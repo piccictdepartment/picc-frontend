@@ -150,6 +150,35 @@ export default function HomePage() {
         {/* Upcoming Events Section */}
           <EventsCarousel />
 
+        {/* Pastors Section */}
+        <section className="py-20 md:py-24 bg-[radial-gradient(circle_at_top,#4B7BA7_0%,#2D5A8C_45%,#1E3A5F_100%)] text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-10 items-center">
+              <div className="space-y-5">
+                <p className="text-xs uppercase tracking-[0.35em] text-white/70">Our Pastors</p>
+                <h2 className="text-3xl md:text-5xl font-semibold leading-tight">
+                  Pastor Esau Banda &amp; Pastor Loyce Banda
+                </h2>
+                <p className="text-white/80 text-lg leading-relaxed">
+                  Pastor Esau Banda and Pastor Loyce Banda serve with passion, vision, and a deep love for God&apos;s people.
+                  Together, they lead PICC with a heart for discipleship, prayer, and transforming lives through the Gospel.
+                </p>
+                <p className="text-white/70">
+                  Their ministry continues to inspire faith, unity, and growth across every generation of the church.
+                </p>
+              </div>
+              <div className="relative aspect-[4/3] rounded-[28px] overflow-hidden shadow-2xl bg-white/5">
+                <Image
+                  src="/images/pastor-preaching-bw.jpg"
+                  alt="Pastor Esau Banda and Pastor Loyce Banda"
+                  fill
+                  className="object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </section>
+
         {/* Listen Now Section */}
         <section className="py-20 md:py-24 bg-background">
           <div className="w-full px-4 sm:px-6 lg:px-8">

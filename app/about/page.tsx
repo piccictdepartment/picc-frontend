@@ -43,26 +43,71 @@ export default function AboutPage() {
           </div>
         </section>
 
-        {/* Church Story */}
+        {/* Our Story */}
         <section className="py-20 md:py-24 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.05fr_1fr] gap-12 items-start">
+              <div className="relative h-[28rem] md:h-[34rem] rounded-3xl overflow-hidden shadow-xl">
+                <Image
+                  src="/images/our-church.JPG"
+                  alt="Our church family"
+                  fill
+                  className="object-cover"
+                />
+              </div>
               <div>
-                <h2 className="text-3xl font-bold text-primary mb-6">Our Story</h2>
-                <p className="text-foreground/70 mb-4 leading-relaxed">
-                  Our church was founded on the belief that everyone deserves to experience God&apos;s love and grace in a welcoming, authentic community. What started as a small group of believers gathering to worship has grown into a thriving congregation of hundreds of families.
+                <h2 className="text-3xl md:text-4xl font-semibold text-foreground leading-tight mb-4">
+                  THE <span className="text-secondary">PICC</span> TENETS
+                  <br />
+                  OF <span className="text-secondary">FAITH.</span>
+                </h2>
+                <p className="text-foreground/70 mb-4 leading-relaxed italic">
+                  &quot;Bringing Hope To the Hopeless and Life To the Dying.&quot;
                 </p>
                 <p className="text-foreground/70 mb-4 leading-relaxed">
-                  For over two decades, we have been committed to biblical teaching, vibrant worship, and compassionate community service. Our mission is to help people discover and follow Jesus Christ in a way that transforms their lives and impacts our world.
+                  The Bible
+                  We believe that the entire bible, Old and New Testaments, are written by the inspiration of the Holy Spirit. (2 Tim 3:16, 17 2 Peter 1:20, 21)
                 </p>
-                <p className="text-foreground/70 leading-relaxed">
-                  Today, we continue to grow as a church while maintaining our core values of authenticity, inclusivity, and spiritual depth. We believe that church should be a place where everyone can come as they are and experience the healing and hope that only Christ can bring.
+                <p className="text-foreground/70 mb-4 leading-relaxed">
+                  About God
+                  As revealed to us by the Bible, we beliebe in the existence of only one God, who created the universe and is revealed as Triune God the Father, the Son and the Holy Spirit. (Gen 1:1; Mat. 3:16,17; 28:19; 2 Cor. 13:14; Gen 1:26)
+                </p>
+                <p className="text-foreground/70 mb-4 leading-relaxed">
+                The Depraved Nature of Man
+                We believe that all men have sinned and come short of the glory of God (Romans 3:23, Gen 3:1-19; 6:23; Mat 13:41, 42), and need Repentance (Acts 2:38; Mat. 4:17; Acts 20:21) and Regeneration (John 3:3, 5; Titus 3:5)
+                </p>
+                <p className="text-secondary font-medium italic">
+                  &quot;I will build my church; and the gates of hell shall not prevail against it.&quot;
+                  <span className="ml-2">Matthew 16:18b.</span>
                 </p>
               </div>
-              <div className="relative h-[28rem] md:h-[32rem] rounded-lg overflow-hidden">
+            </div>
+          </div>
+        </section>
+
+        {/* Join Us */}
+        <section className="py-16 md:py-20 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1fr_1.05fr] gap-12 items-center">
+              <div>
+                <h3 className="text-2xl md:text-3xl font-semibold text-foreground mb-4">Join Us</h3>
+                <p className="text-foreground/70 mb-4 leading-relaxed">
+                  At Pentecost International Christian Center, our foundation is Christ, the Solid Rock.
+                  We welcome you to worship, fellowship, and grow with us. Our services and programs are
+                  designed to build faith, strengthen families, and impact communities.
+                </p>
+                <p className="text-foreground/70 mb-4 leading-relaxed">
+                  You can worship with us at any of our branches or connect with us online. We believe
+                  there is a place for you to belong and serve.
+                </p>
+                <a href="/locations" className="text-secondary font-semibold underline underline-offset-4">
+                  Locate a fellowship today
+                </a>
+              </div>
+              <div className="relative h-[22rem] md:h-[28rem] rounded-3xl overflow-hidden shadow-xl">
                 <Image
-                  src="/hero.jpg"
-                  alt="Church interior"
+                  src="/images/pastor-preaching-bw.jpg"
+                  alt="Worship service"
                   fill
                   className="object-cover"
                 />
@@ -142,7 +187,7 @@ export default function AboutPage() {
         <section className="py-20 md:py-24 bg-muted/30">
           <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8">
             <h2 className="text-3xl font-bold text-primary mb-12">What We Believe</h2>
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            <div className="space-y-10">
               {[
                 {
                   title: 'The Bible',
@@ -169,9 +214,9 @@ export default function AboutPage() {
                   description: 'We believe strong Christian community is essential for spiritual growth and living out our faith.'
                 },
               ].map((belief, i) => (
-                <div key={i} className="border-l-4 border-l-secondary pl-6">
-                  <h3 className="font-bold text-lg text-primary mb-2">{belief.title}</h3>
-                  <p className="text-foreground/70">{belief.description}</p>
+                <div key={i}>
+                  <h3 className="text-lg font-semibold text-foreground mb-3">{belief.title}</h3>
+                  <p className="text-foreground/70 leading-relaxed">{belief.description}</p>
                 </div>
               ))}
             </div>

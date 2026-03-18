@@ -49,7 +49,7 @@ export default function Navigation() {
               priority
             />
             <span className="text-sm md:text-base leading-tight">
-              Welcome to Pentecost International Christian Center
+              Welcome to PICC
             </span>
           </Link>
 
