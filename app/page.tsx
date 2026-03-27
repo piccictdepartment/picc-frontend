@@ -4,11 +4,11 @@ import Navigation from '@/components/Navigation';
 import VerseSection from '@/components/VerseSection';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import { Card } from '@/components/ui/card';
 import MissionSection from '@/components/MissionSection';  
 import EventsCarousel from '@/components/EventsCarousel';
 import QuoteSection from '@/components/QuoteSection';
 import MomentsSection from '@/components/MomentsSection';
+import { apiUrl } from '@/lib/api';
 
 const HERO_IMAGES = [
   { src: '/hero/hero-4.JPG', className: 'col-span-2 row-span-1' },
@@ -32,7 +32,120 @@ const MINISTRY_CARDS = [
   { title: 'Heritage Ministry', image: '/cards/about-church.jpg' },
 ];
 
-export default function HomePage() {
+const DEFAULT_SERVICES = [
+  {
+    day: 'Tuesday',
+    time: '5:30 PM - 7:30 PM',
+    title: 'Home Church Service',
+  },
+  {
+    day: 'Wednesday',
+    time: '9:00 AM - 12:00 PM',
+    title: 'Intercession, Counselling & Deliverance',
+  },
+  {
+    day: 'Thursday',
+    time: '6:00 PM - 8:00 PM',
+    title: 'Special Word Encounter Service',
+  },
+  {
+    day: 'Sunday',
+    time: '7:00 AM - 12:00 PM',
+    title: 'Miracles & Celebration Service',
+  },
+  {
+    day: 'Everyday',
+    time: '5:00 AM - 6:00 AM',
+    title: 'Morning Glory Prayer',
+  },
+  {
+    day: 'Saturday',
+    time: '8:30 AM - 11:00 AM',
+    title: 'Corporate Soul Winning',
+  },
+  {
+    day: 'Sunday',
+    time: 'After the last service',
+    title: 'One on One Prayers and Counseling',
+  },
+];
+
+async function getDailyDevotion() {
+  try {
+    const response = await fetch(apiUrl('/api/devotions/latest'), {
+      next: { revalidate: 300 },
+    });
+
+    if (!response.ok) {
+      return null;
+    }
+
+    return response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
+async function getServices() {
+  try {
+    const response = await fetch(apiUrl('/api/services'), {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return [];
+    return response.json();
+  } catch (error) {
+    return [];
+  }
+}
+
+async function getSeeYouInChurch() {
+  try {
+    const response = await fetch(apiUrl('/api/site-content/see-you-in-church'), {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return null;
+    return response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
+async function getQuoteOfMonth() {
+  try {
+    const response = await fetch(apiUrl('/api/quote-of-month'), {
+      next: { revalidate: 300 },
+    });
+    if (!response.ok) return null;
+    return response.json();
+  } catch (error) {
+    return null;
+  }
+}
+
+function normalizeImageUrl(url?: string | null) {
+  if (!url) return null;
+  if (url.startsWith('http')) return url;
+  return apiUrl(url);
+}
+
+export default async function HomePage() {
+  const [devotion, services, seeYouInChurch, quoteOfMonth] = await Promise.all([
+    getDailyDevotion(),
+    getServices(),
+    getSeeYouInChurch(),
+    getQuoteOfMonth(),
+  ]);
+  const devotionDate = devotion?.publishAt
+    ? new Intl.DateTimeFormat('en-US', {
+        month: 'long',
+        day: 'numeric',
+        year: 'numeric',
+      }).format(new Date(devotion.publishAt))
+    : null;
+
+  const seeYouImageUrl = normalizeImageUrl(seeYouInChurch?.imageUrl) || '/hero/hero-3.jpg';
+  const quoteImageUrl = normalizeImageUrl(quoteOfMonth?.imageUrl);
+
   return (
     <>
       <Navigation />
@@ -84,6 +197,49 @@ export default function HomePage() {
         <VerseSection />
         
         <MissionSection />
+
+        {/* Daily Devotions Section */}
+        <section className="py-20 md:py-24 bg-background">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-10 items-center">
+              <div>
+                <p className="text-xs uppercase tracking-[0.35em] text-primary/70 mb-3">
+                  Daily Devotions
+                </p>
+                <h2 className="text-3xl md:text-5xl font-semibold text-foreground mb-4">
+                  Daily Devotions
+                </h2>
+                <p className="text-foreground/70 text-lg leading-relaxed">
+                  {devotion?.title
+                    ? devotion.title
+                    : 'A fresh reflection shared daily to encourage and strengthen your walk with God.'}
+                </p>
+                <div className="mt-6">
+                  <Link href="/devotions">
+                    <Button className="rounded-full px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90">
+                      View All Devotions
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+              <div className="relative rounded-[28px] border border-primary/10 bg-gradient-to-br from-primary/10 via-background to-secondary/10 p-8 md:p-10 shadow-xl">
+                <p className="text-sm uppercase tracking-[0.3em] text-foreground/60 mb-3">
+                  Today&apos;s Reflection
+                </p>
+                {devotionDate && (
+                  <p className="text-xs uppercase tracking-[0.25em] text-foreground/50 mb-4">
+                    {devotionDate}
+                  </p>
+                )}
+                <p className="text-foreground/80 leading-relaxed">
+                  {devotion?.content
+                    ? devotion.content
+                    : 'Placeholder paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim, ipsum at facilisis pretium, nulla urna luctus nibh, vitae placerat orci nulla sed felis.'}
+                </p>
+              </div>
+            </div>
+          </div>
+        </section>
 
 
       {/* Quick Links / "Your Faith Walk" Section */}
@@ -151,7 +307,11 @@ export default function HomePage() {
         </div>
       </section>
 
-        <QuoteSection />
+        <QuoteSection
+          quote={quoteOfMonth?.quote}
+          author={quoteOfMonth?.author}
+          imageUrl={quoteImageUrl || undefined}
+        />
 
         {/* Upcoming Events Section */}
           <EventsCarousel />
@@ -335,7 +495,7 @@ export default function HomePage() {
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
               <div className="absolute inset-0">
                 <Image
-                  src="/hero/hero-3.jpg"
+                  src={seeYouImageUrl}
                   alt="See you in church"
                   fill
                   className="object-cover"
@@ -345,8 +505,12 @@ export default function HomePage() {
 
                 <div id="see-you-in-church" className="relative p-10 md:p-14 text-white scroll-mt-24">
                   <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-3">See You In Church</h2>
-                    <p className="text-white/80">Grow deeper in your walk with God this week.</p>
+                    <h2 className="text-3xl md:text-5xl font-semibold mb-3">
+                      {seeYouInChurch?.title || 'See You In Church'}
+                    </h2>
+                    <p className="text-white/80">
+                      {seeYouInChurch?.subtitle || 'Grow deeper in your walk with God this week.'}
+                    </p>
                     <div className="mt-6">
                       <Link href="/locations">
                         <Button className="rounded-full px-6 py-3 border border-white/40 bg-transparent text-white hover:bg-white/10">
@@ -357,54 +521,26 @@ export default function HomePage() {
                   </div>
 
                   <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 text-left">
-                    {[
-                      {
-                        day: 'Tuesday',
-                        time: '5:30 PM – 7:30 PM',
-                        title: 'Home Church Service',
-                      },
-                      {
-                        day: 'Wednesday',
-                        time: '9:00 AM – 12:00 PM',
-                        title: 'Intercession, Counselling & Deliverance',
-                      },
-                      {
-                        day: 'Thursday',
-                        time: '6:00 PM – 8:00 PM',
-                        title: 'Special Word Encounter Service',
-                      },
-                      {
-                        day: 'Sunday',
-                        time: '7:00 AM – 12:00 PM',
-                        title: 'Miracles & Celebration Service',
-                      },
-                      {
-                        day: 'Everyday',
-                        time: '5:00 AM – 6:00 AM',
-                        title: 'Morning Glory Prayer',
-                      },
-                      {
-                        day: 'Saturday',
-                        time: '8:30 AM – 11:00 AM',
-                        title: 'Corporate Soul Winning',
-                      },
-                      {
-                        day: 'Sunday',
-                        time: '4:00 PM – 6:00 PM',
-                        title: 'Launch of 17th Cohort of Hope School Ministry',
-                      },
-                      {
-                        day: 'Sunday',
-                        time: 'After the last service',
-                        title: 'One on One Prayers and Counseling',
-                      },
-                    ].map((program) => (
-                      <div key={`${program.day}-${program.title}`} className="rounded-2xl bg-white/10 border border-white/10 p-6">
-                        <p className="text-sm uppercase tracking-[0.2em] text-white/70">{program.day}</p>
-                        <p className="mt-2 text-lg font-semibold">{program.time}</p>
-                        <p className="text-white/70 text-sm">{program.title}</p>
-                      </div>
-                    ))}
+                    {(services?.length ? services : DEFAULT_SERVICES).map((program: any) => {
+                      const time = program.startTime
+                        ? program.endTime
+                          ? `${program.startTime} - ${program.endTime}`
+                          : program.startTime
+                        : program.time;
+
+                      return (
+                        <div
+                          key={`${program.dayOfWeek || program.day}-${program.title}`}
+                          className="rounded-2xl bg-white/10 border border-white/10 p-6"
+                        >
+                          <p className="text-sm uppercase tracking-[0.2em] text-white/70">
+                            {program.dayOfWeek || program.day}
+                          </p>
+                          <p className="mt-2 text-lg font-semibold">{time}</p>
+                          <p className="text-white/70 text-sm">{program.title}</p>
+                        </div>
+                      );
+                    })}
                   </div>
                 </div>
             </div>
@@ -431,11 +567,6 @@ export default function HomePage() {
                       Give Today
                     </Button>
                   </Link>
-                  <Link href="/give">
-                    <Button variant="outline" className="text-lg px-8 py-6 rounded-full border-primary/40">
-                      Learn More
-                    </Button>
-                  </Link>
                 </div>
               </div>
             </div>
@@ -446,6 +577,5 @@ export default function HomePage() {
     </>
   );
 }
-
 
 
