@@ -7,6 +7,7 @@ import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
 import Link from 'next/link';
 import { Search } from 'lucide-react';
+import { Popover, PopoverContent, PopoverTrigger } from '@/components/ui/popover';
 
 export default function EventsPage() {
   const [filter, setFilter] = useState<'today' | 'week' | 'month' | 'year'>('today');
@@ -26,6 +27,72 @@ export default function EventsPage() {
       location: 'Abuja Campus, Lawn Tennis Court (Open Field)',
     },
   ];
+
+  const parseTime = (timeValue: string) => {
+    const [time, period] = timeValue.trim().split(' ');
+    const [rawHours, rawMinutes] = time.split(':').map(Number);
+    let hours = rawHours;
+    const minutes = Number.isNaN(rawMinutes) ? 0 : rawMinutes;
+
+    if (period?.toUpperCase() === 'PM' && hours < 12) hours += 12;
+    if (period?.toUpperCase() === 'AM' && hours === 12) hours = 0;
+
+    return { hours, minutes };
+  };
+
+  const getEventDateRange = (event: typeof events[number]) => {
+    const [startLabel, endLabel] = event.time.split(' - ');
+    const [year, month, day] = event.date.split('-').map(Number);
+    const startTime = parseTime(startLabel);
+    const endTime = parseTime(endLabel ?? startLabel);
+
+    const start = new Date(year, month - 1, day, startTime.hours, startTime.minutes, 0);
+    const end = new Date(year, month - 1, day, endTime.hours, endTime.minutes, 0);
+
+    return { start, end };
+  };
+
+  const formatIcsDate = (date: Date) =>
+    date.toISOString().replace(/[-:]/g, '').replace(/\.\d{3}Z$/, 'Z');
+
+  const escapeIcsText = (value: string) =>
+    value.replace(/\\/g, '\\\\').replace(/;/g, '\\;').replace(/,/g, '\\,').replace(/\n/g, '\\n');
+
+  const buildIcsFile = (event: typeof events[number]) => {
+    const { start, end } = getEventDateRange(event);
+    const dtStamp = formatIcsDate(new Date());
+    const dtStart = formatIcsDate(start);
+    const dtEnd = formatIcsDate(end);
+
+    return [
+      'BEGIN:VCALENDAR',
+      'VERSION:2.0',
+      'PRODID:-//PICC//Events//EN',
+      'CALSCALE:GREGORIAN',
+      'BEGIN:VEVENT',
+      `UID:${event.id}@picc-events`,
+      `DTSTAMP:${dtStamp}`,
+      `DTSTART:${dtStart}`,
+      `DTEND:${dtEnd}`,
+      `SUMMARY:${escapeIcsText(event.title)}`,
+      `LOCATION:${escapeIcsText(event.location)}`,
+      'END:VEVENT',
+      'END:VCALENDAR',
+    ].join('\r\n');
+  };
+
+  const downloadIcs = (event: typeof events[number], filename: string) => {
+    const ics = buildIcsFile(event);
+    const blob = new Blob([ics], { type: 'text/calendar;charset=utf-8' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    document.body.appendChild(link);
+    link.click();
+    link.remove();
+    URL.revokeObjectURL(url);
+  };
 
   const filteredEvents = useMemo(() => {
     const baseDate = selectedDate ? new Date(selectedDate) : new Date();
@@ -102,6 +169,47 @@ export default function EventsPage() {
     const date = selectedDate ? new Date(selectedDate) : new Date();
     return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' });
   }, [selectedDate]);
+
+  const calendarEvent = useMemo(() => {
+    return filteredEvents[0] ?? events[0] ?? null;
+  }, [filteredEvents, events]);
+
+  const calendarLinks = useMemo(() => {
+    if (!calendarEvent) return null;
+    const { start, end } = getEventDateRange(calendarEvent);
+    const details = `${calendarEvent.title}\n${calendarEvent.time}\n${calendarEvent.location}`;
+
+    const googleUrl = new URL('https://calendar.google.com/calendar/render');
+    googleUrl.searchParams.set('action', 'TEMPLATE');
+    googleUrl.searchParams.set('text', calendarEvent.title);
+    googleUrl.searchParams.set('dates', `${formatIcsDate(start)}/${formatIcsDate(end)}`);
+    googleUrl.searchParams.set('details', details);
+    googleUrl.searchParams.set('location', calendarEvent.location);
+
+    const outlookBase = new URL('https://outlook.office.com/calendar/0/deeplink/compose');
+    outlookBase.searchParams.set('path', '/calendar/action/compose');
+    outlookBase.searchParams.set('rru', 'addevent');
+    outlookBase.searchParams.set('subject', calendarEvent.title);
+    outlookBase.searchParams.set('startdt', start.toISOString());
+    outlookBase.searchParams.set('enddt', end.toISOString());
+    outlookBase.searchParams.set('body', details);
+    outlookBase.searchParams.set('location', calendarEvent.location);
+
+    const outlookLive = new URL('https://outlook.live.com/calendar/0/deeplink/compose');
+    outlookLive.searchParams.set('path', '/calendar/action/compose');
+    outlookLive.searchParams.set('rru', 'addevent');
+    outlookLive.searchParams.set('subject', calendarEvent.title);
+    outlookLive.searchParams.set('startdt', start.toISOString());
+    outlookLive.searchParams.set('enddt', end.toISOString());
+    outlookLive.searchParams.set('body', details);
+    outlookLive.searchParams.set('location', calendarEvent.location);
+
+    return {
+      google: googleUrl.toString(),
+      outlook365: outlookBase.toString(),
+      outlookLive: outlookLive.toString(),
+    };
+  }, [calendarEvent]);
 
   return (
     <>
@@ -250,9 +358,77 @@ export default function EventsPage() {
             </div>
 
             <div className="mt-6 flex justify-end">
-              <button className="rounded-full bg-black text-white px-6 py-3 text-sm font-semibold shadow-lg">
-                Subscribe to calendar
-              </button>
+              <Popover>
+                <PopoverTrigger asChild>
+                  <Button className="rounded-full bg-black text-white px-6 py-3 text-sm font-semibold shadow-lg hover:bg-black/90">
+                    Subscribe to calendar
+                  </Button>
+                </PopoverTrigger>
+                <PopoverContent
+                  align="end"
+                  side="bottom"
+                  sideOffset={8}
+                  avoidCollisions={false}
+                  className="w-64 p-2"
+                >
+                  <p className="px-2 py-1 text-xs font-semibold uppercase tracking-[0.2em] text-foreground/50">
+                    Add to calendar
+                  </p>
+                  {calendarEvent && calendarLinks ? (
+                    <div className="mt-2 grid gap-1">
+                      <a
+                        href={calendarLinks.google}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-lg px-3 py-2 text-sm hover:bg-muted"
+                      >
+                        Google Calendar
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => downloadIcs(calendarEvent, 'picc-event.ics')}
+                        className="rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+                      >
+                        iCalendar
+                      </button>
+                      <a
+                        href={calendarLinks.outlook365}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-lg px-3 py-2 text-sm hover:bg-muted"
+                      >
+                        Outlook 365
+                      </a>
+                      <a
+                        href={calendarLinks.outlookLive}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="rounded-lg px-3 py-2 text-sm hover:bg-muted"
+                      >
+                        Outlook Live
+                      </a>
+                      <button
+                        type="button"
+                        onClick={() => downloadIcs(calendarEvent, 'picc-event.ics')}
+                        className="rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+                      >
+                        Export .ics file
+                      </button>
+                      <button
+                        type="button"
+                        onClick={() => downloadIcs(calendarEvent, 'picc-event-outlook.ics')}
+                        className="rounded-lg px-3 py-2 text-left text-sm hover:bg-muted"
+                      >
+                        Export Outlook .ics file
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="px-3 py-2 text-sm text-foreground/60">
+                      No upcoming events to subscribe.
+                    </p>
+                  )}
+                </PopoverContent>
+              </Popover>
             </div>
           </div>
         </section>

@@ -1,14 +1,17 @@
+'use client';
+
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import VerseSection from '@/components/VerseSection';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
-import MissionSection from '@/components/MissionSection';  
+import MissionSection from '@/components/MissionSection';
 import EventsCarousel from '@/components/EventsCarousel';
 import QuoteSection from '@/components/QuoteSection';
 import MomentsSection from '@/components/MomentsSection';
 import { apiUrl } from '@/lib/api';
+import dynamic from 'next/dynamic';
 
 const HOME_HERO_SLOTS = [
   { key: 'home-hero-1', fallback: '/hero/hero-4.JPG', className: 'col-span-2 row-span-1' },
@@ -197,10 +200,10 @@ export default async function HomePage() {
   ]);
   const devotionDate = devotion?.publishAt
     ? new Intl.DateTimeFormat('en-US', {
-        month: 'long',
-        day: 'numeric',
-        year: 'numeric',
-      }).format(new Date(devotion.publishAt))
+      month: 'long',
+      day: 'numeric',
+      year: 'numeric',
+    }).format(new Date(devotion.publishAt))
     : null;
 
   const seeYouImageUrl = normalizeImageUrl(seeYouInChurch?.imageUrl) || '/home/see-you-in-church.JPG';
@@ -221,6 +224,32 @@ export default async function HomePage() {
     image: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
   }));
   const livestreamImage = normalizeImageUrl(siteImages['home-livestream-bg']) || '/hero/hero-6.jpg';
+  const fallbackDevotion = {
+    title: 'God Is Good',
+    content: [
+      'PENTECOST INTERNATIONAL CHRISTIAN CENTRE',
+      '2026 - Year of THE HAND OF GOD (Ezekiel 37:1-10)',
+      'Please Find Your Daily Rivers of Hope Devotional',
+      'Monday, 30 March 2026',
+      'Yes, it is true. No matter what you may be going through, God is good. Whether or not there is money in your pocket, God is good. Whether your marriage is working or not, God is good. Whether or not your prayers have been answered, He remains good.',
+      'Truly God is good to Israel, To such as are pure in heart. Psalms 73:1 NKJV',
+      'He was good before you were born, He is good now, and He will remain good even after you are long gone. His goodness can and must not be questioned at all. There is nothing happening to you or around you that can change His goodness. In other words, regardless of what He does or does not do, He is good!',
+      'In Exodus 34:6, we see that He is abundant in goodness. His goodness is always available in abundant supply. There is no day when God will not be good to His children. Never. You can rest assured that His goodness shall be manifested in all aspects of life.',
+      "We also learn from Psalms 33:5 that the whole earth is full of God's goodness, which means that there is no place on earth where His goodness cannot reach you. No matter your geographical location, be assured that you are a candidate of His goodness.",
+      "Beloved, God's will is that we should all enjoy His goodness while we are still alive (Psalms 27:13). Yes, we must see and enjoy His goodness in the land of the living, not in the land of the dead. Therefore, the devil’s agenda of premature death against us is destroyed in Jesus' mighty name. No evil shall befall you and no plague shall come near your dwelling (Psalms 91:10).",
+      'Your Prayer Today',
+      'Father, help me walk and abide in Your goodness all the days of my life, in Jesus mighty name.',
+      'For Prayer, Counselling and More Spiritual Resources',
+      'Email: pastoresaubanda@gmail.com',
+      'Facebook: https://www.faceboohk.com/pastoresaubanda/ https://www.facebook.com/PICCWorldwide',
+      'Website: www.esaubanda.com',
+      'Get free audio messages at: esaubanda.podbean.com',
+      'If you want to be receiving these devotions, whatsapp the word "Subscribe" to +265886464774',
+      'FOR BOOK ORDERS ONLY, CONTACT GIFT KANDIDZIWA OR GIFT BANDA ON:',
+      'WhatsApp on +265995500800 / 0992849555',
+    ],
+  };
+  const devotionData = devotion ?? fallbackDevotion;
 
   return (
     <>
@@ -271,14 +300,30 @@ export default async function HomePage() {
         </section>
 
         <VerseSection />
-        
+
         <MissionSection imageUrl={missionImage} />
 
         {/* Daily Devotions Section */}
-        <section className="py-16 sm:py-16 sm:py-20 md:py-24 bg-background">
+        <section className="py-20 sm:py-24 md:py-28 bg-background">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_0.9fr] gap-8 lg:gap-10 items-start">
-              <div>
+            <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-10 items-stretch">
+              <div className="relative rounded-[24px] sm:rounded-[28px] border border-primary/10 bg-white p-6 sm:p-8 md:p-10 shadow-xl min-h-[360px]">
+                <p className="text-xs uppercase tracking-[0.35em] text-primary/70 mb-3">
+                  Declarations
+                </p>
+                <h2 className="text-3xl md:text-5xl font-semibold text-foreground mb-6">
+                  Declarations
+                </h2>
+                <div className="relative h-[400px] sm:h-[480px] md:h-[550px] rounded-2xl overflow-hidden">
+                  <Image
+                    src="/home/declaration.jpeg"
+                    alt="Daily declarations"
+                    fill
+                    className="object-cover"
+                  />
+                </div>
+              </div>
+              <div className="relative rounded-[24px] sm:rounded-[28px] border border-primary/10 bg-gradient-to-br from-primary/10 via-background to-secondary/10 p-6 sm:p-8 md:p-10 shadow-xl min-h-[360px]">
                 <p className="text-xs uppercase tracking-[0.35em] text-primary/70 mb-3">
                   Daily Devotions
                 </p>
@@ -286,9 +331,7 @@ export default async function HomePage() {
                   Daily Devotions
                 </h2>
                 <p className="text-foreground/70 text-lg leading-relaxed">
-                  {devotion?.title
-                    ? devotion.title
-                    : 'A fresh reflection shared daily to encourage and strengthen your walk with God.'}
+                  {devotionData.title}
                 </p>
                 <div className="mt-6">
                   <Link href="/devotions">
@@ -297,66 +340,70 @@ export default async function HomePage() {
                     </Button>
                   </Link>
                 </div>
-              </div>
-              <div className="relative rounded-[24px] sm:rounded-[28px] border border-primary/10 bg-gradient-to-br from-primary/10 via-background to-secondary/10 p-6 sm:p-8 md:p-10 shadow-xl">
-                <p className="text-sm uppercase tracking-[0.3em] text-foreground/60 mb-3">
-                  Today&apos;s Reflection
-                </p>
-                {devotionDate && (
-                  <p className="text-xs uppercase tracking-[0.25em] text-foreground/50 mb-4">
-                    {devotionDate}
+                <div className="mt-8 border-t border-primary/10 pt-6">
+                  <p className="text-sm uppercase tracking-[0.3em] text-foreground/60 mb-3">
+                    Today&apos;s Reflection
                   </p>
-                )}
-                <p className="text-foreground/80 leading-relaxed">
-                  {devotion?.content
-                    ? devotion.content
-                    : 'Placeholder paragraph: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vivamus dignissim, ipsum at facilisis pretium, nulla urna luctus nibh, vitae placerat orci nulla sed felis.'}
-                </p>
+                  {devotionDate && (
+                    <p className="text-xs uppercase tracking-[0.25em] text-foreground/50 mb-4">
+                      {devotionDate}
+                    </p>
+                  )}
+                  <div className="space-y-4 text-foreground/80 leading-relaxed">
+                    {Array.isArray(devotionData.content) ? (
+                      devotionData.content.map((line, index) => (
+                        <p key={`${line}-${index}`}>{line}</p>
+                      ))
+                    ) : (
+                      <p>{devotionData.content}</p>
+                    )}
+                  </div>
+                </div>
               </div>
             </div>
           </div>
         </section>
 
 
-      {/* Quick Links / "Your Faith Walk" Section */}
-      <section className="py-16 sm:py-16 sm:py-20 md:py-24 bg-[linear-gradient(180deg,#fffaf0_0%,#fff6ec_100%)]">
-        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="text-center mb-10">
-            <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">Grow in Every Season</h2>
-            <p className="text-foreground/70">Whether you're new or have been with us for years — there's always more.</p>
+        {/* Quick Links / "Your Faith Walk" Section */}
+        <section className="py-16 sm:py-16 sm:py-20 md:py-24 bg-[linear-gradient(180deg,#fffaf0_0%,#fff6ec_100%)]">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-10">
+              <h2 className="text-4xl md:text-5xl font-bold text-primary mb-2">Grow in Every Season</h2>
+              <p className="text-foreground/70">Whether you're new or have been with us for years — there's always more.</p>
+            </div>
+
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8">
+              {growCards.map((card) => (
+                <Link key={card.href} href={card.href}>
+                  <div className="group block rounded-2xl overflow-hidden relative h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
+                    <div className="absolute inset-0">
+                      <Image
+                        src={card.img}
+                        alt={card.title}
+                        fill
+                        className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-105"
+                      />
+                    </div>
+
+                    {/* dim overlay */}
+                    <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-black/40" />
+
+                    {/* small label top-left */}
+                    <div className="absolute top-4 left-4 bg-black/40 text-white px-3 py-1 rounded text-xs uppercase tracking-wider">
+                      {card.label}
+                    </div>
+
+                    {/* main title bottom-left */}
+                    <div className="absolute bottom-6 left-6 text-white">
+                      <h3 className="text-xl md:text-2xl font-bold leading-tight">{card.title}</h3>
+                    </div>
+                  </div>
+                </Link>
+              ))}
+            </div>
           </div>
-
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4 px-4 sm:px-6 lg:px-8">
-            {growCards.map((card) => (
-              <Link key={card.href} href={card.href}>
-                <div className="group block rounded-2xl overflow-hidden relative h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
-                  <div className="absolute inset-0">
-                    <Image
-                      src={card.img}
-                      alt={card.title}
-                      fill
-                      className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-105"
-                    />
-                  </div>
-
-                  {/* dim overlay */}
-                  <div className="absolute inset-0 bg-black/30 transition-colors duration-300 group-hover:bg-black/40" />
-
-                  {/* small label top-left */}
-                  <div className="absolute top-4 left-4 bg-black/40 text-white px-3 py-1 rounded text-xs uppercase tracking-wider">
-                    {card.label}
-                  </div>
-
-                  {/* main title bottom-left */}
-                  <div className="absolute bottom-6 left-6 text-white">
-                    <h3 className="text-xl md:text-2xl font-bold leading-tight">{card.title}</h3>
-                  </div>
-                </div>
-              </Link>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
 
         <QuoteSection
           quote={quoteOfMonth?.quote}
@@ -365,7 +412,7 @@ export default async function HomePage() {
         />
 
         {/* Upcoming Events Section */}
-          <EventsCarousel />
+        <EventsCarousel />
 
         {/* Pastors Section */}
         <section className="py-16 sm:py-16 sm:py-20 md:py-24 bg-[radial-gradient(circle_at_top,#4B7BA7_0%,#2D5A8C_45%,#1E3A5F_100%)] text-white">
@@ -427,14 +474,10 @@ export default async function HomePage() {
                       >
                         Open on Spotify
                       </Link>
-                      <Link
-                        href="https://open.spotify.com/show/4pY3cP8R60wHhzhUciLKK6"
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center justify-center rounded-full border border-white/50 bg-transparent text-white px-6 py-3 text-sm font-semibold hover:bg-white/10 transition-colors"
-                      >
-                        Follow Podcast
-                      </Link>
+                      <SpotifyFollowDialog
+                        showId="4pY3cP8R60wHhzhUciLKK6"
+                        buttonClassName="rounded-full border border-white/50 bg-transparent text-white px-6 py-3 text-sm font-semibold hover:bg-white/10 transition-colors"
+                      />
                     </div>
                   </div>
                   <div className="bg-black/40 border border-white/10 rounded-2xl p-4 md:p-5 backdrop-blur-sm">
@@ -506,7 +549,7 @@ export default async function HomePage() {
           </div>
         </section>
 
-                {/* Latest Livestreams Section */}
+        {/* Latest Livestreams Section */}
         <section className="py-16 sm:py-16 sm:py-24 md:py-32 bg-[radial-gradient(circle_at_top,#4B7BA7_0%,#2D5A8C_45%,#1E3A5F_100%)]">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl max-w-5xl mx-auto min-h-[360px] sm:min-h-[440px] md:min-h-[560px] flex items-center">
@@ -537,10 +580,10 @@ export default async function HomePage() {
             </div>
           </div>
         </section>
-                {/* Moments Section */}
+        {/* Moments Section */}
         <MomentsSection />
 
-{/* Service Times Section */}
+        {/* Service Times Section */}
         <section className="py-16 sm:py-16 sm:py-20 md:py-24 bg-background">
           <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
@@ -554,50 +597,50 @@ export default async function HomePage() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
 
-                <div id="see-you-in-church" className="relative p-6 sm:p-10 md:p-14 text-white scroll-mt-24">
-                  <div className="text-center max-w-3xl mx-auto">
-                    <h2 className="text-3xl md:text-5xl font-semibold mb-3">
-                      {seeYouInChurch?.title || 'See You In Church'}
-                    </h2>
-                    <p className="text-white/80">
-                      {seeYouInChurch?.subtitle || 'Grow deeper in your walk with God this week.'}
-                    </p>
-                    <div className="mt-6">
-                      <Link href="/locations">
-                        <Button className="rounded-full px-6 py-3 border border-white/40 bg-transparent text-white hover:bg-white/10">
-                          Get Directions
-                        </Button>
-                      </Link>
-                  </div>
-                  </div>
-
-                  <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 text-left">
-                    {(services?.length ? services : DEFAULT_SERVICES).map((program: any) => {
-                      const time = program.startTime
-                        ? program.endTime
-                          ? `${program.startTime} - ${program.endTime}`
-                          : program.startTime
-                        : program.time;
-
-                      return (
-                        <div
-                          key={`${program.dayOfWeek || program.day}-${program.title}`}
-                          className="rounded-2xl bg-white/10 border border-white/10 p-4 sm:p-6"
-                        >
-                          <p className="text-sm uppercase tracking-[0.2em] text-white/70">
-                            {program.dayOfWeek || program.day}
-                          </p>
-                          <p className="mt-2 text-lg font-semibold">{time}</p>
-                          <p className="text-white/70 text-sm">{program.title}</p>
-                        </div>
-                      );
-                    })}
+              <div id="see-you-in-church" className="relative p-6 sm:p-10 md:p-14 text-white scroll-mt-24">
+                <div className="text-center max-w-3xl mx-auto">
+                  <h2 className="text-3xl md:text-5xl font-semibold mb-3">
+                    {seeYouInChurch?.title || 'See You In Church'}
+                  </h2>
+                  <p className="text-white/80">
+                    {seeYouInChurch?.subtitle || 'Grow deeper in your walk with God this week.'}
+                  </p>
+                  <div className="mt-6">
+                    <Link href="/locations">
+                      <Button className="rounded-full px-6 py-3 border border-white/40 bg-transparent text-white hover:bg-white/10">
+                        Get Directions
+                      </Button>
+                    </Link>
                   </div>
                 </div>
+
+                <div className="mt-10 grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6 text-left">
+                  {(services?.length ? services : DEFAULT_SERVICES).map((program: any) => {
+                    const time = program.startTime
+                      ? program.endTime
+                        ? `${program.startTime} - ${program.endTime}`
+                        : program.startTime
+                      : program.time;
+
+                    return (
+                      <div
+                        key={`${program.dayOfWeek || program.day}-${program.title}`}
+                        className="rounded-2xl bg-white/10 border border-white/10 p-4 sm:p-6"
+                      >
+                        <p className="text-sm uppercase tracking-[0.2em] text-white/70">
+                          {program.dayOfWeek || program.day}
+                        </p>
+                        <p className="mt-2 text-lg font-semibold">{time}</p>
+                        <p className="text-white/70 text-sm">{program.title}</p>
+                      </div>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
         </section>
-{/* CTA Section */}
+        {/* CTA Section */}
         <section className="py-16 md:py-20 -mt-6 bg-background">
           <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[28px] border border-primary/15 bg-gradient-to-br from-primary/10 via-background to-secondary/10 p-8 md:p-12 w-full">
@@ -631,3 +674,6 @@ export default async function HomePage() {
 
 
 
+const SpotifyFollowDialog = dynamic(() => import('@/components/SpotifyFollowDialog'), {
+  ssr: false,
+});
