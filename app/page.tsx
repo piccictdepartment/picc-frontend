@@ -1,5 +1,3 @@
-'use client';
-
 import Link from 'next/link';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
@@ -10,8 +8,8 @@ import MissionSection from '@/components/MissionSection';
 import EventsCarousel from '@/components/EventsCarousel';
 import QuoteSection from '@/components/QuoteSection';
 import MomentsSection from '@/components/MomentsSection';
+import SpotifyFollowDialog from '@/components/SpotifyFollowDialog';
 import { apiUrl } from '@/lib/api';
-import dynamic from 'next/dynamic';
 
 const HOME_HERO_SLOTS = [
   { key: 'home-hero-1', fallback: '/hero/hero-4.JPG', className: 'col-span-2 row-span-1' },
@@ -375,7 +373,7 @@ export default async function HomePage() {
                 <Link key={card.href} href={card.href}>
                   <div className="group block rounded-2xl overflow-hidden relative h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
                     <div className="absolute inset-0">
-                      <image
+                      <Image
                         src={card.image}
                         alt={card.title}
                         fill
@@ -594,7 +592,7 @@ export default async function HomePage() {
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
 
-              <div id="see-you-in-church" className="relative p-6 sm:p-10 md:p-14 text-white scroll-mt-24">
+              <div className="relative p-6 sm:p-10 md:p-14 text-white scroll-mt-24">
                 <div className="text-center max-w-3xl mx-auto">
                   <h2 className="text-3xl md:text-5xl font-semibold mb-3">
                     {seeYouInChurch?.title || 'See You In Church'}
@@ -668,9 +666,3 @@ export default async function HomePage() {
     </>
   );
 }
-
-
-
-const SpotifyFollowDialog = dynamic(() => import('@/components/SpotifyFollowDialog'), {
-  ssr: false,
-});
