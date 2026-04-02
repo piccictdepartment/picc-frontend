@@ -15,36 +15,36 @@ export default function LivestreamPage() {
   const livestreams = [
     {
       id: 1,
-      title: 'Sunday Service Highlight',
-      pastor: 'PICC',
-      date: 'Watch on YouTube',
+      title: '01 April 2026',
+      pastor: 'PICC WorldWide',
+      date: '',
       duration: 0,
-      description: 'Replay of a powerful service moment.',
+      description: 'Morning Glory Prayers.',
       type: 'video',
-      href: 'https://www.youtube.com/watch?v=wAwMiy57iXg',
-      embed: 'https://www.youtube.com/embed/wAwMiy57iXg',
-    },
-    {
-      id: 2,
-      title: 'Midweek Word Encounter',
-      pastor: 'PICC',
-      date: 'Watch on YouTube',
-      duration: 0,
-      description: 'A message to strengthen your faith.',
-      type: 'video',
-      href: 'https://www.youtube.com/watch?v=ED_nMbVeytM',
+      href: '',
       embed: 'https://www.youtube.com/embed/ED_nMbVeytM',
     },
     {
-      id: 3,
-      title: 'Prayer & Worship Session',
-      pastor: 'PICC',
-      date: 'Watch on YouTube',
+      id: 2,
+      title: '30 March 2026',
+      pastor: 'PICC WorldWide',
+      date: '',
       duration: 0,
-      description: 'A time of worship and prayer.',
+      description: 'Morning Glory Prayers.',
       type: 'video',
-      href: 'https://www.youtube.com/watch?v=abOVO5i-P3g',
+      href: '',
       embed: 'https://www.youtube.com/embed/abOVO5i-P3g',
+    },
+    {
+      id: 3,
+      title: '31 March 2026',
+      pastor: 'PICC WorldWide',
+      date: '',
+      duration: 0,
+      description: 'Morning Glory Prayers.',
+      type: 'video',
+      href: '',
+      embed: 'https://www.youtube.com/embed/wAwMiy57iXg',
     },
   ];
 
@@ -138,14 +138,16 @@ export default function LivestreamPage() {
                       <p className="text-sm text-black/70 mb-4 flex-1 line-clamp-2">{stream.description}</p>
                       <div className="space-y-2 text-sm text-black/60 mb-4">
                         <p>Pastor: {stream.pastor}</p>
-                        <p>{stream.date}</p>
+                        {stream.date && <p>{stream.date}</p>}
                         {stream.duration > 0 && <p>{stream.duration} minutes</p>}
                       </div>
-                      <Button asChild className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90">
-                        <Link href={stream.href} target="_blank" rel="noreferrer">
-                          Watch Livestream
-                        </Link>
-                      </Button>
+                      {stream.href && (
+                        <Button asChild className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90">
+                          <Link href={stream.href} target="_blank" rel="noreferrer">
+                            Watch Livestream
+                          </Link>
+                        </Button>
+                      )}
                     </div>
                   </Card>
                 ))}
