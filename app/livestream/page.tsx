@@ -16,9 +16,27 @@ declare global {
   }
 }
 
+type ToolKey = 'bible' | 'notepad' | 'chat' | null;
+
+const TOOL_CONFIG = {
+  bible: {
+    label: 'Bible',
+    url: 'https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/',
+  },
+  notepad: {
+    label: 'Notepad',
+    url: 'https://devtoollab.com/tools/online-notepad',
+  },
+  chat: {
+    label: 'Live Chat',
+    url: 'https://tlk.io/picc-worldwide-live',
+  },
+} as const;
+
 export default function LivestreamPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [ytReady, setYtReady] = useState(false);
+  const [activeTool, setActiveTool] = useState<ToolKey>(null);
 
   const livestreams = [
     {
@@ -142,33 +160,30 @@ export default function LivestreamPage() {
                     <h3 className="text-lg font-semibold">Stream in English</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <Link
-                      href="https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/"
-                      target="_blank"
-                      rel="noreferrer"
+                    <button
+                      type="button"
+                      onClick={() => setActiveTool('bible')}
                       className="inline-flex items-center gap-2 rounded-full bg-[#EAF2FF] px-3 py-1 text-xs font-medium text-[#1E4FA3] hover:bg-[#DCEAFF] transition-colors"
                     >
                       <BookOpenText size={12} />
                       Bible
-                    </Link>
-                    <Link
-                      href="https://devtoollab.com/tools/online-notepad"
-                      target="_blank"
-                      rel="noreferrer"
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTool('notepad')}
                       className="inline-flex items-center gap-2 rounded-full bg-[#FFF2DA] px-3 py-1 text-xs font-medium text-[#8A5A00] hover:bg-[#FFE9C2] transition-colors"
                     >
                       <StickyNote size={12} />
                       Notepad
-                    </Link>
-                    <Link
-                      href="https://tlk.io/picc-worldwide-live"
-                      target="_blank"
-                      rel="noreferrer"
+                    </button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTool('chat')}
                       className="inline-flex items-center gap-2 rounded-full bg-[#E8FFF3] px-3 py-1 text-xs font-medium text-[#0F7A3E] hover:bg-[#D8F7E7] transition-colors"
                     >
                       <MessageSquareText size={12} />
                       Live Chat
-                    </Link>
+                    </button>
                     <Link
                       href="/forms"
                       className="inline-flex items-center gap-2 rounded-full bg-[#CFF6DF] px-3 py-1 text-xs font-medium text-[#137A3D] hover:bg-[#BDEFD3] transition-colors"
@@ -238,6 +253,47 @@ export default function LivestreamPage() {
 
       </main>
       <LivestreamFooter />
+      {activeTool && (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
+          role="dialog"
+          aria-modal="true"
+          aria-label={`${TOOL_CONFIG[activeTool].label} modal`}
+        >
+          <div className="w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+            <div className="flex items-center justify-between border-b border-black/10 px-5 py-3">
+              <p className="text-sm font-semibold text-black">
+                {TOOL_CONFIG[activeTool].label}
+              </p>
+              <div className="flex items-center gap-3">
+                <Link
+                  href={TOOL_CONFIG[activeTool].url}
+                  target="_blank"
+                  rel="noreferrer"
+                  className="text-xs font-medium text-primary hover:underline"
+                >
+                  Open in new tab
+                </Link>
+                <button
+                  type="button"
+                  onClick={() => setActiveTool(null)}
+                  className="rounded-full bg-black/5 px-3 py-1 text-xs font-semibold text-black hover:bg-black/10"
+                >
+                  Close
+                </button>
+              </div>
+            </div>
+            <div className="aspect-[4/3] w-full bg-black">
+              <iframe
+                className="h-full w-full"
+                src={TOOL_CONFIG[activeTool].url}
+                title={TOOL_CONFIG[activeTool].label}
+                allow="clipboard-write; fullscreen"
+              />
+            </div>
+          </div>
+        </div>
+      )}
     </>
   );
 }
