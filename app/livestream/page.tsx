@@ -15,7 +15,7 @@ declare global {
   }
 }
 
-type ToolKey = 'bible' | 'notepad' | 'chat' | null;
+type ToolKey = 'bible' | 'notepad' | 'chat' | 'testimony' | null;
 
 type YouTubeVideo = {
   videoId: string;
@@ -45,9 +45,23 @@ const TOOL_CONFIG = {
   },
 } as const;
 
+const TOOL_TABS: Array<{ key: ToolKey; label: string; kind: 'embed' | 'form' }> = [
+  { key: 'chat', label: 'Live Chat', kind: 'embed' },
+  { key: 'notepad', label: 'Notepad', kind: 'embed' },
+  { key: 'bible', label: 'Bible', kind: 'embed' },
+  { key: 'testimony', label: 'Send Testimony', kind: 'form' },
+];
+
 export default function LivestreamPage() {
   const [ytReady, setYtReady] = useState(false);
   const [activeTool, setActiveTool] = useState<ToolKey>(null);
+  const [testimonyForm, setTestimonyForm] = useState({
+    fullName: '',
+    phone: '',
+    area: '',
+    situation: '',
+    testimony: '',
+  });
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -203,6 +217,28 @@ export default function LivestreamPage() {
     });
   }, [ytReady]);
 
+  const handleTestimonyChange = (field: keyof typeof testimonyForm) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    setTestimonyForm((prev) => ({ ...prev, [field]: event.target.value }));
+  };
+
+  const handleTestimonySubmit = (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    const subject = 'Testimony Submission';
+    const body = [
+      `Full Name: ${testimonyForm.fullName}`,
+      `Phone Number: ${testimonyForm.phone || 'N/A'}`,
+      `Area of Testimony: ${testimonyForm.area || 'N/A'}`,
+      '',
+      'How the situation was like:',
+      testimonyForm.situation,
+      '',
+      'What God has done:',
+      testimonyForm.testimony,
+    ].join('\n');
+
+    window.location.href = `mailto:info@piccworldwide.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+  };
+
   return (
     <>
       <Navigation />
@@ -271,12 +307,13 @@ export default function LivestreamPage() {
                       <MessageSquareText size={12} />
                       Live Chat
                     </button>
-                    <Link
-                      href="/forms"
+                    <button
+                      type="button"
+                      onClick={() => setActiveTool('testimony')}
                       className="inline-flex items-center gap-2 rounded-full bg-[#CFF6DF] px-3 py-1 text-xs font-medium text-[#137A3D] hover:bg-[#BDEFD3] transition-colors"
                     >
-                      Church Forms
-                    </Link>
+                      Send Testimony
+                    </button>
                     <Button asChild size="sm" className="rounded-full px-4 bg-[#39D98A] text-black hover:bg-[#2FC77C]">
                       <Link href="/give">Give</Link>
                     </Button>
@@ -292,13 +329,13 @@ export default function LivestreamPage() {
             <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
               <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
                 <div className="flex flex-wrap items-center gap-2 border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                  {Object.entries(TOOL_CONFIG).map(([key, tool]) => (
+                  {TOOL_TABS.map((tool) => (
                     <button
-                      key={key}
+                      key={tool.key}
                       type="button"
-                      onClick={() => setActiveTool(key as ToolKey)}
+                      onClick={() => setActiveTool(tool.key)}
                       className={`rounded-full px-3 py-1 transition-colors ${
-                        activeTool === key
+                        activeTool === tool.key
                           ? 'bg-white text-black'
                           : 'bg-white/10 text-white hover:bg-white/20'
                       }`}
@@ -310,31 +347,113 @@ export default function LivestreamPage() {
                     Embedded view
                   </span>
                 </div>
-                <div className="aspect-[4/3] w-full bg-black">
-                  <iframe
-                    className="h-full w-full"
-                    src={TOOL_CONFIG[activeTool].url}
-                    title={TOOL_CONFIG[activeTool].label}
-                    allow="clipboard-write; fullscreen"
-                  />
-                </div>
+                {activeTool !== 'testimony' && (
+                  <div className="aspect-[4/3] w-full bg-black">
+                    <iframe
+                      className="h-full w-full"
+                      src={TOOL_CONFIG[activeTool as Exclude<ToolKey, 'testimony'>].url}
+                      title={TOOL_CONFIG[activeTool as Exclude<ToolKey, 'testimony'>].label}
+                      allow="clipboard-write; fullscreen"
+                    />
+                  </div>
+                )}
+                {activeTool === 'testimony' && (
+                  <div className="px-5 py-6 text-white">
+                    <h3 className="text-lg font-semibold mb-2">Submit a testimony</h3>
+                    <p className="text-white/70 mb-5">
+                      Share what God has done in your life and encourage others.
+                    </p>
+                    <form className="grid gap-4" onSubmit={handleTestimonySubmit}>
+                      <div>
+                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                          Full Name
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Full Name"
+                          required
+                          value={testimonyForm.fullName}
+                          onChange={handleTestimonyChange('fullName')}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                          Phone Number
+                        </label>
+                        <input
+                          type="tel"
+                          placeholder="Phone Number"
+                          value={testimonyForm.phone}
+                          onChange={handleTestimonyChange('phone')}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                          Area of Testimony
+                        </label>
+                        <input
+                          type="text"
+                          placeholder="Area of Testimony"
+                          value={testimonyForm.area}
+                          onChange={handleTestimonyChange('area')}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                          How the situation was like
+                        </label>
+                        <textarea
+                          rows={4}
+                          placeholder="Describe the situation"
+                          required
+                          value={testimonyForm.situation}
+                          onChange={handleTestimonyChange('situation')}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                        />
+                      </div>
+                      <div>
+                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                          What God has done
+                        </label>
+                        <textarea
+                          rows={4}
+                          placeholder="Share what God has done"
+                          required
+                          value={testimonyForm.testimony}
+                          onChange={handleTestimonyChange('testimony')}
+                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                        />
+                      </div>
+                      <Button className="w-full bg-white text-black hover:bg-white/90">
+                        Submit Testimony
+                      </Button>
+                    </form>
+                  </div>
+                )}
                 <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-white/70">
                   <span>
-                    {TOOL_CONFIG[activeTool].label}
+                    {activeTool === 'testimony'
+                      ? 'Testimony Form'
+                      : TOOL_CONFIG[activeTool as Exclude<ToolKey, 'testimony'>].label}
                     {activeTool === 'notepad' && (
                       <span className="ml-2 text-white/50">
                         Tip: use the save/download button inside the notepad.
                       </span>
                     )}
                   </span>
-                  <Link
-                    href={TOOL_CONFIG[activeTool].url}
-                    target="_blank"
-                    rel="noreferrer"
-                    className="text-white/80 hover:text-white hover:underline"
-                  >
-                    Open in new tab
-                  </Link>
+                  {activeTool !== 'testimony' && (
+                    <Link
+                      href={TOOL_CONFIG[activeTool as Exclude<ToolKey, 'testimony'>].url}
+                      target="_blank"
+                      rel="noreferrer"
+                      className="text-white/80 hover:text-white hover:underline"
+                    >
+                      Open in new tab
+                    </Link>
+                  )}
                 </div>
               </div>
             </div>
