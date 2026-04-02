@@ -1,14 +1,13 @@
 'use client';
 
 import { useState } from 'react';
-import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import LivestreamFooter from '@/components/LivestreamFooter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { Play, MapPin } from 'lucide-react';
+import { MapPin } from 'lucide-react';
 
 export default function LivestreamPage() {
   const [searchTerm, setSearchTerm] = useState('');
@@ -23,6 +22,7 @@ export default function LivestreamPage() {
       description: 'Replay of a powerful service moment.',
       type: 'video',
       href: 'https://www.youtube.com/watch?v=wAwMiy57iXg',
+      embed: 'https://www.youtube.com/embed/wAwMiy57iXg',
     },
     {
       id: 2,
@@ -33,6 +33,7 @@ export default function LivestreamPage() {
       description: 'A message to strengthen your faith.',
       type: 'video',
       href: 'https://www.youtube.com/watch?v=ED_nMbVeytM',
+      embed: 'https://www.youtube.com/embed/ED_nMbVeytM',
     },
     {
       id: 3,
@@ -43,6 +44,7 @@ export default function LivestreamPage() {
       description: 'A time of worship and prayer.',
       type: 'video',
       href: 'https://www.youtube.com/watch?v=abOVO5i-P3g',
+      embed: 'https://www.youtube.com/embed/abOVO5i-P3g',
     },
   ];
 
@@ -112,17 +114,6 @@ export default function LivestreamPage() {
         {/* Search Section */}
         <section className="py-10 md:py-12 bg-black border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex gap-2">
-              <Input
-                placeholder="Search streams by title or pastor..."
-                value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
-                className="flex-1 bg-white/5 border-white/15 text-white placeholder:text-white/50"
-              />
-              <Button className="bg-primary text-primary-foreground hover:bg-primary/90">
-                Search
-              </Button>
-            </div>
           </div>
         </section>
 
@@ -133,14 +124,14 @@ export default function LivestreamPage() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
                 {filteredLivestreams.map((stream) => (
                   <Card key={stream.id} className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col bg-white border-black/10 text-black">
-                    <div className="aspect-[4/3] bg-gradient-to-br from-primary to-primary/80 flex items-center justify-center relative">
-                      <Image
-                        src="/placeholder-event.jpg"
-                        alt={stream.title}
-                        fill
-                        className="object-cover opacity-20"
+                    <div className="aspect-video bg-black">
+                      <iframe
+                        className="h-full w-full"
+                        src={stream.embed}
+                        title={stream.title}
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                        allowFullScreen
                       />
-                      <Play className="w-16 h-16 text-secondary relative z-10" fill="currentColor" />
                     </div>
                     <div className="p-6 flex flex-col flex-1">
                       <h3 className="font-bold text-lg text-black mb-2 line-clamp-2">{stream.title}</h3>
