@@ -115,9 +115,11 @@ export default function EventsPage() {
     const endOfYear = (date: Date) => new Date(date.getFullYear(), 11, 31, 23, 59, 59, 999);
 
     let rangeStart = startOfDay(baseDate);
-    let rangeEnd = endOfDay(baseDate);
+    let rangeEnd: Date | null = endOfDay(baseDate);
 
-    if (filter === 'week') {
+    if (filter === 'today') {
+      rangeEnd = null;
+    } else if (filter === 'week') {
       rangeStart = startOfWeek(baseDate);
       rangeEnd = endOfWeek(baseDate);
     } else if (filter === 'month') {
@@ -132,7 +134,11 @@ export default function EventsPage() {
 
     return events
       .map((event) => ({ ...event, dateObj: new Date(event.date) }))
-      .filter((event) => event.dateObj >= rangeStart && event.dateObj <= rangeEnd)
+      .filter((event) =>
+        rangeEnd
+          ? event.dateObj >= rangeStart && event.dateObj <= rangeEnd
+          : event.dateObj >= rangeStart,
+      )
       .filter((event) => {
         if (!normalizedSearch) return true;
         return (
