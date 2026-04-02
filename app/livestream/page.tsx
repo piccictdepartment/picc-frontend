@@ -33,11 +33,11 @@ type YouTubeVideo = {
 const TOOL_CONFIG = {
   bible: {
     label: 'Bible',
-    url: 'https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/',
+    url: 'https://www.youbible.app/',
   },
   notepad: {
     label: 'Notepad',
-    url: 'https://devtoollab.com/tools/online-notepad',
+    url: 'https://www.rapidtables.com/tools/notepad.html',
   },
   chat: {
     label: 'Live Chat',
@@ -225,6 +225,53 @@ export default function LivestreamPage() {
           </div>
         </section>
 
+        {activeTool && (
+          <section className="pb-12 md:pb-16 bg-black">
+            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
+                <div className="flex flex-wrap items-center gap-2 border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                  {Object.entries(TOOL_CONFIG).map(([key, tool]) => (
+                    <button
+                      key={key}
+                      type="button"
+                      onClick={() => setActiveTool(key as ToolKey)}
+                      className={`rounded-full px-3 py-1 transition-colors ${
+                        activeTool === key
+                          ? 'bg-white text-black'
+                          : 'bg-white/10 text-white hover:bg-white/20'
+                      }`}
+                    >
+                      {tool.label}
+                    </button>
+                  ))}
+                  <span className="ml-auto text-[10px] normal-case tracking-normal text-white/50">
+                    Embedded view
+                  </span>
+                </div>
+                <div className="aspect-[4/3] w-full bg-black">
+                  <iframe
+                    className="h-full w-full"
+                    src={TOOL_CONFIG[activeTool].url}
+                    title={TOOL_CONFIG[activeTool].label}
+                    allow="clipboard-write; fullscreen"
+                  />
+                </div>
+                <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-white/70">
+                  <span>{TOOL_CONFIG[activeTool].label}</span>
+                  <Link
+                    href={TOOL_CONFIG[activeTool].url}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="text-white/80 hover:text-white hover:underline"
+                  >
+                    Open in new tab
+                  </Link>
+                </div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Search Section */}
         <section className="py-10 md:py-12 bg-black border-b border-white/10">
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -285,63 +332,6 @@ export default function LivestreamPage() {
 
       </main>
       <LivestreamFooter />
-      {activeTool && (
-        <div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 px-4 py-8"
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${TOOL_CONFIG[activeTool].label} modal`}
-          onClick={() => setActiveTool(null)}
-        >
-          <div
-            className="w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <div className="flex items-center justify-between border-b border-black/10 px-5 py-3">
-              <p className="text-sm font-semibold text-black">
-                {TOOL_CONFIG[activeTool].label}
-              </p>
-              <div className="flex items-center gap-3">
-                <Link
-                  href={TOOL_CONFIG[activeTool].url}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="text-xs font-medium text-primary hover:underline"
-                >
-                  Open in new tab
-                </Link>
-                <button
-                  type="button"
-                  onClick={() => setActiveTool(null)}
-                  aria-label="Close"
-                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black hover:bg-black/10"
-                >
-                  ×
-                </button>
-              </div>
-            </div>
-            <div className="aspect-[4/3] w-full bg-black">
-              <iframe
-                className="h-full w-full"
-                src={TOOL_CONFIG[activeTool].url}
-                title={TOOL_CONFIG[activeTool].label}
-                allow="clipboard-write; fullscreen"
-              />
-            </div>
-            <div className="border-t border-black/10 px-5 py-4 flex justify-end">
-              <button
-                type="button"
-                onClick={() => setActiveTool(null)}
-                className="rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
-              >
-                Close
-              </button>
-            </div>
-          </div>
-        </div>
-      )}
     </>
   );
 }
-
-
