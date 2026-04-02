@@ -333,6 +333,11 @@ export default async function HomePage() {
                 <p className="text-foreground/70 text-lg leading-relaxed">
                   {devotionData.title}
                 </p>
+                {devotionDate && (
+                  <p className="mt-2 text-xs uppercase tracking-[0.25em] text-foreground/50">
+                    {devotionDate}
+                  </p>
+                )}
                 <div className="mt-6">
                   <Link href="/devotions">
                     <Button className="rounded-full px-6 py-3 bg-primary text-primary-foreground hover:bg-primary/90">
@@ -341,11 +346,6 @@ export default async function HomePage() {
                   </Link>
                 </div>
                 <div className="mt-8 border-t border-primary/10 pt-6">
-                  {devotionDate && (
-                    <p className="text-xs uppercase tracking-[0.25em] text-foreground/50 mb-4">
-                      {devotionDate}
-                    </p>
-                  )}
                   <DevotionReadMore content={devotionData.content} />
                 </div>
               </div>

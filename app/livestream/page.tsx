@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import LivestreamFooter from '@/components/LivestreamFooter';
@@ -9,8 +9,16 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { MapPin } from 'lucide-react';
 
+declare global {
+  interface Window {
+    YT: any;
+    onYouTubeIframeAPIReady?: () => void;
+  }
+}
+
 export default function LivestreamPage() {
   const [searchTerm, setSearchTerm] = useState('');
+  const [ytReady, setYtReady] = useState(false);
 
   const livestreams = [
     {
@@ -53,6 +61,50 @@ export default function LivestreamPage() {
     stream.channel.toLowerCase().includes(searchTerm.toLowerCase())
   );
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const existingScript = document.getElementById('youtube-iframe-api');
+
+    const handleReady = () => setYtReady(true);
+
+    if (!existingScript) {
+      const script = document.createElement('script');
+      script.id = 'youtube-iframe-api';
+      script.src = 'https://www.youtube.com/iframe_api';
+      document.body.appendChild(script);
+      window.onYouTubeIframeAPIReady = handleReady;
+    } else if (window.YT && window.YT.Player) {
+      handleReady();
+    } else {
+      window.onYouTubeIframeAPIReady = handleReady;
+    }
+  }, []);
+
+  useEffect(() => {
+    if (!ytReady || typeof window === 'undefined' || !window.YT?.Player) return;
+    const players = new Map<string, any>();
+    const iframes = Array.from(document.querySelectorAll<HTMLIFrameElement>('[data-yt-id]'));
+
+    iframes.forEach((iframe) => {
+      const videoId = iframe.dataset.ytId;
+      if (!videoId || players.has(videoId)) return;
+      const player = new window.YT.Player(iframe, {
+        events: {
+          onStateChange: (event: any) => {
+            if (event.data === window.YT.PlayerState.PLAYING) {
+              players.forEach((p) => {
+                if (p !== event.target) {
+                  p.pauseVideo();
+                }
+              });
+            }
+          },
+        },
+      });
+      players.set(videoId, player);
+    });
+  }, [ytReady]);
+
   return (
     <>
       <Navigation />
@@ -76,7 +128,9 @@ export default function LivestreamPage() {
               <div className="aspect-video bg-black">
                 <iframe
                   className="h-full w-full"
-                  src="https://www.youtube.com/embed/ydTADwZRquA"
+                  data-yt-id="ydTADwZRquA"
+                  id="yt-hero"
+                  src="https://www.youtube.com/embed/ydTADwZRquA?enablejsapi=1&rel=0"
                   title="Sunday Livestream"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                   allowFullScreen
@@ -127,7 +181,9 @@ export default function LivestreamPage() {
                     <div className="aspect-video bg-black">
                       <iframe
                         className="h-full w-full"
-                        src={stream.embed}
+                        data-yt-id={stream.embed.split('/embed/')[1]}
+                        id={`yt-${stream.id}`}
+                        src={`${stream.embed}?enablejsapi=1&rel=0`}
                         title={stream.title}
                         allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
                         allowFullScreen
