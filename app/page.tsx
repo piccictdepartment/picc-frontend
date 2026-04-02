@@ -250,7 +250,7 @@ export default async function HomePage() {
   };
   const devotionData = devotion ?? fallbackDevotion;
   const fallbackDevotionDate = Array.isArray(devotionData?.content)
-    ? devotionData.content.find((line) =>
+    ? devotionData.content.find((line: string) =>
       /\b(?:[A-Za-z]+,?\s+)?\d{1,2}\s+[A-Za-z]+\s+\d{4}\b/.test(line),
     )
     : null;
