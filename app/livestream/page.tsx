@@ -7,7 +7,7 @@ import LivestreamFooter from '@/components/LivestreamFooter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
-import { MapPin } from 'lucide-react';
+import { BookOpenText, MessageSquareText, StickyNote } from 'lucide-react';
 
 declare global {
   interface Window {
@@ -142,13 +142,33 @@ export default function LivestreamPage() {
                     <h3 className="text-lg font-semibold">Stream in English</h3>
                   </div>
                   <div className="flex flex-wrap gap-2">
-                    <span className="inline-flex items-center gap-2 rounded-full bg-[#F1E7FF] px-3 py-1 text-xs font-medium text-[#5B2B9A]">
-                      Live Stream
-                    </span>
-                    <span className="inline-flex items-center gap-2 rounded-full bg-[#DCEAFF] px-3 py-1 text-xs font-medium text-[#1E4FA3]">
-                      <MapPin size={12} />
-                      Area 49, Lilongwe
-                    </span>
+                    <Link
+                      href="https://www.biblegateway.com/versions/New-King-James-Version-NKJV-Bible/"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#EAF2FF] px-3 py-1 text-xs font-medium text-[#1E4FA3] hover:bg-[#DCEAFF] transition-colors"
+                    >
+                      <BookOpenText size={12} />
+                      Bible
+                    </Link>
+                    <Link
+                      href="https://devtoollab.com/tools/online-notepad"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#FFF2DA] px-3 py-1 text-xs font-medium text-[#8A5A00] hover:bg-[#FFE9C2] transition-colors"
+                    >
+                      <StickyNote size={12} />
+                      Notepad
+                    </Link>
+                    <Link
+                      href="https://tlk.io/picc-worldwide-live"
+                      target="_blank"
+                      rel="noreferrer"
+                      className="inline-flex items-center gap-2 rounded-full bg-[#E8FFF3] px-3 py-1 text-xs font-medium text-[#0F7A3E] hover:bg-[#D8F7E7] transition-colors"
+                    >
+                      <MessageSquareText size={12} />
+                      Live Chat
+                    </Link>
                     <Link
                       href="/forms"
                       className="inline-flex items-center gap-2 rounded-full bg-[#CFF6DF] px-3 py-1 text-xs font-medium text-[#137A3D] hover:bg-[#BDEFD3] transition-colors"

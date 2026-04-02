@@ -249,6 +249,12 @@ export default async function HomePage() {
     ],
   };
   const devotionData = devotion ?? fallbackDevotion;
+  const fallbackDevotionDate = Array.isArray(devotionData?.content)
+    ? devotionData.content.find((line) =>
+      /\b(?:[A-Za-z]+,?\s+)?\d{1,2}\s+[A-Za-z]+\s+\d{4}\b/.test(line),
+    )
+    : null;
+  const displayDevotionDate = devotionDate || fallbackDevotionDate;
 
   return (
     <>
@@ -333,9 +339,9 @@ export default async function HomePage() {
                 <p className="text-foreground/70 text-lg leading-relaxed">
                   {devotionData.title}
                 </p>
-                {devotionDate && (
+                {displayDevotionDate && (
                   <p className="mt-2 text-xs uppercase tracking-[0.25em] text-foreground/50">
-                    {devotionDate}
+                    {displayDevotionDate}
                   </p>
                 )}
                 <div className="mt-6">
