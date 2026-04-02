@@ -66,8 +66,18 @@ const BOOKS = [
     cover: '/fire_altar/fire-on-altar-cover.jpg',
     file: '/fire_altar/FIRE%20ON%20THE%20ALTAR%20Vol%203.24.pdf',
   },
-  { title: 'Walking in Purpose', author: 'PICC Publishing', description: 'Placeholder description for book downloads.' },
-  { title: 'Grace and Growth', author: 'PICC Publishing', description: 'Placeholder description for book downloads.' },
+  {
+    title: 'Walking in Purpose',
+    author: 'PICC Publishing',
+    description: 'Placeholder description for book downloads.',
+    cover: '/fire_altar/fire-on-altar-cover.jpg',
+  },
+  {
+    title: 'Grace and Growth',
+    author: 'PICC Publishing',
+    description: 'Placeholder description for book downloads.',
+    cover: '/fire_altar/fire-on-altar-cover.jpg',
+  },
 ];
 
 const EVENT_GALLERY = [

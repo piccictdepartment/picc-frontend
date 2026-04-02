@@ -259,8 +259,12 @@ export default function LivestreamPage() {
           role="dialog"
           aria-modal="true"
           aria-label={`${TOOL_CONFIG[activeTool].label} modal`}
+          onClick={() => setActiveTool(null)}
         >
-          <div className="w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl">
+          <div
+            className="w-full max-w-5xl overflow-hidden rounded-2xl bg-white shadow-2xl"
+            onClick={(event) => event.stopPropagation()}
+          >
             <div className="flex items-center justify-between border-b border-black/10 px-5 py-3">
               <p className="text-sm font-semibold text-black">
                 {TOOL_CONFIG[activeTool].label}
@@ -277,9 +281,10 @@ export default function LivestreamPage() {
                 <button
                   type="button"
                   onClick={() => setActiveTool(null)}
-                  className="rounded-full bg-black/5 px-3 py-1 text-xs font-semibold text-black hover:bg-black/10"
+                  aria-label="Close"
+                  className="inline-flex h-8 w-8 items-center justify-center rounded-full bg-black/5 text-black hover:bg-black/10"
                 >
-                  Close
+                  ×
                 </button>
               </div>
             </div>
@@ -290,6 +295,15 @@ export default function LivestreamPage() {
                 title={TOOL_CONFIG[activeTool].label}
                 allow="clipboard-write; fullscreen"
               />
+            </div>
+            <div className="border-t border-black/10 px-5 py-4 flex justify-end">
+              <button
+                type="button"
+                onClick={() => setActiveTool(null)}
+                className="rounded-full bg-primary px-5 py-2 text-xs font-semibold text-primary-foreground hover:bg-primary/90"
+              >
+                Close
+              </button>
             </div>
           </div>
         </div>
