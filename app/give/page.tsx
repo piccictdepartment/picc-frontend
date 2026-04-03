@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import type { ChangeEvent, FormEvent } from 'react';
+import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Button } from '@/components/ui/button';
@@ -128,8 +129,20 @@ export default function GivePage() {
               <div className="rounded-3xl bg-background p-8 shadow-sm border border-border/60">
                 <div className="border-2 border-foreground/30 rounded-2xl p-6 sm:p-8">
                   <div className="text-center space-y-2">
+                    <div className="mx-auto flex h-16 w-16 items-center justify-center rounded-full border border-foreground/20 bg-white shadow-sm">
+                      <Image
+                        src="/logo.png"
+                        alt="PICC logo"
+                        width={48}
+                        height={48}
+                        className="h-12 w-12 object-contain"
+                      />
+                    </div>
                     <p className="text-xs uppercase tracking-[0.35em] text-foreground/50">
                       Pentecost International Christian Centre
+                    </p>
+                    <p className="text-xs italic text-foreground/60">
+                      Bringing hope to the hopeless and life to the dying
                     </p>
                     <h3 className="text-2xl font-semibold text-foreground">Kingdom Investments Records</h3>
                     <p className="text-sm italic text-foreground/60">Honour the Lord with your Substance</p>
@@ -334,7 +347,7 @@ export default function GivePage() {
                     className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
                     disabled={isSubmitting}
                   >
-                    {isSubmitting ? 'Processing...' : 'Donate Now'}
+                    {isSubmitting ? 'Processing...' : 'Give'}
                   </Button>
                 </div>
                 {formError && (
