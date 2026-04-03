@@ -326,139 +326,251 @@ export default function LivestreamPage() {
         </section>
 
         {activeTool && (
-          <section className="pb-12 md:pb-16 bg-black">
-            <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
-                <div className="flex flex-wrap items-center gap-2 border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
-                  {TOOL_TABS.map((tool) => (
-                    <button
-                      key={tool.key}
-                      type="button"
-                      onClick={() => setActiveTool(tool.key)}
-                      className={`rounded-full px-3 py-1 transition-colors ${
-                        activeTool === tool.key
-                          ? 'bg-white text-black'
-                          : 'bg-white/10 text-white hover:bg-white/20'
-                      }`}
-                    >
-                      {tool.label}
-                    </button>
-                  ))}
-                  <span className="ml-auto text-[10px] normal-case tracking-normal text-white/50">
-                    Embedded view
-                  </span>
-                </div>
-                {activeEmbedTool && (
-                  <div className="aspect-[4/3] w-full bg-black">
-                    <iframe
-                      className="h-full w-full"
-                      src={activeEmbedTool.url}
-                      title={activeEmbedTool.label}
-                      allow="clipboard-write; fullscreen"
-                    />
+          <>
+            <section className="pb-12 md:pb-16 bg-black hidden md:block">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
+                <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
+                  <div className="flex flex-wrap items-center gap-2 border-b border-white/10 px-4 py-3 text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                    {TOOL_TABS.map((tool) => (
+                      <button
+                        key={tool.key}
+                        type="button"
+                        onClick={() => setActiveTool(tool.key)}
+                        className={`rounded-full px-3 py-1 transition-colors ${
+                          activeTool === tool.key
+                            ? 'bg-white text-black'
+                            : 'bg-white/10 text-white hover:bg-white/20'
+                        }`}
+                      >
+                        {tool.label}
+                      </button>
+                    ))}
+                    <span className="ml-auto text-[10px] normal-case tracking-normal text-white/50">
+                      Embedded view
+                    </span>
                   </div>
-                )}
-                {activeTool === 'testimony' && (
-                  <div className="px-5 py-6 text-white">
-                    <h3 className="text-lg font-semibold mb-2">Submit a testimony</h3>
-                    <p className="text-white/70 mb-5">
-                      Share what God has done in your life and encourage others.
-                    </p>
-                    <form className="grid gap-4" onSubmit={handleTestimonySubmit}>
-                      <div>
-                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
-                          Full Name
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Full Name"
-                          required
-                          value={testimonyForm.fullName}
-                          onChange={handleTestimonyChange('fullName')}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
-                          Phone Number
-                        </label>
-                        <input
-                          type="tel"
-                          placeholder="Phone Number"
-                          value={testimonyForm.phone}
-                          onChange={handleTestimonyChange('phone')}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
-                          Area of Testimony
-                        </label>
-                        <input
-                          type="text"
-                          placeholder="Area of Testimony"
-                          value={testimonyForm.area}
-                          onChange={handleTestimonyChange('area')}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
-                          How the situation was like
-                        </label>
-                        <textarea
-                          rows={4}
-                          placeholder="Describe the situation"
-                          required
-                          value={testimonyForm.situation}
-                          onChange={handleTestimonyChange('situation')}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
-                        />
-                      </div>
-                      <div>
-                        <label className="text-xs uppercase tracking-[0.2em] text-white/70">
-                          What God has done
-                        </label>
-                        <textarea
-                          rows={4}
-                          placeholder="Share what God has done"
-                          required
-                          value={testimonyForm.testimony}
-                          onChange={handleTestimonyChange('testimony')}
-                          className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
-                        />
-                      </div>
-                      <Button className="w-full bg-white text-black hover:bg-white/90">
-                        Submit Testimony
-                      </Button>
-                    </form>
-                  </div>
-                )}
-                <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-white/70">
-                  <span>
-                    {activeTool === 'testimony'
-                      ? 'Testimony Form'
-                      : activeEmbedTool?.label}
-                    {activeTool === 'notepad' && (
-                      <span className="ml-2 text-white/50">
-                        Tip: use the save/download button inside the notepad.
-                      </span>
-                    )}
-                  </span>
                   {activeEmbedTool && (
-                    <Link
-                      href={activeEmbedTool.url}
-                      target="_blank"
-                      rel="noreferrer"
-                      className="text-white/80 hover:text-white hover:underline"
-                    >
-                      Open in new tab
-                    </Link>
+                    <div className="aspect-[4/3] w-full bg-black">
+                      <iframe
+                        className="h-full w-full"
+                        src={activeEmbedTool.url}
+                        title={activeEmbedTool.label}
+                        allow="clipboard-write; fullscreen"
+                      />
+                    </div>
                   )}
+                  {activeTool === 'testimony' && (
+                    <div className="px-5 py-6 text-white">
+                      <h3 className="text-lg font-semibold mb-2">Submit a testimony</h3>
+                      <p className="text-white/70 mb-5">
+                        Share what God has done in your life and encourage others.
+                      </p>
+                      <form className="grid gap-4" onSubmit={handleTestimonySubmit}>
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                            Full Name
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Full Name"
+                            required
+                            value={testimonyForm.fullName}
+                            onChange={handleTestimonyChange('fullName')}
+                            className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                            Phone Number
+                          </label>
+                          <input
+                            type="tel"
+                            placeholder="Phone Number"
+                            value={testimonyForm.phone}
+                            onChange={handleTestimonyChange('phone')}
+                            className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                            Area of Testimony
+                          </label>
+                          <input
+                            type="text"
+                            placeholder="Area of Testimony"
+                            value={testimonyForm.area}
+                            onChange={handleTestimonyChange('area')}
+                            className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                            How the situation was like
+                          </label>
+                          <textarea
+                            rows={4}
+                            placeholder="Describe the situation"
+                            required
+                            value={testimonyForm.situation}
+                            onChange={handleTestimonyChange('situation')}
+                            className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                          />
+                        </div>
+                        <div>
+                          <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                            What God has done
+                          </label>
+                          <textarea
+                            rows={4}
+                            placeholder="Share what God has done"
+                            required
+                            value={testimonyForm.testimony}
+                            onChange={handleTestimonyChange('testimony')}
+                            className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                          />
+                        </div>
+                        <Button className="w-full bg-white text-black hover:bg-white/90">
+                          Submit Testimony
+                        </Button>
+                      </form>
+                    </div>
+                  )}
+                  <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-white/70">
+                    <span>
+                      {activeTool === 'testimony'
+                        ? 'Testimony Form'
+                        : activeEmbedTool?.label}
+                      {activeTool === 'notepad' && (
+                        <span className="ml-2 text-white/50">
+                          Tip: use the save/download button inside the notepad.
+                        </span>
+                      )}
+                    </span>
+                    {activeEmbedTool && (
+                      <Link
+                        href={activeEmbedTool.url}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="text-white/80 hover:text-white hover:underline"
+                      >
+                        Open in new tab
+                      </Link>
+                    )}
+                  </div>
                 </div>
               </div>
-            </div>
-          </section>
+            </section>
+            <section className="md:hidden">
+              <div className="fixed bottom-0 left-0 right-0 z-40">
+                <div className="rounded-t-3xl border border-white/10 bg-[#1f1f1f] shadow-[0_-12px_40px_rgba(0,0,0,0.55)]">
+                  <div className="flex items-center gap-2 border-b border-white/10 px-4 py-3 text-xs font-semibold text-white/70">
+                    {TOOL_TABS.map((tool) => (
+                      <button
+                        key={tool.key}
+                        type="button"
+                        onClick={() => setActiveTool(tool.key)}
+                        className={`rounded-full px-3 py-1 transition-colors ${
+                          activeTool === tool.key
+                            ? 'bg-white text-black'
+                            : 'bg-white/10 text-white'
+                        }`}
+                      >
+                        {tool.label}
+                      </button>
+                    ))}
+                  </div>
+                  <div className="h-[62vh] overflow-y-auto">
+                    {activeEmbedTool && (
+                      <div className="aspect-[4/3] w-full bg-black">
+                        <iframe
+                          className="h-full w-full"
+                          src={activeEmbedTool.url}
+                          title={activeEmbedTool.label}
+                          allow="clipboard-write; fullscreen"
+                        />
+                      </div>
+                    )}
+                    {activeTool === 'testimony' && (
+                      <div className="px-4 py-5 text-white">
+                        <h3 className="text-lg font-semibold mb-2">Submit a testimony</h3>
+                        <p className="text-white/70 mb-5">
+                          Share what God has done in your life and encourage others.
+                        </p>
+                        <form className="grid gap-4" onSubmit={handleTestimonySubmit}>
+                          <div>
+                            <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                              Full Name
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="Full Name"
+                              required
+                              value={testimonyForm.fullName}
+                              onChange={handleTestimonyChange('fullName')}
+                              className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                              Phone Number
+                            </label>
+                            <input
+                              type="tel"
+                              placeholder="Phone Number"
+                              value={testimonyForm.phone}
+                              onChange={handleTestimonyChange('phone')}
+                              className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                              Area of Testimony
+                            </label>
+                            <input
+                              type="text"
+                              placeholder="Area of Testimony"
+                              value={testimonyForm.area}
+                              onChange={handleTestimonyChange('area')}
+                              className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                              How the situation was like
+                            </label>
+                            <textarea
+                              rows={4}
+                              placeholder="Describe the situation"
+                              required
+                              value={testimonyForm.situation}
+                              onChange={handleTestimonyChange('situation')}
+                              className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                            />
+                          </div>
+                          <div>
+                            <label className="text-xs uppercase tracking-[0.2em] text-white/70">
+                              What God has done
+                            </label>
+                            <textarea
+                              rows={4}
+                              placeholder="Share what God has done"
+                              required
+                              value={testimonyForm.testimony}
+                              onChange={handleTestimonyChange('testimony')}
+                              className="mt-2 w-full rounded-xl border border-white/15 bg-white/90 px-4 py-3 text-sm text-foreground shadow-sm focus:outline-none focus:ring-2 focus:ring-white/60"
+                            />
+                          </div>
+                          <Button className="w-full bg-white text-black hover:bg-white/90">
+                            Submit Testimony
+                          </Button>
+                        </form>
+                      </div>
+                    )}
+                  </div>
+                </div>
+              </div>
+            </section>
+          </>
         )}
 
         {/* Search Section */}
