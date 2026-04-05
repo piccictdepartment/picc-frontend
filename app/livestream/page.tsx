@@ -1,12 +1,15 @@
 'use client';
 
 import { useEffect, useState } from 'react';
+import type { ChangeEvent, FormEvent } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import LivestreamFooter from '@/components/LivestreamFooter';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { BookOpenText, MessageSquareText, StickyNote } from 'lucide-react';
+import { apiUrl } from '@/lib/api';
 
 declare global {
   interface Window {
@@ -15,7 +18,7 @@ declare global {
   }
 }
 
-type ToolKey = 'bible' | 'notepad' | 'chat' | 'testimony' | null;
+type ToolKey = 'bible' | 'notepad' | 'chat' | 'testimony' | 'give' | null;
 
 type YouTubeVideo = {
   videoId: string;
@@ -50,6 +53,7 @@ const TOOL_TABS: Array<{ key: ToolKey; label: string; kind: 'embed' | 'form' }> 
   { key: 'notepad', label: 'Notepad', kind: 'embed' },
   { key: 'bible', label: 'Bible', kind: 'embed' },
   { key: 'testimony', label: 'Send Testimony', kind: 'form' },
+  { key: 'give', label: 'Give', kind: 'form' },
 ];
 
 export default function LivestreamPage() {
@@ -63,6 +67,23 @@ export default function LivestreamPage() {
     situation: '',
     testimony: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
+  const [giveForm, setGiveForm] = useState({
+    currency: 'MWK',
+    amount: '',
+    fullName: '',
+    email: '',
+    phone: '',
+    phoneCountry: '+265',
+    bookletNumber: '',
+    givingDate: '',
+    givingType: '',
+    specialRecipient: '',
+    reason: '',
+    paymentMethod: 'airtel',
+  });
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
   const [isLoading, setIsLoading] = useState(true);
   const [loadError, setLoadError] = useState<string | null>(null);
@@ -70,7 +91,9 @@ export default function LivestreamPage() {
   const CHANNEL_ID = 'UC6auo8Q1xb5cgyY_pGJbfdw';
   const FALLBACK_HERO_ID = 'ydTADwZRquA';
   const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || '';
-  const activeEmbedTool = activeTool && activeTool !== 'testimony' ? TOOL_CONFIG[activeTool] : null;
+  const activeEmbedTool = activeTool && activeTool !== 'testimony' && activeTool !== 'give'
+    ? TOOL_CONFIG[activeTool]
+    : null;
 
   const featuredVideo = videos[0] || null;
   const gridVideos = videos.slice(1, 4);
@@ -241,6 +264,107 @@ export default function LivestreamPage() {
     window.location.href = `mailto:info@piccworldwide.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
   };
 
+  const normalizePaychanguPhone = (countryCode: string, rawPhone: string) => {
+    const digits = rawPhone.replace(/\D/g, '');
+    if (countryCode === '+265') {
+      return digits.replace(/^0+/, '');
+    }
+    return `${countryCode}${digits}`;
+  };
+
+  const handleGiveChange = (
+    event: ChangeEvent<HTMLInputElement | HTMLTextAreaElement | HTMLSelectElement>
+  ) => {
+    const { name, value } = event.target;
+    setGiveForm((prev) => ({ ...prev, [name]: value }));
+  };
+
+  const handleGiveSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setFormError(null);
+    setFormSuccess(null);
+
+    if (!giveForm.amount || !giveForm.fullName || !giveForm.phone) {
+      setFormError('Please complete the required fields before submitting.');
+      return;
+    }
+
+    const nameParts = giveForm.fullName.trim().split(/\s+/).filter(Boolean);
+    if (nameParts.length < 2) {
+      setFormError('Please enter your full name (first and last).');
+      return;
+    }
+    const firstName = nameParts[0];
+    const lastName = nameParts.slice(1).join(' ');
+
+    const normalizedPhone = normalizePaychanguPhone(giveForm.phoneCountry, giveForm.phone);
+    if (giveForm.phoneCountry === '+265' && normalizedPhone.length !== 9) {
+      setFormError('Please enter a valid Malawi mobile number with 9 digits.');
+      return;
+    }
+
+    const resolvedReason =
+      giveForm.reason || giveForm.givingType || 'Giving';
+
+    setIsSubmitting(true);
+    try {
+      const response = await fetch(apiUrl('/api/paychangu/initialize'), {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          amount: giveForm.amount,
+          firstName,
+          lastName,
+          phone: normalizedPhone,
+          paymentMethod: giveForm.paymentMethod,
+          reason: resolvedReason,
+        }),
+      });
+
+      const data = await response.json();
+      if (!response.ok) {
+        const errorMessage =
+          typeof data?.error === 'string'
+            ? data.error
+            : data?.message || JSON.stringify(data?.error) || 'Payment initialization failed.';
+        throw new Error(errorMessage);
+      }
+
+      setFormSuccess('Thank you! Your giving request was submitted. Follow the mobile prompt to complete payment.');
+      setGiveForm((prev) => ({
+        ...prev,
+        currency: 'MWK',
+        amount: '',
+        fullName: '',
+        email: '',
+        phone: '',
+        phoneCountry: '+265',
+        bookletNumber: '',
+        givingDate: '',
+        givingType: '',
+        specialRecipient: '',
+        reason: '',
+        paymentMethod: 'airtel',
+      }));
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : 'Something went wrong.');
+    } finally {
+      setIsSubmitting(false);
+    }
+  };
+
+  const mobilePanelHeight = mobileSheetSize === 'compact'
+    ? 'h-[45vh]'
+    : mobileSheetSize === 'focus'
+      ? 'h-[75vh]'
+      : 'h-[62vh]';
+
+  const mobilePanelSpacerHeight = mobileSheetSize === 'compact'
+    ? 'h-[calc(45vh+16px)]'
+    : mobileSheetSize === 'focus'
+      ? 'h-[calc(75vh+16px)]'
+      : 'h-[calc(62vh+16px)]';
+
   return (
     <>
       <Navigation />
@@ -316,15 +440,23 @@ export default function LivestreamPage() {
                     >
                       Send Testimony
                     </button>
-                    <Button asChild size="sm" className="rounded-full px-4 bg-[#39D98A] text-black hover:bg-[#2FC77C]">
-                      <Link href="/give">Give</Link>
-                    </Button>
+                    <button
+                      type="button"
+                      onClick={() => setActiveTool('give')}
+                      className="inline-flex items-center gap-2 rounded-full bg-[#39D98A] px-3 py-1 text-xs font-semibold text-black hover:bg-[#2FC77C] transition-colors"
+                    >
+                      Give
+                    </button>
                   </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
+
+        {activeTool && (
+          <div className={`md:hidden ${mobilePanelSpacerHeight}`} />
+        )}
 
         {activeTool && (
           <>
@@ -436,10 +568,246 @@ export default function LivestreamPage() {
                       </form>
                     </div>
                   )}
+                  {activeTool === 'give' && (
+                    <div className="px-5 py-6 text-white">
+                      <div className="rounded-3xl bg-white p-6 sm:p-8 shadow-sm border border-black/10 text-black">
+                        <div className="border-2 border-black/10 rounded-2xl p-4 sm:p-6">
+                          <div className="text-center space-y-2">
+                            <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm">
+                              <Image
+                                src="/logo.png"
+                                alt="PICC logo"
+                                width={40}
+                                height={40}
+                                className="h-10 w-10 object-contain"
+                              />
+                            </div>
+                            <p className="text-[10px] uppercase tracking-[0.35em] text-black/50">
+                              Pentecost International Christian Centre
+                            </p>
+                            <h3 className="text-xl font-semibold text-black">Give Now</h3>
+                          </div>
+
+                          <form onSubmit={handleGiveSubmit} className="mt-6 space-y-8">
+                            <div className="grid grid-cols-1 md:grid-cols-2 gap-4 text-sm">
+                              <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 min-w-0">
+                                <span className="sm:min-w-[110px] text-black/70">Booklet No.</span>
+                                <input
+                                  type="text"
+                                  name="bookletNumber"
+                                  value={giveForm.bookletNumber}
+                                  onChange={handleGiveChange}
+                                  className="w-full min-w-0 flex-1 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                  placeholder="..............."
+                                />
+                              </label>
+                              <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 min-w-0">
+                                <span className="sm:min-w-[70px] text-black/70">Date</span>
+                                <input
+                                  type="date"
+                                  name="givingDate"
+                                  value={giveForm.givingDate}
+                                  onChange={handleGiveChange}
+                                  className="w-full min-w-0 flex-1 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                />
+                              </label>
+                            </div>
+
+                            <div className="grid grid-cols-1 lg:grid-cols-[1.1fr_1fr] gap-6">
+                              <div>
+                                <p className="text-sm font-semibold text-black/70 mb-3">Tick where appropriate</p>
+                                <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm">
+                                  {[
+                                    'First Fruit',
+                                    'Tithe',
+                                    'Project Offering',
+                                    'Thanks Giving',
+                                    "Prophet's Offering",
+                                  ].map((label) => (
+                                    <label key={label} className="flex items-center gap-3">
+                                      <input
+                                        type="radio"
+                                        name="givingType"
+                                        value={label}
+                                        checked={giveForm.givingType === label}
+                                        onChange={handleGiveChange}
+                                        className="h-4 w-4 border border-black/40"
+                                      />
+                                      <span className="text-black/70">{label}</span>
+                                    </label>
+                                  ))}
+                                </div>
+                                <label className="mt-4 flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm min-w-0">
+                                  <span className="sm:min-w-[130px] text-black/70">Special Recipient</span>
+                                  <input
+                                    type="text"
+                                    name="specialRecipient"
+                                    value={giveForm.specialRecipient}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 flex-1 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="........................"
+                                  />
+                                </label>
+                              </div>
+
+                              <div className="space-y-4">
+                                <div className="grid grid-cols-1 sm:grid-cols-[110px_1fr] items-start sm:items-center gap-3 text-sm min-w-0">
+                                  <span className="text-black/70">Amount</span>
+                                  <div className="flex flex-col sm:flex-row sm:items-center gap-3 min-w-0">
+                                    <select
+                                      id="currency"
+                                      name="currency"
+                                      value={giveForm.currency}
+                                      onChange={handleGiveChange}
+                                      className="h-10 w-full sm:w-auto rounded-full border border-black/20 bg-white px-3 text-xs"
+                                    >
+                                      <option value="MWK">MWK</option>
+                                      <option value="USD">USD</option>
+                                    </select>
+                                    <input
+                                      id="amount"
+                                      type="number"
+                                      name="amount"
+                                      value={giveForm.amount}
+                                      onChange={handleGiveChange}
+                                      placeholder="0.00"
+                                      min="1"
+                                      step="any"
+                                      inputMode="decimal"
+                                      className="h-10 w-full min-w-0 flex-1 rounded-full border border-black/10 bg-white px-3 text-sm"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+
+                                <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 text-sm min-w-0">
+                                  <span className="sm:min-w-[110px] text-black/70">Full Names</span>
+                                  <input
+                                    type="text"
+                                    name="fullName"
+                                    value={giveForm.fullName}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 flex-1 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="...................................."
+                                    required
+                                  />
+                                </label>
+
+                                <div className="grid grid-cols-1 gap-3 text-sm">
+                                  <label className="flex flex-col sm:flex-row sm:items-center gap-2 sm:gap-3 min-w-0">
+                                    <span className="sm:min-w-[110px] text-black/70">Email</span>
+                                    <input
+                                      type="email"
+                                      name="email"
+                                      value={giveForm.email}
+                                      onChange={handleGiveChange}
+                                      className="w-full min-w-0 flex-1 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                      placeholder="name@email.com"
+                                    />
+                                  </label>
+                                  <div className="grid grid-cols-1 sm:grid-cols-[120px_1fr] gap-3 min-w-0">
+                                    <select
+                                      id="phoneCountry"
+                                      name="phoneCountry"
+                                      value={giveForm.phoneCountry}
+                                      onChange={handleGiveChange}
+                                      className="h-10 w-full rounded-full border border-black/20 bg-white px-3 text-xs"
+                                    >
+                                      <option value="+265">Malawi (+265)</option>
+                                      <option value="+233">Ghana (+233)</option>
+                                      <option value="+234">Nigeria (+234)</option>
+                                      <option value="+254">Kenya (+254)</option>
+                                      <option value="+255">Tanzania (+255)</option>
+                                      <option value="+260">Zambia (+260)</option>
+                                      <option value="+27">South Africa (+27)</option>
+                                      <option value="+44">United Kingdom (+44)</option>
+                                      <option value="+1">United States (+1)</option>
+                                    </select>
+                                    <input
+                                      id="phone"
+                                      type="tel"
+                                      name="phone"
+                                      value={giveForm.phone}
+                                      onChange={handleGiveChange}
+                                      placeholder="Phone number"
+                                      className="h-10 w-full min-w-0 rounded-full border border-black/10 bg-white px-3 text-sm"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+                              </div>
+                            </div>
+
+                            <div className="rounded-2xl border border-black/10 bg-white p-5">
+                              <h4 className="text-lg font-semibold text-black mb-4">Payment Info</h4>
+                              <div className="flex flex-col gap-2">
+                                <span className="text-sm font-medium text-black">Payment Method</span>
+                                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                  <label htmlFor="paymentMethodAirtel" className="flex items-center gap-3 rounded-2xl border border-black/10 px-4 py-3">
+                                    <input
+                                      id="paymentMethodAirtel"
+                                      type="radio"
+                                      name="paymentMethod"
+                                      value="airtel"
+                                      checked={giveForm.paymentMethod === 'airtel'}
+                                      onChange={handleGiveChange}
+                                    />
+                                    <span className="text-sm font-medium text-black">Airtel Money</span>
+                                  </label>
+                                  <label htmlFor="paymentMethodMpamba" className="flex items-center gap-3 rounded-2xl border border-black/10 px-4 py-3">
+                                    <input
+                                      id="paymentMethodMpamba"
+                                      type="radio"
+                                      name="paymentMethod"
+                                      value="mpamba"
+                                      checked={giveForm.paymentMethod === 'mpamba'}
+                                      onChange={handleGiveChange}
+                                    />
+                                    <span className="text-sm font-medium text-black">Mpamba</span>
+                                  </label>
+                                </div>
+                              </div>
+                              <div className="mt-4 flex flex-col gap-2">
+                                <label htmlFor="reason" className="text-sm font-medium text-black">
+                                  Giving Reason
+                                </label>
+                                <input
+                                  id="reason"
+                                  type="text"
+                                  name="reason"
+                                  value={giveForm.reason}
+                                  onChange={handleGiveChange}
+                                  placeholder="Giving Reason"
+                                  className="h-12 rounded-full border border-black/10 bg-white px-4 text-sm"
+                                />
+                              </div>
+                              <div className="mt-6">
+                                <Button
+                                  type="submit"
+                                  className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                                  disabled={isSubmitting}
+                                >
+                                  {isSubmitting ? 'Processing...' : 'Give'}
+                                </Button>
+                              </div>
+                              {formError && (
+                                <p className="mt-4 text-sm text-red-600">{formError}</p>
+                              )}
+                              {formSuccess && (
+                                <p className="mt-4 text-sm text-green-600">{formSuccess}</p>
+                              )}
+                            </div>
+                          </form>
+                        </div>
+                      </div>
+                    </div>
+                  )}
                   <div className="flex items-center justify-between border-t border-white/10 px-4 py-3 text-xs text-white/70">
                     <span>
                       {activeTool === 'testimony'
                         ? 'Testimony Form'
+                        : activeTool === 'give'
+                          ? 'Giving Form'
                         : activeEmbedTool?.label}
                       {activeTool === 'notepad' && (
                         <span className="ml-2 text-white/50">
@@ -513,13 +881,7 @@ export default function LivestreamPage() {
                     </div>
                   </div>
                   <div
-                    className={`overflow-y-auto ${
-                      mobileSheetSize === 'compact'
-                        ? 'h-[45vh]'
-                        : mobileSheetSize === 'focus'
-                          ? 'h-[75vh]'
-                          : 'h-[62vh]'
-                    }`}
+                    className={`overflow-y-auto ${mobilePanelHeight}`}
                   >
                     {activeEmbedTool && (
                       <div className="aspect-[4/3] w-full bg-black">
@@ -605,6 +967,237 @@ export default function LivestreamPage() {
                             Submit Testimony
                           </Button>
                         </form>
+                      </div>
+                    )}
+                    {activeTool === 'give' && (
+                      <div className="px-4 py-5 text-white">
+                        <div className="rounded-3xl bg-white p-5 shadow-sm border border-black/10 text-black">
+                          <div className="border-2 border-black/10 rounded-2xl p-4">
+                            <div className="text-center space-y-2">
+                              <div className="mx-auto flex h-12 w-12 items-center justify-center rounded-full border border-black/10 bg-white shadow-sm">
+                                <Image
+                                  src="/logo.png"
+                                  alt="PICC logo"
+                                  width={36}
+                                  height={36}
+                                  className="h-9 w-9 object-contain"
+                                />
+                              </div>
+                              <p className="text-[10px] uppercase tracking-[0.35em] text-black/50">
+                                Pentecost International Christian Centre
+                              </p>
+                              <h3 className="text-lg font-semibold text-black">Give Now</h3>
+                            </div>
+
+                            <form onSubmit={handleGiveSubmit} className="mt-5 space-y-6">
+                              <div className="grid grid-cols-1 gap-3 text-sm">
+                                <label className="flex flex-col gap-2 min-w-0">
+                                  <span className="text-black/70">Booklet No.</span>
+                                  <input
+                                    type="text"
+                                    name="bookletNumber"
+                                    value={giveForm.bookletNumber}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="..............."
+                                  />
+                                </label>
+                                <label className="flex flex-col gap-2 min-w-0">
+                                  <span className="text-black/70">Date</span>
+                                  <input
+                                    type="date"
+                                    name="givingDate"
+                                    value={giveForm.givingDate}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                  />
+                                </label>
+                              </div>
+
+                              <div className="space-y-3">
+                                <p className="text-sm font-semibold text-black/70">Tick where appropriate</p>
+                                <div className="grid grid-cols-1 gap-2 text-sm">
+                                  {[
+                                    'First Fruit',
+                                    'Tithe',
+                                    'Project Offering',
+                                    'Thanks Giving',
+                                    "Prophet's Offering",
+                                  ].map((label) => (
+                                    <label key={label} className="flex items-center gap-3">
+                                      <input
+                                        type="radio"
+                                        name="givingType"
+                                        value={label}
+                                        checked={giveForm.givingType === label}
+                                        onChange={handleGiveChange}
+                                        className="h-4 w-4 border border-black/40"
+                                      />
+                                      <span className="text-black/70">{label}</span>
+                                    </label>
+                                  ))}
+                                </div>
+                                <label className="mt-2 flex flex-col gap-2 text-sm min-w-0">
+                                  <span className="text-black/70">Special Recipient</span>
+                                  <input
+                                    type="text"
+                                    name="specialRecipient"
+                                    value={giveForm.specialRecipient}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="........................"
+                                  />
+                                </label>
+                              </div>
+
+                              <div className="space-y-4">
+                                <div className="grid grid-cols-1 gap-3 text-sm min-w-0">
+                                  <span className="text-black/70">Amount</span>
+                                  <div className="flex flex-col gap-3 min-w-0">
+                                    <select
+                                      id="currencyMobile"
+                                      name="currency"
+                                      value={giveForm.currency}
+                                      onChange={handleGiveChange}
+                                      className="h-10 w-full rounded-full border border-black/20 bg-white px-3 text-xs"
+                                    >
+                                      <option value="MWK">MWK</option>
+                                      <option value="USD">USD</option>
+                                    </select>
+                                    <input
+                                      id="amountMobile"
+                                      type="number"
+                                      name="amount"
+                                      value={giveForm.amount}
+                                      onChange={handleGiveChange}
+                                      placeholder="0.00"
+                                      min="1"
+                                      step="any"
+                                      inputMode="decimal"
+                                      className="h-10 w-full min-w-0 rounded-full border border-black/10 bg-white px-3 text-sm"
+                                      required
+                                    />
+                                  </div>
+                                </div>
+
+                                <label className="flex flex-col gap-2 text-sm min-w-0">
+                                  <span className="text-black/70">Full Names</span>
+                                  <input
+                                    type="text"
+                                    name="fullName"
+                                    value={giveForm.fullName}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="...................................."
+                                    required
+                                  />
+                                </label>
+
+                                <label className="flex flex-col gap-2 text-sm min-w-0">
+                                  <span className="text-black/70">Email</span>
+                                  <input
+                                    type="email"
+                                    name="email"
+                                    value={giveForm.email}
+                                    onChange={handleGiveChange}
+                                    className="w-full min-w-0 border-b border-dashed border-black/40 bg-transparent py-1 outline-none"
+                                    placeholder="name@email.com"
+                                  />
+                                </label>
+
+                                <div className="grid grid-cols-1 gap-3 min-w-0">
+                                  <select
+                                    id="phoneCountryMobile"
+                                    name="phoneCountry"
+                                    value={giveForm.phoneCountry}
+                                    onChange={handleGiveChange}
+                                    className="h-10 w-full rounded-full border border-black/20 bg-white px-3 text-xs"
+                                  >
+                                    <option value="+265">Malawi (+265)</option>
+                                    <option value="+233">Ghana (+233)</option>
+                                    <option value="+234">Nigeria (+234)</option>
+                                    <option value="+254">Kenya (+254)</option>
+                                    <option value="+255">Tanzania (+255)</option>
+                                    <option value="+260">Zambia (+260)</option>
+                                    <option value="+27">South Africa (+27)</option>
+                                    <option value="+44">United Kingdom (+44)</option>
+                                    <option value="+1">United States (+1)</option>
+                                  </select>
+                                  <input
+                                    id="phoneMobile"
+                                    type="tel"
+                                    name="phone"
+                                    value={giveForm.phone}
+                                    onChange={handleGiveChange}
+                                    placeholder="Phone number"
+                                    className="h-10 w-full min-w-0 rounded-full border border-black/10 bg-white px-3 text-sm"
+                                    required
+                                  />
+                                </div>
+                              </div>
+
+                              <div className="rounded-2xl border border-black/10 bg-white p-4">
+                                <h4 className="text-base font-semibold text-black mb-3">Payment Info</h4>
+                                <div className="flex flex-col gap-2">
+                                  <span className="text-sm font-medium text-black">Payment Method</span>
+                                  <div className="grid grid-cols-1 gap-3">
+                                    <label htmlFor="paymentMethodAirtelMobile" className="flex items-center gap-3 rounded-2xl border border-black/10 px-4 py-3">
+                                      <input
+                                        id="paymentMethodAirtelMobile"
+                                        type="radio"
+                                        name="paymentMethod"
+                                        value="airtel"
+                                        checked={giveForm.paymentMethod === 'airtel'}
+                                        onChange={handleGiveChange}
+                                      />
+                                      <span className="text-sm font-medium text-black">Airtel Money</span>
+                                    </label>
+                                    <label htmlFor="paymentMethodMpambaMobile" className="flex items-center gap-3 rounded-2xl border border-black/10 px-4 py-3">
+                                      <input
+                                        id="paymentMethodMpambaMobile"
+                                        type="radio"
+                                        name="paymentMethod"
+                                        value="mpamba"
+                                        checked={giveForm.paymentMethod === 'mpamba'}
+                                        onChange={handleGiveChange}
+                                      />
+                                      <span className="text-sm font-medium text-black">Mpamba</span>
+                                    </label>
+                                  </div>
+                                </div>
+                                <div className="mt-3 flex flex-col gap-2">
+                                  <label htmlFor="reasonMobile" className="text-sm font-medium text-black">
+                                    Giving Reason
+                                  </label>
+                                  <input
+                                    id="reasonMobile"
+                                    type="text"
+                                    name="reason"
+                                    value={giveForm.reason}
+                                    onChange={handleGiveChange}
+                                    placeholder="Giving Reason"
+                                    className="h-12 rounded-full border border-black/10 bg-white px-4 text-sm"
+                                  />
+                                </div>
+                                <div className="mt-5">
+                                  <Button
+                                    type="submit"
+                                    className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
+                                    disabled={isSubmitting}
+                                  >
+                                    {isSubmitting ? 'Processing...' : 'Give'}
+                                  </Button>
+                                </div>
+                                {formError && (
+                                  <p className="mt-4 text-sm text-red-600">{formError}</p>
+                                )}
+                                {formSuccess && (
+                                  <p className="mt-4 text-sm text-green-600">{formSuccess}</p>
+                                )}
+                              </div>
+                            </form>
+                          </div>
+                        </div>
                       </div>
                     )}
                   </div>
