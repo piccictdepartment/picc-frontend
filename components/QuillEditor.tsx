@@ -1,17 +1,14 @@
 'use client';
 
-import dynamic from 'next/dynamic';
-import { useState, useEffect } from 'react';
-import 'react-quill/dist/quill.snow.css';
-
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+import { useEffect, useRef, useState } from 'react';
+import 'quill/dist/quill.snow.css';
 
 interface QuillEditorProps {
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
   readOnly?: boolean;
-  modules?: any;
+  modules?: Record<string, any>;
   theme?: string;
   className?: string;
 }
@@ -25,34 +22,68 @@ export default function QuillEditor({
   theme = 'snow',
   className = '',
 }: QuillEditorProps) {
-  const [isLoaded, setIsLoaded] = useState(false);
+  const editorContainerRef = useRef<HTMLDivElement | null>(null);
+  const editorRef = useRef<any>(null);
+  const [isClient, setIsClient] = useState(false);
 
   useEffect(() => {
-    setIsLoaded(true);
+    setIsClient(true);
   }, []);
 
-  const defaultModules = modules || {
-    toolbar: [
-      ['bold', 'italic', 'underline'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      ['link'],
-    ],
-  };
+  useEffect(() => {
+    if (!isClient || !editorContainerRef.current) return;
+
+    let isMounted = true;
+    let Quill: any;
+
+    import('quill').then((mod) => {
+      if (!isMounted || !editorContainerRef.current) return;
+
+      Quill = mod.default;
+      editorRef.current = new Quill(editorContainerRef.current, {
+        theme,
+        placeholder,
+        readOnly,
+        modules:
+          modules ?? {
+            toolbar: [
+              ['bold', 'italic', 'underline'],
+              [{ list: 'ordered' }, { list: 'bullet' }],
+              ['link'],
+            ],
+          },
+      });
+
+      editorRef.current.clipboard.dangerouslyPasteHTML(value || '');
+      editorRef.current.on('text-change', () => {
+        const html = editorRef.current.root.innerHTML;
+        onChange(html === '<p><br></p>' ? '' : html);
+      });
+    });
+
+    return () => {
+      isMounted = false;
+      if (editorRef.current) {
+        editorRef.current.off('text-change');
+        editorRef.current = null;
+      }
+    };
+  }, [isClient, modules, placeholder, readOnly, theme, onChange, value]);
+
+  useEffect(() => {
+    if (!editorRef.current) return;
+    const currentHtml = editorRef.current.root.innerHTML;
+    if (value !== currentHtml && !(value === '' && currentHtml === '<p><br></p>')) {
+      editorRef.current.clipboard.dangerouslyPasteHTML(value || '');
+    }
+  }, [value]);
 
   return (
     <div className={`quill-editor-wrapper ${className}`}>
-      {!isLoaded && (
+      {!isClient ? (
         <div className="h-48 bg-white/5 border border-white/10 rounded-lg animate-pulse" />
-      )}
-      {isLoaded && (
-        <ReactQuill
-          theme={theme}
-          value={value}
-          onChange={onChange}
-          placeholder={placeholder}
-          readOnly={readOnly}
-          modules={defaultModules}
-        />
+      ) : (
+        <div ref={editorContainerRef} className="min-h-[240px] bg-white" />
       )}
     </div>
   );
