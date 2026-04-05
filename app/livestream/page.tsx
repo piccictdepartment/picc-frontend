@@ -923,6 +923,34 @@ export default function LivestreamPage() {
                         <LiveChat />
                       </div>
                     )}
+                    {activeTool === 'notepad' && (
+                      <div className="bg-black text-white mb-4">
+                        <div className="space-y-3">
+                          <div>
+                            <h3 className="text-lg font-semibold mb-2">Notepad</h3>
+                            <p className="text-white/70 text-sm mb-4">
+                              Take notes during the livestream. Your notes are saved locally in your browser.
+                            </p>
+                          </div>
+                          <div className="bg-white rounded-lg overflow-hidden">
+                            <QuillEditor
+                              value={notepadContent}
+                              onChange={setNotepadContent}
+                              placeholder="Type your notes here..."
+                              modules={{
+                                toolbar: [
+                                  ['bold', 'italic', 'underline', 'strike'],
+                                  [{ list: 'ordered' }, { list: 'bullet' }],
+                                  ['blockquote', 'code-block'],
+                                  ['link'],
+                                  ['clean'],
+                                ],
+                              }}
+                            />
+                          </div>
+                        </div>
+                      </div>
+                    )}
                     {activeTool === 'testimony' && (
                       <div>
                         <h3 className="text-lg font-semibold mb-2">Submit a testimony</h3>

@@ -24,22 +24,26 @@ export default function QuillEditor({
 }: QuillEditorProps) {
   const editorContainerRef = useRef<HTMLDivElement | null>(null);
   const editorRef = useRef<any>(null);
+  const onChangeRef = useRef(onChange);
   const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    onChangeRef.current = onChange;
+  }, [onChange]);
 
   useEffect(() => {
     setIsClient(true);
   }, []);
 
   useEffect(() => {
-    if (!isClient || !editorContainerRef.current) return;
+    if (!isClient || !editorContainerRef.current || editorRef.current) return;
 
     let isMounted = true;
-    let Quill: any;
 
     import('quill').then((mod) => {
       if (!isMounted || !editorContainerRef.current) return;
 
-      Quill = mod.default;
+      const Quill = mod.default;
       editorRef.current = new Quill(editorContainerRef.current, {
         theme,
         placeholder,
@@ -57,7 +61,9 @@ export default function QuillEditor({
       editorRef.current.clipboard.dangerouslyPasteHTML(value || '');
       editorRef.current.on('text-change', () => {
         const html = editorRef.current.root.innerHTML;
-        onChange(html === '<p><br></p>' ? '' : html);
+        if (onChangeRef.current) {
+          onChangeRef.current(html === '<p><br></p>' ? '' : html);
+        }
       });
     });
 
@@ -68,7 +74,7 @@ export default function QuillEditor({
         editorRef.current = null;
       }
     };
-  }, [isClient, modules, placeholder, readOnly, theme, onChange, value]);
+  }, [isClient, modules, placeholder, readOnly, theme, value]);
 
   useEffect(() => {
     if (!editorRef.current) return;
