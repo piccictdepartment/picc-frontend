@@ -5,6 +5,7 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/dialog';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Eye, EyeOff } from 'lucide-react';
 import { apiUrl } from '@/lib/api';
 import { useToast } from '@/hooks/use-toast';
 
@@ -35,6 +36,9 @@ export default function LiveChat() {
     confirmPassword: '',
   });
   const [isAuthLoading, setIsAuthLoading] = useState(false);
+  const [showLoginPassword, setShowLoginPassword] = useState(false);
+  const [showRegisterPassword, setShowRegisterPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const messagesEndRef = useRef<HTMLDivElement>(null);
   const { toast } = useToast();
 
@@ -199,7 +203,7 @@ export default function LiveChat() {
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({
-          username: authForm.username,
+          name: authForm.username,
           email: authForm.email,
           password: authForm.password,
         }),
@@ -281,15 +285,24 @@ export default function LiveChat() {
                       required
                     />
                   </div>
-                  <div>
+                  <div className="relative">
                     <label className="text-sm font-medium">Password</label>
                     <Input
-                      type="password"
+                      type={showLoginPassword ? 'text' : 'password'}
                       value={authForm.password}
                       onChange={(e) => setAuthForm(prev => ({ ...prev, password: e.target.value }))}
                       placeholder="Password"
                       required
+                      className="pr-10"
                     />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-3 top-9 inline-flex items-center text-sm text-muted-foreground"
+                      onClick={() => setShowLoginPassword((prev) => !prev)}
+                      aria-label={showLoginPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showLoginPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
                   </div>
                   <Button type="submit" className="w-full" disabled={isAuthLoading}>
                     {isAuthLoading ? 'Logging in...' : 'Login'}
@@ -318,25 +331,43 @@ export default function LiveChat() {
                       required
                     />
                   </div>
-                  <div>
+                  <div className="relative">
                     <label className="text-sm font-medium">Password</label>
                     <Input
-                      type="password"
+                      type={showRegisterPassword ? 'text' : 'password'}
                       value={authForm.password}
                       onChange={(e) => setAuthForm(prev => ({ ...prev, password: e.target.value }))}
                       placeholder="Password"
                       required
+                      className="pr-10"
                     />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-3 top-9 inline-flex items-center text-sm text-muted-foreground"
+                      onClick={() => setShowRegisterPassword((prev) => !prev)}
+                      aria-label={showRegisterPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showRegisterPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
                   </div>
-                  <div>
+                  <div className="relative">
                     <label className="text-sm font-medium">Confirm Password</label>
                     <Input
-                      type="password"
+                      type={showConfirmPassword ? 'text' : 'password'}
                       value={authForm.confirmPassword}
                       onChange={(e) => setAuthForm(prev => ({ ...prev, confirmPassword: e.target.value }))}
                       placeholder="Confirm password"
                       required
+                      className="pr-10"
                     />
+                    <button
+                      type="button"
+                      className="absolute inset-y-0 right-3 top-9 inline-flex items-center text-sm text-muted-foreground"
+                      onClick={() => setShowConfirmPassword((prev) => !prev)}
+                      aria-label={showConfirmPassword ? 'Hide password' : 'Show password'}
+                    >
+                      {showConfirmPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+                    </button>
                   </div>
                   <Button type="submit" className="w-full" disabled={isAuthLoading}>
                     {isAuthLoading ? 'Creating account...' : 'Register'}
