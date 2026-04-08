@@ -87,10 +87,21 @@ export default function LiveChat() {
 
   const fetchMessages = async () => {
     try {
-      const response = await fetch(apiUrl('/api/chat/messages'));
+      const token = localStorage.getItem('authToken');
+      if (!token) return;
+
+      const response = await fetch(apiUrl('/api/chat/messages'), {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+        },
+      });
       if (response.ok) {
         const messagesData = await response.json();
         setMessages(messagesData);
+      } else if (response.status === 401) {
+        localStorage.removeItem('authToken');
+        setUser(null);
+        setMessages([]);
       }
     } catch (error) {
       console.error('Failed to fetch messages:', error);
@@ -260,7 +271,7 @@ export default function LiveChat() {
         </div>
         <Dialog open={isAuthModalOpen} onOpenChange={setIsAuthModalOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-white text-black hover:bg-white/90">
+            <Button className="bg-white text-black hover:bg-white/90 !text-black">
               Login / Register
             </Button>
           </DialogTrigger>

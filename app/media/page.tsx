@@ -291,28 +291,7 @@ export default function MediaPage() {
           </div>
         </section>
 
-        <section className="py-16 sm:py-20 md:py-24 bg-background">
-          <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <h2 className="text-3xl md:text-4xl font-semibold text-foreground mb-4">
-              Ready to Explore More?
-            </h2>
-            <p className="text-foreground/70 mb-8">
-              Check back as we grow this library with devotionals, magazines, and teaching series.
-            </p>
-            <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <Link href="/devotions">
-                <Button className="rounded-full px-6 py-3">
-                  Daily Devotions
-                </Button>
-              </Link>
-              <Link href="/events">
-                <Button variant="outline" className="rounded-full px-6 py-3">
-                  Upcoming Events
-                </Button>
-              </Link>
-            </div>
-          </div>
-        </section>
+
       </main>
       <Footer />
     </>
