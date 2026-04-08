@@ -17,7 +17,7 @@ export default function Navigation() {
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
     { href: '/media', label: 'Media' },
-    { href: '/forms', label: 'Membership Form' },
+    { href: '/forms', label: 'Forms' },
     { href: '/livestream', label: 'Livestream' },
     { href: '/events', label: 'Events' },
     { href: '/store', label: 'Store' },

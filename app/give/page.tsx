@@ -43,125 +43,135 @@ export default function GivePage() {
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
 
-  const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    setFormError(null);
-    setFormSuccess(null);
+const handleSubmit = async (event: FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+  setFormError(null);
+  setFormSuccess(null);
 
-    if (!formData.amount || !formData.fullName || !formData.phone) {
-      setFormError('Please complete the required fields before submitting.');
-      return;
+  if (!formData.amount || !formData.fullName || !formData.phone) {
+    setFormError('Please complete the required fields before submitting.');
+    return;
+  }
+
+  const nameParts = formData.fullName.trim().split(/\s+/).filter(Boolean);
+  if (nameParts.length < 2) {
+    setFormError('Please enter your full name (first and last).');
+    return;
+  }
+
+  const firstName = nameParts[0];
+  const lastName = nameParts.slice(1).join(' ');
+
+  const normalizedPhone = normalizePaychanguPhone(formData.phoneCountry, formData.phone);
+
+  if (formData.phoneCountry === '+265' && normalizedPhone.length !== 9) {
+    setFormError('Please enter a valid Malawi mobile number with 9 digits.');
+    return;
+  }
+
+  const resolvedReason =
+    formData.reason || formData.givingType || 'Giving';
+
+  setIsSubmitting(true);
+
+  try {
+    // 1. Save giving record
+    const givingResponse = await fetch(apiUrl('/api/giving'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        bookletNumber: formData.bookletNumber,
+        givingDate: formData.givingDate,
+        givingType: formData.givingType,
+        specialRecipient: formData.specialRecipient,
+        amount: parseFloat(formData.amount),
+        currency: formData.currency,
+        fullName: formData.fullName,
+        email: formData.email,
+        phone: normalizedPhone,
+        phoneCountry: formData.phoneCountry,
+        paymentMethod: formData.paymentMethod,
+        reason: resolvedReason,
+      }),
+    });
+
+    if (!givingResponse.ok) {
+      const givingData = await givingResponse.json();
+      throw new Error(givingData.error || 'Failed to save giving record');
     }
 
-    const nameParts = formData.fullName.trim().split(/\s+/).filter(Boolean);
-    if (nameParts.length < 2) {
-      setFormError('Please enter your full name (first and last).');
-      return;
+    // 2. Initialize PayChangu payment
+    const paymentResponse = await fetch(apiUrl('/api/paychangu/initialize'), {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        amount: parseFloat(formData.amount),
+        firstName,
+        lastName,
+        phone: normalizedPhone,
+        paymentMethod: formData.paymentMethod,
+        reason: resolvedReason,
+      }),
+    });
+
+    const paymentData = await paymentResponse.json();
+
+    if (!paymentResponse.ok) {
+      const errorMessage =
+        typeof paymentData?.error === 'string'
+          ? paymentData.error
+          : paymentData?.message || JSON.stringify(paymentData?.error) || 'Payment initialization failed.';
+      throw new Error(errorMessage);
     }
-    const firstName = nameParts[0];
-    const lastName = nameParts.slice(1).join(' ');
 
-    const normalizedPhone = normalizePaychanguPhone(formData.phoneCountry, formData.phone);
-    if (formData.phoneCountry === '+265' && normalizedPhone.length !== 9) {
-      setFormError('Please enter a valid Malawi mobile number with 9 digits.');
-      return;
-    }
-
-    const resolvedReason =
-      formData.reason || formData.givingType || 'Giving';
-
-    setIsSubmitting(true);
+    // 3. Send confirmation email AFTER successful initialization
     try {
-      // First, save the giving record to the database
-      const givingResponse = await fetch(apiUrl('/api/giving'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+      await fetch("https://your-backend.onrender.com/api/email/send", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
         body: JSON.stringify({
-          bookletNumber: formData.bookletNumber,
-          givingDate: formData.givingDate,
-          givingType: formData.givingType,
-          specialRecipient: formData.specialRecipient,
-          amount: parseFloat(formData.amount),
-          currency: formData.currency,
-          fullName: formData.fullName,
           email: formData.email,
-          phone: normalizedPhone,
-          phoneCountry: formData.phoneCountry,
-          paymentMethod: formData.paymentMethod,
-          reason: resolvedReason,
-        }),
-      });
-
-      if (!givingResponse.ok) {
-        const givingData = await givingResponse.json();
-        throw new Error(givingData.error || 'Failed to save giving record');
-      }
-
-      // Then proceed with PayChangu payment
-      const paymentResponse = await fetch(apiUrl('/api/paychangu/initialize'), {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({
-          amount: parseFloat(formData.amount),
-          firstName,
-          lastName,
-          phone: normalizedPhone,
-          paymentMethod: formData.paymentMethod,
-          reason: resolvedReason,
-        }),
-      });
-
-      const paymentData = await paymentResponse.json();
-      if (!paymentResponse.ok) {
-        const errorMessage =
-          typeof paymentData?.error === 'string'
-            ? paymentData.error
-            : paymentData?.message || JSON.stringify(paymentData?.error) || 'Payment initialization failed.';
-        throw new Error(errorMessage);
-      }
-
-      try {
-        await sendGivingNotification({
-          userEmail: formData.email || undefined,
-          churchEmail: 'info@piccworldwide.org',
           fullName: formData.fullName,
           amount: formData.amount,
           currency: formData.currency,
-          phone: normalizedPhone,
-          phoneCountry: formData.phoneCountry,
-          paymentMethod: formData.paymentMethod,
           reason: resolvedReason,
           givingType: formData.givingType,
-          specialRecipient: formData.specialRecipient,
-          givingDate: formData.givingDate,
-          bookletNumber: formData.bookletNumber,
-        });
-      } catch (emailError) {
-        console.error('Giving notification email failed:', emailError);
-      }
-
-      setFormSuccess('Thank you! Your giving request was submitted. Follow the mobile prompt to complete payment.');
-      setFormData((prev) => ({
-        ...prev,
-        currency: 'MWK',
-        amount: '',
-        fullName: '',
-        email: '',
-        phone: '',
-        phoneCountry: '+265',
-        bookletNumber: '',
-        givingDate: '',
-        givingType: '',
-        specialRecipient: '',
-        reason: '',
-        paymentMethod: 'airtel',
-      }));
-    } catch (error) {
-      setFormError(error instanceof Error ? error.message : 'Something went wrong.');
-    } finally {
-      setIsSubmitting(false);
+          paymentMethod: formData.paymentMethod,
+        }),
+      });
+    } catch (emailError) {
+      console.error('Confirmation email failed:', emailError);
     }
-  };
+
+    // 4. Success message
+    setFormSuccess(
+      'Thank you! Your giving request was submitted. Follow the mobile prompt to complete payment. A confirmation email has been sent.'
+    );
+
+    // 5. Reset form
+    setFormData((prev) => ({
+      ...prev,
+      currency: 'MWK',
+      amount: '',
+      fullName: '',
+      email: '',
+      phone: '',
+      phoneCountry: '+265',
+      bookletNumber: '',
+      givingDate: '',
+      givingType: '',
+      specialRecipient: '',
+      reason: '',
+      paymentMethod: 'airtel',
+    }));
+  } catch (error) {
+    setFormError(error instanceof Error ? error.message : 'Something went wrong.');
+  } finally {
+    setIsSubmitting(false);
+  }
+};
 
   return (
     <>
