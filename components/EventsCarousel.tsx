@@ -236,9 +236,9 @@ export default function EventsCarousel() {
                   Livestream
                 </Button>
               </Link>
-              <Link href="/events">
+              <Link href="/ministries">
                 <Button variant="outline" className="px-6 py-3">
-                  View Events
+                  Our Ministries
                 </Button>
               </Link>
             </div>

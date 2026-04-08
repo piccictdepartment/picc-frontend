@@ -16,7 +16,7 @@ export default function Footer() {
     },
     {
       question: 'How can I join a ministry?',
-      answer: 'Visit the Events page or contact us to connect with a ministry leader.',
+      answer: 'Contact us or visit any of our church locations to connect with a ministry leader.',
     },
     {
       question: 'Where can I watch online?',
@@ -50,7 +50,6 @@ export default function Footer() {
               <ul className="space-y-3 text-sm text-white/80">
                 <li><Link href="/" className="hover:text-white">Home</Link></li>
                 <li><Link href="/livestream" className="hover:text-white">Livestream</Link></li>
-                <li><Link href="/events" className="hover:text-white">Events</Link></li>
                 <li><Link href="/contact" className="hover:text-white">Contact</Link></li>
                 <li><a href="#faq" className="hover:text-white">FAQ</a></li>
               </ul>

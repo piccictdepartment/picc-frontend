@@ -16,14 +16,9 @@ export default function Navigation() {
   const navLinks = [
     { href: '/', label: 'Home' },
     { href: '/about', label: 'About' },
-    { href: '/media', label: 'Media' },
-    { href: '/forms', label: 'Forms' },
     { href: '/livestream', label: 'Livestream' },
-    { href: '/events', label: 'Events' },
     { href: '/store', label: 'Store' },
     { href: '/contact', label: 'Contact' },
-    
-    
   ];
   const ministryLinks = [
     { href: '/ministries/icd', label: 'ICD' },
@@ -156,14 +151,14 @@ export default function Navigation() {
               >
                 <div className="py-2">
                   <Link
-                    href="/locations"
+                    href="/media"
                     className={
                       isDarkNav
                         ? 'block px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10'
                         : 'block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted'
                     }
                   >
-                    Church Locations
+                    Media
                   </Link>
                   <Link
                     href="/forms"
@@ -173,7 +168,17 @@ export default function Navigation() {
                         : 'block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted'
                     }
                   >
-                    Church Forms
+                    Forms
+                  </Link>
+                  <Link
+                    href="/locations"
+                    className={
+                      isDarkNav
+                        ? 'block px-4 py-2 text-sm text-white/80 hover:text-white hover:bg-white/10'
+                        : 'block px-4 py-2 text-sm text-foreground hover:text-primary hover:bg-muted'
+                    }
+                  >
+                    Church Locations
                   </Link>
                   <Link
                     href="/sermons"
@@ -270,7 +275,7 @@ export default function Navigation() {
                 {mobileResourcesOpen && (
                   <div className="space-y-1">
                     <Link
-                      href="/locations"
+                      href="/media"
                       className={
                         isDarkNav
                           ? 'block px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors'
@@ -278,7 +283,7 @@ export default function Navigation() {
                       }
                       onClick={closeMenu}
                     >
-                      Church Locations
+                      Media
                     </Link>
                     <Link
                       href="/forms"
@@ -290,6 +295,17 @@ export default function Navigation() {
                       onClick={closeMenu}
                     >
                       Forms
+                    </Link>
+                    <Link
+                      href="/locations"
+                      className={
+                        isDarkNav
+                          ? 'block px-4 py-2 text-white/80 hover:bg-white/10 rounded-lg transition-colors'
+                          : 'block px-4 py-2 text-foreground hover:bg-muted rounded-lg transition-colors'
+                      }
+                      onClick={closeMenu}
+                    >
+                      Church Locations
                     </Link>
                     <Link
                       href="/sermons"
