@@ -74,7 +74,7 @@ export default function Navigation() {
               priority
             />
             <span className="text-sm md:text-base leading-tight hidden sm:inline">
-              Welcome to PICC
+              Welcome to Pentecost International Christian Center
             </span>
             <span className="text-sm leading-tight sm:hidden">
               PICC

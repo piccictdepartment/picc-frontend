@@ -291,9 +291,9 @@ export default function MediaPage() {
                   Daily Devotions
                 </Button>
               </Link>
-              <Link href="/ministries">
+              <Link href="/events">
                 <Button variant="outline" className="rounded-full px-6 py-3">
-                  Our Ministries
+                  Upcoming Events
                 </Button>
               </Link>
             </div>

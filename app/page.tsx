@@ -43,7 +43,7 @@ const GROW_CARD_SLOTS = [
     key: 'home-grow-card-3',
     label: 'CONNECT',
     title: 'Get Involved',
-    href: '/ministries',
+    href: '/events',
     fallback: '/cards/upcoming-events.jpg',
   },
   {
