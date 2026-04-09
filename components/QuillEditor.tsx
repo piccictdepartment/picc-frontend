@@ -78,7 +78,7 @@ export default function QuillEditor({
         editorContainerRef.current.innerHTML = '';
       }
     };
-  }, [isClient, modules, placeholder, readOnly, theme, value]);
+  }, [isClient, modules, placeholder, readOnly, theme]);
 
   useEffect(() => {
     if (!editorRef.current) return;

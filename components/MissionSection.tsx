@@ -8,7 +8,7 @@ type MissionSectionProps = {
 };
 
 export default function MissionSection({ imageUrl }: MissionSectionProps) {
-  const resolvedImage = imageUrl || '/images/pastor-preaching-bw.jpg';
+  const resolvedImage = imageUrl || '/images/pastor-preaching-bw.jpeg';
   return (
     <section className="py-20 md:py-28 lg:py-36 bg-background">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">

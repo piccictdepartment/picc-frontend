@@ -23,7 +23,7 @@ export default function AboutPage() {
   const [slideTransition, setSlideTransition] = useState(true);
   const [openTenet, setOpenTenet] = useState<number | null>(0);
   const [openCoreValue, setOpenCoreValue] = useState<number | null>(0);
-  const [showAllThemes, setShowAllThemes] = useState(false);
+  const [openThemeYear, setOpenThemeYear] = useState<number | null>(null);
 
   useEffect(() => {
     const imageKeys = [
@@ -63,26 +63,24 @@ export default function AboutPage() {
 
   const yearlyThemes = [
     { year: 2010, theme: 'Theme to be updated' },
-    { year: 2011, theme: 'Theme to be updated' },
-    { year: 2012, theme: 'Theme to be updated' },
-    { year: 2013, theme: 'Theme to be updated' },
-    { year: 2014, theme: 'Theme to be updated' },
-    { year: 2015, theme: 'Theme to be updated' },
-    { year: 2016, theme: 'Theme to be updated' },
-    { year: 2017, theme: 'Theme to be updated' },
-    { year: 2018, theme: 'Theme to be updated' },
-    { year: 2019, theme: 'Theme to be updated' },
-    { year: 2020, theme: 'Theme to be updated' },
-    { year: 2021, theme: 'Theme to be updated' },
-    { year: 2022, theme: 'Theme to be updated' },
-    { year: 2023, theme: 'Theme to be updated' },
-    { year: 2024, theme: 'Theme to be updated' },
-    { year: 2025, theme: 'Theme to be updated' },
+    { year: 2011, theme: 'The Year Of Unending Enlargement - 1 Chronicles 4:4-9 ' },
+    { year: 2012, theme: 'My Year Of Open Doors - Revelations 3:8 ' },
+    { year: 2013, theme: 'The Year Of Supernatural Harvest - Jeremiah 5:24' },
+    { year: 2014, theme: 'The Year Of A New Thing - Isaiah 43:19 ' },
+    { year: 2015, theme: 'Unlimited Breakthroughs - Genesis 26:22 ' },
+    { year: 2016, theme: 'Breaking New Grounds - Isaiah 60:22 ' },
+    { year: 2017, theme: 'Divine Establishment - 1 Samuel 3:20 ' },
+    { year: 2018, theme: 'All Round Dominion - Genesis 1:26-28' },
+    { year: 2019, theme: 'The Supernatural - Isaih 60:1-22' },
+    { year: 2020, theme: 'Break Forth - Isaiah 54:3' },
+    { year: 2021, theme: 'Recover All - 1 Samuel 30:18-20' },
+    { year: 2022, theme: 'Abundantly Exceeding Grace - 1 Timothy 1:14 ' },
+    { year: 2023, theme: 'Divine Expansion - Isaiah 54:1' },
+    { year: 2024, theme: 'Perfect Jubilee from Glory to Glory - Leviticus 25:1-55 ' },
+    { year: 2025, theme: 'Multiple Divine Visitation - 1 Samuel 2: 21: ' },
     { year: 2026, theme: 'The year of the hand of God - Ezekiel 37:1-10' },
   ];
-  const currentYear = new Date().getFullYear();
-  const currentYearTheme = yearlyThemes.find((entry) => entry.year === currentYear);
-  const otherYearThemes = yearlyThemes.filter((entry) => entry.year !== currentYear);
+  const visibleThemes = yearlyThemes;
 
   return (
     <>
@@ -378,13 +376,7 @@ export default function AboutPage() {
               className="object-cover object-[center_30%]"
             />
           </div>
-          <div
-            className={
-              showAllThemes
-                ? 'absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/70'
-                : 'absolute inset-0 bg-gradient-to-b from-black/55 via-black/40 to-black/55'
-            }
-          />
+          <div className="absolute inset-0 bg-gradient-to-b from-black/75 via-black/60 to-black/70" />
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-white">
             <div className="mb-12">
               <p className="text-xs uppercase tracking-[0.35em] text-white/70 mb-3">
@@ -398,62 +390,43 @@ export default function AboutPage() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-              {currentYearTheme && (
-                <div
-                  key={currentYearTheme.year}
-                  className="bg-white/15 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-white"
-                >
-                  <div className="flex items-center gap-4">
-                    <div className="min-w-[72px] text-center rounded-xl bg-white/15 text-white font-semibold py-3 border border-white/20">
-                      {currentYearTheme.year}
-                    </div>
-                    <div>
-                      <p className="text-xs uppercase tracking-[0.25em] text-white/70 mb-2">
-                        Yearly Theme
-                      </p>
-                      <h3 className="text-lg md:text-xl font-semibold text-white">
-                        {currentYearTheme.theme}
-                      </h3>
-                    </div>
-                  </div>
-                </div>
-              )}
-
-              {showAllThemes &&
-                otherYearThemes.map((entry) => (
+            <div className="space-y-4 max-w-3xl">
+              {visibleThemes.map((entry) => {
+                const isOpen = openThemeYear === entry.year;
+                return (
                   <div
                     key={entry.year}
-                    className="bg-white/15 backdrop-blur-sm border border-white/20 rounded-2xl p-6 shadow-sm hover:shadow-md transition-shadow text-white"
+                    className="rounded-2xl border border-white/25 bg-white/10 backdrop-blur-sm px-4 py-4 shadow-sm"
                   >
-                    <div className="flex items-center gap-4">
-                      <div className="min-w-[72px] text-center rounded-xl bg-white/15 text-white font-semibold py-3 border border-white/20">
+                    <button
+                      type="button"
+                      onClick={() => setOpenThemeYear(isOpen ? null : entry.year)}
+                      className="w-full flex items-center justify-between gap-4 text-left"
+                      aria-expanded={isOpen}
+                    >
+                      <span className="text-lg md:text-xl font-semibold text-white">
                         {entry.year}
-                      </div>
-                      <div>
-                        <p className="text-xs uppercase tracking-[0.25em] text-white/70 mb-2">
+                      </span>
+                      <span
+                        className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-white/50 text-white text-xl leading-none"
+                        aria-hidden="true"
+                      >
+                        {isOpen ? '-' : '+'}
+                      </span>
+                    </button>
+                    {isOpen && (
+                      <div className="mt-3 space-y-2">
+                        <p className="text-xs uppercase tracking-[0.25em] text-white/70">
                           Yearly Theme
                         </p>
-                        <h3 className="text-lg md:text-xl font-semibold text-white">
-                          {entry.theme}
-                        </h3>
+                        <p className="text-white/85 leading-relaxed">{entry.theme}</p>
                       </div>
-                    </div>
+                    )}
                   </div>
-                ))}
+                );
+              })}
             </div>
 
-            <div className="mt-8">
-              <button
-                type="button"
-                onClick={() => setShowAllThemes((prev) => !prev)}
-                className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white/10 px-6 py-3 text-sm font-semibold uppercase tracking-[0.25em] text-white transition-colors hover:bg-white/20"
-              >
-                {showAllThemes
-                  ? 'Hide themes from other years'
-                  : 'View themes from other years'}
-              </button>
-            </div>
           </div>
         </section>
 

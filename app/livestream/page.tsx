@@ -60,6 +60,7 @@ const QUILL_MODULES = {
     ['clean'],
   ],
 };
+const NOTEPAD_STORAGE_KEY = 'livestream-notepad-content';
 
 export default function LivestreamPage() {
   const [ytReady, setYtReady] = useState(false);
@@ -104,6 +105,25 @@ export default function LivestreamPage() {
 
   const featuredVideo = videos[0] || null;
   const gridVideos = videos.slice(1, 4);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      const saved = window.localStorage.getItem(NOTEPAD_STORAGE_KEY);
+      if (saved) setNotepadContent(saved);
+    } catch (error) {
+      console.error('Failed to load livestream notepad content:', error);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    try {
+      window.localStorage.setItem(NOTEPAD_STORAGE_KEY, notepadContent);
+    } catch (error) {
+      console.error('Failed to save livestream notepad content:', error);
+    }
+  }, [notepadContent]);
 
   const formatDate = (value: string) => {
     if (!value) return '';
@@ -481,7 +501,7 @@ export default function LivestreamPage() {
               <div
                 className={
                   mobilePlayerActive
-                    ? 'fixed inset-x-0 top-0 z-50 h-[40vh] bg-black md:static md:h-auto'
+                    ? 'sticky top-0 z-40 aspect-video bg-black'
                     : 'relative aspect-video bg-black'
                 }
               >
@@ -951,15 +971,9 @@ export default function LivestreamPage() {
                 </div>
               </div>
             </section>
-            <section className="md:hidden">
-              <div className="fixed inset-0 z-40 bg-black">
-                <div
-                  className={
-                    mobilePlayerActive
-                      ? 'flex h-full flex-col overflow-hidden border-t border-white/10 bg-[#111111] pt-[40vh]'
-                      : 'flex h-full flex-col overflow-hidden border-t border-white/10 bg-[#111111]'
-                  }
-                >
+            <section className="md:hidden pb-12 bg-black">
+              <div className="max-w-5xl mx-auto px-4 sm:px-6">
+                <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
                   <div className="border-b border-white/10 px-4 py-3">
                     <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white/70">
                       {TOOL_TABS.map((tool) => (
@@ -985,7 +999,7 @@ export default function LivestreamPage() {
                       </button>
                     </div>
                   </div>
-                  <div className="flex-1 overflow-y-auto px-4 py-5 text-white">
+                  <div className="px-4 py-5 text-white">
                     {activeEmbedTool && (
                       <div className="aspect-[4/3] w-full bg-black mb-4">
                         <iframe
@@ -1015,15 +1029,7 @@ export default function LivestreamPage() {
                               value={notepadContent}
                               onChange={setNotepadContent}
                               placeholder="Type your notes here..."
-                              modules={{
-                                toolbar: [
-                                  ['bold', 'italic', 'underline', 'strike'],
-                                  [{ list: 'ordered' }, { list: 'bullet' }],
-                                  ['blockquote', 'code-block'],
-                                  ['link'],
-                                  ['clean'],
-                                ],
-                              }}
+                              modules={QUILL_MODULES}
                             />
                           </div>
                         </div>

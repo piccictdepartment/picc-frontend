@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import Link from 'next/link';
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 
@@ -53,6 +53,12 @@ const SERMONS = [
 
 export default function SermonsPage() {
   const [selectedSermon, setSelectedSermon] = useState<(typeof SERMONS)[number] | null>(null);
+  const selectedSermonRef = useRef<HTMLElement | null>(null);
+
+  useEffect(() => {
+    if (!selectedSermon) return;
+    selectedSermonRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+  }, [selectedSermon]);
 
   return (
     <>
@@ -60,7 +66,10 @@ export default function SermonsPage() {
       <main className="min-h-screen bg-background">
         {/* Hero / Selected Sermon */}
         {selectedSermon ? (
-          <section className="relative overflow-hidden py-20 sm:py-24 md:py-32 text-white rounded-b-[36px] md:rounded-b-[48px]">
+          <section
+            ref={selectedSermonRef}
+            className="relative overflow-hidden py-20 sm:py-24 md:py-32 text-white rounded-b-[36px] md:rounded-b-[48px]"
+          >
             <div className="absolute inset-0">
               <div className="absolute inset-0 bg-[radial-gradient(circle_at_top,#4B7BA7_0%,#2D5A8C_45%,#1E3A5F_100%)]" />
               <div className="absolute inset-0 bg-black/20" />

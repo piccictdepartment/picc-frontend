@@ -56,13 +56,13 @@ const GROW_CARD_SLOTS = [
 ];
 
 const MINISTRY_CARDS = [
-  { title: 'Women of Hope', key: 'home-ministry-card-1', fallback: '/hero/hero-8-woh.jpg' },
-  { title: 'ICD', key: 'home-ministry-card-2', fallback: '/hero/hero-11-icd.jpg' },
-  { title: 'Men of Valour', key: 'home-ministry-card-3', fallback: '/hero/hero-7-mov.jpg' },
-  { title: 'Prison Ministry', key: 'home-ministry-card-4', fallback: '/hero/hero-14.jpg' },
-  { title: 'Youth Church Ministry', key: 'home-ministry-card-5', fallback: '/hero/hero-10-yc.jpg' },
-  { title: 'Hope and Beauty', key: 'home-ministry-card-6', fallback: '/hero/hero-13-hb.jpg' },
-  { title: 'Heritage Ministry', key: 'home-ministry-card-7', fallback: '/hero/hero-12-heritage.jpg' },
+  { title: 'Women of Hope', key: 'home-ministry-card-1', fallback: '/hero/hero-8-woh.jpg', href: '/ministries/women-of-hope' },
+  { title: 'ICD', key: 'home-ministry-card-2', fallback: '/hero/hero-11-icd.jpg', href: '/ministries/icd' },
+  { title: 'Men of Valour', key: 'home-ministry-card-3', fallback: '/hero/hero-7-mov.jpg', href: '/ministries/men-of-valour' },
+  { title: 'Prison Ministry', key: 'home-ministry-card-4', fallback: '/hero/hero-14.jpg', href: '/ministries/prison-ministry' },
+  { title: 'Youth Church Ministry', key: 'home-ministry-card-5', fallback: '/hero/hero-10-yc.jpg', href: '/ministries/youth-church-ministry' },
+  { title: 'Hope and Beauty', key: 'home-ministry-card-6', fallback: '/hero/hero-13-hb.jpg', href: '/ministries/hope-and-beauty' },
+  { title: 'Heritage Ministry', key: 'home-ministry-card-7', fallback: '/hero/hero-12-heritage.jpg', href: '/ministries/heritage-ministry' },
 ];
 
 const DEFAULT_SERVICES = [
@@ -211,12 +211,12 @@ export default async function HomePage() {
     ...slot,
     src: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
   }));
-  const missionImage = normalizeImageUrl(siteImages['home-mission-image']) || '/images/pastor-preaching-bw.jpg';
+  const missionImage = normalizeImageUrl(siteImages['home-mission-image']) || '/images/pastor-preaching-bw.jpeg';
   const growCards = GROW_CARD_SLOTS.map((slot) => ({
     ...slot,
     image: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
   }));
-  const pastorsImage = normalizeImageUrl(siteImages['home-pastors-image']) || '/images/pastor-preaching-bw.jpg';
+  const pastorsImage = normalizeImageUrl(siteImages['home-pastors-image']) || '/images/pastor-preaching-bw.jpeg';
   const listenNowImage = normalizeImageUrl(siteImages['home-listen-now-bg']) || '/pastor/pastor-photo.jpg';
   const ministryCards = MINISTRY_CARDS.map((slot) => ({
     ...slot,
@@ -524,9 +524,11 @@ export default async function HomePage() {
           <div className="ministry-marquee overflow-hidden">
             <div className="ministry-track flex gap-4 sm:gap-6 w-[200%] px-4 sm:px-6">
               {[...ministryCards, ...ministryCards].map((item, index) => (
-                <div
+                <Link
                   key={`${item.title}-${index}`}
-                  className="relative min-w-[70vw] w-[70vw] sm:min-w-[44vw] sm:w-[44vw] md:min-w-[320px] md:w-[320px] lg:min-w-[340px] lg:w-[340px] h-[200px] sm:h-[240px] md:h-[300px] rounded-2xl overflow-hidden shadow-xl"
+                  href={item.href}
+                  className="block relative min-w-[70vw] w-[70vw] sm:min-w-[44vw] sm:w-[44vw] md:min-w-[320px] md:w-[320px] lg:min-w-[340px] lg:w-[340px] h-[200px] sm:h-[240px] md:h-[300px] rounded-2xl overflow-hidden shadow-xl"
+                  aria-label={item.title}
                 >
                   <Image
                     src={item.image}
@@ -538,7 +540,7 @@ export default async function HomePage() {
                   <div className="absolute inset-0 p-5 flex flex-col justify-end">
                     <p className="text-white text-base sm:text-lg md:text-xl font-semibold">{item.title}</p>
                   </div>
-                </div>
+                </Link>
               ))}
             </div>
           </div>
