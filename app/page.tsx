@@ -51,7 +51,7 @@ const GROW_CARD_SLOTS = [
     label: 'GIVE',
     title: 'Support the Mission',
     href: '/give',
-    fallback: '/cards/give-offerings.jpg',
+    fallback: '/cards/give-offerings.png',
   },
 ];
 

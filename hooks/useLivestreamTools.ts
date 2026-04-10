@@ -3,6 +3,7 @@ import { apiUrl } from '@/lib/api';
 import { sendGivingNotification } from '@/lib/email';
 
 const NOTEPAD_STORAGE_KEY = 'picc-livestream-notepad';
+const LEGACY_NOTEPAD_STORAGE_KEY = 'livestream-notepad-content';
 
 export function useNotepad() {
   const [notepadContent, setNotepadContent] = useState('');
@@ -11,7 +12,17 @@ export function useNotepad() {
     if (typeof window === 'undefined') return;
     try {
       const saved = window.localStorage.getItem(NOTEPAD_STORAGE_KEY);
-      if (saved) setNotepadContent(saved);
+      if (saved) {
+        setNotepadContent(saved);
+        return;
+      }
+
+      const legacySaved = window.localStorage.getItem(LEGACY_NOTEPAD_STORAGE_KEY);
+      if (legacySaved) {
+        setNotepadContent(legacySaved);
+        // Migrate old key so existing users keep their notes.
+        window.localStorage.setItem(NOTEPAD_STORAGE_KEY, legacySaved);
+      }
     } catch (error) {
       console.error('Failed to load livestream notepad content:', error);
     }
