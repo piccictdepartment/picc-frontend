@@ -1,41 +1,29 @@
 import { useState, useEffect, ChangeEvent, FormEvent } from 'react';
 import { apiUrl } from '@/lib/api';
-import { sendGivingNotification } from '@/lib/email';
+import { sendGivingNotification, sendTestimonyNotification } from '@/lib/email';
 
 const NOTEPAD_STORAGE_KEY = 'picc-livestream-notepad';
 const LEGACY_NOTEPAD_STORAGE_KEY = 'livestream-notepad-content';
 
 export function useNotepad() {
   const [notepadContent, setNotepadContent] = useState('');
+  const [isInitialized, setIsInitialized] = useState(false);
 
+  // Load from localStorage on mount
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      const saved = window.localStorage.getItem(NOTEPAD_STORAGE_KEY);
-      if (saved) {
-        setNotepadContent(saved);
-        return;
-      }
-
-      const legacySaved = window.localStorage.getItem(LEGACY_NOTEPAD_STORAGE_KEY);
-      if (legacySaved) {
-        setNotepadContent(legacySaved);
-        // Migrate old key so existing users keep their notes.
-        window.localStorage.setItem(NOTEPAD_STORAGE_KEY, legacySaved);
-      }
-    } catch (error) {
-      console.error('Failed to load livestream notepad content:', error);
+    const saved = localStorage.getItem(NOTEPAD_STORAGE_KEY) || localStorage.getItem(LEGACY_NOTEPAD_STORAGE_KEY);
+    if (saved) {
+      setNotepadContent(saved);
     }
+    setIsInitialized(true);
   }, []);
 
+  // Save to localStorage whenever content changes
   useEffect(() => {
-    if (typeof window === 'undefined') return;
-    try {
-      window.localStorage.setItem(NOTEPAD_STORAGE_KEY, notepadContent);
-    } catch (error) {
-      console.error('Failed to save livestream notepad content:', error);
+    if (isInitialized) {
+      localStorage.setItem(NOTEPAD_STORAGE_KEY, notepadContent);
     }
-  }, [notepadContent]);
+  }, [notepadContent, isInitialized]);
 
   return { notepadContent, setNotepadContent };
 }
@@ -48,30 +36,51 @@ export function useTestimonyForm() {
     situation: '',
     testimony: '',
   });
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const [formError, setFormError] = useState<string | null>(null);
+  const [formSuccess, setFormSuccess] = useState<string | null>(null);
 
   const handleTestimonyChange = (field: keyof typeof testimonyForm) => (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setTestimonyForm((prev) => ({ ...prev, [field]: event.target.value }));
   };
 
-  const handleTestimonySubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleTestimonySubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    const subject = 'Testimony Submission';
-    const body = [
-      `Full Name: ${testimonyForm.fullName}`,
-      `Phone Number: ${testimonyForm.phone || 'N/A'}`,
-      `Area of Testimony: ${testimonyForm.area || 'N/A'}`,
-      '',
-      'How the situation was like:',
-      testimonyForm.situation,
-      '',
-      'What God has done:',
-      testimonyForm.testimony,
-    ].join('\n');
+    setFormError(null);
+    setFormSuccess(null);
 
-    window.location.href = `mailto:info@piccworldwide.org?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    if (!testimonyForm.fullName || !testimonyForm.situation || !testimonyForm.testimony) {
+      setFormError('Please complete the required fields before submitting.');
+      return;
+    }
+
+    setIsSubmitting(true);
+    try {
+      await sendTestimonyNotification({
+        churchEmail: 'info@piccworldwide.org',
+        fullName: testimonyForm.fullName,
+        phone: testimonyForm.phone || undefined,
+        area: testimonyForm.area || undefined,
+        situation: testimonyForm.situation,
+        testimony: testimonyForm.testimony,
+      });
+
+      setFormSuccess('Thank you! Your testimony has been sent.');
+      setTestimonyForm({
+        fullName: '',
+        phone: '',
+        area: '',
+        situation: '',
+        testimony: '',
+      });
+    } catch (error) {
+      setFormError(error instanceof Error ? error.message : 'Failed to submit testimony.');
+    } finally {
+      setIsSubmitting(false);
+    }
   };
 
-  return { testimonyForm, handleTestimonyChange, handleTestimonySubmit };
+  return { testimonyForm, handleTestimonyChange, handleTestimonySubmit, isSubmitting, formError, formSuccess };
 }
 
 export function useGiveForm() {

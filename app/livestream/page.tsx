@@ -264,12 +264,25 @@ export default function LivestreamPage() {
 
   const mobilePlayerActive = isMobileViewport && activeTool;
 
+  useEffect(() => {
+    if (typeof document === 'undefined') return;
+    if (!mobilePlayerActive) return;
+    const previousOverflow = document.body.style.overflow;
+    const previousOverscroll = document.body.style.overscrollBehavior;
+    document.body.style.overflow = 'hidden';
+    document.body.style.overscrollBehavior = 'none';
+    return () => {
+      document.body.style.overflow = previousOverflow;
+      document.body.style.overscrollBehavior = previousOverscroll;
+    };
+  }, [mobilePlayerActive]);
+
   return (
     <>
       <Navigation />
       <main className="min-h-screen bg-black text-white">
         {/* Hero Section */}
-        <section className="py-16 sm:py-20 md:py-24 bg-black text-white">
+        <section className={`py-16 sm:py-20 md:py-24 bg-black text-white ${mobilePlayerActive ? 'hidden md:block' : ''}`}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <h1 className="text-4xl md:text-5xl font-bold tracking-tight mb-4">
               Watch <span className="text-red-500">Live</span> Services
@@ -281,13 +294,13 @@ export default function LivestreamPage() {
         </section>
 
         {/* Sunday Livestream Section */}
-        <section className="py-12 md:py-16 bg-black">
+        <section className={`py-12 md:py-16 bg-black ${mobilePlayerActive ? 'hidden md:block' : ''}`}>
           <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8">
             <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
               <div
                 className={
                   mobilePlayerActive
-                    ? 'sticky top-0 z-40 aspect-video bg-black'
+                    ? 'sticky top-16 z-40 h-[40svh] bg-black'
                     : 'relative aspect-video bg-black'
                 }
               >
@@ -301,7 +314,7 @@ export default function LivestreamPage() {
                   allowFullScreen
                 />
               </div>
-              <div className="bg-white text-black px-6 py-5">
+              <div className={`bg-white text-black px-6 py-5 ${mobilePlayerActive ? 'hidden md:block' : ''}`}>
                 <div className="flex items-center justify-between gap-4 flex-wrap">
                   <div>
                     <h3 className="text-lg font-semibold">
@@ -395,7 +408,7 @@ export default function LivestreamPage() {
                   )}
                   {activeTool === 'chat' && (
                     <div className="h-[400px] w-full bg-black">
-                      <LiveChat />
+                      <LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} />
                     </div>
                   )}
                   {activeTool === 'notepad' && (
@@ -440,35 +453,46 @@ export default function LivestreamPage() {
                 </div>
               </div>
             </section>
-            <section className="md:hidden pb-12 bg-black">
-              <div className="max-w-5xl mx-auto px-4 sm:px-6">
-                <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5">
-                  <div className="border-b border-white/10 px-4 py-3">
-                    <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white/70">
-                      {TOOL_TABS.map((tool) => (
-                        <button
-                          key={tool.key}
-                          type="button"
-                          onClick={() => setActiveTool(tool.key)}
-                          className={`rounded-full px-3 py-1 transition-colors ${
-                            activeTool === tool.key
-                              ? 'bg-white text-black'
-                              : 'bg-white/10 text-white'
-                          }`}
-                        >
-                          {tool.label}
-                        </button>
-                      ))}
-                      <button
-                        type="button"
-                        onClick={() => setActiveTool(null)}
-                        className="ml-auto rounded-full bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
-                      >
-                        Close
-                      </button>
-                    </div>
+            {mobilePlayerActive ? (
+              <section className="md:hidden fixed top-16 left-0 right-0 bottom-0 z-40 bg-black">
+                <div className="h-full flex flex-col">
+                  <div className="flex-[0_0_40%] bg-black">
+                    <iframe
+                      className="h-full w-full"
+                      data-yt-id={featuredVideo?.videoId || FALLBACK_HERO_ID}
+                      id="yt-hero-mobile"
+                      src={`${featuredVideo?.embedUrl || `https://www.youtube.com/embed/${FALLBACK_HERO_ID}`}?enablejsapi=1&rel=0`}
+                      title={featuredVideo?.title || 'Sunday Livestream'}
+                      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                      allowFullScreen
+                    />
                   </div>
-                  <div className="px-4 py-5 text-white">
+                  <div className="flex-[1_1_60%] px-4 py-5 text-white overflow-y-auto bg-black">
+                    <div className="mb-4 border-b border-white/10 pb-3">
+                      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white/70">
+                        {TOOL_TABS.map((tool) => (
+                          <button
+                            key={tool.key}
+                            type="button"
+                            onClick={() => setActiveTool(tool.key)}
+                            className={`rounded-full px-3 py-1 transition-colors ${
+                              activeTool === tool.key
+                                ? 'bg-white text-black'
+                                : 'bg-white/10 text-white'
+                            }`}
+                          >
+                            {tool.label}
+                          </button>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => setActiveTool(null)}
+                          className="ml-auto rounded-full bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
                     {activeEmbedTool && (
                       <div className="aspect-[4/3] w-full bg-black mb-4">
                         <iframe
@@ -481,7 +505,7 @@ export default function LivestreamPage() {
                     )}
                     {activeTool === 'chat' && (
                       <div className="h-[300px] w-full bg-black mb-4">
-                        <LiveChat />
+                        <LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} />
                       </div>
                     )}
                     {activeTool === 'notepad' && (
@@ -501,18 +525,83 @@ export default function LivestreamPage() {
                     )}
                   </div>
                 </div>
-              </div>
-            </section>
+              </section>
+            ) : (
+              <section className="md:hidden pb-12 bg-black">
+                <div className="max-w-5xl mx-auto px-4 sm:px-6">
+                  <div className="overflow-hidden rounded-2xl border border-white/15 bg-white/5 h-[60vh] flex flex-col">
+                    <div className="border-b border-white/10 px-4 py-3">
+                      <div className="flex flex-wrap items-center gap-2 text-xs font-semibold text-white/70">
+                        {TOOL_TABS.map((tool) => (
+                          <button
+                            key={tool.key}
+                            type="button"
+                            onClick={() => setActiveTool(tool.key)}
+                            className={`rounded-full px-3 py-1 transition-colors ${
+                              activeTool === tool.key
+                                ? 'bg-white text-black'
+                                : 'bg-white/10 text-white'
+                            }`}
+                          >
+                            {tool.label}
+                          </button>
+                        ))}
+                        <button
+                          type="button"
+                          onClick={() => setActiveTool(null)}
+                          className="ml-auto rounded-full bg-white/10 px-3 py-1 text-xs text-white hover:bg-white/20"
+                        >
+                          Close
+                        </button>
+                      </div>
+                    </div>
+                    <div className="px-4 py-5 text-white flex-1 overflow-y-auto">
+                      {activeEmbedTool && (
+                        <div className="aspect-[4/3] w-full bg-black mb-4">
+                          <iframe
+                            className="h-full w-full"
+                            src={activeEmbedTool.url}
+                            title={activeEmbedTool.label}
+                            allow="clipboard-write; fullscreen"
+                          />
+                        </div>
+                      )}
+                      {activeTool === 'chat' && (
+                        <div className="h-[300px] w-full bg-black mb-4">
+                          <LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} />
+                        </div>
+                      )}
+                      {activeTool === 'notepad' && (
+                        <div className="mb-4">
+                          <NotepadTool />
+                        </div>
+                      )}
+                      {activeTool === 'testimony' && (
+                        <div className="px-4 py-5 text-white">
+                          <TestimonyTool />
+                        </div>
+                      )}
+                      {activeTool === 'give' && (
+                        <div className="px-4 py-5 text-white">
+                          <GiveTool isMobile={true} />
+                        </div>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </section>
+            )}
           </>
         )}
 
-        {/* Search Section */}        <section className="py-10 md:py-12 bg-black border-b border-white/10">
+        {/* Search Section */}
+        <section className={`py-10 md:py-12 bg-black border-b border-white/10 ${mobilePlayerActive ? 'hidden md:block' : ''}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           </div>
         </section>
 
         {/* Livestreams Grid */}
-        <section className="py-16 sm:py-20 md:py-24 bg-black">
+        <section className={`py-16 sm:py-20 md:py-24 bg-black ${mobilePlayerActive ? 'hidden md:block' : ''}`}>
           <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             {isLoading ? (
               <div className="text-center py-12">
@@ -564,7 +653,7 @@ export default function LivestreamPage() {
         </section>
 
       </main>
-      <LivestreamFooter />
+      {!mobilePlayerActive && <LivestreamFooter />}
     </>
   );
 }
