@@ -1,3 +1,5 @@
+//app/admin/livechat/page.tsx
+
 'use client';
 
 import { useEffect, useMemo, useState } from 'react';
@@ -30,6 +32,7 @@ export default function LiveChatAdminPage() {
   const [password, setPassword] = useState('');
   const [loginError, setLoginError] = useState('');
   const [status, setStatus] = useState('');
+  const [lastError, setLastError] = useState('');
   const [threads, setThreads] = useState<ChatThread[]>([]);
   const [selectedVideoId, setSelectedVideoId] = useState<string | null>(null);
   const [messages, setMessages] = useState<ChatMessage[]>([]);
@@ -71,10 +74,31 @@ export default function LiveChatAdminPage() {
     [threads, selectedVideoId]
   );
 
+  const readResponseDetail = async (response: Response) => {
+    try {
+      const text = await response.text();
+      if (!text) {
+        return `HTTP ${response.status} ${response.statusText}`.trim();
+      }
+      try {
+        const parsed = JSON.parse(text) as { message?: string };
+        if (parsed?.message) {
+          return `HTTP ${response.status} ${response.statusText} - ${parsed.message}`.trim();
+        }
+      } catch {
+        // Ignore JSON parse errors and fall back to raw text
+      }
+      return `HTTP ${response.status} ${response.statusText} - ${text}`.trim();
+    } catch {
+      return `HTTP ${response.status} ${response.statusText}`.trim();
+    }
+  };
+
   const handleLogin = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     setLoginError('');
     setStatus('');
+    setLastError('');
 
     try {
       const response = await fetch(apiUrl('/api/auth/login'), {
@@ -111,12 +135,15 @@ export default function LiveChatAdminPage() {
     if (!token) return;
     setIsLoadingThreads(true);
     setStatus('');
+    setLastError('');
     try {
       const response = await fetch(apiUrl('/api/chat/admin/threads?take=200'), {
         headers: { Authorization: `Bearer ${token}` },
       });
       if (!response.ok) {
+        const detail = await readResponseDetail(response);
         setStatus('Unable to load chat threads.');
+        setLastError(detail || `HTTP ${response.status}`);
         setThreads([]);
         return;
       }
@@ -134,13 +161,16 @@ export default function LiveChatAdminPage() {
     if (!token) return;
     setIsLoadingMessages(true);
     setStatus('');
+    setLastError('');
     try {
       const response = await fetch(
         apiUrl(`/api/chat/admin/messages?videoId=${encodeURIComponent(videoId)}&take=500`),
         { headers: { Authorization: `Bearer ${token}` } }
       );
       if (!response.ok) {
+        const detail = await readResponseDetail(response);
         setStatus('Unable to load messages for that stream.');
+        setLastError(detail || `HTTP ${response.status}`);
         setMessages([]);
         return;
       }
@@ -289,6 +319,9 @@ export default function LiveChatAdminPage() {
 
                 {status && (
                   <p className="text-sm text-foreground/70 mb-4">{status}</p>
+                )}
+                {lastError && (
+                  <p className="text-xs text-red-600 mb-4">{lastError}</p>
                 )}
 
                 {isLoadingMessages ? (
