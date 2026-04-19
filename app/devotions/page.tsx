@@ -79,7 +79,7 @@ export default async function DevotionsPage() {
     debugMessage: confessionsDebugMessage,
   } = await getConfessions();
   const combinedDebug = debugMessage || confessionsDebugMessage;
-  const showDebug = process.env.NODE_ENV !== 'production' && combinedDebug;
+  const showDebug = process.env.NODE_ENV !== 'production' && Boolean(combinedDebug);
 
   const fallbackConfessions = [
     {

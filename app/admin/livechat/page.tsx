@@ -188,14 +188,21 @@ export default function LiveChatAdminPage() {
   };
 
   const requestDeleteMessage = (messageId: string, videoId: string) => {
-    toast('Delete this message?', {
+    let toastId: string | number;
+    toastId = toast('Delete this message?', {
       description: 'This action cannot be undone.',
       action: {
         label: 'Delete',
-        onClick: () => deleteMessage(messageId, videoId),
+        onClick: () => {
+          toast.dismiss(toastId);
+          void deleteMessage(messageId, videoId);
+        },
       },
       cancel: {
         label: 'Cancel',
+        onClick: () => {
+          toast.dismiss(toastId);
+        },
       },
     });
   };
