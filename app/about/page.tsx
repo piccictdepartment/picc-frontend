@@ -384,7 +384,7 @@ export default function AboutPage() {
             </p>
             <h2 className="text-3xl md:text-5xl font-semibold mt-4">Watch Our Story</h2>
             <p className="text-primary-foreground/80 max-w-2xl mx-auto mt-4">
-              The story of Pentecost International Christian Center is a testament to
+              The story of Pentecost International Christian Centre is a testament to
               God&apos;s grace and help through the years.
             </p>
 

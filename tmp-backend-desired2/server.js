@@ -1452,11 +1452,14 @@ app.post('/api/testimonies', async (req, res) => {
       },
     });
 
-    res.status(201).json({ message: 'Testimony created successfully', id: testimony.id });
-  } catch (error) {
+    res.status(201).json({ message: 'Testimony submitted for approval', id: testimony.id });
+    } catch (error) {
     res.status(500).json({ error: 'Internal server error' });
-  }
-});
+    }
+    });
+
+    // --- END OF ROUTES ---
+
 
 app.post('/api/giving', async (req, res) => {
   try {

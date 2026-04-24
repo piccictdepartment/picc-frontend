@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { Facebook, Instagram, Twitter, Youtube, Music2, Mail, CheckCircle, AlertCircle } from 'lucide-react';
@@ -19,21 +19,41 @@ export default function Footer() {
     type: 'success' | 'error' | null;
     message: string;
   }>({ type: null, message: '' });
+  const [faqs, setFaqs] = useState<{ question: string; answer: string }[]>([]);
 
-  const faqs = [
-    {
-      question: 'What time are services?',
-      answer: 'Service times are listed on the Service Times page and updated weekly.',
-    },
-    {
-      question: 'How can I join a ministry?',
-      answer: 'Contact us or visit any of our church locations to connect with a ministry leader.',
-    },
-    {
-      question: 'Where can I watch online?',
-      answer: 'Use the Livestream page for live services and recent broadcasts.',
-    },
-  ];
+  useEffect(() => {
+    const fetchFaqs = async () => {
+      try {
+        const response = await apiFetch('/api/faqs');
+        if (response.ok) {
+          const data = await response.json();
+          const activeFaqs = (data || []).filter((f: any) => f.isActive);
+          if (activeFaqs.length > 0) {
+            setFaqs(activeFaqs);
+          } else {
+            // Fallback if no active FAQs in DB
+            setFaqs([
+              {
+                question: 'What time are services?',
+                answer: 'Service times are listed on the Service Times page and updated weekly.',
+              },
+              {
+                question: 'How can I join a ministry?',
+                answer: 'Contact us or visit any of our church locations to connect with a ministry leader.',
+              },
+              {
+                question: 'Where can I watch online?',
+                answer: 'Use the Livestream page for live services and recent broadcasts.',
+              },
+            ]);
+          }
+        }
+      } catch (error) {
+        console.error('Error fetching FAQs:', error);
+      }
+    };
+    fetchFaqs();
+  }, []);
 
   const handleSubscribe = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -129,7 +149,12 @@ export default function Footer() {
             <div>
               <h3 className="text-lg font-semibold mb-4">Address</h3>
               <p className="text-sm text-white/80 leading-relaxed">
-                Malawi, Lilongwe, Area 49 Bahghdad
+                Pentecost International Christian Centre (PICC)
+Along Kaunda Road, Near Best Oil Filling Station, Area 49
+Post Office Box 31841
+Lilongwe 3
+Malawi
+
               </p>
               <div className="mt-6 flex items-center gap-4 text-white/80">
                 <Link href="https://www.facebook.com/PICCWorldwide/" aria-label="Facebook" className="hover:text-white" target="_blank" rel="noreferrer">
@@ -244,7 +269,7 @@ export default function Footer() {
           </div>
 
           <div className="mt-16 pt-10 border-t border-white/15 text-center text-sm text-white/60">
-            &copy; {currentYear} Pentecost International Christian Center. All rights reserved.
+            &copy; {currentYear} Pentecost International Christian Centre. All rights reserved.
           </div>
         </div>
       </div>

@@ -23,6 +23,7 @@ const NAV_ITEMS: NavItem[] = [
   { label: 'Events', href: '/admin/events', pageKey: ADMIN_PAGE.EVENTS },
   { label: 'Quote of the Month', href: '/admin/quote-of-month', pageKey: ADMIN_PAGE.QUOTE_OF_MONTH },
   { label: 'Homepage Images', href: '/admin/page-images', pageKey: ADMIN_PAGE.PAGE_IMAGES },
+  { label: 'FAQ (Footer)', href: '/admin/faqs', pageKey: ADMIN_PAGE.FAQS },
   { label: 'Live Chat Archive', href: '/admin/livechat', pageKey: ADMIN_PAGE.LIVECHAT },
 ];
 

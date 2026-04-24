@@ -238,7 +238,7 @@ export default async function HomePage() {
   const confessionImageSrc = normalizeImageUrl(confession?.imageUrl) || '/home/declaration.jpeg';
   const confessionImageUnoptimized = isLocalUpstreamImage(confessionImageSrc);
 
-  const seeYouImageUrl = normalizeImageUrl(seeYouInChurch?.imageUrl) || '/home/see-you-in-church.JPG';
+const seeYouImageUrl = "/see-you-in-church.jpg";
   const quoteImageUrl = normalizeImageUrl(quoteOfMonth?.imageUrl);
   const heroImages = HOME_HERO_SLOTS.map((slot) => ({
     ...slot,
@@ -319,7 +319,7 @@ export default async function HomePage() {
           <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 w-full">
             <div className="max-w-4xl mx-auto text-center">
               <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold text-primary-foreground mb-3 md:mb-4 leading-tight">
-                Welcome to Pentecost International Christian Center
+                Welcome to Pentecost International Christian Centre
               </h1>
               <p className="text-base sm:text-lg text-primary-foreground/90 mb-6 md:mb-8">
                 A place of worship, fellowship, and spiritual growth for all
@@ -643,13 +643,13 @@ export default async function HomePage() {
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
               <div className="absolute inset-0">
                 <Image
-                  src={seeYouImageUrl}
-                  alt="See you in church"
-                  fill
-                  sizes="100vw"
-                  className="object-cover"
-                  unoptimized={isLocalUpstreamImage(seeYouImageUrl)}
-                />
+  src="/home/see-you-in-church.jpg"
+  alt="See you in church"
+  fill
+  sizes="100vw"
+  className="object-cover"
+  unoptimized={isLocalUpstreamImage("/see-you-in-church.jpg")}
+/>
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
 

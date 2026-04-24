@@ -1,76 +1,170 @@
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
-import { Users, Heart, Smile, Book, Music, Trophy } from 'lucide-react';
-import Link from 'next/link';
+import EventsCarousel from '@/components/EventsCarousel';
+import HopeSchoolNewsSection from '@/components/schools/HopeSchoolNewsSection';
+import Image from 'next/image';
+import { BookOpen, Building2, Compass, Crown, GraduationCap, Lightbulb, Target, Users } from 'lucide-react';
 
 export const metadata = {
-  title: 'Hope School Ministry - Children\'s Faith Development',
-  description: 'Nurturing young hearts and minds in a Christ-centered community',
+  title: 'Hope School - Leadership Training & Ministry Equipping',
+  description: 'Leadership training and practical equipping for effective Christian service',
 };
 
 export default function HopeSchoolPage() {
-  const activities = [
+  const aims = [
+    'To provide general leadership training in preparing future leaders for life, citizenship, and active Christian service.',
+    'To provide training and practical experience for believers who desire to be equipped for effective service to Christ and in their local churches.',
+    'To provide relevant instruction to believers in their fields of ministry that will enable them to gain skills and abilities necessary for effective ministry.',
+    'To foster missionary interests and concern.',
+  ];
+
+  const modules = [
     {
-      icon: Book,
-      title: 'Bible Stories & Lessons',
-      description: 'Age-appropriate biblical teaching and spiritual formation',
+      icon: Crown,
+      title: 'Principles of success in leadership',
+      description: 'Foundational principles that shape healthy leadership and long-term impact.',
       num: '01',
     },
     {
-      icon: Music,
-      title: 'Worship & Music',
-      description: 'Engaging songs, worship activities, and creative expression',
+      icon: Users,
+      title: 'The making of a leader',
+      description: 'How leaders are formed through calling, process, and faithful stewardship.',
       num: '02',
     },
     {
-      icon: Heart,
-      title: 'Values Development',
-      description: 'Building character, kindness, integrity, and Christian virtues',
+      icon: Target,
+      title: 'The character of a leader',
+      description: 'Integrity, humility, and consistency—the inner life that sustains ministry.',
       num: '03',
     },
     {
-      icon: Users,
-      title: 'Community Projects',
-      description: 'Service learning and outreach to help others in need',
+      icon: Building2,
+      title: 'The family of a leader',
+      description: 'Building a strong home and healthy relationships while serving faithfully.',
       num: '04',
     },
     {
-      icon: Smile,
-      title: 'Fun & Games',
-      description: 'Interactive games and activities that reinforce learning',
+      icon: Compass,
+      title: 'The spiritual life of a leader',
+      description: 'Prayer, the Word, and devotion as the source of strength and direction.',
       num: '05',
     },
     {
-      icon: Trophy,
-      title: 'Recognition & Awards',
-      description: 'Celebrating growth, effort, and spiritual development',
+      icon: Lightbulb,
+      title: 'Principles and power of vision',
+      description: 'Developing, communicating, and pursuing God-given vision with clarity.',
       num: '06',
+    },
+    {
+      icon: GraduationCap,
+      title: 'Maximizing your potential',
+      description: 'Discovering gifts and developing skills for excellence in service.',
+      num: '07',
+    },
+    {
+      icon: Crown,
+      title: 'Work ethic of a leader',
+      description: 'Discipline, diligence, and consistency in ministry responsibilities.',
+      num: '08',
+    },
+    {
+      icon: Compass,
+      title: 'How God speaks',
+      description: 'Hearing and obeying God through Scripture, the Spirit, and wisdom.',
+      num: '09',
+    },
+    {
+      icon: Users,
+      title: 'Loyalty in Ministry',
+      description: 'Faithfulness, honor, and unity—serving with a loyal spirit.',
+      num: '10',
+    },
+    {
+      icon: Building2,
+      title: 'How to start a church from scratch',
+      description: 'Practical steps for church planting and building a healthy ministry foundation.',
+      num: '11',
+    },
+    {
+      icon: BookOpen,
+      title: 'The Holy Spirit',
+      description: 'Understanding the Spirit’s work, empowerment, and guidance in ministry.',
+      num: '12',
+    },
+    {
+      icon: GraduationCap,
+      title: 'Ladders of excellence in Ministry',
+      description: 'Growing through levels of maturity, responsibility, and proven faithfulness.',
+      num: '13',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Understanding Kingdom giving',
+      description: 'Stewardship, generosity, and faith principles for Kingdom advancement.',
+      num: '14',
+    },
+    {
+      icon: Building2,
+      title: 'Church Administration and Management',
+      description: 'Systems, teams, and governance that support healthy ministry operations.',
+      num: '15',
+    },
+    {
+      icon: Target,
+      title: 'Principles of Kingdom Service',
+      description: 'Serving with humility, purpose, and excellence as a Kingdom steward.',
+      num: '16',
+    },
+    {
+      icon: Compass,
+      title: 'Principles and Practices of Evangelism',
+      description: 'Practical tools and biblical foundations for winning and discipling souls.',
+      num: '17',
+    },
+    {
+      icon: BookOpen,
+      title: 'The Power ministry',
+      description: 'Walking in faith for signs, wonders, and compassionate ministry to people.',
+      num: '18',
+    },
+    {
+      icon: GraduationCap,
+      title: 'The preacher and his preaching',
+      description: 'Preparing messages, preaching with clarity, and growing as a communicator.',
+      num: '19',
+    },
+    {
+      icon: Lightbulb,
+      title: 'Laws of Church Growth',
+      description: 'Principles that help ministries grow healthily and sustainably over time.',
+      num: '20',
     },
   ];
 
-  const ageGroups = [
+  const tracks = [
     {
-      name: 'Tiny Explorers',
-      description: 'Introduction to Jesus and basic Bible stories',
-      level: 'Ages 3-5',
+      name: 'Leadership Development',
+      description: 'Character, vision, discipline, and excellence for responsible leadership.',
+      level: 'Leadership',
     },
     {
-      name: 'Young Believers',
-      description: 'Bible foundations and early character development',
-      level: 'Ages 6-8',
+      name: 'Ministry & Administration',
+      description: 'Practical skills for ministry service, management, and church operations.',
+      level: 'Ministry',
     },
     {
-      name: 'Growing Disciples',
-      description: 'Deeper faith understanding and service opportunities',
-      level: 'Ages 9-12',
+      name: 'Mission & Evangelism',
+      description: 'Evangelism practice and missionary concern for reaching people effectively.',
+      level: 'Mission',
     },
   ];
 
   const importantDates = [
+    ['Registration Opens', 'March 15, 2025'],
     ['Registration Deadline', 'April 30, 2025'],
-    ['Term 1 Starts', 'May 4, 2025'],
-    ['Term 1 Ends', 'July 27, 2025'],
-    ['Term 2 Registration', 'August 17, 2025'],
+    ['Cohort 1 Starts', 'May 4, 2025'],
+    ['Cohort 1 Ends', 'July 27, 2025'],
+    ['Cohort 2 Registration', 'August 17, 2025'],
   ];
 
   const inputClass =
@@ -95,92 +189,139 @@ export default function HopeSchoolPage() {
       <Navigation />
 
       {/* ── HERO ── */}
-      <section className="relative bg-[#0d1f3c] overflow-hidden py-28 px-4 text-center">
+      <section className="relative bg-[#0d1f3c] overflow-hidden py-48 px-4 text-center">
+        {/* Background Image */}
+        <div className="absolute inset-0 z-0">
+          <Image
+            src="/schools/hope-school/hosom.jpeg"
+            alt="Hope School Background"
+            fill
+            className="object-cover opacity-50"
+            priority
+          />
+          <div className="absolute inset-0 bg-gradient-to-b from-[#0d1f3c]/60 via-[#0d1f3c]/40 to-[#0d1f3c]/70" />
+        </div>
+        
         <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_50%_at_50%_0%,rgba(201,168,76,0.18),transparent)] pointer-events-none" />
-        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-[#c9a84c]" />
+        <div className="absolute top-0 left-1/2 -translate-x-1/2 w-px h-16 bg-gradient-to-b from-transparent to-[#c9a84c] z-10" />
 
-        <div className="relative inline-flex items-center justify-center w-20 h-20 rounded-full border border-[#c9a84c] mb-6">
+        <div className="relative z-10 inline-flex items-center justify-center w-24 h-24 rounded-full border border-[#c9a84c] mb-6 bg-white/10 backdrop-blur-sm p-4">
           <div className="absolute inset-1.5 rounded-full border border-[#c9a84c]/30" />
-          <Smile size={32} className="text-[#c9a84c]" />
+          <Image 
+            src="/schools/hope-school/logo.png" 
+            alt="Hope School Logo" 
+            width={64} 
+            height={64} 
+            className="object-contain"
+          />
         </div>
 
-        <p className="relative text-[#c9a84c] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
-          Nurturing Faith — Nairobi, Kenya
+        <p className="relative z-10 text-[#c9a84c] text-xs font-semibold tracking-[0.25em] uppercase mb-3">
+          Area 49, Lilongwe
         </p>
 
-        <h1 className="relative text-white text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 font-serif">
+        <h1 className="relative z-10 text-white text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 font-serif">
           Hope School Ministry
         </h1>
 
-        <div className="flex items-center justify-center gap-3 mb-6 relative">
+        <div className="flex items-center justify-center gap-3 mb-6 relative z-10">
           <span className="block w-14 h-px bg-[#c9a84c] opacity-60" />
           <span className="block w-1.5 h-1.5 bg-[#c9a84c] rotate-45" />
           <span className="block w-14 h-px bg-[#c9a84c] opacity-60" />
         </div>
 
-        <p className="relative text-white/70 text-lg sm:text-xl italic font-serif max-w-lg mx-auto leading-relaxed mb-10">
-          Where children discover faith, make friends, and grow in God&apos;s love
+        <p className="relative z-10 text-white/70 text-lg sm:text-xl italic font-serif max-w-lg mx-auto leading-relaxed mb-10">
+          &quot;Raising a New Generation of Leaders with Global Influence&quot;
         </p>
 
-        <div className="relative flex flex-wrap gap-3 justify-center">
-          <button className="bg-[#c9a84c] text-[#0d1f3c] text-xs font-bold tracking-[0.15em] uppercase px-8 py-3.5 hover:bg-[#e2c27d] transition-colors duration-200">
-            Join Us This Sunday
-          </button>
-          <Link href="/services">
-            <button className="border border-white/40 text-white text-xs font-medium tracking-[0.15em] uppercase px-8 py-3.5 hover:border-[#c9a84c] hover:text-[#c9a84c] transition-colors duration-200">
-              Service Times
+        <div className="relative z-10 flex flex-wrap gap-3 justify-center">
+          <a href="#enrollment">
+            <button className="bg-[#c9a84c] text-[#0d1f3c] text-xs font-bold tracking-[0.15em] uppercase px-8 py-3.5 hover:bg-[#e2c27d] transition-colors duration-200">
+              Enroll Now
             </button>
-          </Link>
+          </a>
+        </div>
+      </section>
+
+      {/* ── AIMS ── */}
+      <section className="bg-stone-50 py-20 px-4">
+        <div className="text-center mb-14">
+          <span className={sectionLabelClass}>Purpose</span>
+          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Aims</h2>
+          {dividerEl}
+          <p className="mt-5 text-slate-600 text-base leading-relaxed font-serif max-w-3xl mx-auto">
+            Hope School exists to equip believers with leadership training, practical ministry skills, and a heart for mission.
+          </p>
+        </div>
+
+        <div className="max-w-4xl mx-auto rounded-2xl border border-slate-100 bg-white shadow-sm p-8 sm:p-10">
+          <ul className="grid gap-4 text-slate-700 text-sm sm:text-base leading-relaxed">
+            {aims.map((aim) => (
+              <li key={aim} className="flex gap-3">
+                <span className="mt-1.5 h-2 w-2 rotate-45 bg-[#c9a84c] shrink-0" />
+                <span>{aim}</span>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 
       {/* ── MISSION & VISION ── */}
-      <section className="bg-[#0d1f3c] border-t border-[#c9a84c]/20 py-20 px-4">
+      <section className="bg-[#0d1f3c] py-24 px-4">
         <div className="max-w-4xl mx-auto grid md:grid-cols-[1fr_1px_1fr]">
           <div className="text-center px-8 py-6">
             <div className="inline-flex items-center justify-center w-12 h-12 border border-[#c9a84c] text-[#c9a84c] text-xl mb-5">✦</div>
-            <h2 className="text-[#c9a84c] text-lg font-semibold font-serif mb-4 tracking-wide">Our Mission</h2>
-            <p className="text-white/65 text-base leading-relaxed font-serif italic">
-              To provide a vibrant, welcoming community where children can experience God&apos;s love through 
-              engaging lessons, creative activities, and meaningful friendships.
+            <h2 className="text-white text-lg font-semibold font-serif mb-4 tracking-wide uppercase">Our Mission</h2>
+            <p className="text-white/70 text-base leading-relaxed font-serif italic">
+              To provide leadership training and practical ministry equipping for believers who desire to serve Christ effectively in their local churches and communities.
             </p>
           </div>
 
-          <div className="hidden md:block bg-[#c9a84c]/25 my-4" />
+          <div className="hidden md:block bg-[#c9a84c]/20 my-4" />
 
-          <div className="text-center px-8 py-6 border-t border-[#c9a84c]/20 md:border-t-0">
+          <div className="text-center px-8 py-6 border-t border-[#c9a84c]/10 md:border-t-0">
             <div className="inline-flex items-center justify-center w-12 h-12 border border-[#c9a84c] text-[#c9a84c] text-xl mb-5">◈</div>
-            <h2 className="text-[#c9a84c] text-lg font-semibold font-serif mb-4 tracking-wide">Our Vision</h2>
-            <p className="text-white/65 text-base leading-relaxed font-serif italic">
-              That every child is valued, loved, and encouraged to grow in their personal relationship 
-              with Jesus Christ, becoming a light in their generation.
+            <h2 className="text-white text-lg font-semibold font-serif mb-4 tracking-wide uppercase">Our Vision</h2>
+            <p className="text-white/70 text-base leading-relaxed font-serif italic">
+              To raise future leaders prepared for life, citizenship, and active Christian service—carrying vision, character, and missionary concern.
             </p>
           </div>
         </div>
       </section>
 
-      {/* ── ACTIVITIES ── */}
-      <section className="bg-stone-50 py-20 px-4">
-        <div className="text-center mb-14">
-          <span className={sectionLabelClass}>What We Do</span>
-          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>The Hope School Experience</h2>
+      {/* ── MODULES ── */}
+      <section className="relative py-12 px-4 overflow-hidden">
+        <Image
+          src="/schools/hope-school/modules.jpeg"
+          alt="Modules Background"
+          fill
+          className="object-cover"
+        />
+        <div className="absolute inset-0 bg-[#0d1f3c]/40" />
+
+        <div className="relative text-center mb-8">
+          <span className={sectionLabelClass}>Curriculum</span>
+          <h2 className={`${sectionTitleClass} text-white font-serif`}>Modules</h2>
           {dividerEl}
+          <p className="mt-5 text-white/90 text-base leading-relaxed font-serif max-w-3xl mx-auto">
+            A practical leadership and ministry curriculum designed to develop skills, character, and spiritual strength.
+          </p>
         </div>
 
-        <div className="max-w-5xl mx-auto grid sm:grid-cols-2 lg:grid-cols-3 gap-px bg-slate-200">
-          {activities.map(({ icon: Icon, title, description, num }, index) => (
-            <div key={index} className="group bg-white p-8 relative overflow-hidden transition-colors duration-300 hover:bg-[#0d1f3c]">
-              <span className="absolute top-5 right-6 text-5xl font-bold font-serif text-slate-100 group-hover:text-white/5 transition-colors duration-300 select-none">
+        <div className="relative max-w-7xl mx-auto grid sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-px bg-[#c9a84c]/20">
+          {modules.map(({ icon: Icon, title, description, num }, index) => (
+            <div key={index} className="group bg-[#0d1f3c]/40 backdrop-blur-sm p-5 relative overflow-hidden transition-colors duration-300 hover:bg-[#1a3360]/60">
+              <span className="absolute top-4 right-5 text-5xl font-bold font-serif text-white/5 group-hover:text-white/10 transition-colors duration-300 select-none">
                 {num}
               </span>
               <div className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-transparent via-[#c9a84c] to-transparent scale-x-0 group-hover:scale-x-100 transition-transform duration-300" />
-              <div className="inline-flex items-center justify-center w-11 h-11 border border-slate-300 group-hover:border-[#c9a84c] text-[#0d1f3c] group-hover:text-[#c9a84c] mb-5 transition-colors duration-300">
-                <Icon size={20} />
+              <div className="inline-flex items-center justify-center w-10 h-10 border border-[#c9a84c]/30 group-hover:border-[#c9a84c] text-[#c9a84c] mb-4 transition-colors duration-300">
+                <Icon size={18} />
               </div>
-              <h3 className="text-[#0d1f3c] group-hover:text-white font-semibold font-serif text-base mb-2 transition-colors duration-300">
+              <h3 className="text-white font-semibold font-serif text-sm mb-1.5 transition-colors duration-300">
                 {title}
               </h3>
-              <p className="text-slate-500 group-hover:text-white/60 text-sm leading-relaxed transition-colors duration-300">
+              <p className="text-white/80 text-xs leading-relaxed transition-colors duration-300">
                 {description}
               </p>
             </div>
@@ -188,51 +329,49 @@ export default function HopeSchoolPage() {
         </div>
       </section>
 
-      {/* ── AGE GROUPS ── */}
-      <section className="bg-[#0d1f3c] py-20 px-4">
-        <div className="text-center mb-14">
-          <span className={sectionLabelClass}>Programs</span>
-          <h2 className={`${sectionTitleClass} text-white font-serif`}>Age Groups</h2>
-          {dividerEl}
-        </div>
-
-        <div className="max-w-4xl mx-auto grid sm:grid-cols-3 gap-px bg-[#c9a84c]/20">
-          {ageGroups.map(({ name, description, level }, index) => (
-            <div key={index} className="group bg-[#0d1f3c] border-t border-l border-[#c9a84c]/15 p-8 hover:bg-[#1a3360] transition-colors duration-300">
-              <span className="inline-block text-[#0d1f3c] bg-[#c9a84c] text-[0.6rem] font-bold tracking-[0.15em] uppercase px-3 py-1 mb-4">
-                {level}
-              </span>
-              <h3 className="text-white text-lg font-semibold font-serif mb-2">{name}</h3>
-              <p className="text-white/55 text-sm leading-relaxed">{description}</p>
-              <div className="mt-5 text-[#c9a84c] text-lg opacity-0 group-hover:opacity-100 -translate-x-2 group-hover:translate-x-0 transition-all duration-300">
-                →
-              </div>
-            </div>
-          ))}
-        </div>
-      </section>
-
       {/* ── CONTACT ── */}
-      <section className="bg-stone-50 py-20 px-4">
+      <section className="bg-white py-20 px-4">
         <div className="text-center mb-14">
           <span className={sectionLabelClass}>Get in Touch</span>
           <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Contact Hope School</h2>
           {dividerEl}
         </div>
 
-        <div className="max-w-3xl mx-auto grid sm:grid-cols-3 gap-px bg-slate-200">
+        <div className="max-w-3xl mx-auto grid sm:grid-cols-3 gap-px bg-slate-100">
           {[
-            { icon: '📞', label: 'Phone', lines: ['+254 700 456 789', '(Sunday Mornings)'] },
-            { icon: '✉', label: 'Email', lines: ['hopeschool@church.ke', 'kids@church.ke'] },
-            { icon: '⊕', label: 'Location', lines: ['PICC Main Church', 'Sunday Services'] },
+            { icon: '📞', label: 'Phone', lines: ['+265 999 045 869', '+265 992 603 608'] },
+            { icon: '✉', label: 'Email', lines: ['info@piccworldwide.org', 'hopeschool@piccworldwide.org'] },
+            { icon: '⊕', label: 'Location', lines: ['Pentecost International Christian Centre- PICC Along Kaunda Road, Near Best Oil Filling Station Area 49, Post Office Box 31841 Lilongwe 3 Malawi'] },
           ].map(({ icon, label, lines }) => (
-            <div key={label} className="bg-white p-8 text-center">
+            <div key={label} className="bg-stone-50 p-8 text-center">
               <div className="inline-flex items-center justify-center w-14 h-14 border border-[#c9a84c] text-2xl mx-auto mb-4">
                 {icon}
               </div>
               <h3 className="text-[#0d1f3c] font-semibold font-serif text-base mb-3">{label}</h3>
               {lines.map((line) => (
-                <p key={line} className="text-slate-500 text-sm leading-7">{line}</p>
+                <p key={line} className="text-slate-500 text-sm leading-7">
+                  {label === 'Email' ? (
+                    <a 
+                      href={`https://mail.google.com/mail/?view=cm&fs=1&to=${line}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-[#c9a84c] transition-colors"
+                    >
+                      {line}
+                    </a>
+                  ) : label === 'Phone' ? (
+                    <a 
+                      href={`https://wa.me/${line.replace(/[^0-9]/g, '')}`} 
+                      target="_blank" 
+                      rel="noopener noreferrer" 
+                      className="hover:text-[#25D366] transition-colors"
+                    >
+                      {line}
+                    </a>
+                  ) : (
+                    line
+                  )}
+                </p>
               ))}
             </div>
           ))}
@@ -240,95 +379,204 @@ export default function HopeSchoolPage() {
       </section>
 
       {/* ── ENROLLMENT ── */}
-      <section className="bg-white py-20 px-4">
+      <section id="enrollment" className="bg-[#eef4fb] py-24 px-4">
         <div className="text-center mb-14">
           <span className={sectionLabelClass}>Registration 2025</span>
-          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Child Enrollment</h2>
+          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Enrollment</h2>
           {dividerEl}
         </div>
 
-        {/* Key Dates */}
-        <div className="max-w-2xl mx-auto mb-16">
-          <p className="text-center text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-5">
-            Important Dates
-          </p>
-          <div className="border-t border-slate-100">
-            {importantDates.map(([label, date]) => (
-              <div key={label} className="flex justify-between items-center py-4 px-2 border-b border-slate-100 gap-4">
-                <span className="text-[#0d1f3c] font-medium text-sm">{label}</span>
-                <span className="text-[0.7rem] font-semibold tracking-wide text-[#0d1f3c] bg-[#f5e9c8] border border-[#c9a84c] px-3 py-1 whitespace-nowrap">
-                  {date}
-                </span>
+        <div className="max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-start">
+          {/* Enrollment Details column */}
+          <div className="space-y-12">
+            <div>
+              <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-6">
+                Important Dates
+              </p>
+              <div className="border-t border-slate-200">
+                {importantDates.map(([label, date]) => (
+                  <div key={label} className="flex justify-between items-center py-4 px-2 border-b border-slate-200 gap-4">
+                    <span className="text-[#0d1f3c] font-medium text-sm">{label}</span>
+                    <span className="text-[0.7rem] font-semibold tracking-wide text-[#0d1f3c] bg-[#f5e9c8] border border-[#c9a84c] px-3 py-1 whitespace-nowrap">
+                      {date}
+                    </span>
+                  </div>
+                ))}
               </div>
-            ))}
+            </div>
+
+            <div className="bg-white p-8 border-l-4 border-[#c9a84c] shadow-sm">
+              <h4 className="text-[#0d1f3c] font-serif font-bold mb-3">Registration Process</h4>
+              <p className="text-slate-600 text-sm leading-relaxed mb-4">
+                To join Hope School Ministry, please follow these simple steps to ensure your registration is processed correctly:
+              </p>
+              <ul className="text-slate-600 text-sm space-y-3">
+                <li className="flex items-start gap-3">
+                  <span className="text-[#c9a84c] mt-0.5">✓</span>
+                  <span>Complete the online registration form on the right</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#c9a84c] mt-0.5">✓</span>
+                  <span>Receive a confirmation email with your registration ID</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#c9a84c] mt-0.5">✓</span>
+                  <span>Attend the orientation session on the start date</span>
+                </li>
+                <li className="flex items-start gap-3">
+                  <span className="text-[#c9a84c] mt-0.5">✓</span>
+                  <span>Join our vibrant community of learners and believers</span>
+                </li>
+              </ul>
+            </div>
           </div>
-        </div>
 
-        {/* Form */}
-        <div className="max-w-2xl mx-auto border border-slate-200">
-          <div className="bg-[#0d1f3c] border-b-4 border-[#c9a84c] px-8 py-6">
-            <h3 className="text-white text-xl font-semibold font-serif">Registration Form</h3>
-            <p className="text-white/55 text-sm mt-1">Required fields are marked with an asterisk (*)</p>
-          </div>
-
-          <div className="bg-white px-8 py-8">
-            {/* Child Info */}
-            <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase border-b border-[#f5e9c8] pb-3 mb-5">
-              Child Information
-            </p>
-            <div className="grid sm:grid-cols-2 gap-4 mb-4">
-              <div>
-                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">First Name *</label>
-                <input type="text" placeholder="Sarah" className={inputClass} />
-              </div>
-              <div>
-                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Last Name *</label>
-                <input type="text" placeholder="Kipchoge" className={inputClass} />
-              </div>
-            </div>
-            <div className="mb-4">
-              <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Date of Birth *</label>
-              <input type="date" className={inputClass} />
-            </div>
-            <div className="mb-6">
-              <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Age Group *</label>
-              <select className={`${inputClass} appearance-none cursor-pointer`}>
-                <option>Select age group</option>
-                <option>Tiny Explorers (3-5)</option>
-                <option>Young Believers (6-8)</option>
-                <option>Growing Disciples (9-12)</option>
-              </select>
+          {/* Form column */}
+          <div className="border border-slate-200 shadow-sm bg-white">
+            <div className="bg-[#0d1f3c] border-b-4 border-[#c9a84c] px-8 py-6">
+              <h3 className="text-white text-xl font-semibold font-serif">Registration Form</h3>
+              <p className="text-white/55 text-sm mt-1">Required fields are marked with an asterisk (*)</p>
             </div>
 
-            {/* Parent Info */}
-            <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase border-b border-[#f5e9c8] pb-3 mb-5">
-              Parent / Guardian Information
-            </p>
-            <div className="mb-4">
-              <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Parent Name *</label>
-              <input type="text" placeholder="Parent/Guardian name" className={inputClass} />
-            </div>
-            <div className="grid sm:grid-cols-2 gap-4 mb-6">
-              <div>
-                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Email *</label>
-                <input type="email" placeholder="parent@email.com" className={inputClass} />
+            <div className="px-8 py-8">
+              {/* Personal Information */}
+              <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase border-b border-slate-100 pb-2 mb-4">Personal Details</p>
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">First Name *</label>
+                  <input type="text" placeholder="First Name" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Last Name *</label>
+                  <input type="text" placeholder="Last Name" className={inputClass} />
+                </div>
               </div>
-              <div>
-                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Phone *</label>
-                <input type="tel" placeholder="+254 700 000 000" className={inputClass} />
-              </div>
-            </div>
 
-            <button className="w-full mt-8 bg-[#0d1f3c] hover:bg-[#1a3360] text-white text-xs font-bold tracking-[0.2em] uppercase py-4 transition-colors duration-200 border-b-2 border-[#c9a84c]">
-              Register My Child
-            </button>
-            <p className="text-center text-slate-400 text-xs mt-4 leading-relaxed">
-              We will contact you shortly to confirm registration and answer any questions you may have.
-            </p>
+              <div className="grid sm:grid-cols-3 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Gender *</label>
+                  <select className={`${inputClass} appearance-none cursor-pointer`}>
+                    <option>Select</option>
+                    <option>Male</option>
+                    <option>Female</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Age *</label>
+                  <input type="number" placeholder="Age" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Marital Status *</label>
+                  <select className={`${inputClass} appearance-none cursor-pointer`}>
+                    <option>Select</option>
+                    <option>Single</option>
+                    <option>Married</option>
+                    <option>Separated</option>
+                    <option>Divorced</option>
+                  </select>
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Phone/Mobile *</label>
+                  <input type="tel" placeholder="+265 700 000 000" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Email *</label>
+                  <input type="email" placeholder="email@address.com" className={inputClass} />
+                </div>
+              </div>
+
+              {/* Address Details */}
+              <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase border-b border-slate-100 pb-2 mb-4 mt-6">Address Information</p>
+              <div className="mb-4">
+                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Residential Address *</label>
+                <input type="text" placeholder="Current neighborhood/area" className={inputClass} />
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Permanent Home Address *</label>
+                <input type="text" placeholder="Home village address" className={inputClass} />
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Village *</label>
+                  <input type="text" placeholder="Village name" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">T/A *</label>
+                  <input type="text" placeholder="Traditional Authority" className={inputClass} />
+                </div>
+              </div>
+
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">District *</label>
+                  <input type="text" placeholder="District" className={inputClass} />
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Country *</label>
+                  <input type="text" placeholder="Malawi" className={inputClass} defaultValue="Malawi" />
+                </div>
+              </div>
+
+              {/* Church and Learning details */}
+              <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase border-b border-slate-100 pb-2 mb-4 mt-6">Church & Learning</p>
+              <div className="grid sm:grid-cols-2 gap-4 mb-4">
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">PICC Status *</label>
+                  <select className={`${inputClass} appearance-none cursor-pointer`}>
+                    <option>Select Status</option>
+                    <option>MEMBER</option>
+                    <option>REGULAR ATTENDEE</option>
+                    <option>NEW FOLLOWER</option>
+                  </select>
+                </div>
+                <div>
+                  <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">PICC Service Group</label>
+                  <input type="text" placeholder="e.g. Ushering, Choir" className={inputClass} />
+                </div>
+              </div>
+
+              <div className="mb-4">
+                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Church Denomination *</label>
+                <input type="text" placeholder="Your church denomination" className={inputClass} />
+              </div>
+
+              <div className="mb-6">
+                <label className="block text-[#0d1f3c] text-xs font-medium tracking-wide mb-1.5">Preferred Mode of Learning *</label>
+                <select className={`${inputClass} appearance-none cursor-pointer`}>
+                  <option>Select Mode of Learning</option>
+                  <option>Face to Face</option>
+                  <option>Online</option>
+                </select>
+              </div>
+
+              <button className="w-full mt-8 bg-[#0d1f3c] hover:bg-[#1a3360] text-white text-xs font-bold tracking-[0.2em] uppercase py-4 transition-colors duration-200 border-b-2 border-[#c9a84c]">
+                Submit Registration
+              </button>
+              <p className="text-center text-slate-400 text-xs mt-4 leading-relaxed">
+                We will contact you shortly to confirm your registration and provide further details.
+              </p>
+            </div>
           </div>
         </div>
       </section>
 
+      <EventsCarousel
+        apiPath="/api/events?take=12&scope=hope-school"
+        eventsHref="/schools/hope-school/events"
+        eventsLabel="View all school events"
+        title="Hope School Events"
+        subtitle="Stay updated with our latest school activities and academic calendar"
+        connectLabel="HOPE SCHOOL"
+        connectTitle="Building a brighter future for every student"
+        connectSubtitle="Join us in our journey of excellence and faith-based education."
+        showLivestream={false}
+      />
+      <HopeSchoolNewsSection />
       <Footer />
     </div>
   );

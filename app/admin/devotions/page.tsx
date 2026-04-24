@@ -27,7 +27,7 @@ export default function DevotionsAdminPage() {
     handleLogin,
     handleLogout,
   } = useAdminAuth();
-
+const [devotionSearch, setDevotionSearch] = useState('');
   const [status, setStatus] = useState('');
   const [date, setDate] = useState(() => {
     const tomorrow = new Date();
@@ -244,34 +244,56 @@ export default function DevotionsAdminPage() {
           </div>
         </div>
 
-        <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-foreground mb-4">
-            Recent Devotions
-          </h2>
-          {allDevotions.length === 0 ? (
-            <p className="text-sm text-foreground/60">
-              No devotions yet.
+<div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
+  <h2 className="text-lg font-semibold text-foreground mb-4">
+    Recent Devotions
+  </h2>
+
+  <div className="mb-4">
+    <input
+      type="search"
+      value={devotionSearch}
+      onChange={(e) => setDevotionSearch(e.target.value)}
+      placeholder="Search by title or date..."
+      className="w-full rounded-xl border border-border bg-background px-4 py-2.5 text-sm text-foreground placeholder:text-foreground/40"
+    />
+  </div>
+
+  {allDevotions.length === 0 ? (
+    <p className="text-sm text-foreground/60">No devotions yet.</p>
+  ) : (() => {
+    const query = devotionSearch.trim().toLowerCase();
+    const filtered = query
+      ? allDevotions.filter(
+          (d) =>
+            String(d.date).slice(0, 10).includes(query) ||
+            (d.title || '').toLowerCase().includes(query)
+        )
+      : allDevotions;
+
+    return filtered.length === 0 ? (
+      <p className="text-sm text-foreground/60">No devotions match your search.</p>
+    ) : (
+      <div className="space-y-3 max-h-[520px] overflow-y-auto pr-2">
+        {filtered.map((devotion) => (
+          <button
+            key={devotion.id}
+            type="button"
+            onClick={() => setDate(String(devotion.date).slice(0, 10))}
+            className="w-full rounded-xl border border-border/60 bg-background px-4 py-3 text-left hover:border-primary/60 transition"
+          >
+            <p className="text-xs uppercase tracking-[0.25em] text-foreground/50">
+              {String(devotion.date).slice(0, 10)}
             </p>
-          ) : (
-            <div className="space-y-3 max-h-[520px] overflow-y-auto pr-2">
-              {allDevotions.map((devotion) => (
-                <button
-                  key={devotion.id}
-                  type="button"
-                  onClick={() => setDate(String(devotion.date).slice(0, 10))}
-                  className="w-full rounded-xl border border-border/60 bg-background px-4 py-3 text-left hover:border-primary/60 transition"
-                >
-                  <p className="text-xs uppercase tracking-[0.25em] text-foreground/50">
-                    {String(devotion.date).slice(0, 10)}
-                  </p>
-                  <p className="text-sm font-semibold text-foreground mt-1">
-                    {devotion.title || 'Untitled devotion'}
-                  </p>
-                </button>
-              ))}
-            </div>
-          )}
-        </div>
+            <p className="text-sm font-semibold text-foreground mt-1">
+              {devotion.title || 'Untitled devotion'}
+            </p>
+          </button>
+        ))}
+      </div>
+    );
+  })()}
+</div>
       </div>
 
       <AlertDialog
