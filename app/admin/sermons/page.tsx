@@ -321,7 +321,7 @@ export default function AdminSermonsPage() {
               <Input
                 id="header-upload"
                 type="file"
-                accept="image/*"
+                accept="image/*,.heic,.heif,.avif"
                 onChange={async (e) => {
                   const file = e.target.files?.[0];
                   if (file) {
@@ -381,22 +381,13 @@ export default function AdminSermonsPage() {
               />
             </div>
 
-            <div>
-              <Label htmlFor="views">Views</Label>
-              <Input
-                id="views"
-                value={draftSermon.views}
-                onChange={(e) => setDraftSermon(prev => ({ ...prev, views: e.target.value }))}
-                placeholder="e.g., 1,232"
-              />
-            </div>
 
             <div>
               <Label htmlFor="image-upload">Upload Sermon Image <span className="text-[11px] font-normal text-muted-foreground">(Max 1MB allowed)</span></Label>
               <Input
                 id="image-upload"
                 type="file"
-                accept="image/*"
+                accept="image/*,.heic,.heif,.avif"
                 onChange={async (e) => {
                   const file = e.target.files?.[0];
                   if (file) {
@@ -478,7 +469,7 @@ export default function AdminSermonsPage() {
                 <div key={sermon.id} className="flex items-center justify-between p-4 border rounded-lg">
                   <div className="flex-1">
                     <h3 className="font-semibold">{sermon.title || 'Untitled'}</h3>
-                    <p className="text-sm text-muted-foreground">{sermon.date || 'No date'} • {sermon.views || '0'} views</p>
+                    <p className="text-sm text-muted-foreground">{sermon.date || 'No date'}</p>
                     <p className="text-sm text-muted-foreground">YouTube: {sermon.youtubeUrl || 'No URL'}</p>
                   </div>
                   <div className="flex gap-2">

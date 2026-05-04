@@ -8,8 +8,9 @@ import SchoolIntakesManager from '@/components/admin/SchoolIntakesManager';
 import SchoolInfoManager from '@/components/admin/SchoolInfoManager';
 import SchoolNewsManager from '@/components/admin/SchoolNewsManager';
 import SchoolEventsManager from '@/components/admin/SchoolEventsManager';
+import SchoolKeyDatesManager from '@/components/admin/SchoolKeyDatesManager';
 
-type Tab = 'enrollment' | 'info' | 'news' | 'events';
+type Tab = 'enrollment' | 'key-dates' | 'info' | 'news' | 'events';
 
 export default function HopeSchoolEnrollmentAdminPage() {
   const {
@@ -40,6 +41,7 @@ export default function HopeSchoolEnrollmentAdminPage() {
 
   const tabs: Array<{ id: Tab; label: string }> = [
     { id: 'enrollment', label: 'Enrollment' },
+    { id: 'key-dates', label: 'Key Dates' },
     { id: 'info', label: 'School Info' },
     { id: 'news', label: 'News' },
     { id: 'events', label: 'Events' },
@@ -80,6 +82,7 @@ export default function HopeSchoolEnrollmentAdminPage() {
 
       <div>
         {activeTab === 'enrollment' && <SchoolIntakesManager token={token} schoolKey="hope-school" />}
+        {activeTab === 'key-dates' && <SchoolKeyDatesManager token={token} schoolKey="hope-school" />}
         {activeTab === 'info' && <SchoolInfoManager token={token} schoolKey="hope-school" schoolName="Hope School" />}
         {activeTab === 'news' && <SchoolNewsManager token={token} schoolKey="hope-school" schoolName="Hope School" />}
         {activeTab === 'events' && <SchoolEventsManager token={token} schoolKey="hope-school" schoolName="Hope School" />}
@@ -87,4 +90,3 @@ export default function HopeSchoolEnrollmentAdminPage() {
     </div>
   );
 }
-

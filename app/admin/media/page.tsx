@@ -375,7 +375,7 @@ export default function AdminMediaPage() {
                 <label className="block text-sm font-medium text-foreground mb-2">Upload Image</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*,.heic,.heif,.avif"
                   onChange={async (event) => {
                     const file = event.target.files?.[0];
                     if (!file) return;
@@ -474,7 +474,7 @@ export default function AdminMediaPage() {
                         <label className="block text-sm font-medium text-foreground mb-2">Upload Image</label>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/*,.heic,.heif,.avif"
                           onChange={async (event) => {
                             const file = event.target.files?.[0];
                             if (!file) return;
@@ -530,18 +530,24 @@ export default function AdminMediaPage() {
                 onChange={(event) => setDraftGallery((prev) => ({ ...prev, title: event.target.value }))}
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
               />
-              <input
-                type="text"
-                placeholder="Category (e.g. Worship)"
+              <select
                 value={draftGallery.category}
                 onChange={(event) => setDraftGallery((prev) => ({ ...prev, category: event.target.value }))}
                 className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
-              />
+              >
+                <option value="">Select a category</option>
+                <option value="worship">Worship</option>
+                <option value="outreach">Outreach</option>
+                <option value="youth">Youth</option>
+                <option value="music">Music</option>
+                <option value="celebration">Celebration</option>
+                <option value="prayer">Prayer</option>
+              </select>
               <div>
                 <label className="block text-sm font-medium text-foreground mb-2">Upload Image</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*,.heic,.heif,.avif"
                   onChange={async (event) => {
                     const file = event.target.files?.[0];
                     if (!file) return;
@@ -591,8 +597,7 @@ export default function AdminMediaPage() {
                         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
                         placeholder="Title"
                       />
-                      <input
-                        type="text"
+                      <select
                         value={item.category || ''}
                         onChange={(event) =>
                           setGalleryItems((prev) =>
@@ -602,13 +607,20 @@ export default function AdminMediaPage() {
                           )
                         }
                         className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
-                        placeholder="Category"
-                      />
+                      >
+                        <option value="">Select a category</option>
+                        <option value="worship">Worship</option>
+                        <option value="outreach">Outreach</option>
+                        <option value="youth">Youth</option>
+                        <option value="music">Music</option>
+                        <option value="celebration">Celebration</option>
+                        <option value="prayer">Prayer</option>
+                      </select>
                       <div>
                         <label className="block text-sm font-medium text-foreground mb-2">Upload Image</label>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/*,.heic,.heif,.avif"
                           onChange={async (event) => {
                             const file = event.target.files?.[0];
                             if (!file) return;
@@ -689,7 +701,7 @@ export default function AdminMediaPage() {
                 <label className="block text-sm font-medium text-foreground mb-2">Cover Image</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*,.heic,.heif,.avif"
                   onChange={async (event) => {
                     const file = event.target.files?.[0];
                     if (!file) return;
@@ -779,7 +791,7 @@ export default function AdminMediaPage() {
                         <label className="block text-sm font-medium text-foreground mb-2">Cover Image</label>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/*,.heic,.heif,.avif"
                           onChange={async (event) => {
                             const file = event.target.files?.[0];
                             if (!file) return;
@@ -853,7 +865,7 @@ export default function AdminMediaPage() {
                 <label className="block text-sm font-medium text-foreground mb-2">Cover Image</label>
                 <input
                   type="file"
-                  accept="image/*"
+                  accept="image/*,.heic,.heif,.avif"
                   onChange={async (event) => {
                     const file = event.target.files?.[0];
                     if (!file) return;
@@ -930,7 +942,7 @@ export default function AdminMediaPage() {
                         <label className="block text-sm font-medium text-foreground mb-2">Cover Image</label>
                         <input
                           type="file"
-                          accept="image/*"
+                          accept="image/*,.heic,.heif,.avif"
                           onChange={async (event) => {
                             const file = event.target.files?.[0];
                             if (!file) return;

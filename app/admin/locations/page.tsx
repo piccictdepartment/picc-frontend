@@ -368,7 +368,7 @@ export default function LocationsAdminPage() {
                 <div className='mt-4 space-y-3'>
                   <input
                     type='file'
-                    accept='image/*'
+                    accept='image/*,.heic,.heif,.avif'
                     onChange={async (event) => {
                       const file = event.target.files?.[0];
                       if (!file) return;

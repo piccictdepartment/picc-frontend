@@ -14,16 +14,19 @@ import {
   DialogTitle,
 } from '@/components/ui/dialog';
 import { sendEventRegistrationNotification } from '@/lib/email';
-import { apiFetch } from '@/lib/api';
+import { apiFetch, apiUrl } from '@/lib/api';
 
 interface Event {
   id: number | string;
   title: string;
-  date: string;
+  startDate: string;
+  endDate: string;
   time: string;
   image: string;
   location: string;
   description: string;
+  requiresRegistration: boolean;
+  registrationEmail: string | null;
   imageUrl?: string | null;
   scope?: string | null;
 }
@@ -68,28 +71,53 @@ const parseDateOnly = (dateValue: string) => {
 const getEventDateRange = (event: Event) => {
   const time = event.time || '12:00 PM - 1:00 PM';
   const [startLabel, endLabel] = time.split(' - ');
-  const dateOnly = parseDateOnly(event.date);
+  const startDateOnly = parseDateOnly(event.startDate);
+  const endDateOnly = parseDateOnly(event.endDate || event.startDate);
   const startTime = parseTime(startLabel);
   const endTime = parseTime(endLabel ?? startLabel);
 
   const start = new Date(
-    dateOnly.getFullYear(),
-    dateOnly.getMonth(),
-    dateOnly.getDate(),
+    startDateOnly.getFullYear(),
+    startDateOnly.getMonth(),
+    startDateOnly.getDate(),
     startTime.hours,
     startTime.minutes,
     0,
   );
   const end = new Date(
-    dateOnly.getFullYear(),
-    dateOnly.getMonth(),
-    dateOnly.getDate(),
+    endDateOnly.getFullYear(),
+    endDateOnly.getMonth(),
+    endDateOnly.getDate(),
     endTime.hours,
     endTime.minutes,
     0,
   );
 
   return { start, end };
+};
+
+const formatEventDateSummary = (event: Pick<Event, 'startDate' | 'endDate'>) => {
+  const start = parseDateOnly(event.startDate);
+  const end = parseDateOnly(event.endDate || event.startDate);
+
+  if (start.toDateString() === end.toDateString()) {
+    return start.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+  }
+
+  return `${start.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })} - ${end.toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}`;
+};
+
+const normalizeEventImageUrl = (value?: string | null) => {
+  const trimmed = typeof value === 'string' ? value.trim() : '';
+  if (!trimmed) return '';
+  if (trimmed.startsWith('http')) return trimmed;
+  if (trimmed.startsWith('/uploads')) return apiUrl(trimmed);
+  return trimmed;
+};
+
+const isLocalUpstreamImage = (url?: string | null) => {
+  if (!url) return false;
+  return url.includes('://localhost') || url.includes('://127.0.0.1') || url.includes('://[::1]');
 };
 
 const formatIcsDate = (date: Date) =>
@@ -130,12 +158,15 @@ const DEFAULT_EVENTS: Event[] = [
   {
     id: 1,
     title: '2026 Chatroom',
-    date: '2026-04-11',
+    startDate: '2026-04-11',
+    endDate: '2026-04-11',
     time: '8:00 AM - 4:00 PM',
     image: '/events/upcoming.JPG',
     location: 'African Bible College',
     description:
       'PICC Teens Ministry presents 2026 Chatroom. Registration fee MK18,000 (includes snacks and lunch). Age group 12–19 years. With Pastor Loyce Banda.',
+    requiresRegistration: true,
+    registrationEmail: 'info@piccworldwide.org',
   },
 ];
 
@@ -184,20 +215,33 @@ export default function EventsListSection({
             .map((event) => ({
               id: typeof event.id === 'string' || typeof event.id === 'number' ? event.id : String(event.id ?? ''),
               title: typeof event.title === 'string' ? event.title : '',
-              date: event.date ? String(event.date).slice(0, 10) : '',
+              startDate:
+                event.startDate
+                  ? String(event.startDate).slice(0, 10)
+                  : event.date
+                    ? String(event.date).slice(0, 10)
+                    : '',
+              endDate:
+                event.endDate
+                  ? String(event.endDate).slice(0, 10)
+                  : event.date
+                    ? String(event.date).slice(0, 10)
+                    : '',
               time: typeof event.time === 'string' ? event.time : '',
               image:
                 typeof event.image === 'string'
-                  ? event.image
+                  ? normalizeEventImageUrl(event.image)
                   : typeof event.imageUrl === 'string'
-                    ? event.imageUrl
+                    ? normalizeEventImageUrl(event.imageUrl)
                     : '',
               location: typeof event.location === 'string' ? event.location : '',
               description: typeof event.description === 'string' ? event.description : '',
+              requiresRegistration: Boolean(event.requiresRegistration),
+              registrationEmail: typeof event.registrationEmail === 'string' ? event.registrationEmail : null,
               imageUrl: typeof event.imageUrl === 'string' ? event.imageUrl : null,
               scope: typeof event.scope === 'string' ? event.scope : null,
             }))
-            .filter((event) => Boolean(event.title) && Boolean(event.date));
+            .filter((event) => Boolean(event.title) && Boolean(event.startDate));
           setEvents(normalized.length > 0 ? normalized : DEFAULT_EVENTS);
         } else {
           setEvents(DEFAULT_EVENTS);
@@ -267,7 +311,7 @@ export default function EventsListSection({
     const normalizedSearch = searchTerm.trim().toLowerCase();
 
     return events
-      .map((event) => ({ ...event, dateObj: parseDateOnly(event.date) }))
+      .map((event) => ({ ...event, dateObj: parseDateOnly(event.startDate) }))
       .filter((event) =>
         rangeEnd ? event.dateObj >= rangeStart && event.dateObj <= rangeEnd : event.dateObj >= rangeStart,
       )
@@ -358,6 +402,7 @@ export default function EventsListSection({
   }, [calendarEvent]);
 
   const openRegister = (event: typeof events[number]) => {
+    if (!event.requiresRegistration) return;
     setActiveEvent(event);
     setIsRegisterOpen(true);
     setRegisterError(null);
@@ -373,13 +418,17 @@ export default function EventsListSection({
       setRegisterError('Please complete the required fields before submitting.');
       return;
     }
+    if (!activeEvent.registrationEmail) {
+      setRegisterError('This event is not configured to receive registrations yet.');
+      return;
+    }
 
     setRegisterSubmitting(true);
     try {
       await sendEventRegistrationNotification({
-        churchEmail: 'info@piccworldwide.org',
+        churchEmail: activeEvent.registrationEmail,
         eventTitle: activeEvent.title,
-        eventDate: activeEvent.date,
+        eventDate: formatEventDateSummary(activeEvent),
         fullName: registerForm.fullName,
         residence: registerForm.residence,
         phone: registerForm.phone,
@@ -497,7 +546,7 @@ export default function EventsListSection({
                         return (
                           <div
                             key={event.id}
-                            className="grid grid-cols-1 md:grid-cols-[90px_1fr_240px] gap-6 items-center pb-10 border-b border-border last:border-b-0 last:pb-0"
+                            className="grid grid-cols-1 md:grid-cols-[90px_1fr_320px] gap-6 items-center pb-10 border-b border-border last:border-b-0 last:pb-0"
                           >
                             <div className="text-center md:text-left">
                               <p className="text-xs uppercase text-foreground/60">{dateLabel}</p>
@@ -509,18 +558,31 @@ export default function EventsListSection({
                                 {group.label} • {event.time}
                               </p>
                               <p className="text-sm text-foreground/60 mt-2">{event.location}</p>
+                              <p className="text-sm text-foreground/70 mt-2">
+                                Event dates: {formatEventDateSummary(event)}
+                              </p>
+                              {event.description ? (
+                                <p className="text-sm leading-6 text-foreground/75 mt-3">{event.description}</p>
+                              ) : null}
                               <div className="mt-4">
                                 <Button
                                   variant="outline"
                                   className="rounded-full px-5 text-sm"
+                                  disabled={!event.requiresRegistration}
                                   onClick={() => openRegister(event)}
                                 >
-                                  Register for Event
+                                  {event.requiresRegistration ? 'Register for Event' : 'Registration Not Required'}
                                 </Button>
                               </div>
                             </div>
-                            <div className="relative aspect-[3/4] max-w-[240px] w-full justify-self-center md:justify-self-end overflow-hidden rounded-xl shadow-sm">
-                              <Image src={event.image} alt={event.title} fill className="object-cover" />
+                            <div className="relative aspect-video max-w-[320px] w-full justify-self-center md:justify-self-end overflow-hidden rounded-xl border border-border/40 bg-white shadow-sm">
+                              <Image
+                                src={event.image}
+                                alt={event.title}
+                                fill
+                                className="object-cover"
+                                unoptimized={isLocalUpstreamImage(event.image)}
+                              />
                             </div>
                           </div>
                         );

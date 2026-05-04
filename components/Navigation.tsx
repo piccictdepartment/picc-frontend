@@ -33,7 +33,7 @@ export default function Navigation() {
   ];
   const schoolLinks = [
     { href: '/schools/picc-secondary', label: 'PICC Secondary School' },
-    { href: '/schools/hope-school', label: 'Hope School Ministry' },
+    { href: '/schools/hope-school', label: 'Hope School of Ministry' },
     { href: '/schools/discipleship', label: 'School of Discipleship' },
   ];
 

@@ -2,6 +2,7 @@ import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import Image from 'next/image';
 import PICCSecondaryApplicationForm from '@/components/schools/PICCSecondaryApplicationForm';
+import SchoolKeyDatesList from '@/components/schools/SchoolKeyDatesList';
 
 export const metadata = {
   title: 'PICC Secondary School - Quality Christian Education',
@@ -21,10 +22,10 @@ export default function PICCSecondaryPage() {
     'Impactfulness',
   ];
 
-  const importantDates = [
-    ['Registration Opens', 'January 15, 2025'],
+  const keyDatesFallback: Array<[string, string]> = [
+    ['Application Opens', 'January 15, 2025'],
     ['Application Deadline', 'March 31, 2025'],
-    ['Entrance Exams', 'April 12–13, 2025'],
+    ['Entrance Exams', 'April 12-13, 2025'],
     ['Results Released', 'May 15, 2025'],
     ['School Opens', 'June 2, 2025'],
   ];
@@ -90,12 +91,12 @@ export default function PICCSecondaryPage() {
         </div>
 
         <p className="relative text-white/70 text-lg sm:text-xl italic font-serif max-w-lg mx-auto leading-relaxed mb-10">
-          "Equipping Children Today To Become Godly Leaders Tomorrow"
+          &quot;Equipping Children Today To Become Godly Leaders Tomorrow&quot;
         </p>
 
         <div className="relative flex flex-wrap gap-3 justify-center">
           <button className="bg-[#c9a84c] text-[#0d1f3c] text-xs font-bold tracking-[0.15em] uppercase px-8 py-3.5 hover:bg-[#e2c27d] transition-colors duration-200">
-            Visit the school's official website
+            Visit the school&apos;s official website
           </button>
          
         </div>
@@ -237,16 +238,7 @@ export default function PICCSecondaryPage() {
               <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-5">
                 Key Dates
               </p>
-              <div className="border-t border-slate-100">
-                {importantDates.map(([label, date]) => (
-                  <div key={label} className="flex justify-between items-center py-4 px-2 border-b border-slate-100 gap-4">
-                    <span className="text-[#0d1f3c] font-medium text-sm">{label}</span>
-                    <span className="text-[0.7rem] font-semibold tracking-wide text-[#0d1f3c] bg-[#f5e9c8] border border-[#c9a84c] px-3 py-1 whitespace-nowrap">
-                      {date}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <SchoolKeyDatesList schoolKey="picc-secondary" fallback={keyDatesFallback} />
             </div>
 
             <div className="bg-stone-50 p-8 border-l-4 border-[#c9a84c]">

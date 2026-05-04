@@ -104,6 +104,7 @@ const DEFAULT_SERVICES = [
 ];
 
 type ServiceLike = {
+  id?: number | string | null;
   day?: string | null;
   dayOfWeek?: string | null;
   title?: string | null;
@@ -262,6 +263,9 @@ export default async function HomePage() {
     getSiteImages(imageKeys),
     getHomeVerse(),
   ]);
+
+  const seeYouBg =
+    normalizeImageUrl(seeYouInChurch?.imageUrl) ?? '/home/see-you-in-church.jpg';
   const devotionDate = devotion?.publishAt
     ? new Intl.DateTimeFormat('en-US', {
       month: 'long',
@@ -685,12 +689,12 @@ export default async function HomePage() {
             <div className="relative overflow-hidden rounded-[28px] shadow-2xl">
               <div className="absolute inset-0">
                 <Image
-  src="/home/see-you-in-church.jpg"
+  src={seeYouBg}
   alt="See you in church"
   fill
   sizes="100vw"
   className="object-cover"
-  unoptimized={isLocalUpstreamImage("/see-you-in-church.jpg")}
+  unoptimized={isLocalUpstreamImage(seeYouBg)}
 />
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/75 via-black/55 to-black/35" />
@@ -722,7 +726,7 @@ export default async function HomePage() {
 
                     return (
                       <div
-                        key={`${program.dayOfWeek || program.day}-${program.title}`}
+                        key={program.id || `${program.dayOfWeek || program.day}-${program.title}-${time}`}
                         className="rounded-2xl bg-white/10 border border-white/10 p-4 sm:p-6"
                       >
                         <p className="text-sm uppercase tracking-[0.2em] text-white/70">

@@ -12,6 +12,11 @@ import { apiFetch } from '@/lib/api';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
+  const helpline = '+265 992 433 333';
+  const helplineDigits = helpline.replace(/[^0-9]/g, '');
+  const piccEmail = 'info@piccworldwide.org';
+  const whatsappHref = `https://wa.me/${helplineDigits}`;
+  const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(piccEmail)}`;
   const [showFaqs, setShowFaqs] = useState(false);
   const [email, setEmail] = useState('');
   const [isSubscribing, setIsSubscribing] = useState(false);
@@ -156,6 +161,30 @@ Lilongwe 3
 Malawi
 
               </p>
+              <div className="mt-5 space-y-2 text-sm text-white/80">
+                <p>
+                  <span className="font-semibold text-white">Helpline:</span>{' '}
+                  <a
+                    href={whatsappHref}
+                    className="hover:text-white underline underline-offset-4"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {helpline}
+                  </a>
+                </p>
+                <p>
+                  <span className="font-semibold text-white">Email:</span>{' '}
+                  <a
+                    href={gmailHref}
+                    className="hover:text-white underline underline-offset-4"
+                    target="_blank"
+                    rel="noreferrer"
+                  >
+                    {piccEmail}
+                  </a>
+                </p>
+              </div>
               <div className="mt-6 flex items-center gap-4 text-white/80">
                 <Link href="https://www.facebook.com/PICCWorldwide/" aria-label="Facebook" className="hover:text-white" target="_blank" rel="noreferrer">
                   <Facebook size={20} />

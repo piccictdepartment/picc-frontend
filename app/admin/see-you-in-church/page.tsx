@@ -40,7 +40,7 @@ export default function SeeYouInChurchAdminPage() {
             : apiUrl(data.imageUrl)
           : '';
         setSeeYouImageUrl(imageUrl);
-      } catch (error) {
+      } catch {
         // ignore
       }
     };
@@ -72,7 +72,7 @@ export default function SeeYouInChurchAdminPage() {
       }
       const data = await response.json();
       return apiUrl(data.url);
-    } catch (error) {
+    } catch {
       setStatus('Image upload failed.');
       return null;
     }
@@ -98,7 +98,7 @@ export default function SeeYouInChurchAdminPage() {
         return;
       }
       setStatus('See You in Church section updated.');
-    } catch (error) {
+    } catch {
       setStatus('Unable to save See You in Church settings.');
     }
   };
@@ -167,7 +167,7 @@ export default function SeeYouInChurchAdminPage() {
             </label>
             <input
               type="file"
-              accept="image/*"
+              accept="image/*,.heic,.heif,.avif"
               onChange={async (event) => {
                 const file = event.target.files?.[0];
                 if (!file) return;
@@ -211,7 +211,7 @@ export default function SeeYouInChurchAdminPage() {
           </p>
           <div
             className="h-44 rounded-xl bg-cover bg-center border border-border/60"
-            style={{ backgroundImage: `url(${seeYouImageUrl || '/home/see-you-in-church.JPG'})` }}
+            style={{ backgroundImage: `url(${seeYouImageUrl || '/home/see-you-in-church.jpg'})` }}
           />
         </div>
       </div>

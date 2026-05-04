@@ -6,8 +6,9 @@ import AdminLoginCard from '@/components/admin/AdminLoginCard';
 import { useAdminAuth } from '@/hooks/use-admin-auth';
 import SchoolIntakesManager from '@/components/admin/SchoolIntakesManager';
 import SchoolInfoManager from '@/components/admin/SchoolInfoManager';
+import SchoolKeyDatesManager from '@/components/admin/SchoolKeyDatesManager';
 
-type Tab = 'enrollment' | 'info';
+type Tab = 'enrollment' | 'key-dates' | 'info';
 
 export default function PICCSecondaryEnrollmentAdminPage() {
   const {
@@ -38,6 +39,7 @@ export default function PICCSecondaryEnrollmentAdminPage() {
 
   const tabs: Array<{ id: Tab; label: string }> = [
     { id: 'enrollment', label: 'Enrollment' },
+    { id: 'key-dates', label: 'Key Dates' },
     { id: 'info', label: 'School Info' },
   ];
 
@@ -76,9 +78,9 @@ export default function PICCSecondaryEnrollmentAdminPage() {
 
       <div>
         {activeTab === 'enrollment' && <SchoolIntakesManager token={token} schoolKey="picc-secondary" />}
+        {activeTab === 'key-dates' && <SchoolKeyDatesManager token={token} schoolKey="picc-secondary" />}
         {activeTab === 'info' && <SchoolInfoManager token={token} schoolKey="picc-secondary" schoolName="PICC Secondary" />}
       </div>
     </div>
   );
 }
-

@@ -5,10 +5,10 @@ import Footer from '@/components/Footer';
 import EventsCarousel from '@/components/EventsCarousel';
 import DiscipleshipNewsSection from '@/components/schools/DiscipleshipNewsSection';
 import { BookOpen, ShieldCheck, Sun, Anchor, Zap, Flame, Gift, Crown } from 'lucide-react';
-import Link from 'next/link';
 import Image from 'next/image';
 import { useRef } from 'react';
 import SchoolIntakeGate from '@/components/schools/SchoolIntakeGate';
+import SchoolKeyDatesList from '@/components/schools/SchoolKeyDatesList';
 
 export default function SchoolOfDiscipleshipPage() {
   const enrollmentRef = useRef<HTMLElement>(null);
@@ -109,11 +109,11 @@ export default function SchoolOfDiscipleshipPage() {
     },
   ];
 
-  const importantDates = [
-    ['Foundation Level Starts', 'January 20, 2025'],
-    ['Growth Level Starts', 'February 10, 2025'],
-    ['Leadership Level Starts', 'March 3, 2025'],
-    ['Enrollment Deadline', '1 week before start'],
+  const keyDatesFallback: Array<[string, string]> = [
+    ['Registration Starts', 'January 20, 2025'],
+    ['Registration Closes', 'February 10, 2025'],
+    ['Current Cohort Ends', 'March 3, 2025'],
+    ['Next Cohort Starts', '1 week before start'],
   ];
 
 
@@ -349,16 +349,7 @@ export default function SchoolOfDiscipleshipPage() {
               <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-6">
                 Upcoming Start Dates
               </p>
-              <div className="border-t border-slate-100">
-                {importantDates.map(([label, date]) => (
-                  <div key={label} className="flex justify-between items-center py-4 px-2 border-b border-slate-100 gap-4">
-                    <span className="text-[#0d1f3c] font-medium text-sm">{label}</span>
-                    <span className="text-[0.7rem] font-semibold tracking-wide text-[#0d1f3c] bg-[#f5e9c8] border border-[#c9a84c] px-3 py-1 whitespace-nowrap">
-                      {date}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <SchoolKeyDatesList schoolKey="discipleship" fallback={keyDatesFallback} />
             </div>
 
             <div className="bg-stone-50 p-8 border-l-4 border-[#c9a84c]">

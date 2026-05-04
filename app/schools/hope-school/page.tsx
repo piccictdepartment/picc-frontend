@@ -3,6 +3,7 @@ import Footer from '@/components/Footer';
 import EventsCarousel from '@/components/EventsCarousel';
 import HopeSchoolNewsSection from '@/components/schools/HopeSchoolNewsSection';
 import HopeSchoolRegistrationForm from '@/components/schools/HopeSchoolRegistrationForm';
+import SchoolKeyDatesList from '@/components/schools/SchoolKeyDatesList';
 import Image from 'next/image';
 import { BookOpen, Building2, Compass, Crown, GraduationCap, Lightbulb, Target, Users } from 'lucide-react';
 
@@ -142,25 +143,7 @@ export default function HopeSchoolPage() {
     },
   ];
 
-  const tracks = [
-    {
-      name: 'Leadership Development',
-      description: 'Character, vision, discipline, and excellence for responsible leadership.',
-      level: 'Leadership',
-    },
-    {
-      name: 'Ministry & Administration',
-      description: 'Practical skills for ministry service, management, and church operations.',
-      level: 'Ministry',
-    },
-    {
-      name: 'Mission & Evangelism',
-      description: 'Evangelism practice and missionary concern for reaching people effectively.',
-      level: 'Mission',
-    },
-  ];
-
-  const importantDates = [
+  const keyDatesFallback: Array<[string, string]> = [
     ['Registration Opens', 'March 15, 2025'],
     ['Registration Deadline', 'April 30, 2025'],
     ['Cohort 1 Starts', 'May 4, 2025'],
@@ -223,7 +206,7 @@ export default function HopeSchoolPage() {
         </p>
 
         <h1 className="relative z-10 text-white text-4xl sm:text-5xl lg:text-6xl font-bold tracking-tight mb-6 font-serif">
-          Hope School Ministry
+          Hope School of Ministry
         </h1>
 
         <div className="flex items-center justify-center gap-3 mb-6 relative z-10">
@@ -335,7 +318,7 @@ export default function HopeSchoolPage() {
       <section className="bg-white py-20 px-4">
         <div className="text-center mb-14">
           <span className={sectionLabelClass}>Get in Touch</span>
-          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Contact Hope School</h2>
+          <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Contact Hope School of Ministry</h2>
           {dividerEl}
         </div>
 
@@ -395,16 +378,7 @@ export default function HopeSchoolPage() {
               <p className="text-[#c9a84c] text-[0.65rem] font-semibold tracking-[0.2em] uppercase mb-6">
                 Important Dates
               </p>
-              <div className="border-t border-slate-200">
-                {importantDates.map(([label, date]) => (
-                  <div key={label} className="flex justify-between items-center py-4 px-2 border-b border-slate-200 gap-4">
-                    <span className="text-[#0d1f3c] font-medium text-sm">{label}</span>
-                    <span className="text-[0.7rem] font-semibold tracking-wide text-[#0d1f3c] bg-[#f5e9c8] border border-[#c9a84c] px-3 py-1 whitespace-nowrap">
-                      {date}
-                    </span>
-                  </div>
-                ))}
-              </div>
+              <SchoolKeyDatesList schoolKey="hope-school" fallback={keyDatesFallback} />
             </div>
 
             <div className="bg-white p-8 border-l-4 border-[#c9a84c] shadow-sm">

@@ -3,7 +3,7 @@
 import { useEffect, useMemo, useRef, useState } from 'react';
 import { apiFetch } from '@/lib/api';
 import { Button } from '@/components/ui/button';
-import { Loader2, Plus, Trash2, Save, GripVertical } from 'lucide-react';
+import { Loader2, Plus, Trash2, Save, GripVertical, Search } from 'lucide-react';
 
 export type FAQRecord = {
   id: number;
@@ -27,6 +27,7 @@ export default function FAQManager({
   const [status, setStatus] = useState('');
   const [isLoading, setIsLoading] = useState(true);
   const [faqs, setFaqs] = useState<FAQRecord[]>([]);
+  const [searchTerm, setSearchTerm] = useState('');
   const savedSnapshotRef = useRef<Record<number, string>>({});
   const [savingFaqId, setSavingFaqId] = useState<number | null>(null);
   const [faqDraft, setFaqDraft] = useState<FAQDraft>({
@@ -50,6 +51,16 @@ export default function FAQManager({
     () => (faq: FAQRecord) => savedSnapshotRef.current[faq.id] !== snapshot(faq),
     [snapshot],
   );
+
+  const filteredFaqs = useMemo(() => {
+    if (!searchTerm.trim()) return faqs;
+    const lowerSearch = searchTerm.toLowerCase();
+    return faqs.filter(
+      (faq) =>
+        faq.question.toLowerCase().includes(lowerSearch) ||
+        faq.answer.toLowerCase().includes(lowerSearch),
+    );
+  }, [faqs, searchTerm]);
 
   const refreshFaqs = async () => {
     try {
@@ -214,16 +225,30 @@ export default function FAQManager({
         </div>
 
         <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
-          <h2 className="text-lg font-semibold text-foreground mb-4">
-            Current FAQs
-          </h2>
-          {faqs.length === 0 ? (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 mb-4">
+            <h2 className="text-lg font-semibold text-foreground">
+              Current FAQs
+            </h2>
+            <div className="relative flex-1 max-w-sm">
+              <Search className="absolute left-3 top-1/2 -translate-y-1/2 h-4 w-4 text-foreground/40" />
+              <input
+                type="text"
+                placeholder="Search FAQs..."
+                value={searchTerm}
+                onChange={(event) => setSearchTerm(event.target.value)}
+                className="w-full rounded-xl border border-border bg-background pl-9 pr-4 py-2 text-sm text-foreground focus:ring-2 focus:ring-primary/20 transition outline-none"
+              />
+            </div>
+          </div>
+          {filteredFaqs.length === 0 ? (
             <div className="text-center py-12 border border-dashed rounded-xl border-border/60">
-              <p className="text-sm text-foreground/60">No FAQs added yet.</p>
+              <p className="text-sm text-foreground/60">
+                {searchTerm ? 'No FAQs match your search.' : 'No FAQs added yet.'}
+              </p>
             </div>
           ) : (
             <div className="space-y-4">
-              {faqs.map((faq) => (
+              {filteredFaqs.map((faq) => (
                 <div
                   key={faq.id}
                   className="rounded-xl border border-border/60 bg-background p-4 space-y-4 group"
