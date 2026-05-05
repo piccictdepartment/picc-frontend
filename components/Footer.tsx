@@ -12,10 +12,8 @@ import { apiFetch } from '@/lib/api';
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
-  const helpline = '+265 992 433 333';
-  const helplineDigits = helpline.replace(/[^0-9]/g, '');
+  const prayerlineNumbers = ['+265 996 80 08 00', '+265 886 80 08 00'];
   const piccEmail = 'info@piccworldwide.org';
-  const whatsappHref = `https://wa.me/${helplineDigits}`;
   const gmailHref = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(piccEmail)}`;
   const [showFaqs, setShowFaqs] = useState(false);
   const [email, setEmail] = useState('');
@@ -161,18 +159,21 @@ Lilongwe 3
 Malawi
 
               </p>
-              <div className="mt-5 space-y-2 text-sm text-white/80">
-                <p>
-                  <span className="font-semibold text-white">Helpline:</span>{' '}
-                  <a
-                    href={whatsappHref}
-                    className="hover:text-white underline underline-offset-4"
-                    target="_blank"
-                    rel="noreferrer"
-                  >
-                    {helpline}
-                  </a>
-                </p>
+              <div className="mt-5 space-y-4 text-sm text-white/80">
+                <div className="flex flex-col gap-1">
+                  <span className="font-semibold text-white">Prayerline:</span>
+                  {prayerlineNumbers.map((number) => (
+                    <a
+                      key={number}
+                      href={`https://wa.me/${number.replace(/[^0-9]/g, '')}`}
+                      className="hover:text-white underline underline-offset-4"
+                      target="_blank"
+                      rel="noreferrer"
+                    >
+                      {number}
+                    </a>
+                  ))}
+                </div>
                 <p>
                   <span className="font-semibold text-white">Email:</span>{' '}
                   <a
