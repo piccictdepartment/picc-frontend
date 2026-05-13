@@ -6,7 +6,8 @@ import HopeSchoolRegistrationForm from '@/components/schools/HopeSchoolRegistrat
 import SchoolKeyDatesList from '@/components/schools/SchoolKeyDatesList';
 import { apiUrl } from '@/lib/api';
 import Image from 'next/image';
-import { BookOpen, Building2, Compass, Crown, GraduationCap, Lightbulb, Mail, MapPin, Phone, Sparkles, Target, Users } from 'lucide-react';
+import Link from 'next/link';
+import { BookOpen, Building2, Compass, Crown, GraduationCap, Lightbulb, LogIn, Mail, MapPin, Phone, Sparkles, Target, UserPlus, Users } from 'lucide-react';
 
 export const metadata = {
   title: 'Hope School - Leadership Training & Ministry Equipping',
@@ -398,6 +399,57 @@ export default async function HopeSchoolPage() {
               </p>
             </div>
           ))}
+        </div>
+      </section>
+
+      <section className="bg-stone-50 py-20 px-4">
+        <div className="max-w-6xl mx-auto grid lg:grid-cols-[0.9fr_1.1fr] gap-10 items-center">
+          <div>
+            <span className={sectionLabelClass}>Online Learning</span>
+            <h2 className={`${sectionTitleClass} text-[#0d1f3c] font-serif`}>Join Hope School Online Classes</h2>
+            <div className="flex items-center gap-3 mt-4 mb-6">
+              <span className="block w-10 h-px bg-[#c9a84c] opacity-50" />
+              <span className="block w-1.5 h-1.5 bg-[#c9a84c] rotate-45" />
+              <span className="block w-10 h-px bg-[#c9a84c] opacity-50" />
+            </div>
+            <p className="text-slate-600 text-base leading-relaxed font-serif max-w-xl">
+              Access online classes, register as a new learner, or log in to continue with your Hope School coursework.
+            </p>
+          </div>
+
+          <div className="grid sm:grid-cols-2 gap-4">
+            <Link
+              href="/schools/hope-school/online-classes?mode=register"
+              className="group border border-[#c9a84c]/40 bg-white p-7 shadow-sm transition-all hover:-translate-y-1 hover:border-[#c9a84c] hover:shadow-md"
+            >
+              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center border border-[#c9a84c] text-[#c9a84c] transition-colors group-hover:bg-[#c9a84c] group-hover:text-[#0d1f3c]">
+                <UserPlus size={20} />
+              </div>
+              <h3 className="font-serif text-xl font-bold text-[#0d1f3c]">Register</h3>
+              <p className="mt-2 text-sm leading-6 text-slate-600">
+                Create your online class access and begin the enrollment flow.
+              </p>
+              <span className="mt-6 inline-flex text-xs font-bold uppercase tracking-[0.15em] text-[#0d1f3c]">
+                Start registration
+              </span>
+            </Link>
+
+            <Link
+              href="/schools/hope-school/online-classes?mode=login"
+              className="group border border-[#0d1f3c]/15 bg-[#0d1f3c] p-7 shadow-sm transition-all hover:-translate-y-1 hover:bg-[#17345f] hover:shadow-md"
+            >
+              <div className="mb-5 inline-flex h-12 w-12 items-center justify-center border border-[#c9a84c] text-[#c9a84c] transition-colors group-hover:bg-[#c9a84c] group-hover:text-[#0d1f3c]">
+                <LogIn size={20} />
+              </div>
+              <h3 className="font-serif text-xl font-bold text-white">Login</h3>
+              <p className="mt-2 text-sm leading-6 text-white/70">
+                Return to your online class dashboard and learning materials.
+              </p>
+              <span className="mt-6 inline-flex text-xs font-bold uppercase tracking-[0.15em] text-[#c9a84c]">
+                Continue learning
+              </span>
+            </Link>
+          </div>
         </div>
       </section>
 

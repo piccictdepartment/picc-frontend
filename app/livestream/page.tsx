@@ -9,6 +9,7 @@ import LiveChat from '@/components/LiveChat';
 import NotepadTool from '@/components/livestream/NotepadTool';
 import TestimonyTool from '@/components/livestream/TestimonyTool';
 import GiveTool from '@/components/livestream/GiveTool';
+import PrayerRequestTool from '@/components/livestream/PrayerRequestTool';
 import BibleTool from '@/components/livestream/BibleTool';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
@@ -21,7 +22,7 @@ declare global {
   }
 }
 
-type ToolKey = "bible" | "notepad" | "chat" | "testimony" | "give" | null;
+type ToolKey = "bible" | "notepad" | "chat" | "testimony" | "prayer" | "give" | null;
 
 type YouTubeVideo = {
   videoId: string;
@@ -109,6 +110,7 @@ const TOOL_TABS: Array<{
   { key: "notepad", label: "Notepad", kind: "component" },
   { key: "bible", label: "Bible", kind: "component" },
   { key: "testimony", label: "Send Testimony", kind: "form" },
+  { key: "prayer", label: "Prayer Request", kind: "form" },
   { key: "give", label: "Give", kind: "form" },
 ];
 
@@ -517,6 +519,13 @@ export default function LivestreamPage() {
                         </button>
                         <button
                           type="button"
+                          onClick={() => setActiveTool("prayer")}
+                          className="inline-flex items-center gap-2 rounded-full bg-[#EAF2FF] px-3 py-1 text-xs font-medium text-[#1E4FA3] hover:bg-[#DCEAFF] transition-colors"
+                        >
+                          Prayer Request
+                        </button>
+                        <button
+                          type="button"
                           onClick={() => setActiveTool("give")}
                           className="inline-flex items-center gap-2 rounded-full bg-[#39D98A] px-3 py-1 text-semibold text-black hover:bg-[#2FC77C] transition-colors"
                         >
@@ -566,8 +575,13 @@ export default function LivestreamPage() {
                       <TestimonyTool />
                     </div>
                   )}
+                  {activeTool === "prayer" && (
+                    <div className="px-5 py-6 text-white">
+                      <PrayerRequestTool />
+                    </div>
+                  )}
                   {activeTool === "give" && (
-                    <div className="px-5 text-white">
+                    <div className="px-5 py-6 text-white">
                       <GiveTool isMobile={false} />
                     </div>
                   )}
@@ -575,6 +589,8 @@ export default function LivestreamPage() {
                     <span>
                       {activeTool === "testimony"
                         ? "Testimony Form"
+                        : activeTool === "prayer"
+                          ? "Prayer Request Form"
                         : activeTool === "give"
                           ? "Giving Form"
                           : activeTool === "chat"
@@ -665,6 +681,11 @@ export default function LivestreamPage() {
                         <TestimonyTool />
                       </div>
                     )}
+                    {activeTool === "prayer" && (
+                      <div className="px-4 py-5 text-white">
+                        <PrayerRequestTool />
+                      </div>
+                    )}
                     {activeTool === "give" && (
                       <div className="px-4 py-5 text-white">
                         <GiveTool isMobile={true} />
@@ -734,6 +755,11 @@ export default function LivestreamPage() {
                       {activeTool === 'testimony' && (
                         <div className="px-4 py-5 text-white">
                           <TestimonyTool />
+                        </div>
+                      )}
+                      {activeTool === 'prayer' && (
+                        <div className="px-4 py-5 text-white">
+                          <PrayerRequestTool />
                         </div>
                       )}
                       {activeTool === 'give' && (

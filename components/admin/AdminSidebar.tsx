@@ -48,6 +48,7 @@ const MINISTRIES_ITEMS: NavItem[] = [
   { label: 'Youth Church', href: '/admin/ministries/youth-church' },
   { label: 'Women of Hope', href: '/admin/ministries/women-of-hope' },
   { label: 'Wailing Woman', href: '/admin/ministries/wailing-woman' },
+  { label: 'Rivers of Hope', href: '/admin/ministries/rivers-of-hope' },
   { label: 'Hope and Beauty', href: '/admin/ministries/hope-and-beauty' },
   { label: 'Heritage', href: '/admin/ministries/heritage' },
 ];
