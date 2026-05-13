@@ -1,6 +1,7 @@
 'use client';
 
 import { useEffect, useRef, useState } from 'react';
+import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
 import LivestreamFooter from '@/components/LivestreamFooter';
@@ -15,7 +16,7 @@ import { BookOpenText, MessageSquareText, StickyNote } from 'lucide-react';
 
 declare global {
   interface Window {
-    YT: any;
+    YT?: YouTubeIframeApi;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
@@ -33,7 +34,70 @@ type YouTubeVideo = {
   url: string;
   embedUrl: string;
   isLive?: boolean;
+  canEmbed?: boolean;
 };
+
+type YouTubeThumbnail = {
+  url?: string;
+};
+
+type YouTubeSnippet = {
+  title?: string;
+  publishedAt?: string;
+  channelTitle?: string;
+  description?: string;
+  liveBroadcastContent?: string;
+  thumbnails?: {
+    high?: YouTubeThumbnail;
+    medium?: YouTubeThumbnail;
+  };
+};
+
+type YouTubeSearchItem = {
+  id?: {
+    videoId?: string;
+  };
+  snippet?: YouTubeSnippet;
+};
+
+type YouTubePlaylistItem = {
+  contentDetails?: {
+    videoId?: string;
+  };
+  snippet?: YouTubeSnippet;
+};
+
+type YouTubePlayer = {
+  pauseVideo: () => void;
+  getCurrentTime?: () => number;
+};
+
+type YouTubePlayerStateChangeEvent = {
+  data: number;
+  target: YouTubePlayer;
+};
+
+type YouTubeIframeApi = {
+  Player: new (
+    iframe: HTMLIFrameElement,
+    options: {
+      events: {
+        onStateChange: (event: YouTubePlayerStateChangeEvent) => void;
+      };
+    },
+  ) => YouTubePlayer;
+  PlayerState: {
+    PLAYING: number;
+  };
+};
+
+const CHANNEL_ID = "UC5iA3dWaUBlP_PBlGSQvgNQ";
+const RELATED_CHANNEL_IDS = [
+  "UC8JUC-G4wKhrrPr7xjxYWJw",
+  "UC_aXxxQF62jKWRK3xjzOZPg",
+  "UC6auo8Q1xb5cgyY_pGJbfdw",
+];
+const FALLBACK_HERO_ID = "ydTADwZRquA";
 
 const TOOL_TABS: Array<{
   key: ToolKey;
@@ -55,10 +119,8 @@ export default function LivestreamPage() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [mobileResumeAt, setMobileResumeAt] = useState<number | null>(null);
-  const playersRef = useRef<Map<string, any>>(new Map());
+  const playersRef = useRef<Map<string, YouTubePlayer>>(new Map());
 
-  const CHANNEL_ID = "UC5iA3dWaUBlP_PBlGSQvgNQ";
-  const FALLBACK_HERO_ID = "ydTADwZRquA";
   const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
 
   const featuredVideo = videos[0] || null;
@@ -78,7 +140,10 @@ export default function LivestreamPage() {
   useEffect(() => {
     let isMounted = true;
 
-    const toVideoFromSearch = (item: any): YouTubeVideo | null => {
+    const toVideoFromSearch = (
+      item?: YouTubeSearchItem,
+      canEmbed = true,
+    ): YouTubeVideo | null => {
       const videoId = item?.id?.videoId;
       if (!videoId) return null;
       const snippet = item.snippet || {};
@@ -96,10 +161,14 @@ export default function LivestreamPage() {
         url: `https://www.youtube.com/watch?v=${videoId}`,
         embedUrl: `https://www.youtube.com/embed/${videoId}`,
         isLive: snippet.liveBroadcastContent === "live",
+        canEmbed,
       };
     };
 
-    const toVideoFromPlaylist = (item: any): YouTubeVideo | null => {
+    const toVideoFromPlaylist = (
+      item?: YouTubePlaylistItem,
+      canEmbed = true,
+    ): YouTubeVideo | null => {
       const videoId = item?.contentDetails?.videoId;
       if (!videoId) return null;
       const snippet = item.snippet || {};
@@ -117,6 +186,7 @@ export default function LivestreamPage() {
         url: `https://www.youtube.com/watch?v=${videoId}`,
         embedUrl: `https://www.youtube.com/embed/${videoId}`,
         isLive: false,
+        canEmbed,
       };
     };
 
@@ -128,6 +198,92 @@ export default function LivestreamPage() {
       return response.json();
     };
 
+    const fetchLatestUpload = async (
+      channelId: string,
+      canEmbed = true,
+      maxResults = 1,
+    ) => {
+      const channelUrl = new URL(
+        "https://www.googleapis.com/youtube/v3/channels",
+      );
+      channelUrl.searchParams.set("part", "contentDetails");
+      channelUrl.searchParams.set("id", channelId);
+      channelUrl.searchParams.set("key", YOUTUBE_API_KEY);
+
+      const channelData = await fetchJson(channelUrl.toString());
+      const uploadsPlaylistId =
+        channelData?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
+
+      if (!uploadsPlaylistId) return null;
+
+      const uploadsUrl = new URL(
+        "https://www.googleapis.com/youtube/v3/playlistItems",
+      );
+      uploadsUrl.searchParams.set("part", "snippet,contentDetails");
+      uploadsUrl.searchParams.set("playlistId", uploadsPlaylistId);
+      uploadsUrl.searchParams.set("maxResults", String(maxResults));
+      uploadsUrl.searchParams.set("key", YOUTUBE_API_KEY);
+
+      const uploadsData = await fetchJson(uploadsUrl.toString());
+      const playlistVideos: YouTubeVideo[] = Array.isArray(uploadsData?.items)
+        ? uploadsData.items
+            .map((item: YouTubePlaylistItem) =>
+              toVideoFromPlaylist(item, canEmbed),
+            )
+            .filter((item: YouTubeVideo | null): item is YouTubeVideo =>
+              Boolean(item),
+            )
+        : [];
+
+      return playlistVideos[0] || null;
+    };
+
+    const fetchLatestEmbeddableVideo = async (channelId: string) => {
+      const searchUrl = new URL("https://www.googleapis.com/youtube/v3/search");
+      searchUrl.searchParams.set("part", "snippet");
+      searchUrl.searchParams.set("channelId", channelId);
+      searchUrl.searchParams.set("type", "video");
+      searchUrl.searchParams.set("order", "date");
+      searchUrl.searchParams.set("videoEmbeddable", "true");
+      searchUrl.searchParams.set("maxResults", "1");
+      searchUrl.searchParams.set("key", YOUTUBE_API_KEY);
+
+      const searchData = await fetchJson(searchUrl.toString());
+      return Array.isArray(searchData?.items)
+        ? toVideoFromSearch(searchData.items[0])
+        : null;
+    };
+
+    const fetchRelatedVideo = async (channelId: string) => {
+      const [embeddableVideo, latestUpload] = await Promise.all([
+        fetchLatestEmbeddableVideo(channelId),
+        fetchLatestUpload(channelId, false),
+      ]);
+
+      return embeddableVideo || latestUpload;
+    };
+
+    const fetchHeroVideo = async () => {
+      const liveUrl = new URL("https://www.googleapis.com/youtube/v3/search");
+      liveUrl.searchParams.set("part", "snippet");
+      liveUrl.searchParams.set("channelId", CHANNEL_ID);
+      liveUrl.searchParams.set("eventType", "live");
+      liveUrl.searchParams.set("type", "video");
+      liveUrl.searchParams.set("maxResults", "1");
+      liveUrl.searchParams.set("key", YOUTUBE_API_KEY);
+
+      const [liveData, latestUpload] = await Promise.all([
+        fetchJson(liveUrl.toString()),
+        fetchLatestUpload(CHANNEL_ID, true),
+      ]);
+
+      const liveVideo = Array.isArray(liveData?.items)
+        ? toVideoFromSearch(liveData.items[0])
+        : null;
+
+      return liveVideo || latestUpload;
+    };
+
     const fetchVideos = async () => {
       try {
         setIsLoading(true);
@@ -137,68 +293,26 @@ export default function LivestreamPage() {
           throw new Error("Missing API key");
         }
 
-        const channelUrl = new URL(
-          "https://www.googleapis.com/youtube/v3/channels",
-        );
-        channelUrl.searchParams.set("part", "contentDetails");
-        channelUrl.searchParams.set("id", CHANNEL_ID);
-        channelUrl.searchParams.set("key", YOUTUBE_API_KEY);
-
-        const liveUrl = new URL("https://www.googleapis.com/youtube/v3/search");
-        liveUrl.searchParams.set("part", "snippet");
-        liveUrl.searchParams.set("channelId", CHANNEL_ID);
-        liveUrl.searchParams.set("eventType", "live");
-        liveUrl.searchParams.set("type", "video");
-        liveUrl.searchParams.set("maxResults", "1");
-        liveUrl.searchParams.set("key", YOUTUBE_API_KEY);
-
-        const channelData = await fetchJson(channelUrl.toString());
-        const uploadsPlaylistId =
-          channelData?.items?.[0]?.contentDetails?.relatedPlaylists?.uploads;
-
-        if (!uploadsPlaylistId) {
-          throw new Error("Missing uploads playlist");
-        }
-
-        const uploadsUrl = new URL(
-          "https://www.googleapis.com/youtube/v3/playlistItems",
-        );
-        uploadsUrl.searchParams.set("part", "snippet,contentDetails");
-        uploadsUrl.searchParams.set("playlistId", uploadsPlaylistId);
-        uploadsUrl.searchParams.set("maxResults", "6");
-        uploadsUrl.searchParams.set("key", YOUTUBE_API_KEY);
-
-        const [liveData, uploadsData] = await Promise.all([
-          fetchJson(liveUrl.toString()),
-          fetchJson(uploadsUrl.toString()),
+        const [heroVideo, relatedVideos] = await Promise.all([
+          fetchHeroVideo(),
+          Promise.all(
+            RELATED_CHANNEL_IDS.map((channelId) =>
+              fetchRelatedVideo(channelId),
+            ),
+          ),
         ]);
 
-        const liveVideo = Array.isArray(liveData?.items)
-          ? toVideoFromSearch(liveData.items[0])
-          : null;
-        const recentVideos: YouTubeVideo[] = Array.isArray(uploadsData?.items)
-          ? uploadsData.items
-              .map(toVideoFromPlaylist)
-              .filter((item: YouTubeVideo | null): item is YouTubeVideo =>
-                Boolean(item),
-              )
-          : [];
-
-        const merged: YouTubeVideo[] = [];
-        if (liveVideo) merged.push(liveVideo);
-        recentVideos.forEach((video: YouTubeVideo) => {
-          if (
-            !merged.find((existing) => existing.videoId === video?.videoId) &&
-            video
-          ) {
-            merged.push(video);
-          }
-        });
+        const merged = [
+          heroVideo,
+          ...relatedVideos,
+        ].filter((item: YouTubeVideo | null): item is YouTubeVideo =>
+          Boolean(item),
+        );
 
         if (isMounted) {
           setVideos(merged.slice(0, 4));
         }
-      } catch (error) {
+      } catch {
         if (isMounted) {
           setLoadError("Unable to load the latest videos right now.");
           setVideos([]);
@@ -259,6 +373,7 @@ export default function LivestreamPage() {
 
   useEffect(() => {
     if (!ytReady || typeof window === "undefined" || !window.YT?.Player) return;
+    const yt = window.YT;
     const players = playersRef.current;
     const iframes = Array.from(
       document.querySelectorAll<HTMLIFrameElement>("[data-yt-id]"),
@@ -267,10 +382,10 @@ export default function LivestreamPage() {
     iframes.forEach((iframe) => {
       const videoId = iframe.dataset.ytId;
       if (!videoId || players.has(videoId)) return;
-      const player = new window.YT.Player(iframe, {
+      const player = new yt.Player(iframe, {
         events: {
-          onStateChange: (event: any) => {
-            if (event.data === window.YT.PlayerState.PLAYING) {
+          onStateChange: (event: YouTubePlayerStateChangeEvent) => {
+            if (event.data === yt.PlayerState.PLAYING) {
               players.forEach((p) => {
                 if (p !== event.target) {
                   p.pauseVideo();
@@ -644,7 +759,7 @@ export default function LivestreamPage() {
             {isLoading ? (
               <div className="text-center py-12">
                 <p className="text-lg text-white/70">
-                  Loading latest videos...
+                  Loading videos from other channels...
                 </p>
               </div>
             ) : loadError ? (
@@ -659,15 +774,42 @@ export default function LivestreamPage() {
                     className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col bg-white border-black/10 text-black"
                   >
                     <div className="aspect-video bg-black">
-                      <iframe
-                        className="h-full w-full"
-                        data-yt-id={stream.videoId}
-                        id={`yt-${stream.videoId}`}
-                        src={`${stream.embedUrl}?enablejsapi=1&rel=0`}
-                        title={stream.title}
-                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                        allowFullScreen
-                      />
+                      {stream.canEmbed === false ? (
+                        <Link
+                          href={stream.url}
+                          target="_blank"
+                          rel="noreferrer"
+                          className="relative block h-full w-full"
+                          aria-label={`Watch ${stream.title} on YouTube`}
+                        >
+                          {stream.thumbnail ? (
+                            <Image
+                              src={stream.thumbnail}
+                              alt=""
+                              fill
+                              sizes="(min-width: 1024px) 33vw, (min-width: 768px) 50vw, 100vw"
+                              className="h-full w-full object-cover"
+                            />
+                          ) : (
+                            <div className="h-full w-full bg-black" />
+                          )}
+                          <span className="absolute inset-0 flex items-center justify-center bg-black/20">
+                            <span className="rounded-full bg-red-600 px-5 py-3 text-sm font-bold text-white shadow-lg">
+                              Watch on YouTube
+                            </span>
+                          </span>
+                        </Link>
+                      ) : (
+                        <iframe
+                          className="h-full w-full"
+                          data-yt-id={stream.videoId}
+                          id={`yt-${stream.videoId}`}
+                          src={`${stream.embedUrl}?enablejsapi=1&rel=0`}
+                          title={stream.title}
+                          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                          allowFullScreen
+                        />
+                      )}
                     </div>
                     <div className="p-4 flex flex-col">
                       <h3 className="font-bold text-lg text-black mb-2 line-clamp-2">
