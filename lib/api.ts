@@ -21,6 +21,10 @@ const resolveApiBaseUrl = () => {
 };
 
 const resolveFallbackApiBaseUrl = () => {
+  if (process.env.NEXT_PUBLIC_API_FALLBACK_BASE_URL) {
+    return normalize(process.env.NEXT_PUBLIC_API_FALLBACK_BASE_URL);
+  }
+
   if (typeof window === 'undefined') return null;
   const host = window.location.hostname;
   if (host === 'localhost' || host === '127.0.0.1') {
