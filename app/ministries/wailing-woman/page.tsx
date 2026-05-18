@@ -24,7 +24,8 @@ import BibleTool from '@/components/livestream/BibleTool';
 // --- TYPES & GLOBALS ---
 declare global {
   interface Window {
-    YT?: YouTubeIframeApi;
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    YT: any;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
