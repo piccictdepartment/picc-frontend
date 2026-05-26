@@ -62,7 +62,7 @@ const MINISTRY_CARDS = [
   { title: 'Prison Ministry', key: 'home-ministry-card-4', fallback: '/hero/hero-14.jpg', href: '/ministries/prison-ministry' },
   { title: 'Youth Church Ministry', key: 'home-ministry-card-5', fallback: '/hero/hero-10-yc.jpg', href: '/ministries/youth-church-ministry' },
   { title: 'Hope and Beauty', key: 'home-ministry-card-6', fallback: '/hero/hero-13-hb.jpg', href: '/ministries/hope-and-beauty' },
-  { title: 'Heritage Ministry', key: 'home-ministry-card-7', fallback: '/hero/hero-12-heritage.jpg', href: '/ministries/heritage-ministry' },
+  { title: 'Heritage Ministry', key: 'home-ministry-card-7', fallback: '/hero/hero-12-heritage.jpg', href: '/ministries/heritage' },
 ];
 
 const DEFAULT_SEE_YOU_SERVICES = [

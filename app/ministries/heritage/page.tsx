@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, type SyntheticEvent } from 'react';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -48,11 +48,19 @@ type MinistryItem = {
   caption?: string | null;
 };
 
+type MinistryItemApiResponse = MinistryItem & {
+  image?: string | null;
+};
+
 const toAssetUrl = (value: string | null | undefined) => {
   const trimmed = (value || '').trim();
   if (!trimmed) return '';
   if (trimmed.startsWith('/uploads')) return apiUrl(trimmed);
   return trimmed;
+};
+
+const fallbackImageHandler = (fallbackSrc: string) => (event: SyntheticEvent<HTMLImageElement>) => {
+  event.currentTarget.src = fallbackSrc;
 };
 
 const mergeItemsWithFallback = (loaded: MinistryItem[], fallback: MinistryItem[]) => {
@@ -240,12 +248,12 @@ const defaultEventItems: MinistryItem[] = [
 
 export default function HeritageMinistryPage() {
   // --- STATE ---
-  const [activeGalleryId, setActiveGalleryId] = useState<number | null>(null);
-  const [selectedEvent, setSelectedEvent] = useState<any | null>(null);
+  const [activeGalleryId, setActiveGalleryId] = useState<string | null>(null);
+  const [selectedEvent, setSelectedEvent] = useState<MinistryItem | null>(null);
   const [featuredEventIndex, setFeaturedEventIndex] = useState(0);
   const [ministryInfo, setMinistryInfo] = useState<MinistryInfo>(defaultMinistryInfo);
   const [ministryItems, setMinistryItems] = useState<MinistryItem[]>([]);
-  const [isLoading, setIsLoading] = useState(true);
+  const [, setIsLoading] = useState(true);
 
   // --- CYCLING EVENTS EFFECT ---
   useEffect(() => {
@@ -259,14 +267,17 @@ export default function HeritageMinistryPage() {
     async function loadContent() {
       try {
         const response = await apiFetch('/api/ministries/heritage/content');
-        if (response?.ministryInfo) {
+        const data = await response.json().catch(() => null);
+
+        if (data?.info) {
           setMinistryInfo({
             ...defaultMinistryInfo,
-            ...response.ministryInfo,
+            ...data.info,
           });
         }
-        if (response?.ministryItems) {
-          setMinistryItems(response.ministryItems.map((item: any) => ({
+
+        if (Array.isArray(data?.items)) {
+          setMinistryItems(data.items.map((item: MinistryItemApiResponse) => ({
             ...item,
             imageUrl: item.imageUrl || item.image || null,
           })));
@@ -288,6 +299,8 @@ export default function HeritageMinistryPage() {
   const focusAreas = mergeItemsWithFallback(loadedFocusItems, defaultFocusAreas);
   const highlightGalleryItems = mergeItemsWithFallback(loadedHighlightItems, defaultHighlightGallery);
   const eventList = mergeItemsWithFallback(loadedEventItems, defaultEventItems);
+  const aboutParagraphs = (ministryInfo.about || defaultMinistryInfo.about || '').split(/\n{2,}/).filter(Boolean);
+  const logoImageUrl = toAssetUrl(ministryInfo.logoImageUrl);
 
   const featuredGridEvent = eventList[featuredEventIndex % Math.max(1, eventList.length)];
   const remainingEvents = eventList.filter((_, idx) => idx !== featuredEventIndex % Math.max(1, eventList.length));
@@ -326,7 +339,7 @@ export default function HeritageMinistryPage() {
                   alt={selectedEvent.title}
                   fill
                   className="object-cover"
-                  onError={(e: any) => e.target.src = '/hero/hero-store.jpg'}
+                  onError={fallbackImageHandler('/hero/hero-store.jpg')}
                 />
               </div>
 
@@ -377,16 +390,18 @@ export default function HeritageMinistryPage() {
         <section className="relative pt-28 pb-20 sm:pt-36 sm:pb-28 bg-sky-500 text-white rounded-b-[36px] md:rounded-b-[48px] shadow-lg z-10">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
             <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-8 bg-white rounded-full p-2 shadow-xl border-4 border-white/20 flex items-center justify-center overflow-hidden">
-              <Image 
-                src={toAssetUrl(ministryInfo.logoImageUrl) || '/logo.png'} 
-                alt={ministryInfo.name || 'Heritage Ministry Logo'} 
-                fill 
-                className="object-contain p-2"
-                onError={(e: any) => e.target.src = '/logo.png'}
-              />
+              {logoImageUrl ? (
+                <Image
+                  src={logoImageUrl}
+                  alt={ministryInfo.name || 'Heritage Ministry Logo'}
+                  fill
+                  className="object-contain p-2"
+                  onError={fallbackImageHandler('/logo.png')}
+                />
+              ) : null}
             </div>
 
-            <p className="text-xs uppercase tracking-[0.35em] text-white/90 mb-3 font-bold drop-shadow-md">PICC Children's Church</p>
+            <p className="text-xs uppercase tracking-[0.35em] text-white/90 mb-3 font-bold drop-shadow-md">PICC Children&apos;s Church</p>
             <h1 className="text-4xl md:text-6xl lg:text-7xl font-black mb-6 tracking-tight drop-shadow-lg text-yellow-300">{ministryInfo.name || 'Heritage Ministry'}</h1>
             
             <div className="inline-block border-y border-white/30 py-3 px-8 mb-6 bg-black/10 rounded-3xl backdrop-blur-sm">
@@ -408,12 +423,13 @@ export default function HeritageMinistryPage() {
             <div className="max-w-4xl mx-auto text-center">
               <h2 className="text-3xl md:text-4xl font-bold mb-6 text-sky-800">Laying the Early Foundations of Faith</h2>
               <div className="w-20 h-2 bg-yellow-400 mx-auto mb-8 rounded-full" />
-              <p className="text-lg text-black/70 leading-relaxed mb-6">
-                {ministryInfo.about || defaultMinistryInfo.about}
-              </p>
-              <p className="text-lg text-black/70 leading-relaxed">
-                {ministryInfo.partnershipBody || defaultMinistryInfo.partnershipBody}
-              </p>
+              <div className="space-y-6">
+                {aboutParagraphs.map((paragraph) => (
+                  <p key={paragraph} className="text-lg text-black/70 leading-relaxed">
+                    {paragraph}
+                  </p>
+                ))}
+              </div>
             </div>
           </div>
         </section>
@@ -436,7 +452,7 @@ export default function HeritageMinistryPage() {
                     alt={ministryInfo.partnershipTitle || 'Heritage Support'}
                     fill
                     className="object-cover"
-                    onError={(e: any) => e.target.src = '/images/youth-church/img-6.jpg'}
+                    onError={fallbackImageHandler('/images/youth-church/img-6.jpg')}
                   />
                 </div>
               </div>
@@ -522,7 +538,7 @@ export default function HeritageMinistryPage() {
                     alt={item.title || `Gallery Highlight ${item.id}`} 
                     fill 
                     className={`object-cover transition-transform duration-700 ease-in-out ${activeGalleryId === item.id ? 'scale-110' : 'group-hover:scale-105'}`}
-                    onError={(e: any) => e.target.src = '/hero/hero-store.jpg'} 
+                    onError={fallbackImageHandler('/hero/hero-store.jpg')} 
                   />
                   
                   <AnimatePresence>
@@ -577,7 +593,7 @@ export default function HeritageMinistryPage() {
                       alt={featuredGridEvent.title}
                       fill
                       className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      onError={(e: any) => e.target.src = '/hero/hero-store.jpg'}
+                      onError={fallbackImageHandler('/hero/hero-store.jpg')}
                     />
                     <div className="absolute inset-0 bg-gradient-to-t from-sky-900/90 via-sky-900/30 to-transparent flex flex-col justify-end p-8">
                       <span className="bg-yellow-400 text-sky-900 text-xs font-black uppercase tracking-wider py-1.5 px-4 rounded-full w-fit mb-3 shadow-sm">
@@ -612,7 +628,7 @@ export default function HeritageMinistryPage() {
                       alt={event.title}
                       fill
                       className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      onError={(e: any) => e.target.src = '/hero/hero-store.jpg'}
+                      onError={fallbackImageHandler('/hero/hero-store.jpg')}
                     />
                     <div className="absolute inset-0 bg-sky-900/60 group-hover:bg-sky-900/40 transition-colors duration-300 flex flex-col justify-end p-4">
                       <span className="text-yellow-300 text-[10px] font-black uppercase tracking-wider mb-1">
@@ -632,9 +648,9 @@ export default function HeritageMinistryPage() {
         <section className="py-20 bg-white text-black border-b border-black/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
             <Globe className="w-12 h-12 mx-auto text-sky-500 mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-sky-900">Parent's Noticeboard</h2>
+            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-sky-900">Parent&apos;s Noticeboard</h2>
             <p className="text-lg text-black/70 max-w-2xl mx-auto mb-8 font-medium">
-              Parents, please remember that check-in for all classes begins 15 minutes before the main church service starts. The new curriculum workbooks for Heritage Kids are now available at the children's welcome desk!
+              Parents, please remember that check-in for all classes begins 15 minutes before the main church service starts. The new curriculum workbooks for Heritage Kids are now available at the children&apos;s welcome desk!
             </p>
           </div>
         </section>

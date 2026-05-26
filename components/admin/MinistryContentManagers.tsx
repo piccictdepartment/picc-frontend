@@ -5,6 +5,7 @@ import Image from 'next/image';
 import { Loader2, Plus, Save, Trash2 } from 'lucide-react';
 import { apiFetch, apiUrl } from '@/lib/api';
 import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
 
 export type PartnershipDetail = {
   label: string;
@@ -665,7 +666,6 @@ export function MinistryItemsManager({
       setStatus('Fallback items cannot be deleted. Save it first if you want to customize it.');
       return;
     }
-    if (!confirm('Delete this item?')) return;
 
     try {
       const response = await apiFetch(`${baseUrl}/items/${encodeURIComponent(item.id)}`, {
@@ -682,6 +682,29 @@ export function MinistryItemsManager({
     } catch {
       setStatus('Unable to delete item.');
     }
+  };
+
+  const requestRemove = (item: MinistryItem) => {
+    if (item.isFallback) {
+      setStatus('Fallback items cannot be deleted. Save it first if you want to customize it.');
+      return;
+    }
+
+    const toastId = toast('Delete this item?', {
+      description: item.title,
+      duration: Infinity,
+      action: {
+        label: 'Delete',
+        onClick: () => {
+          toast.dismiss(toastId);
+          void remove(item);
+        },
+      },
+      cancel: {
+        label: 'Cancel',
+        onClick: () => toast.dismiss(toastId),
+      },
+    });
   };
 
   if (isLoading && items.length === 0) {
@@ -760,6 +783,19 @@ export function MinistryItemsManager({
                   <p className="break-all px-3 py-2 text-xs text-foreground/50">{draft.imageUrl}</p>
                 </div>
               ) : null}
+              {draft.imageUrl ? (
+                <Button
+                  type="button"
+                  variant="outline"
+                  className="mt-3"
+                  onClick={() => {
+                    setDraft((prev) => ({ ...prev, imageUrl: '' }));
+                    setStatus(`${labels?.image || 'Image'} removed. Save changes to publish it.`);
+                  }}
+                >
+                  Remove Image
+                </Button>
+              ) : null}
             </div>
           )}
 
@@ -778,7 +814,7 @@ export function MinistryItemsManager({
               {saveButtonText}
             </Button>
             {isPersistedEdit && editingItem ? (
-              <Button variant="destructive" onClick={() => remove(editingItem)} className="gap-2">
+              <Button variant="destructive" onClick={() => requestRemove(editingItem)} className="gap-2">
                 <Trash2 className="h-4 w-4" />
                 Delete
               </Button>
