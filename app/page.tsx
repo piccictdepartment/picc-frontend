@@ -739,6 +739,14 @@ export default async function HomePage() {
               fallbackTitle={VIDEO_DECLARATION_FALLBACK_TITLE}
               fallbackSubtitle={VIDEO_DECLARATION_FALLBACK_SUBTITLE}
             />
+            <div className="mt-8 text-center">
+              <Link
+                href="/video-declarations"
+                className="inline-flex items-center justify-center rounded-full border border-white/40 bg-white px-6 py-3 text-sm font-semibold text-primary shadow-lg transition hover:bg-white/90"
+              >
+                View Video Declarations Archive
+              </Link>
+            </div>
           </div>
         </section>
         {/* Moments Section */}

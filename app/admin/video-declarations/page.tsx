@@ -82,6 +82,7 @@ export default function VideoDeclarationsAdminPage() {
   const [uploadName, setUploadName] = useState('');
   const [isUploading, setIsUploading] = useState(false);
   const [isSaving, setIsSaving] = useState(false);
+  const [archive, setArchive] = useState<Array<DeclarationContent & { id: string; createdAt: string }>>([]);
 
   const youtubeEmbedUrl = useMemo(
     () => (draft.source === 'youtube' ? getYouTubeEmbedUrl(draft.mediaUrl) : ''),
@@ -116,6 +117,26 @@ export default function VideoDeclarationsAdminPage() {
     };
 
     void loadContent();
+  }, [token]);
+
+  const loadArchive = async () => {
+    if (!token) return;
+
+    try {
+      const response = await apiFetch('/api/admin/video-declarations', {
+        headers: { Authorization: `Bearer ${token}` },
+      });
+      if (!response.ok) return;
+      const data = await response.json().catch(() => null);
+      setArchive(Array.isArray(data?.declarations) ? data.declarations : []);
+    } catch {
+      // Archive history is helpful, but it should not block editing the current declaration.
+    }
+  };
+
+  useEffect(() => {
+    void loadArchive();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [token]);
 
   const uploadMedia = async (file: File) => {
@@ -181,17 +202,13 @@ export default function VideoDeclarationsAdminPage() {
         mediaUrl: draft.mediaUrl.trim(),
       };
 
-      const response = await apiFetch(`/api/site-content/${CONTENT_KEY}`, {
+      const response = await apiFetch('/api/video-declarations', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${token}`,
         },
-        body: JSON.stringify({
-          title: payload.title,
-          subtitle: payload.subtitle,
-          body: JSON.stringify(payload),
-        }),
+        body: JSON.stringify(payload),
       });
 
       if (!response.ok) {
@@ -202,6 +219,7 @@ export default function VideoDeclarationsAdminPage() {
       setDraft(payload);
       setUploadName('');
       setStatus('Video declaration saved.');
+      await loadArchive();
     } catch {
       setStatus('Unable to save video declaration.');
     } finally {
@@ -400,6 +418,29 @@ export default function VideoDeclarationsAdminPage() {
           </div>
         </div>
       </div>
+
+      {archive.length > 0 && (
+        <div className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
+          <h2 className="text-xl font-semibold text-foreground">Archive History</h2>
+          <div className="mt-4 divide-y divide-border/60">
+            {archive.slice(0, 8).map((item) => (
+              <div key={item.id} className="flex flex-col gap-1 py-3 sm:flex-row sm:items-center sm:justify-between">
+                <div>
+                  <p className="font-medium text-foreground">{item.title}</p>
+                  <p className="text-xs text-foreground/60">{item.subtitle || FALLBACK_SUBTITLE}</p>
+                </div>
+                <p className="text-xs text-foreground/50">
+                  {new Intl.DateTimeFormat('en-US', {
+                    month: 'short',
+                    day: 'numeric',
+                    year: 'numeric',
+                  }).format(new Date(item.createdAt))}
+                </p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
     </div>
   );
 }
