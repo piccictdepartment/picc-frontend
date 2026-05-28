@@ -128,6 +128,7 @@ type VideoDeclaration = VideoDeclarationCardContent;
 const VIDEO_DECLARATION_KEY = 'home-video-declaration';
 const VIDEO_DECLARATION_FALLBACK_TITLE = "Listen to God's Word for You.";
 const VIDEO_DECLARATION_FALLBACK_SUBTITLE = 'Video Declaration';
+const REMOVED_IMAGE_VALUE = '__removed__';
 
 function parseSeeYouServices(body?: string | null): ServiceLike[] {
   if (!body) return DEFAULT_SEE_YOU_SERVICES;
@@ -307,10 +308,16 @@ async function getHomeVerse() {
 function normalizeImageUrl(url?: string | null) {
   const trimmed = url?.trim();
   if (!trimmed) return null;
+  if (trimmed === REMOVED_IMAGE_VALUE) return null;
   if (trimmed.startsWith('http')) return trimmed;
   if (trimmed.startsWith('/uploads')) return apiUrl(trimmed);
   if (trimmed === '/home/see-you-in-church.jpg') return '/home/see-you-in-church.JPG';
   return trimmed;
+}
+
+function resolveSiteImage(url: string | null | undefined, fallback: string) {
+  if (url === REMOVED_IMAGE_VALUE) return null;
+  return normalizeImageUrl(url) || fallback;
 }
 
 function isLocalUpstreamImage(url?: string | null) {
@@ -364,20 +371,20 @@ export default async function HomePage() {
   const quoteImageUrl = normalizeImageUrl(quoteOfMonth?.imageUrl);
   const heroImages = HOME_HERO_SLOTS.map((slot) => ({
     ...slot,
-    src: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
+    src: resolveSiteImage(siteImages[slot.key], slot.fallback),
   }));
-  const missionImage = normalizeImageUrl(siteImages['home-mission-image']) || '/images/pastor-preaching-bw.jpeg';
+  const missionImage = resolveSiteImage(siteImages['home-mission-image'], '/images/pastor-preaching-bw.jpeg');
   const growCards = GROW_CARD_SLOTS.map((slot) => ({
     ...slot,
-    image: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
+    image: resolveSiteImage(siteImages[slot.key], slot.fallback),
   }));
-  const pastorsImage = normalizeImageUrl(siteImages['home-pastors-image']) || '/images/pastor-preaching-bw.jpeg';
-  const listenNowImage = normalizeImageUrl(siteImages['home-listen-now-bg']) || '/pastor/pastor-photo.jpg';
+  const pastorsImage = resolveSiteImage(siteImages['home-pastors-image'], '/images/pastor-preaching-bw.jpeg');
+  const listenNowImage = resolveSiteImage(siteImages['home-listen-now-bg'], '/pastor/pastor-photo.jpg');
   const ministryCards = MINISTRY_CARDS.map((slot) => ({
     ...slot,
-    image: normalizeImageUrl(siteImages[slot.key]) || slot.fallback,
+    image: resolveSiteImage(siteImages[slot.key], slot.fallback),
   }));
-  const livestreamImage = normalizeImageUrl(siteImages['home-livestream-bg']) || '/hero/hero-15.png';
+  const livestreamImage = resolveSiteImage(siteImages['home-livestream-bg'], '/hero/hero-15.png');
   const fallbackDevotion = {
     title: 'God Is Good',
     content: [
@@ -421,16 +428,20 @@ export default async function HomePage() {
           <div className="absolute inset-0 hero-collage p-2 sm:p-3 md:p-4" aria-hidden="true">
             <div className="grid h-full w-full grid-cols-2 md:grid-cols-6 grid-rows-3 md:grid-rows-3 gap-2 sm:gap-3 md:gap-4">
               {heroImages.map((item, index) => (
-                <div key={item.src} className={`${item.className} relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)]`}>
-                  <Image
-                    src={item.src}
-                    alt={`PICC hero background ${index + 1}`}
-                    fill
-                    sizes="(max-width: 768px) 50vw, 33vw"
-                    priority={index < 2}
-                    className="object-cover"
-                    unoptimized={isLocalUpstreamImage(item.src)}
-                  />
+                <div key={item.key} className={`${item.className} relative overflow-hidden rounded-2xl shadow-[0_20px_60px_rgba(0,0,0,0.35)]`}>
+                  {item.src ? (
+                    <Image
+                      src={item.src}
+                      alt={`PICC hero background ${index + 1}`}
+                      fill
+                      sizes="(max-width: 768px) 50vw, 33vw"
+                      priority={index < 2}
+                      className="object-cover"
+                      unoptimized={isLocalUpstreamImage(item.src)}
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-primary/20" />
+                  )}
                 </div>
               ))}
             </div>
@@ -544,14 +555,18 @@ export default async function HomePage() {
                 <Link key={card.href} href={card.href}>
                   <div className="group block rounded-2xl overflow-hidden relative h-56 sm:h-64 md:h-72 lg:h-80 cursor-pointer">
                     <div className="absolute inset-0">
-                      <Image
-                        src={card.image}
-                        alt={card.title}
-                        fill
-                        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                        className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-105"
-                        unoptimized={isLocalUpstreamImage(card.image)}
-                      />
+                        {card.image ? (
+                          <Image
+                            src={card.image}
+                            alt={card.title}
+                            fill
+                            sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                            className="object-cover w-full h-full transform transition-transform duration-500 group-hover:scale-105"
+                            unoptimized={isLocalUpstreamImage(card.image)}
+                          />
+                        ) : (
+                          <div className="h-full w-full bg-primary/20" />
+                        )}
                     </div>
 
                     {/* dim overlay */}
@@ -600,14 +615,18 @@ export default async function HomePage() {
                 </p>
               </div>
               <div className="relative aspect-[4/3] rounded-[28px] overflow-hidden shadow-2xl bg-white/5">
-                <Image
-                  src={pastorsImage}
-                  alt="Pastor Esau Banda and Pastor Loyce Banda"
-                  fill
-                  sizes="(max-width: 768px) 100vw, 50vw"
-                  className="object-cover object-top"
-                  unoptimized={isLocalUpstreamImage(pastorsImage)}
-                />
+                {pastorsImage ? (
+                  <Image
+                    src={pastorsImage}
+                    alt="Pastor Esau Banda and Pastor Loyce Banda"
+                    fill
+                    sizes="(max-width: 768px) 100vw, 50vw"
+                    className="object-cover object-top"
+                    unoptimized={isLocalUpstreamImage(pastorsImage)}
+                  />
+                ) : (
+                  <div className="flex h-full items-center justify-center bg-white/10 text-white/60">Image removed</div>
+                )}
               </div>
             </div>
           </div>
@@ -618,14 +637,18 @@ export default async function HomePage() {
           <div className="w-full px-4 sm:px-6 lg:px-8">
             <div className="relative overflow-hidden rounded-[28px] group">
               <div className="absolute inset-0">
-                <Image
-                  src={listenNowImage}
-                  alt="Listen now background"
-                  fill
-                  sizes="100vw"
-                  className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
-                  unoptimized={isLocalUpstreamImage(listenNowImage)}
-                />
+                {listenNowImage ? (
+                  <Image
+                    src={listenNowImage}
+                    alt="Listen now background"
+                    fill
+                    sizes="100vw"
+                    className="object-cover group-hover:scale-[1.02] transition-transform duration-500"
+                    unoptimized={isLocalUpstreamImage(listenNowImage)}
+                  />
+                ) : (
+                  <div className="h-full w-full bg-primary/20" />
+                )}
               </div>
               <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
 
@@ -707,13 +730,17 @@ export default async function HomePage() {
                   className="block relative min-w-[70vw] w-[70vw] sm:min-w-[44vw] sm:w-[44vw] md:min-w-[320px] md:w-[320px] lg:min-w-[340px] lg:w-[340px] h-[200px] sm:h-[240px] md:h-[300px] rounded-2xl overflow-hidden shadow-xl"
                   aria-label={item.title}
                 >
-                  <Image
-                    src={item.image}
-                    alt={item.title}
-                    fill
-                    sizes="(max-width: 640px) 70vw, (max-width: 1024px) 44vw, 340px"
-                    className="object-cover"
-                  />
+                  {item.image ? (
+                    <Image
+                      src={item.image}
+                      alt={item.title}
+                      fill
+                      sizes="(max-width: 640px) 70vw, (max-width: 1024px) 44vw, 340px"
+                      className="object-cover"
+                    />
+                  ) : (
+                    <div className="h-full w-full bg-primary/20" />
+                  )}
                   <div className="absolute inset-0 bg-black/35" />
                   <div className="absolute inset-0 p-5 flex flex-col justify-end">
                     <p className="text-white text-base sm:text-lg md:text-xl font-semibold">{item.title}</p>
@@ -735,7 +762,7 @@ export default async function HomePage() {
             <VideoDeclarationCard
               key={videoDeclaration?.mediaUrl || 'fallback-video-declaration'}
               declaration={videoDeclaration}
-              fallbackImage={livestreamImage}
+              fallbackImage={livestreamImage || '/hero/hero-15.png'}
               fallbackTitle={VIDEO_DECLARATION_FALLBACK_TITLE}
               fallbackSubtitle={VIDEO_DECLARATION_FALLBACK_SUBTITLE}
             />
