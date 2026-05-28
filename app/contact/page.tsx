@@ -25,6 +25,7 @@ type ServiceRecord = {
 export default function ContactPage() {
   const [pageImages, setPageImages] = useState<Record<string, string>>({});
   const [services, setServices] = useState<ServiceRecord[]>([]);
+  const [servicesLoading, setServicesLoading] = useState(true);
   const familySlides = [
     ['/moments/1.jpg', '/moments/2.jpg', '/moments/3.jpg'],
     ['/moments/4.jpg', '/moments/5.jpg', '/moments/6.jpg'],
@@ -80,6 +81,8 @@ export default function ContactPage() {
   }, []);
 
   useEffect(() => {
+    let cancelled = false;
+
     const loadServices = async () => {
       try {
         const response = await apiFetch('/api/services');
@@ -93,13 +96,23 @@ export default function ContactPage() {
               : service.startTime
             : service.time || '',
         }));
+        if (cancelled) return;
         setServices(normalized);
       } catch {
+        if (cancelled) return;
         setServices([]);
+      } finally {
+        if (!cancelled) {
+          setServicesLoading(false);
+        }
       }
     };
 
     loadServices();
+
+    return () => {
+      cancelled = true;
+    };
   }, []);
 
   const resolveImage = (key: string, fallback: string) => pageImages[key] || fallback;
@@ -116,17 +129,22 @@ export default function ContactPage() {
     'Every Thursday - Special Word Encounter - 6:00 PM - 8:00 PM',
   ];
 
-  const serviceLines = services.length
-    ? services
-      .map((service) => {
+  const loadedServiceLines = services
+    .map((service) => {
         const title = String(service.title || '').trim();
         const day = String(service.dayOfWeek || '').trim();
         const time = String(service.time || '').trim();
         const lineTitle = day ? `${day} - ${title || 'Service'}` : title || 'Service';
         return time ? `${lineTitle} - ${time}` : lineTitle;
       })
-      .filter(Boolean)
-    : DEFAULT_SERVICE_LINES;
+    .filter(Boolean);
+
+  const serviceLines = servicesLoading
+    ? []
+    : [...loadedServiceLines, ...DEFAULT_SERVICE_LINES].filter((line, index, lines) => {
+      const normalized = line.toLowerCase().replace(/\s+/g, ' ').trim();
+      return lines.findIndex((item) => item.toLowerCase().replace(/\s+/g, ' ').trim() === normalized) === index;
+    });
 
   const serviceLineItems = serviceLines.map((line, index) => ({
     id: `service-line-${index}`,
@@ -285,18 +303,22 @@ export default function ContactPage() {
                   <p className="text-[11px] tracking-[0.24em] uppercase text-foreground/60 font-bold mb-3">
                     Service Times:
                   </p>
-                  <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-foreground/80">
-                    <div className="space-y-2">
-                      {leftServiceLines.map((item) => (
-                        <p key={item.id}>{item.line}</p>
-                      ))}
+                  {servicesLoading ? (
+                    <p className="text-foreground/60">Loading service times...</p>
+                  ) : (
+                    <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 text-foreground/80">
+                      <div className="space-y-2">
+                        {leftServiceLines.map((item) => (
+                          <p key={item.id}>{item.line}</p>
+                        ))}
+                      </div>
+                      <div className="space-y-2">
+                        {rightServiceLines.map((item) => (
+                          <p key={item.id}>{item.line}</p>
+                        ))}
+                      </div>
                     </div>
-                    <div className="space-y-2">
-                      {rightServiceLines.map((item) => (
-                        <p key={item.id}>{item.line}</p>
-                      ))}
-                    </div>
-                  </div>
+                  )}
                   <div className="mt-4">
                     <Link href="/locations" className="underline underline-offset-4 text-foreground">
                       Locate A Branch Near You

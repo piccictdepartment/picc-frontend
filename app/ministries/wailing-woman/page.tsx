@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, type FormEvent } from 'react';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
@@ -9,7 +9,7 @@ import { Card } from '@/components/ui/card';
 import { 
   ChevronLeft, ChevronRight, MapPin, 
   Phone, Mail, CalendarClock, BookOpen, StickyNote, Globe, 
-  Target, MessageCircle, X, CreditCard, Landmark, Wallet
+  Target, MessageCircle, X, CreditCard, Landmark, Wallet, Search
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -24,7 +24,6 @@ import BibleTool from '@/components/livestream/BibleTool';
 // --- TYPES & GLOBALS ---
 declare global {
   interface Window {
-    YT: any;
     onYouTubeIframeAPIReady?: () => void;
   }
 }
@@ -45,14 +44,14 @@ type YouTubeVideo = {
   canEmbed?: boolean;
 };
 
-type YouTubePlayer = {
+type LivestreamYouTubePlayer = {
   pauseVideo: () => void;
   getCurrentTime?: () => number;
 };
 
 type YouTubePlayerStateChangeEvent = {
   data: number;
-  target: YouTubePlayer;
+  target: LivestreamYouTubePlayer;
 };
 
 const CHANNEL_ID = "UC5iA3dWaUBlP_PBlGSQvgNQ";
@@ -107,13 +106,13 @@ const highlightGallery = [
 ];
 
 const publishedMaterials = [
-  { id: 1, type: 'Prosperity Arrows For My Seed', title: '18 May 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-18-may.jpg' },
-  { id: 2, type: 'Prosperity Arrows For My Seed', title: '11 May 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-11-may.jpg' },
-  { id: 3, type: 'Prosperity Arrows For My Seed', title: '27 April 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-27-apr.jpg' },
-  { id: 4, type: 'Prosperity Arrows For My Seed', title: '20 April 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-20-apr.jpg' },
-  { id: 5, type: 'Prosperity Arrows For My Seed', title: '13 April 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-13-apr.jpg' },
-  { id: 6, type: 'Prosperity Arrows For My Seed', title: '06 April 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-6-apr.jpg' },
-  { id: 7, type: 'Prosperity Arrows For My Seed', title: '30 March 2026 Confession', image: '/ministries/wailing-woman/pp-arrow-30-mar.jpg' },
+  { id: 1, type: 'Prosperity Arrows For My Seed', title: '18 May 2026 Confession', date: '2026-05-18', image: '/ministries/wailing-woman/pp-arrow-18-may.jpg' },
+  { id: 2, type: 'Prosperity Arrows For My Seed', title: '11 May 2026 Confession', date: '2026-05-11', image: '/ministries/wailing-woman/pp-arrow-11-may.jpg' },
+  { id: 3, type: 'Prosperity Arrows For My Seed', title: '27 April 2026 Confession', date: '2026-04-27', image: '/ministries/wailing-woman/pp-arrow-27-apr.jpg' },
+  { id: 4, type: 'Prosperity Arrows For My Seed', title: '20 April 2026 Confession', date: '2026-04-20', image: '/ministries/wailing-woman/pp-arrow-20-apr.jpg' },
+  { id: 5, type: 'Prosperity Arrows For My Seed', title: '13 April 2026 Confession', date: '2026-04-13', image: '/ministries/wailing-woman/pp-arrow-13-apr.jpg' },
+  { id: 6, type: 'Prosperity Arrows For My Seed', title: '06 April 2026 Confession', date: '2026-04-06', image: '/ministries/wailing-woman/pp-arrow-6-apr.jpg' },
+  { id: 7, type: 'Prosperity Arrows For My Seed', title: '30 March 2026 Confession', date: '2026-03-30', image: '/ministries/wailing-woman/pp-arrow-30-mar.jpg' },
 ];
 
 export default function WailingWomenPage() {
@@ -134,7 +133,9 @@ export default function WailingWomenPage() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [mobileResumeAt, setMobileResumeAt] = useState<number | null>(null);
-  const playersRef = useRef<Map<string, YouTubePlayer>>(new Map());
+  const [arrowSearchInput, setArrowSearchInput] = useState('');
+  const [arrowSearchQuery, setArrowSearchQuery] = useState('');
+  const playersRef = useRef<Map<string, LivestreamYouTubePlayer>>(new Map());
 
   const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
   const featuredVideo = videos[0] || null;
@@ -355,17 +356,19 @@ export default function WailingWomenPage() {
       const videoId = iframe.dataset.ytId;
       if (!videoId || players.has(videoId)) return;
       const player = new yt.Player(iframe, {
+        videoId,
         events: {
-          onStateChange: (event: any) => {
+          onStateChange: (event) => {
+            const stateChangeEvent = event as YouTubePlayerStateChangeEvent;
             if (event.data === yt.PlayerState.PLAYING) {
               players.forEach((p) => {
-                if (p !== event.target) p.pauseVideo();
+                if (p !== stateChangeEvent.target) p.pauseVideo();
               });
             }
           },
         },
       });
-      players.set(videoId, player);
+      players.set(videoId, player as unknown as LivestreamYouTubePlayer);
     });
   }, [ytReady, activeTool]);
 
@@ -407,6 +410,28 @@ export default function WailingWomenPage() {
   // Derived properties for Prosperity Arrows splitting logic
   const mainArrow = publishedMaterials[0];
   const sideArrows = publishedMaterials.slice(1);
+  const visibleSideArrows = arrowSearchQuery
+    ? publishedMaterials.filter((arrow) => {
+        const searchableText = [
+          arrow.title,
+          arrow.type,
+          arrow.date,
+          formatDate(arrow.date),
+        ].join(' ').toLowerCase();
+
+        return searchableText.includes(arrowSearchQuery.toLowerCase());
+      })
+    : sideArrows;
+
+  const handleArrowSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setArrowSearchQuery(arrowSearchInput.trim());
+  };
+
+  const clearArrowSearch = () => {
+    setArrowSearchInput('');
+    setArrowSearchQuery('');
+  };
 
   return (
     <>
@@ -661,11 +686,39 @@ export default function WailingWomenPage() {
 
                 {/* Smaller Side Confessions Sidebar with strict height constraint and vertical scrolling */}
                 <div className="flex flex-col h-full">
-                  <span className="text-xs font-bold uppercase tracking-wider text-purple-700 mb-3 hidden lg:block">Previous Arrows</span>
+                  <div className="mb-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+                    <span className="text-xs font-bold uppercase tracking-wider text-purple-700">Previous Arrows</span>
+                    <form onSubmit={handleArrowSearch} className="flex items-center gap-2">
+                      <input
+                        type="search"
+                        value={arrowSearchInput}
+                        onChange={(event) => setArrowSearchInput(event.target.value)}
+                        placeholder="21 may"
+                        className="h-9 min-w-0 rounded-lg border border-gray-200 bg-white px-3 text-xs font-medium text-gray-700 outline-none transition placeholder:text-gray-400 focus:border-purple-400 focus:ring-2 focus:ring-purple-100"
+                        aria-label="Search previous arrows"
+                      />
+                      <button
+                        type="submit"
+                        className="inline-flex h-9 items-center gap-1 rounded-lg bg-purple-700 px-3 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-purple-800 focus:outline-none focus:ring-2 focus:ring-purple-200"
+                      >
+                        <Search className="h-3.5 w-3.5" />
+                        Search
+                      </button>
+                    </form>
+                  </div>
+                  {arrowSearchQuery && (
+                    <button
+                      type="button"
+                      onClick={clearArrowSearch}
+                      className="mb-3 w-fit text-xs font-semibold text-purple-700 hover:text-purple-900"
+                    >
+                      Clear search
+                    </button>
+                  )}
                   
                   {/* Restricts desktop view to show 4 rows smoothly (~370px) before turning into an active scrollbar */}
                   <div className="flex lg:flex-col gap-3 overflow-x-auto lg:overflow-x-hidden lg:overflow-y-auto lg:max-h-[460px] pb-4 lg:pb-0 scrollbar-thin scrollbar-thumb-purple-200 pr-1 snap-x">
-                    {sideArrows.map((arrow) => (
+                    {visibleSideArrows.map((arrow) => (
                       <div 
                         key={arrow.id}
                         onClick={() => setSelectedArrowImage(arrow.image)}
@@ -681,6 +734,11 @@ export default function WailingWomenPage() {
                         </div>
                       </div>
                     ))}
+                    {visibleSideArrows.length === 0 && (
+                      <div className="w-64 sm:w-72 lg:w-full rounded-2xl border border-dashed border-purple-200 bg-white p-5 text-sm text-gray-500">
+                        No Prosperity Arrows found for this search.
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
