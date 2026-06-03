@@ -336,7 +336,7 @@ export default function MenOfValourPage() {
   const playersRef = useRef<Map<string, YouTubePlayer>>(new Map());
 
   // --- LIVESTREAM CONSTANTS ---
-  const PASTOR_ESAU_BANDA_CHANNEL_ID = "UC5iA3dWaUBlP_PBlGSQvgNQ";
+  const PASTOR_ESAU_BANDA_CHANNEL_ID = "UC-v_ov21EZf8f";
   const FALLBACK_HERO_ID = videoIdFromUrl(ministryInfo.liveSessionYoutubeUrl) || "ydTADwZRquA";
   const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
 
@@ -348,7 +348,7 @@ export default function MenOfValourPage() {
     events: ministryItems.filter((item) => item.category === 'event'),
   };
   const aboutCards = mergeItemsWithFallback(itemGroups.cards, defaultCards);
-  const brotherhoodItems = mergeItemsWithFallback(itemGroups.brotherhood, defaultBrotherhoodItems);
+  const brotherhoodItems = mergeItemsWithFallback(itemGroups.brotherhood, defaultBrotherhoodItems).slice(0, 6);
   const galleryItems = brotherhoodItems.map((item, index) => ({
     id: index + 1,
     src: toAssetUrl(item.imageUrl) || highlightGallery[index % highlightGallery.length]?.src || '/hero/hero-store.jpg',
@@ -535,7 +535,7 @@ export default function MenOfValourPage() {
           .filter((item) => item.title);
 
         if (isMounted && items.length > 0) {
-          setNewsItems(items);
+          setNewsItems(items.slice(0, MEN_OF_VALOUR_NEWS_ITEMS.length));
         }
       } catch {
         // Keep fallback news.

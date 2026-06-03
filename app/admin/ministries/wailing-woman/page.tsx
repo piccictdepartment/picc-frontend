@@ -190,6 +190,7 @@ export default function WailingWomanAdminPage() {
           labels={{ title: 'Picture Title', description: 'Caption', image: 'Gallery Picture', save: 'Save Picture', formTitle: 'Save Highlight' }}
           showLabel={false}
           showSortOrder={false}
+          maxItems={6}
         />
       )}
 

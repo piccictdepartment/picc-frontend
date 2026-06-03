@@ -333,7 +333,7 @@ export default function RiversOfHopePage() {
     events: ministryItems.filter((item) => item.category === 'event'),
   };
   const programItems = mergeItemsWithFallback(itemGroups.programs, defaultProgramItems);
-  const galleryItems = mergeItemsWithFallback(itemGroups.highlights, defaultHighlightItems).map((item, index) => ({
+  const galleryItems = mergeItemsWithFallback(itemGroups.highlights, defaultHighlightItems).slice(0, 6).map((item, index) => ({
     id: index + 1,
     src: toAssetUrl(item.imageUrl) || highlightGallery[index % highlightGallery.length]?.src || '/hero/hero-store.jpg',
     caption: item.description || item.title,

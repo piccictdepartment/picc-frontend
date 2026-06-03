@@ -93,6 +93,7 @@ export default function SiteNewsManager({
   fallbackItems,
   imageHelpText = 'Use existing ministry news photos or upload a replacement image.',
   imagePlaceholder = '/ministries/youth-church/news-1.JPG',
+  maxItems,
 }: {
   token: string;
   contentKey: string;
@@ -101,6 +102,7 @@ export default function SiteNewsManager({
   fallbackItems: NewsSectionItem[];
   imageHelpText?: string;
   imagePlaceholder?: string;
+  maxItems?: number;
 }) {
   const fallbackNews = useMemo<EditableNewsItem[]>(
     () =>
@@ -128,6 +130,11 @@ export default function SiteNewsManager({
   };
 
   const saveAll = async (nextItems: EditableNewsItem[]) => {
+    if (typeof maxItems === 'number' && nextItems.length > maxItems) {
+      setStatus(`Only ${maxItems} news items can be shown on this page. Delete one before adding another.`);
+      return false;
+    }
+
     const response = await apiFetch(`/api/site-content/${contentKey}`, {
       method: 'POST',
       headers: {
@@ -169,7 +176,8 @@ export default function SiteNewsManager({
                 ? item.image
                 : '',
         }));
-      setItems(loaded.length > 0 ? loaded : fallbackNews);
+      const nextItems = loaded.length > 0 ? loaded : fallbackNews;
+      setItems(typeof maxItems === 'number' ? nextItems.slice(0, maxItems) : nextItems);
     } catch {
       setStatus('Unable to load news.');
       setItems(fallbackNews);
@@ -196,6 +204,10 @@ export default function SiteNewsManager({
   };
 
   const save = async () => {
+    if (!editingId && typeof maxItems === 'number' && items.length >= maxItems) {
+      setStatus(`Only ${maxItems} news items can be shown on this page. Delete one before adding another.`);
+      return;
+    }
     if (!draft.title.trim()) {
       setStatus('Please add a news title.');
       return;
@@ -265,7 +277,7 @@ export default function SiteNewsManager({
         <p className="mt-1 text-sm text-foreground/70">{description}</p>
       </div>
       {status ? (
-        <div className={`rounded-xl p-4 text-sm ${status.includes('Unable') || status.includes('Please') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>
+        <div className={`rounded-xl p-4 text-sm ${status.includes('Unable') || status.includes('Please') || status.includes('Only') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>
           {status}
         </div>
       ) : null}
@@ -273,11 +285,16 @@ export default function SiteNewsManager({
         <div className="space-y-5 rounded-2xl border border-border/60 bg-card p-6 shadow-sm">
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
-              <h3 className="text-lg font-semibold text-foreground">{editingId ? 'Edit News Item' : 'Create News Item'}</h3>
-              <p className="text-sm text-foreground/60">{imageHelpText}</p>
-            </div>
-            {editingId ? (
-              <Button variant="outline" onClick={resetDraft}>
+                  <h3 className="text-lg font-semibold text-foreground">{editingId ? 'Edit News Item' : 'Create News Item'}</h3>
+                  <p className="text-sm text-foreground/60">{imageHelpText}</p>
+                  {typeof maxItems === 'number' ? (
+                    <p className={`mt-2 text-xs font-semibold ${items.length >= maxItems ? 'text-destructive' : 'text-primary'}`}>
+                      {Math.min(items.length, maxItems)} / {maxItems} news items used. {items.length >= maxItems ? 'Delete one before adding another.' : `Up to ${maxItems} news items can be shown.`}
+                    </p>
+                  ) : null}
+                </div>
+                {editingId ? (
+              <Button variant="outline" onClick={resetDraft} disabled={typeof maxItems === 'number' && items.length >= maxItems}>
                 New Item
               </Button>
             ) : null}
@@ -349,7 +366,7 @@ export default function SiteNewsManager({
             </div>
           </div>
           <div className="flex flex-wrap gap-3 border-t border-border/60 pt-4">
-            <Button onClick={save} className="gap-2">
+            <Button onClick={save} className="gap-2" disabled={!editingId && typeof maxItems === 'number' && items.length >= maxItems}>
               <Save className="h-4 w-4" />
               {editingId ? 'Save News Item' : 'Add News Item'}
             </Button>

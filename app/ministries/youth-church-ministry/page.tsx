@@ -401,7 +401,7 @@ export default function YouthChurchMinistryPage() {
     events: ministryItems.filter((item) => item.category === 'event'),
   };
   const armItems = mergeItemsWithFallback(itemGroups.arms, defaultArmItems);
-  const youthLifeItems = mergeItemsWithFallback(itemGroups.youthLife, defaultYouthLifeItems);
+  const youthLifeItems = mergeItemsWithFallback(itemGroups.youthLife, defaultYouthLifeItems).slice(0, 6);
   const galleryItems = youthLifeItems.map((item, index) => ({
     id: index + 1,
     src: toAssetUrl(item.imageUrl) || highlightGallery[index % highlightGallery.length]?.src || '/hero/hero-store.jpg',
@@ -721,7 +721,7 @@ export default function YouthChurchMinistryPage() {
           .filter((item) => item.title);
 
         if (isMounted && items.length > 0) {
-          setNewsItems(items);
+          setNewsItems(items.slice(0, YOUTH_CHURCH_NEWS_ITEMS.length));
         }
       } catch {
         // Keep fallback news.

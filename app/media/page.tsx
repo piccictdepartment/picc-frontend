@@ -228,7 +228,7 @@ export default function MediaPage() {
 
       if (Array.isArray(newsItems) && newsItems.length > 0) {
         setNews(
-          newsItems.map((item) => ({
+          newsItems.slice(0, CAMPUS_NEWS.length).map((item) => ({
             badge: item.badge || 'Updates',
             date: item.date || '',
             title: item.title || '',

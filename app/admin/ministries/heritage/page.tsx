@@ -183,6 +183,7 @@ export default function HeritageAdminPage() {
           labels={{ title: 'Image Title', description: 'Caption', image: 'Highlight Image', save: 'Save' }}
           showLabel={false}
           showSortOrder={false}
+          maxItems={6}
         />
       )}
       {activeTab === 'events' && (

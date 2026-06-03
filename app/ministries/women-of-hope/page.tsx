@@ -426,7 +426,7 @@ export default function WomenOfHopePage() {
   };
 
   const pillarCards = mergeItemsWithFallback(ministryItemGroups.pillars, defaultPillars);
-  const highlightGalleryItems = mergeItemsWithFallback(ministryItemGroups.highlights, defaultHighlights).map((item) => ({
+  const highlightGalleryItems = mergeItemsWithFallback(ministryItemGroups.highlights, defaultHighlights).slice(0, 6).map((item) => ({
     id: item.id,
     src: toAssetUrl(item.imageUrl) || '/hero/hero-store.jpg',
     caption: item.description || item.title,

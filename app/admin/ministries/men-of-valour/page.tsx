@@ -204,6 +204,7 @@ export default function MenOfValourAdminPage() {
           labels={{ title: 'Picture Title', description: 'Caption', image: 'Brotherhood Picture', save: 'Save', formTitle: 'Save Brotherhood Picture' }}
           showLabel={false}
           showSortOrder={false}
+          maxItems={6}
         />
       )}
 
@@ -241,6 +242,7 @@ export default function MenOfValourAdminPage() {
           fallbackItems={MEN_OF_VALOUR_NEWS_ITEMS}
           imageHelpText="Use the Men of Valour news photos or upload a replacement image."
           imagePlaceholder="/ministries/mov/news-1.JPG"
+          maxItems={MEN_OF_VALOUR_NEWS_ITEMS.length}
         />
       )}
     </div>

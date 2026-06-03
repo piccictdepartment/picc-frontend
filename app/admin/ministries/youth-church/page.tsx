@@ -214,6 +214,7 @@ export default function YouthChurchAdminPage() {
           labels={{ title: 'Picture Title', description: 'Caption', image: 'Gallery Picture', save: 'Save Picture', formTitle: 'Save Gallery Picture' }}
           showLabel={false}
           showSortOrder={false}
+          maxItems={6}
         />
       )}
 
@@ -251,6 +252,7 @@ export default function YouthChurchAdminPage() {
           title="Youth Church News"
           description="Manage the Latest News section shown on the public Youth Church page."
           fallbackItems={YOUTH_CHURCH_NEWS_ITEMS}
+          maxItems={YOUTH_CHURCH_NEWS_ITEMS.length}
         />
       )}
     </div>

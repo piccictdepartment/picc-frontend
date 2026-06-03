@@ -536,6 +536,7 @@ export function MinistryItemsManager({
   showImage = true,
   showPaymentFields = false,
   defaultPaymentAccount = 'main',
+  maxItems,
 }: {
   token: string;
   ministryKey: string;
@@ -556,6 +557,7 @@ export function MinistryItemsManager({
   showImage?: boolean;
   showPaymentFields?: boolean;
   defaultPaymentAccount?: 'main' | 'youth';
+  maxItems?: number;
 }) {
   const [items, setItems] = useState<MinistryItem[]>([]);
   const [editingItem, setEditingItem] = useState<MinistryItem | null>(null);
@@ -648,6 +650,10 @@ export function MinistryItemsManager({
   };
 
   const addNew = () => {
+    if (typeof maxItems === 'number' && items.length >= maxItems) {
+      setStatus(`Only ${maxItems} ${title.toLowerCase()} can be shown on the page. Delete one before adding another.`);
+      return;
+    }
     setEditingItem(null);
     setDraft({
       title: '',
@@ -664,6 +670,10 @@ export function MinistryItemsManager({
   };
 
   const save = async () => {
+    if (!editingItem && typeof maxItems === 'number' && items.length >= maxItems) {
+      setStatus(`Only ${maxItems} ${title.toLowerCase()} can be shown on the page. Delete one before adding another.`);
+      return;
+    }
     if (!draft.title.trim()) {
       setStatus('Please enter a title.');
       return;
@@ -701,7 +711,9 @@ export function MinistryItemsManager({
       });
 
       if (!response.ok) {
-        setStatus(`Unable to ${isPersisted ? 'update' : 'add'} item.`);
+        const data = await response.json().catch(() => null);
+        const message = typeof data?.error === 'string' ? data.error : `Unable to ${isPersisted ? 'update' : 'add'} item.`;
+        setStatus(message);
         return;
       }
 
@@ -771,11 +783,14 @@ export function MinistryItemsManager({
 
   const isPersistedEdit = Boolean(editingItem && !editingItem.isFallback);
   const saveButtonText = labels?.save || 'Save Item';
+  const limitReached = typeof maxItems === 'number' && items.length >= maxItems;
+  const isCreatingNew = !editingItem;
+  const itemLimitLabel = typeof maxItems === 'number' ? `${Math.min(items.length, maxItems)} / ${maxItems}` : null;
 
   return (
     <div className="space-y-6">
       {status && (
-        <div className={`rounded-xl p-4 text-sm ${status.includes('Unable') || status.includes('Please') || status.includes('cannot') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>
+        <div className={`rounded-xl p-4 text-sm ${status.includes('Unable') || status.includes('Please') || status.includes('cannot') || status.includes('Only') ? 'bg-destructive/10 text-destructive' : 'bg-primary/10 text-primary'}`}>
           {status}
         </div>
       )}
@@ -786,6 +801,11 @@ export function MinistryItemsManager({
             <div>
               <h2 className="text-xl font-semibold text-foreground">{labels?.formTitle || (isPersistedEdit ? `Update ${title}` : `Add ${title}`)}</h2>
               <p className="mt-1 text-sm text-foreground/70">{description}</p>
+              {itemLimitLabel ? (
+                <p className={`mt-2 text-xs font-semibold ${limitReached ? 'text-destructive' : 'text-primary'}`}>
+                  {itemLimitLabel} items used. {limitReached ? 'Delete one before adding another.' : `Up to ${maxItems} items can be shown.`}
+                </p>
+              ) : null}
             </div>
             {editingItem ? (
               <div className="flex flex-wrap gap-2">
@@ -793,7 +813,7 @@ export function MinistryItemsManager({
                   {savingId !== null ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
                   {saveButtonText}
                 </Button>
-                <Button variant="outline" onClick={addNew}>
+                <Button variant="outline" onClick={addNew} disabled={limitReached}>
                   <Plus className="mr-2 h-4 w-4" />
                   New
                 </Button>
@@ -904,10 +924,15 @@ export function MinistryItemsManager({
           )}
 
           <div className="flex flex-wrap gap-3 border-t border-border/60 pt-4">
-            <Button onClick={save} disabled={savingId !== null} className="gap-2">
+            <Button onClick={save} disabled={savingId !== null || (isCreatingNew && limitReached)} className="gap-2">
               {savingId !== null ? <Loader2 className="h-4 w-4 animate-spin" /> : <Save className="h-4 w-4" />}
               {saveButtonText}
             </Button>
+            {isCreatingNew && limitReached ? (
+              <p className="flex items-center text-sm font-medium text-destructive">
+                Limit reached. Select an existing item to edit it, or delete one saved item first.
+              </p>
+            ) : null}
             {isPersistedEdit && editingItem ? (
               <Button variant="destructive" onClick={() => requestRemove(editingItem)} className="gap-2">
                 <Trash2 className="h-4 w-4" />

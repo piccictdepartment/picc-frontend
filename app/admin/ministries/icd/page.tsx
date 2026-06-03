@@ -199,6 +199,7 @@ export default function IcdAdminPage() {
           labels={{ title: 'Image Title', description: 'Caption', image: 'Learning Image', save: 'Save', formTitle: 'Save Learning Pictures' }}
           showLabel={false}
           showSortOrder={false}
+          maxItems={6}
         />
       )}
       {activeTab === 'initiatives' && (

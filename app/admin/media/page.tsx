@@ -27,6 +27,7 @@ const MONTHS = [
 ];
 
 const GALLERY_CATEGORIES = ['worship', 'outreach', 'youth', 'music', 'celebration', 'prayer'];
+const MEDIA_NEWS_MAX_ITEMS = 6;
 
 type NewsItem = {
   id: string;
@@ -325,6 +326,11 @@ export default function AdminMediaPage() {
   ) => {
     if (!token) return;
 
+    if (section === 'news' && !editingId && items.length >= MEDIA_NEWS_MAX_ITEMS) {
+      setStatus(`Only ${MEDIA_NEWS_MAX_ITEMS} news items can be shown on the media page. Delete one before adding another.`);
+      return;
+    }
+
     if (!draft.title.trim()) {
       setStatus('Please add a title before saving.');
       return;
@@ -447,9 +453,12 @@ export default function AdminMediaPage() {
                   <p className="text-sm text-foreground/60">
                     The editor stays right after the sidebar, just like the devotions flow.
                   </p>
+                  <p className={`mt-2 text-xs font-semibold ${newsItems.length >= MEDIA_NEWS_MAX_ITEMS ? 'text-destructive' : 'text-primary'}`}>
+                    {Math.min(newsItems.length, MEDIA_NEWS_MAX_ITEMS)} / {MEDIA_NEWS_MAX_ITEMS} news items used. {newsItems.length >= MEDIA_NEWS_MAX_ITEMS ? 'Delete one before adding another.' : `Up to ${MEDIA_NEWS_MAX_ITEMS} news items can be shown.`}
+                  </p>
                 </div>
                 {editingIds.news && (
-                  <Button variant="outline" onClick={() => resetSectionEditor('news')}>
+                  <Button variant="outline" onClick={() => resetSectionEditor('news')} disabled={newsItems.length >= MEDIA_NEWS_MAX_ITEMS}>
                     New Item
                   </Button>
                 )}
@@ -540,7 +549,10 @@ export default function AdminMediaPage() {
               </div>
 
               <div className="flex flex-wrap gap-3">
-                <Button onClick={() => handleSaveItem('news', draftNews, editingIds.news, newsItems, setNewsItems)}>
+                <Button
+                  onClick={() => handleSaveItem('news', draftNews, editingIds.news, newsItems, setNewsItems)}
+                  disabled={!editingIds.news && newsItems.length >= MEDIA_NEWS_MAX_ITEMS}
+                >
                   {editingIds.news ? 'Save News Item' : 'Add News Item'}
                 </Button>
                 <Button variant="outline" onClick={() => resetSectionEditor('news')}>

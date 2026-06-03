@@ -293,7 +293,7 @@ export default function IcdMinistryPage() {
     events: ministryItems.filter((item) => item.category === 'event'),
   };
   const icdCards = mergeItemsWithFallback(itemGroups.cards, defaultIcdCards);
-  const learningItems = mergeItemsWithFallback(itemGroups.learning, defaultLearningItems);
+  const learningItems = mergeItemsWithFallback(itemGroups.learning, defaultLearningItems).slice(0, 6);
   const galleryItems = learningItems.length > 0
     ? learningItems.map((item, index) => ({
         id: index + 1,

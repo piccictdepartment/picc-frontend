@@ -297,7 +297,7 @@ export default function HeritageMinistryPage() {
   const loadedFocusItems = ministryItems.filter((item) => item.category === 'focus');
 
   const focusAreas = mergeItemsWithFallback(loadedFocusItems, defaultFocusAreas);
-  const highlightGalleryItems = mergeItemsWithFallback(loadedHighlightItems, defaultHighlightGallery);
+  const highlightGalleryItems = mergeItemsWithFallback(loadedHighlightItems, defaultHighlightGallery).slice(0, 6);
   const eventList = mergeItemsWithFallback(loadedEventItems, defaultEventItems);
   const aboutParagraphs = (ministryInfo.about || defaultMinistryInfo.about || '').split(/\n{2,}/).filter(Boolean);
   const logoImageUrl = toAssetUrl(ministryInfo.logoImageUrl);
