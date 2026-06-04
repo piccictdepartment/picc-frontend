@@ -1,47 +1,35 @@
 'use client';
 
-import { useState, useMemo, useEffect } from 'react';
+import { useState, useMemo, type FormEvent, type SyntheticEvent } from 'react';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { 
-  ShoppingCart, Plus, Minus, Trash2, X, CheckCircle2, 
-  Download, Printer, Mail, MessageCircle, ImageIcon,
-  ChevronLeft, ChevronRight, ChevronsLeft, ChevronsRight,
-  BookOpen, ExternalLink, Building2
+  ShoppingCart, Search, Plus, Minus, Trash2, X, CheckCircle2, 
+  MessageCircle, ImageIcon, BookOpen, ExternalLink, Building2, Menu
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 import { products, categories, bookAuthors, bookGenres, type Product } from '@/components/data/products';
 
 export default function StorePage() {
-  const [mounted, setMounted] = useState(false);
   const [activeCategory, setActiveCategory] = useState('All');
   const [activeAuthor, setActiveAuthor] = useState('All');
   const [activeGenre, setActiveGenre] = useState('All');
+  const [searchInput, setSearchInput] = useState('');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [trendingTab, setTrendingTab] = useState<'Featured' | 'New arrivals' | 'Best sellers'>('Featured');
   
   // Selection Modal State
   const [selectedBook, setSelectedBook] = useState<Product | null>(null);
-
-  // Pagination State
-  const [currentPage, setCurrentPage] = useState(1);
-  const itemsPerPage = 12;
 
   // Cart & Checkout State
   const [cart, setCart] = useState<{ product: Product; quantity: number }[]>([]);
   const [isCartOpen, setIsCartOpen] = useState(false);
   const [checkoutStep, setCheckoutStep] = useState<'cart' | 'checkout' | 'success'>('cart');
   const [paymentMethod, setPaymentMethod] = useState('');
-
-  useEffect(() => {
-    setMounted(true);
-  }, []);
-
-  useEffect(() => {
-    setCurrentPage(1);
-  }, [activeCategory, activeAuthor, activeGenre]);
 
   const filteredProducts = useMemo(() => {
     return products.filter((product) => {
@@ -50,19 +38,67 @@ export default function StorePage() {
         if (activeAuthor !== 'All' && product.author !== activeAuthor) return false;
         if (activeGenre !== 'All' && product.genre !== activeGenre) return false;
       }
+
+      if (searchQuery) {
+        const lowerQuery = searchQuery.toLowerCase();
+        const searchable = [
+          product.name,
+          product.category,
+          product.author || '',
+          product.genre || '',
+        ].join(' ').toLowerCase();
+        if (!searchable.includes(lowerQuery)) return false;
+      }
+
       return true;
     });
-  }, [activeCategory, activeAuthor, activeGenre]);
+  }, [activeCategory, activeAuthor, activeGenre, searchQuery]);
 
-  const totalPages = Math.ceil(filteredProducts.length / itemsPerPage);
-  const paginatedProducts = useMemo(() => {
-    const startIndex = (currentPage - 1) * itemsPerPage;
-    return filteredProducts.slice(startIndex, startIndex + itemsPerPage);
-  }, [filteredProducts, currentPage]);
+  const trendingProducts = useMemo(() => {
+    const active = filteredProducts.length ? filteredProducts : products;
 
-  const goToPage = (page: number) => {
-    setCurrentPage(Math.min(Math.max(1, page), totalPages));
-    window.scrollTo({ top: 0, behavior: 'smooth' });
+    if (trendingTab === 'New arrivals') {
+      return [...active].slice(-4).reverse();
+    }
+
+    if (trendingTab === 'Best sellers') {
+      return active.filter((product) => product.price >= 5000).slice(0, 4);
+    }
+
+    return active.slice(0, 4);
+  }, [filteredProducts, trendingTab]);
+
+  const featuredProduct = filteredProducts[0] || products[0];
+  const heroBook = products.find((product) => product.id === 'b2') || featuredProduct;
+  const dealsOfWeek = products.slice(1, 3);
+  const bookProductsWithImages = useMemo(
+    () => products.filter((product) => product.category === 'Books' && !product.image.includes('placeholder')),
+    []
+  );
+
+  const classicTrendingProducts = useMemo(() => {
+    const active = bookProductsWithImages.length ? bookProductsWithImages : products.filter((product) => product.category === 'Books');
+
+    if (trendingTab === 'New arrivals') {
+      return [...active].slice(-8).reverse();
+    }
+
+    if (trendingTab === 'Best sellers') {
+      return [...active]
+        .sort((a, b) => b.price - a.price)
+        .slice(0, 8);
+    }
+
+    return active.slice(0, 8);
+  }, [bookProductsWithImages, trendingTab]);
+
+  const handleSearchSubmit = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setSearchQuery(searchInput.trim());
+  };
+
+  const swapImage = (fallback: string) => (event: SyntheticEvent<HTMLImageElement>) => {
+    event.currentTarget.src = fallback;
   };
 
   const handleProductClick = (product: Product) => {
@@ -98,8 +134,6 @@ export default function StorePage() {
   const cartTotal = cart.reduce((total, item) => total + (item.product.price * item.quantity), 0);
   const cartCount = cart.reduce((count, item) => count + item.quantity, 0);
   const formatMWK = (amount: number) => `MWK ${amount.toLocaleString()}`;
-
-  if (!mounted) return null;
 
   return (
     <>
@@ -170,107 +204,313 @@ export default function StorePage() {
         )}
       </AnimatePresence>
 
-      <main className="min-h-screen bg-white text-black">
-        <section className="relative overflow-hidden py-24 md:py-36 text-white rounded-b-[36px] md:rounded-b-[48px]">
-          <div className="absolute inset-0">
-            <div className="absolute inset-0 bg-[url('/hero/hero-store.jpg')] bg-cover bg-center" />
-            <div className="absolute inset-0 bg-gradient-to-r from-black/80 via-black/60 to-black/30" />
+      <main className="min-h-screen bg-white text-slate-900">
+        <section className="bg-white text-slate-950">
+          <div className="bg-slate-50 border-b border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between text-sm text-slate-700">
+              <p>Support: support@propheticstore.com</p>
+              <div className="flex flex-wrap items-center gap-4">
+                <button type="button" className="hover:text-slate-950">Account</button>
+                <span className="h-4 w-px bg-slate-300" />
+                <span>MWK MK</span>
+                <span className="h-4 w-px bg-slate-300" />
+                <button type="button" className="hover:text-slate-950">English</button>
+              </div>
+            </div>
           </div>
-          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="max-w-3xl mt-20">
-              <h1 className="text-4xl md:text-6xl font-semibold mb-4">PICC Store</h1>
-              <p className="text-lg text-white/80">Resources and items to empower your spiritual journey.</p>
+
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+            <div className="grid gap-6 lg:grid-cols-[260px_minmax(320px,1fr)_220px] lg:items-center">
+              <div className="flex items-center gap-3">
+                <div className="relative flex h-14 w-14 items-center justify-center">
+                  <ShoppingCart className="h-12 w-12 text-slate-950" strokeWidth={1.5} />
+                  <span className="absolute bottom-2 right-1 rounded bg-white px-1 text-[10px] font-black text-[#d71920]">S</span>
+                </div>
+                <div className="leading-none">
+                  <p className="text-2xl font-black tracking-tight">Prophetic</p>
+                  <p className="-mt-1 text-2xl font-black tracking-tight text-[#d71920]">Store</p>
+                </div>
+              </div>
+
+              <form onSubmit={handleSearchSubmit} className="flex w-full items-stretch">
+                <label htmlFor="store-search-top" className="sr-only">Search</label>
+                <input
+                  id="store-search-top"
+                  type="search"
+                  value={searchInput}
+                  onChange={(e) => setSearchInput(e.target.value)}
+                  placeholder="Search"
+                  className="min-h-14 flex-1 border-2 border-r-0 border-slate-950 bg-white px-5 text-base text-slate-950 outline-none placeholder:text-slate-500"
+                />
+                <button type="submit" className="min-h-14 w-16 bg-[#1688b4] text-white hover:bg-[#0f759c]" aria-label="Search products">
+                  <Search className="mx-auto h-5 w-5" />
+                </button>
+              </form>
+
+              <button
+                type="button"
+                onClick={() => setIsCartOpen(true)}
+                className="inline-flex items-center justify-start gap-3 text-left lg:justify-center"
+              >
+                <ShoppingCart className="h-7 w-7 text-slate-950" />
+                <span>
+                  <span className="block font-serif text-base">Shopping Cart</span>
+                  <span className="block text-xs text-slate-500">{cartCount} item{cartCount === 1 ? '' : 's'}</span>
+                </span>
+              </button>
+            </div>
+          </div>
+
+          <div className="border-y border-slate-200">
+            <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-2">
+              <button
+                type="button"
+                onClick={() => {
+                  setActiveCategory('All');
+                  setActiveAuthor('All');
+                  setActiveGenre('All');
+                  setTrendingTab('Featured');
+                }}
+                className="inline-flex min-h-14 items-center gap-4 rounded-md bg-[#1688b4] px-7 text-sm font-semibold uppercase tracking-[0.2em] text-white hover:bg-[#0f759c]"
+              >
+                <Menu className="h-6 w-6" />
+                All Categories
+              </button>
             </div>
           </div>
         </section>
 
-        <section className="py-12 md:py-20 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-          <div className="flex flex-col lg:flex-row gap-12">
-            <aside className="w-full lg:w-64 flex-shrink-0 space-y-8">
-              <div>
-                <h3 className="font-semibold text-lg mb-4">Categories</h3>
-                <div className="space-y-1">
-                  {categories.map(cat => (
-                    <button
-                      key={cat}
-                      onClick={() => { setActiveCategory(cat); setActiveAuthor('All'); setActiveGenre('All'); }}
-                      className={`block w-full text-left px-3 py-2 rounded-lg text-sm transition-all ${activeCategory === cat ? 'bg-black text-white' : 'hover:bg-black/5 text-black/70'}`}
-                    >
-                      {cat}
-                    </button>
-                  ))}
+        <section className="relative overflow-hidden bg-[#142458] text-white">
+          <div className="absolute inset-0 opacity-35 [background-image:radial-gradient(circle_at_20%_20%,rgba(255,255,255,0.16)_0,transparent_24%),linear-gradient(135deg,rgba(255,255,255,0.08)_25%,transparent_25%,transparent_50%,rgba(255,255,255,0.08)_50%,rgba(255,255,255,0.08)_75%,transparent_75%,transparent)] [background-size:900px_600px,18px_18px]" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_left_center,rgba(37,99,235,0.28),transparent_38%),linear-gradient(90deg,rgba(7,22,71,0.2),rgba(7,22,71,0.7))]" />
+          <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-14 lg:py-20">
+            <div className="grid gap-12 lg:grid-cols-[0.85fr_1.15fr] items-center">
+              <div className="relative mx-auto w-[min(76vw,390px)] aspect-[0.72] [perspective:1200px]">
+                <div className="absolute -bottom-9 left-8 right-1 h-12 rounded-[50%] bg-black/45 blur-2xl" />
+                <div className="relative h-full w-full origin-left [transform:rotateY(-7deg)]">
+                  <div className="absolute -right-3 top-4 z-0 h-[calc(100%-32px)] w-4 skew-y-2 bg-gradient-to-r from-[#3b2018] to-[#160d0a] shadow-xl" />
+                  <div className="absolute left-0 top-0 z-20 h-full w-[7%] bg-gradient-to-r from-black/35 via-white/14 to-transparent" />
+                  <Image
+                    src={heroBook.image}
+                    alt={heroBook.name}
+                    fill
+                    priority
+                    sizes="(min-width: 1024px) 390px, 76vw"
+                    className="z-10 object-cover shadow-[22px_28px_48px_rgba(0,0,0,0.45)]"
+                    onError={swapImage('/store/books/placeholder.png')}
+                  />
                 </div>
               </div>
 
-              {activeCategory === 'Books' && (
-                <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="space-y-6 pt-4 border-t border-black/10">
-                  <div>
-                    <p className="text-xs font-bold uppercase text-black/40 mb-3">By Author</p>
-                    <select value={activeAuthor} onChange={(e) => setActiveAuthor(e.target.value)} className="w-full p-2 border border-black/10 rounded-md text-sm outline-none">
-                      <option value="All">All Authors</option>
-                      {bookAuthors.map(a => <option key={a} value={a}>{a}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <p className="text-xs font-bold uppercase text-black/40 mb-3">By Genre</p>
-                    <div className="flex flex-wrap gap-2">
-                      {['All', ...bookGenres].map(g => (
-                        <button key={g} onClick={() => setActiveGenre(g)} className={`px-3 py-1 rounded-full text-xs border ${activeGenre === g ? 'bg-black text-white border-black' : 'border-black/10 text-black/60 hover:border-black/30'}`}>
-                          {g}
-                        </button>
-                      ))}
-                    </div>
-                  </div>
-                </motion.div>
-              )}
-            </aside>
+              <div className="mx-auto max-w-2xl text-center">
+                <p className="font-serif text-3xl md:text-4xl text-white">Now Available</p>
+                <h1 className="mt-5 font-serif text-5xl md:text-7xl font-semibold leading-tight tracking-wide uppercase">
+                  {heroBook.name}
+                </h1>
+                <p className="mx-auto mt-7 max-w-2xl font-serif text-lg leading-8 text-white">
+                  A prophetic resource to strengthen your faith, sharpen your focus, and help you contend for the breakthroughs God has prepared for you.
+                </p>
+                <div className="mt-10">
+                  <Button
+                    onClick={() => handleProductClick(heroBook)}
+                    className="rounded-md bg-[#1688b4] px-8 py-6 font-serif text-base font-bold uppercase tracking-wide text-white hover:bg-[#0f759c]"
+                  >
+                    Shop Now
+                  </Button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
 
-            <div className="flex-1">
-              <div className="grid grid-cols-1 sm:grid-cols-2 xl:grid-cols-3 gap-6 mb-12">
-                {paginatedProducts.map(product => (
-                  <ProductCard key={product.id} product={product} onAdd={() => handleProductClick(product)} formatMWK={formatMWK} />
+        <section className="bg-[#fbfbff] py-16 lg:py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center">
+              <h2 className="font-serif text-4xl font-semibold text-slate-950 md:text-5xl">Trending Products</h2>
+              <div className="mt-8 flex flex-wrap justify-center gap-3">
+                {['Featured', 'New arrivals', 'Best sellers'].map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setTrendingTab(tab as 'Featured' | 'New arrivals' | 'Best sellers')}
+                    className={`min-h-12 rounded-md border px-8 font-serif text-base transition ${trendingTab === tab ? 'border-[#1688b4] bg-[#1688b4] text-white' : 'border-slate-200 bg-white text-slate-950 hover:border-[#1688b4]'}`}
+                  >
+                    {tab === 'New arrivals' ? 'New Arrivals' : tab === 'Best sellers' ? 'Best Sellers' : tab}
+                  </button>
                 ))}
               </div>
+            </div>
 
-              {totalPages > 1 && (
-                <div className="flex flex-col items-center gap-4 py-8 border-t border-black/5">
-                  <div className="flex items-center gap-1">
-                    <Button variant="outline" size="icon" onClick={() => goToPage(1)} disabled={currentPage === 1} className="hidden sm:flex">
-                      <ChevronsLeft className="w-4 h-4" />
-                    </Button>
-                    <Button variant="outline" size="icon" onClick={() => goToPage(currentPage - 1)} disabled={currentPage === 1}>
-                      <ChevronLeft className="w-4 h-4" />
-                    </Button>
+            <div className="mt-10 grid gap-x-8 gap-y-12 sm:grid-cols-2 lg:grid-cols-4">
+              {classicTrendingProducts.map((product, index) => (
+                <ClassicProductTile
+                  key={product.id}
+                  product={product}
+                  onSelect={() => handleProductClick(product)}
+                  formatMWK={formatMWK}
+                  showSaleBadge={index === 3 || index === 4 || index === 5}
+                  originalPrice={index === 3 || index === 5 ? product.price + 2500 : undefined}
+                />
+              ))}
+            </div>
+          </div>
+        </section>
 
-                    <div className="flex items-center gap-1 mx-2">
-                      {Array.from({ length: totalPages }, (_, i) => i + 1)
-                        .filter(page => page === 1 || page === totalPages || Math.abs(page - currentPage) <= 1)
-                        .map((page, index, array) => (
-                          <div key={page} className="flex items-center">
-                            {index > 0 && array[index - 1] !== page - 1 && (
-                              <span className="px-2 text-black/30">...</span>
-                            )}
-                            <Button
-                              variant={currentPage === page ? "default" : "outline"}
-                              size="sm"
-                              onClick={() => goToPage(page)}
-                              className="w-10"
-                            >
-                              {page}
-                            </Button>
-                          </div>
-                        ))}
-                    </div>
+        <section className="bg-white py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+              <div>
+                <p className="text-sm uppercase tracking-[0.24em] text-slate-500">Shop the store</p>
+                <h2 className="mt-3 text-3xl font-semibold text-slate-900">Find what you need quickly</h2>
+              </div>
+              <form onSubmit={handleSearchSubmit} className="flex w-full max-w-xl items-center gap-3">
+                <label htmlFor="store-search" className="sr-only">Search products</label>
+                <div className="flex w-full items-center gap-2 rounded-full border border-slate-200 bg-slate-50 px-3 py-2 shadow-sm focus-within:border-[#045BB4]">
+                  <Search className="w-4 h-4 text-slate-500" />
+                  <input
+                    id="store-search"
+                    type="search"
+                    value={searchInput}
+                    onChange={(e) => setSearchInput(e.target.value)}
+                    placeholder="Search products, books, devotionals..."
+                    className="w-full bg-transparent text-sm text-slate-900 outline-none"
+                  />
+                </div>
+                <Button type="submit" className="whitespace-nowrap px-5 py-3">Search</Button>
+              </form>
+            </div>
 
-                    <Button variant="outline" size="icon" onClick={() => goToPage(currentPage + 1)} disabled={currentPage === totalPages}>
-                      <ChevronRight className="w-4 h-4" />
-                    </Button>
-                    <Button variant="outline" size="icon" onClick={() => goToPage(totalPages)} disabled={currentPage === totalPages} className="hidden sm:flex">
-                      <ChevronsRight className="w-4 h-4" />
-                    </Button>
+            <div className="mt-8 flex flex-wrap gap-3">
+              {categories.map((cat) => (
+                <button
+                  key={cat}
+                  type="button"
+                  onClick={() => {
+                    setActiveCategory(cat);
+                    setActiveAuthor('All');
+                    setActiveGenre('All');
+                    setTrendingTab('Featured');
+                  }}
+                  className={`rounded-full px-5 py-2 text-sm font-medium transition ${activeCategory === cat ? 'bg-[#045BB4] text-white' : 'bg-slate-100 text-slate-700 hover:bg-slate-200'}`}
+                >
+                  {cat}
+                </button>
+              ))}
+            </div>
+
+            {activeCategory === 'Books' && (
+              <div className="mt-8 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+                <div>
+                  <p className="text-xs uppercase tracking-[0.24em] text-slate-500">By author</p>
+                  <select
+                    value={activeAuthor}
+                    onChange={(e) => setActiveAuthor(e.target.value)}
+                    className="mt-3 w-full rounded-2xl border border-slate-200 bg-white px-4 py-3 text-sm outline-none"
+                  >
+                    <option value="All">All authors</option>
+                    {bookAuthors.map((author) => (
+                      <option key={author} value={author}>{author}</option>
+                    ))}
+                  </select>
+                </div>
+                <div className="lg:col-span-2">
+                  <p className="text-xs uppercase tracking-[0.24em] text-slate-500">By genre</p>
+                  <div className="mt-3 flex flex-wrap gap-2">
+                    {['All', ...bookGenres].map((genre) => (
+                      <button
+                        key={genre}
+                        type="button"
+                        onClick={() => setActiveGenre(genre)}
+                        className={`rounded-full px-4 py-2 text-xs font-medium transition ${activeGenre === genre ? 'bg-[#045BB4] text-white' : 'border border-slate-200 bg-white text-slate-700 hover:border-slate-300'}`}
+                      >
+                        {genre}
+                      </button>
+                    ))}
                   </div>
                 </div>
-              )}
+              </div>
+            )}
+          </div>
+        </section>
+
+        <section className="bg-slate-50 py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col gap-6 lg:flex-row lg:items-end lg:justify-between">
+              <div>
+                <p className="text-sm uppercase tracking-[0.24em] text-slate-500">Trending Products</p>
+                <h2 className="mt-3 text-3xl font-semibold text-slate-900">Selected picks for you</h2>
+              </div>
+              <div className="inline-flex items-center gap-2 rounded-full bg-white p-1 shadow-sm border border-slate-200">
+                {['Featured', 'New arrivals', 'Best sellers'].map((tab) => (
+                  <button
+                    key={tab}
+                    type="button"
+                    onClick={() => setTrendingTab(tab as 'Featured' | 'New arrivals' | 'Best sellers')}
+                    className={`rounded-full px-4 py-2 text-sm font-semibold transition ${trendingTab === tab ? 'bg-[#045BB4] text-white' : 'text-slate-600 hover:bg-slate-100'}`}
+                  >
+                    {tab}
+                  </button>
+                ))}
+              </div>
+            </div>
+
+            <div className="mt-8 grid gap-6 lg:grid-cols-4">
+              {trendingProducts.map((product) => (
+                <ProductCard key={product.id} product={product} onAdd={() => handleProductClick(product)} formatMWK={formatMWK} />
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-white py-20">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-12">
+              <p className="text-sm uppercase tracking-[0.24em] text-slate-500">Deals of the week</p>
+              <h2 className="mt-3 text-3xl font-semibold text-slate-900">Deals Of The Week</h2>
+            </div>
+
+            <div className="grid gap-6 lg:grid-cols-2">
+              {dealsOfWeek.map((deal, index) => (
+                <div key={deal.id} className={`relative overflow-hidden rounded-[32px] text-white shadow-2xl ${index === 0 ? 'bg-[radial-gradient(circle_at_top_left,_rgba(38,191,255,0.18),_transparent_35%)]' : 'bg-[radial-gradient(circle_at_top_right,_rgba(16,185,129,0.18),_transparent_35%)]'}`}>
+                  <div className="relative h-96 lg:h-[360px]">
+                    <Image src={deal.image} alt={deal.name} fill className="object-cover opacity-70" onError={swapImage('/images/placeholder.png')} />
+                  </div>
+                  <div className="relative p-8 lg:p-10 bg-slate-950/75">
+                    <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">Shop now</p>
+                    <h3 className="mt-4 text-3xl font-semibold">{deal.name}</h3>
+                    <p className="mt-4 max-w-xl text-sm text-slate-200">Grab this season’s best prophetic resource with a special offer and faster checkout.</p>
+                    <Button onClick={() => addToCart(deal)} className="mt-8 bg-white text-slate-950 px-6 py-3 hover:bg-slate-100">SHOP NOW</Button>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="bg-slate-50 py-14">
+          <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-6 lg:grid-cols-3">
+              {[
+                { title: 'Spiritual', subtitle: 'Get 45% Off', color: 'bg-cyan-600' },
+                { title: 'Business', subtitle: 'Get 45% Off', color: 'bg-emerald-600' },
+                { title: 'Audio Book', subtitle: 'Get 50% Off', color: 'bg-blue-600' },
+              ].map((card) => (
+                <div key={card.title} className={`group relative overflow-hidden rounded-[32px] ${card.color} p-8 text-white shadow-2xl`}>
+                  <div className="absolute inset-0 opacity-10 bg-gradient-to-br from-white/30 via-transparent to-black/10"></div>
+                  <div className="relative z-10 flex h-full flex-col justify-between">
+                    <div>
+                      <p className="text-sm uppercase tracking-[0.3em] text-slate-200">{card.title}</p>
+                      <h3 className="mt-3 text-3xl font-semibold">{card.subtitle}</h3>
+                    </div>
+                    <div className="mt-6 flex items-end justify-between gap-4">
+                      <p className="text-sm text-slate-200">Best discounts on study and ministry resources.</p>
+                      <div className="relative h-28 w-28 overflow-hidden rounded-3xl border border-white/20 bg-white/10">
+                        <Image src={featuredProduct.image} alt={card.title} fill className="object-cover" onError={swapImage('/images/placeholder.png')} />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
             </div>
           </div>
         </section>
@@ -294,7 +534,7 @@ export default function StorePage() {
                     {cart.map(item => (
                       <div key={item.product.id} className="flex gap-4">
                         <div className="relative w-20 h-20 bg-black/5 rounded-md overflow-hidden">
-                           <Image src={item.product.image} alt={item.product.name} fill className="object-cover" onError={(e:any) => e.target.src='/images/placeholder.png'} />
+                           <Image src={item.product.image} alt={item.product.name} fill className="object-cover" onError={swapImage('/images/placeholder.png')} />
                         </div>
                         <div className="flex-1">
                           <h4 className="font-semibold text-sm leading-tight">{item.product.name}</h4>
@@ -406,6 +646,55 @@ export default function StorePage() {
         )}
       </AnimatePresence>
     </>
+  );
+}
+
+function ClassicProductTile({
+  product,
+  onSelect,
+  formatMWK,
+  showSaleBadge,
+  originalPrice,
+}: {
+  product: Product;
+  onSelect: () => void;
+  formatMWK: (a: number) => string;
+  showSaleBadge?: boolean;
+  originalPrice?: number;
+}) {
+  const [imgError, setImgError] = useState(false);
+
+  return (
+    <button type="button" onClick={onSelect} className="group text-center">
+      <div className="relative flex aspect-square items-center justify-center border border-slate-200 bg-white p-7 transition group-hover:border-slate-300 group-hover:shadow-lg">
+        {showSaleBadge && (
+          <span className="absolute left-4 top-4 z-10 flex h-12 w-12 items-center justify-center rounded-full bg-red-600 text-xs font-bold text-white">
+            Sale
+          </span>
+        )}
+        {!imgError ? (
+          <Image
+            src={product.image}
+            alt={product.name}
+            width={260}
+            height={360}
+            sizes="(min-width: 1024px) 260px, (min-width: 640px) 35vw, 70vw"
+            className="h-full w-auto object-contain drop-shadow-[0_16px_18px_rgba(15,23,42,0.18)] transition duration-300 group-hover:scale-105"
+            onError={() => setImgError(true)}
+          />
+        ) : (
+          <div className="flex flex-col items-center text-slate-300">
+            <ImageIcon className="h-12 w-12" />
+            <span className="mt-2 text-[10px] font-bold uppercase tracking-widest">Image Coming Soon</span>
+          </div>
+        )}
+      </div>
+      <h3 className="mt-5 min-h-12 font-serif text-lg leading-6 text-slate-950">{product.name}</h3>
+      <p className="mt-1 font-serif text-base text-slate-950">
+        {originalPrice && <span className="mr-2 text-slate-400 line-through">{formatMWK(originalPrice)}</span>}
+        <span>{formatMWK(product.price)}</span>
+      </p>
+    </button>
   );
 }
 

@@ -59,6 +59,8 @@ const CAMPUS_NEWS = [
   },
 ];
 
+import { MapPin, Phone, Mail, CalendarClock, Globe, X } from 'lucide-react';
+
 type MediaNewsItem = {
   id: string;
   badge: string;
@@ -119,6 +121,13 @@ type MagazineItem = {
   issue: string;
   cover: string;
   file?: string;
+};
+
+type YouTubeVideo = {
+  videoId: string;
+  title: string;
+  thumbnail: string;
+  url: string;
 };
 
 const isRecord = (value: unknown): value is Record<string, unknown> =>
@@ -212,6 +221,43 @@ export default function MediaPage() {
   const [gallery, setGallery] = useState<GalleryItem[]>(EVENT_GALLERY);
   const [books, setBooks] = useState<BookItem[]>(BOOKS);
   const [magazines, setMagazines] = useState<MagazineItem[]>(MAGAZINES);
+  const [musicVideos, setMusicVideos] = useState<YouTubeVideo[]>([]);
+  const [activeVideo, setActiveVideo] = useState<YouTubeVideo | null>(null);
+
+  const MUSIC_CHANNEL_ID = "UCsrF1bC3s230vmduZSjEsBQ";
+  const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
+
+  useEffect(() => {
+    if (!YOUTUBE_API_KEY) return;
+
+    const fetchMusicVideos = async () => {
+      try {
+        const url = new URL("https://www.googleapis.com/youtube/v3/search");
+        url.searchParams.set("part", "snippet");
+        url.searchParams.set("channelId", MUSIC_CHANNEL_ID);
+        url.searchParams.set("order", "date");
+        url.searchParams.set("type", "video");
+        url.searchParams.set("maxResults", "8");
+        url.searchParams.set("key", YOUTUBE_API_KEY);
+
+        const response = await fetch(url.toString());
+        if (!response.ok) return;
+        
+        const data = await response.json();
+        const videos = (data.items || []).map((item: any) => ({
+          videoId: item.id.videoId,
+          title: item.snippet.title,
+          thumbnail: item.snippet.thumbnails.high?.url || item.snippet.thumbnails.medium?.url,
+          url: `https://www.youtube.com/watch?v=${item.id.videoId}`,
+        }));
+        setMusicVideos(videos);
+      } catch (error) {
+        console.error("Error fetching music videos:", error);
+      }
+    };
+
+    void fetchMusicVideos();
+  }, [YOUTUBE_API_KEY]);
 
   useEffect(() => {
     let alive = true;
@@ -279,9 +325,33 @@ export default function MediaPage() {
   }, []);
 
   const galleryItems = useMemo(() => {
-    if (galleryFilter === 'All') return gallery;
-    return gallery.filter((item) => item.category === galleryFilter);
-  }, [galleryFilter, gallery]);
+    const baseGallery = gallery.map(item => {
+      if (item.category === 'Music' && musicVideos.length > 0) {
+        return {
+          ...item,
+          image: musicVideos[0].thumbnail,
+          title: musicVideos[0].title,
+          isVideo: true,
+          videoId: musicVideos[0].videoId,
+          videoUrl: musicVideos[0].url
+        };
+      }
+      return item;
+    });
+
+    if (galleryFilter === 'All') return baseGallery;
+    if (galleryFilter === 'Music' && musicVideos.length > 0) {
+      return musicVideos.map(v => ({
+        title: v.title,
+        category: 'Music',
+        image: v.thumbnail,
+        isVideo: true,
+        videoId: v.videoId,
+        videoUrl: v.url
+      }));
+    }
+    return baseGallery.filter((item) => item.category === galleryFilter);
+  }, [galleryFilter, gallery, musicVideos]);
 
   const galleryFilters = useMemo(() => {
     const categories = Array.from(new Set(gallery.map((item) => item.category).filter(Boolean)));
@@ -339,11 +409,21 @@ export default function MediaPage() {
               ))}
             </div>
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
-              {galleryItems.map((item) => (
+            <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 px-4 sm:px-6 lg:px-10">
+              {galleryItems.map((item, idx) => (
                 <div
-                  key={item.title}
-                  className="group relative overflow-hidden rounded-2xl shadow-md"
+                  key={`${item.title}-${idx}`}
+                  className="group relative overflow-hidden rounded-2xl shadow-md cursor-pointer"
+                  onClick={() => {
+                    if ((item as any).isVideo) {
+                      setActiveVideo({
+                        videoId: (item as any).videoId,
+                        title: item.title,
+                        thumbnail: item.image,
+                        url: (item as any).videoUrl
+                      });
+                    }
+                  }}
                 >
                   <div className="relative h-56 sm:h-64">
                     <Image
@@ -353,21 +433,59 @@ export default function MediaPage() {
                       sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 25vw"
                       className="object-cover transition-transform duration-500 group-hover:scale-[1.03]"
                     />
+                    {(item as any).isVideo && (
+                      <div className="absolute inset-0 flex items-center justify-center bg-black/10 group-hover:bg-black/30 transition-colors">
+                        <div className="h-12 w-12 rounded-full bg-red-600/90 flex items-center justify-center text-white shadow-lg group-hover:scale-110 transition-transform duration-300">
+                          <svg className="w-6 h-6 fill-current" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
+                      </div>
+                    )}
                   </div>
-                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors" />
+                  <div className="absolute inset-0 bg-black/10 group-hover:bg-black/20 transition-colors pointer-events-none" />
                   <div className="absolute bottom-4 left-4 rounded-full bg-primary/90 px-4 py-1 text-[11px] font-semibold uppercase tracking-[0.3em] text-primary-foreground">
-                    {item.category}
+                    {(item as any).isVideo ? 'Music Video' : item.category}
                   </div>
-                  <div className="absolute right-4 bottom-4 opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0">
-                    <a href={item.image} download>
-                      <Button variant="outline" className="rounded-full px-4 py-2 text-[11px]">
-                        Download Photo
-                      </Button>
-                    </a>
-                  </div>
+                  {!(item as any).isVideo && (
+                    <div className="absolute right-4 bottom-4 opacity-0 translate-y-1 transition-all duration-300 group-hover:opacity-100 group-hover:translate-y-0" onClick={(e) => e.stopPropagation()}>
+                      <a href={item.image} download>
+                        <Button variant="outline" className="rounded-full px-4 py-2 text-[11px]">
+                          Download Photo
+                        </Button>
+                      </a>
+                    </div>
+                  )}
                 </div>
               ))}
             </div>
+
+            {/* Video Modal */}
+            {activeVideo && (
+              <div 
+                className="fixed inset-0 z-[100] flex items-center justify-center bg-black/90 p-4 backdrop-blur-sm"
+                onClick={() => setActiveVideo(null)}
+              >
+                <div 
+                  className="relative w-full max-w-5xl aspect-video bg-black rounded-2xl overflow-hidden shadow-2xl"
+                  onClick={(e) => e.stopPropagation()}
+                >
+                  <button 
+                    onClick={() => setActiveVideo(null)}
+                    className="absolute top-4 right-4 z-[110] p-2 rounded-full bg-white/10 text-white hover:bg-white/20 transition-colors"
+                  >
+                    <X className="w-6 h-6" />
+                  </button>
+                  <iframe
+                    src={`https://www.youtube.com/embed/${activeVideo.videoId}?autoplay=1`}
+                    title={activeVideo.title}
+                    className="w-full h-full border-none"
+                    allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                    allowFullScreen
+                  />
+                </div>
+              </div>
+            )}
           </div>
         </section>
 

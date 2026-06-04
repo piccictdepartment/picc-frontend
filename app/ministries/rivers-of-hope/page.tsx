@@ -1,6 +1,7 @@
 'use client';
 
-import { useState, useEffect, useRef, type SyntheticEvent } from 'react';
+import { useState, useEffect, useRef, type FormEvent, type SyntheticEvent } from 'react';
+import { toast } from 'sonner';
 import Image from 'next/image';
 import Link from 'next/link';
 import Navigation from '@/components/Navigation';
@@ -98,6 +99,9 @@ const swapImage = (fallback: string) => (event: SyntheticEvent<HTMLImageElement>
   event.currentTarget.src = fallback;
 };
 
+const normalizeSearchText = (value: string) =>
+  value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
 const mergeItemsWithFallback = (loaded: MinistryItem[], fallback: MinistryItem[]) => {
   if (!loaded.length) return fallback;
   if (!fallback.length) return loaded;
@@ -137,7 +141,7 @@ const defaultInfo: MinistryInfo = {
   about:
     'The Rivers of Hope Crusades are flagship evangelistic outreach programs led by Pastor Esau Banda across Malawi and internationally. These large-scale crusades are designed to proclaim the Gospel of Jesus Christ with power and clarity, reaching diverse communities through open-air gatherings and mass evangelism.\n\nCharacterized by dynamic preaching, worship, healing, and deliverance sessions, we create an environment where individuals encounter genuine spiritual transformation. Beyond evangelism, the initiative also fosters unity among churches and serves as a catalyst for community revival and discipleship.',
   heroImageUrl: '/hero/hero-1.jpg',
-  logoImageUrl: '/logo.png',
+  logoImageUrl: '/ministries/roh/logo.jpeg',
   liveSessionYoutubeUrl: 'https://www.youtube.com/watch?v=ydTADwZRquA',
   partnershipTitle: 'Partner With The Harvest',
   partnershipBody:
@@ -306,11 +310,36 @@ export default function RiversOfHopePage() {
   // --- STATE ---
   const [activeGalleryId, setActiveGalleryId] = useState<number | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<EventCard | null>(null);
-  const [featuredEventIndex, setFeaturedEventIndex] = useState(0);
+  const [currentSlide, setCurrentSlide] = useState(0);
+  const [eventSearchInput, setEventSearchInput] = useState('');
+  const [eventSearchQuery, setEventSearchQuery] = useState('');
   const [ministryInfo, setMinistryInfo] = useState<MinistryInfo>(defaultInfo);
   const [ministryItems, setMinistryItems] = useState<MinistryItem[]>([]);
+  const [isRohSubmitting, setIsRohSubmitting] = useState(false);
+  const [rohFormData, setRohFormData] = useState({
+    fullName: '',
+    email: '',
+    phone: '',
+    location: '',
+    amount: '',
+    frequency: 'Monthly',
+    volunteerArea: '',
+    notes: '',
+    programs: {
+      prayer: false,
+      financial: false,
+      radioMedia: false,
+      volunteer: false,
+    },
+  });
 
-  // --- LIVESTREAM STATE ---
+  const ROH_PROGRAM_OPTIONS = [
+    { key: 'prayer', label: 'Prayer' },
+    { key: 'financial', label: 'Financial' },
+    { key: 'radioMedia', label: 'Radio & Media' },
+    { key: 'volunteer', label: 'Volunteer' },
+  ] as const;
+
   const [ytReady, setYtReady] = useState(false);
   const [activeTool, setActiveTool] = useState<ToolKey>(null);
   const [videos, setVideos] = useState<YouTubeVideo[]>([]);
@@ -319,6 +348,93 @@ export default function RiversOfHopePage() {
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [mobileResumeAt, setMobileResumeAt] = useState<number | null>(null);
   const playersRef = useRef<Map<string, any>>(new Map());
+
+  const selectedProgramLabels = Object.entries(rohFormData.programs)
+    .filter(([, isSelected]) => isSelected)
+    .map(([key]) => ROH_PROGRAM_OPTIONS.find((option) => option.key === key)?.label)
+    .filter(Boolean)
+    .join(', ');
+
+  const handleRohFormChange = (event: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value, type, checked } = event.target;
+
+    if (name.startsWith('programs.')) {
+      const key = name.replace('programs.', '') as keyof typeof rohFormData.programs;
+      setRohFormData((prev) => ({
+        ...prev,
+        programs: {
+          ...prev.programs,
+          [key]: checked,
+        },
+      }));
+      return;
+    }
+
+    setRohFormData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  const handleRohFormSubmit = async (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setIsRohSubmitting(true);
+
+    try {
+      const response = await apiFetch('/api/contact', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          fullName: rohFormData.fullName.trim(),
+          email: rohFormData.email.trim(),
+          phone: rohFormData.phone.trim(),
+          location: rohFormData.location.trim(),
+          programs: ROH_PROGRAM_OPTIONS.filter((option) => rohFormData.programs[option.key]).map((option) => option.label),
+          amount: rohFormData.amount.trim(),
+          frequency: rohFormData.frequency,
+          volunteerArea: rohFormData.volunteerArea.trim(),
+          notes: rohFormData.notes.trim(),
+        }),
+      });
+
+      if (!response.ok) {
+        let errorMessage = 'There was an error sending your request. Please try again.';
+        try {
+          const data = await response.json();
+          if (typeof data?.error === 'string' && data.error.trim()) {
+            errorMessage = data.error;
+          }
+        } catch {
+          // ignore
+        }
+        toast.error(errorMessage);
+        return;
+      }
+
+      toast.success('Thank you! Your Rivers of Hope inquiry has been submitted.');
+      setRohFormData({
+        fullName: '',
+        email: '',
+        phone: '',
+        location: '',
+        amount: '',
+        frequency: 'Monthly',
+        volunteerArea: '',
+        notes: '',
+        programs: {
+          prayer: false,
+          financial: false,
+          radioMedia: false,
+          volunteer: false,
+        },
+      });
+    } catch (error) {
+      console.error('ROH form submit failed:', error);
+      toast.error('There was an error sending your request. Please try again.');
+    } finally {
+      setIsRohSubmitting(false);
+    }
+  };
 
   // --- LIVESTREAM CONSTANTS ---
   const CHANNEL_ID = "UC5iA3dWaUBlP_PBlGSQvgNQ";
@@ -365,16 +481,43 @@ export default function RiversOfHopePage() {
     return date.toLocaleDateString("en-US", { month: "long", day: "numeric", year: "numeric", timeZone: "Africa/Blantyre" });
   };
 
-  // --- CYCLING EVENTS EFFECT ---
+  const normalizedEventSearchQuery = normalizeSearchText(eventSearchQuery);
+  const filteredEventItems = normalizedEventSearchQuery
+    ? eventItems.filter((event) => {
+        const searchableText = normalizeSearchText(
+          [event.title, event.date, event.location, event.description].join(' '),
+        );
+        return searchableText.includes(normalizedEventSearchQuery);
+      })
+    : eventItems;
+
+  // --- CYCLING EVENTS EFFECT (based on filtered results) ---
   useEffect(() => {
+    if (!filteredEventItems.length) return;
     const timer = setInterval(() => {
-      setFeaturedEventIndex((prev) => (prev + 1) % eventItems.length);
+      setCurrentSlide((prev) => (prev + 1) % filteredEventItems.length);
     }, 5000);
     return () => clearInterval(timer);
-  }, [eventItems.length]);
+  }, [filteredEventItems.length]);
 
-  const featuredGridEvent = eventItems[featuredEventIndex] || eventItems[0];
-  const remainingEvents = eventItems.filter((_, idx) => idx !== featuredEventIndex);
+  const safeCurrentSlide = filteredEventItems.length
+    ? currentSlide % filteredEventItems.length
+    : 0;
+
+  const featuredGridEvent = filteredEventItems[safeCurrentSlide] || eventItems[0];
+  const remainingEvents = filteredEventItems.filter((_, idx) => idx !== safeCurrentSlide);
+
+  const handleEventSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setEventSearchQuery(eventSearchInput.trim());
+    setCurrentSlide(0);
+  };
+
+  const clearEventSearch = () => {
+    setEventSearchInput('');
+    setEventSearchQuery('');
+    setCurrentSlide(0);
+  };
 
   // --- EFFECTS ---
   useEffect(() => {
@@ -671,11 +814,11 @@ export default function RiversOfHopePage() {
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center flex flex-col items-center">
               <div className="relative w-24 h-24 sm:w-32 sm:h-32 mb-8 bg-white rounded-full p-2 shadow-xl border-4 border-white/20 flex items-center justify-center overflow-hidden">
                 <Image 
-                  src={toAssetUrl(ministryInfo.logoImageUrl) || '/logo.png'} 
+                  src={toAssetUrl(ministryInfo.logoImageUrl) || '/ministries/roh/logo.jpeg'} 
                   alt={`${ministryInfo.name || 'Rivers of Hope'} Logo`} 
                   fill 
                   className="object-contain p-2"
-                  onError={swapImage('/logo.png')}
+                  onError={swapImage('/ministries/roh/logo.jpeg')}
                 />
               </div>
 
@@ -877,136 +1020,265 @@ export default function RiversOfHopePage() {
         {!mobilePlayerActive && (
           <section className="py-20 bg-gray-50 text-black overflow-hidden border-y border-black/5">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+              <div className="flex flex-col gap-6 mb-10 md:flex-row md:items-end md:justify-between">
                 <div>
                   <h2 className="text-3xl md:text-4xl font-bold mb-4">Upcoming Crusades & Conferences</h2>
                   <p className="text-black/60 max-w-xl">See where Pastor Esau Banda and the team will be taking the Gospel next.</p>
                 </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                <button 
-                  onClick={() => setSelectedEvent(featuredGridEvent)}
-                  className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-black/5 group text-left w-full focus:outline-none focus:ring-4 focus:ring-red-800"
-                >
-                  <AnimatePresence mode="wait">
-                    <motion.div
-                      key={featuredGridEvent.id}
-                      initial={{ opacity: 0, x: 20 }}
-                      animate={{ opacity: 1, x: 0 }}
-                      exit={{ opacity: 0, x: -20 }}
-                      transition={{ duration: 0.5 }}
-                      className="absolute inset-0"
-                    >
-                      <Image 
-                        src={featuredGridEvent.image} 
-                        alt={featuredGridEvent.title}
-                        fill
-                        className="object-cover group-hover:scale-105 transition-transform duration-700"
-                        onError={swapImage('/hero/hero-store.jpg')}
-                      />
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
-                        <span className="bg-red-700 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3 flex items-center gap-2">
-                          <CalendarClock className="w-4 h-4" />
-                          {featuredGridEvent.type}
-                        </span>
-                        <h3 className="text-white text-3xl md:text-4xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">{featuredGridEvent.title}</h3>
-                        <p className="text-white/90 text-sm md:text-base font-medium flex items-center gap-2 mb-1">
-                          <CalendarClock className="w-4 h-4" /> {featuredGridEvent.date}
-                        </p>
-                        <p className="text-white/70 text-sm flex items-center gap-2">
-                          <MapPin className="w-4 h-4" /> {featuredGridEvent.location}
-                        </p>
-                      </div>
-                    </motion.div>
-                  </AnimatePresence>
-                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-medium border border-white/30 opacity-0 group-hover:opacity-100 transition-opacity">
-                    Click for Details
-                  </div>
-                </button>
-
-                <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
-                  {remainingEvents.map((event) => (
-                    <button 
-                      key={event.id} 
-                      onClick={() => setSelectedEvent(event)}
-                      className="relative h-48 lg:h-[113px] rounded-xl overflow-hidden shadow-md border border-black/5 group text-left w-full focus:outline-none focus:ring-2 focus:ring-red-800"
-                    >
-                      <Image 
-                        src={event.image} 
-                        alt={event.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={swapImage('/hero/hero-store.jpg')}
-                      />
-                      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
-                        <span className="text-red-300 text-[10px] font-bold uppercase tracking-wider mb-1">
-                          {event.type}
-                        </span>
-                        <h4 className="text-white text-sm font-semibold leading-tight mb-1 group-hover:underline underline-offset-2">{event.title}</h4>
-                        <p className="text-white/60 text-[10px] truncate">{event.date}</p>
-                      </div>
-                    </button>
-                  ))}
-                </div>
-              </div>
-            </div>
-          </section>
-        )}
-
-        {/* 7. MINISTRY PROJECTS */}
-        {!mobilePlayerActive && (
-          <section className="py-20 bg-white text-black border-b border-black/5">
-            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-              <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
-                <div>
-                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Strategic Discipleship</h2>
-                  <p className="text-black/60 max-w-xl">How we ensure the harvest is preserved and leaders are continuously equipped.</p>
-                </div>
-              </div>
-
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-                <div className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-black/5 group">
-                  <Image 
-                    src={projectItems[0]?.image || '/hero/hero-store.jpg'} 
-                    alt={projectItems[0]?.title || 'Rivers of Hope project'}
-                    fill
-                    className="object-cover group-hover:scale-105 transition-transform duration-700"
-                    onError={swapImage('/hero/hero-store.jpg')}
+                <form onSubmit={handleEventSearch} className="flex w-full max-w-2xl items-center gap-3">
+                  <label htmlFor="rivers-of-hope-event-search" className="sr-only">Search events</label>
+                  <input
+                    id="rivers-of-hope-event-search"
+                    value={eventSearchInput}
+                    onChange={(event) => setEventSearchInput(event.target.value)}
+                    placeholder="Search crusades, dates, locations"
+                    className="min-w-0 flex-1 rounded-full border border-black/10 bg-white px-4 py-3 text-sm text-black shadow-sm focus:border-red-800 focus:outline-none focus:ring-2 focus:ring-red-100"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/20 to-transparent flex flex-col justify-end p-8">
-                    <span className="bg-red-800 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3">
-                      {projectItems[0]?.type || 'Initiative'}
-                    </span>
-                    <h3 className="text-white text-2xl md:text-3xl font-bold mb-1">{projectItems[0]?.title || 'Rivers of Hope Project'}</h3>
-                    <p className="text-white/80 text-sm font-medium">Status: {projectItems[0]?.status || 'Active'}</p>
+                  <button type="submit" className="rounded-full bg-red-800 px-5 py-3 text-sm font-semibold text-white hover:bg-red-900 transition">
+                    Search
+                  </button>
+                  <button type="button" onClick={clearEventSearch} className="rounded-full border border-black/10 bg-white px-4 py-3 text-sm text-black hover:bg-black/5 transition">
+                    Clear
+                  </button>
+                </form>
+              </div>
+
+              {filteredEventItems.length === 0 ? (
+                <div className="rounded-3xl border border-black/10 bg-white p-12 text-center">
+                  <p className="text-xl font-semibold text-black">No crusades or conferences matched your search.</p>
+                  <p className="mt-3 text-sm text-black/70">Try another keyword or clear the search to view all upcoming events.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                  <button 
+                    onClick={() => setSelectedEvent(featuredGridEvent)}
+                    className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-black/5 group text-left w-full focus:outline-none focus:ring-4 focus:ring-red-800"
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={featuredGridEvent.id}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-0"
+                      >
+                        <Image 
+                          src={featuredGridEvent.image} 
+                          alt={featuredGridEvent.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                          onError={swapImage('/hero/hero-store.jpg')}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
+                          <span className="bg-red-700 text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3 flex items-center gap-2">
+                            <CalendarClock className="w-4 h-4" />
+                            {featuredGridEvent.type}
+                          </span>
+                          <h3 className="text-white text-3xl md:text-4xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">{featuredGridEvent.title}</h3>
+                          <p className="text-white/90 text-sm md:text-base font-medium flex items-center gap-2 mb-1">
+                            <CalendarClock className="w-4 h-4" /> {featuredGridEvent.date}
+                          </p>
+                          <p className="text-white/70 text-sm flex items-center gap-2">
+                            <MapPin className="w-4 h-4" /> {featuredGridEvent.location}
+                          </p>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-medium border border-white/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Click for Details
+                    </div>
+                  </button>
+
+                  <div className="lg:col-span-1">
+                    <div className="flex gap-4 overflow-x-auto pb-4 lg:max-h-[500px] lg:flex-col lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 lg:pr-1 scrollbar-thin scrollbar-thumb-red-200">
+                      {remainingEvents.map((event) => (
+                        <button 
+                          key={event.id} 
+                          onClick={() => setSelectedEvent(event)}
+                          className="min-w-[280px] lg:min-w-full relative h-48 lg:h-[113px] rounded-xl overflow-hidden shadow-md border border-black/5 group text-left focus:outline-none focus:ring-2 focus:ring-red-800"
+                        >
+                          <Image 
+                            src={event.image} 
+                            alt={event.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            onError={swapImage('/hero/hero-store.jpg')}
+                          />
+                          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
+                            <span className="text-red-300 text-[10px] font-bold uppercase tracking-wider mb-1">
+                              {event.type}
+                            </span>
+                            <h4 className="text-white text-sm font-semibold leading-tight mb-1 group-hover:underline underline-offset-2">{event.title}</h4>
+                            <p className="text-white/60 text-[10px] truncate">{event.date}</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
                   </div>
                 </div>
-
-                <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
-                  {projectItems.slice(1).map((material) => (
-                    <div key={material.id} className="relative h-48 lg:h-[113px] rounded-xl overflow-hidden shadow-md border border-black/5 group">
-                      <Image 
-                        src={material.image} 
-                        alt={material.title}
-                        fill
-                        className="object-cover group-hover:scale-110 transition-transform duration-500"
-                        onError={swapImage('/hero/hero-store.jpg')}
-                      />
-                      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
-                        <span className="text-red-300 text-[10px] font-bold uppercase tracking-wider mb-1">
-                          {material.type}
-                        </span>
-                        <h4 className="text-white text-sm font-semibold leading-tight mb-1">{material.title}</h4>
-                        <p className="text-white/60 text-[10px]">Status: {material.status}</p>
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
+              )}
             </div>
           </section>
         )}
+
+        <section className="py-20 bg-white text-black">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="grid gap-10 lg:grid-cols-[1.2fr_0.95fr] items-start">
+              <div>
+                <span className="inline-flex items-center rounded-full bg-red-100 px-4 py-1 text-sm font-semibold uppercase tracking-[0.32em] text-red-800 mb-4">
+                  Rivers of Hope Partnership
+                </span>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4">Request Support or Join the Rivers of Hope Movement</h2>
+                <p className="text-black/70 mb-6">Complete the form to share your details with the Rivers of Hope desk. Your request will be saved in the database and delivered to <strong>roh@piccworldwide.org</strong>.</p>
+                <div className="grid gap-4 text-sm text-black/75">
+                  <div className="rounded-3xl bg-red-50 p-5">
+                    <p className="font-semibold text-black mb-1">Email</p>
+                    <p>roh@piccworldwide.org</p>
+                  </div>
+                  <div className="rounded-3xl bg-red-50 p-5">
+                    <p className="font-semibold text-black mb-1">Location</p>
+                    <p>Rivers of Hope Desk, PICC Worldwide</p>
+                  </div>
+                  <div className="rounded-3xl bg-red-50 p-5">
+                    <p className="font-semibold text-black mb-1">What we receive</p>
+                    <p>Prayer support, financial partnership, media and volunteer requests, and crusade invitations.</p>
+                  </div>
+                </div>
+              </div>
+
+              <form onSubmit={handleRohFormSubmit} className="rounded-3xl border border-black/10 bg-slate-50 p-8 shadow-sm">
+                <div className="grid gap-4">
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Full Name</span>
+                    <input
+                      name="fullName"
+                      value={rohFormData.fullName}
+                      onChange={handleRohFormChange}
+                      required
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="Your full name"
+                    />
+                  </label>
+
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Email Address</span>
+                    <input
+                      name="email"
+                      type="email"
+                      value={rohFormData.email}
+                      onChange={handleRohFormChange}
+                      required
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="you@example.com"
+                    />
+                  </label>
+
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Phone Number</span>
+                    <input
+                      name="phone"
+                      value={rohFormData.phone}
+                      onChange={handleRohFormChange}
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="+265 88 123 4567"
+                    />
+                  </label>
+
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Location</span>
+                    <input
+                      name="location"
+                      value={rohFormData.location}
+                      onChange={handleRohFormChange}
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="Your city or branch"
+                    />
+                  </label>
+
+                  <div className="space-y-3 rounded-3xl border border-black/10 bg-white p-4">
+                    <p className="text-sm font-semibold text-black">Partnership Program (select all that apply)</p>
+                    <div className="grid gap-3 sm:grid-cols-2">
+                      {ROH_PROGRAM_OPTIONS.map((option) => (
+                        <label key={option.key} className="inline-flex items-center gap-3 rounded-2xl border border-black/10 bg-slate-50 px-4 py-3 text-sm text-black cursor-pointer">
+                          <input
+                            type="checkbox"
+                            name={`programs.${option.key}`}
+                            checked={rohFormData.programs[option.key]}
+                            onChange={handleRohFormChange}
+                            className="h-4 w-4 rounded border-gray-300 text-red-800 focus:ring-red-800"
+                          />
+                          <span>{option.label}</span>
+                        </label>
+                      ))}
+                    </div>
+                    <p className="text-xs text-black/60">Selected: {selectedProgramLabels || 'None'}</p>
+                  </div>
+
+                  <div className="grid gap-4 sm:grid-cols-2">
+                    <label className="space-y-2 text-sm font-medium text-black">
+                      <span>Amount</span>
+                      <input
+                        name="amount"
+                        value={rohFormData.amount}
+                        onChange={handleRohFormChange}
+                        className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                        placeholder="K 0.00"
+                      />
+                    </label>
+
+                    <label className="space-y-2 text-sm font-medium text-black">
+                      <span>Frequency</span>
+                      <select
+                        name="frequency"
+                        value={rohFormData.frequency}
+                        onChange={handleRohFormChange}
+                        className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      >
+                        <option>Monthly</option>
+                        <option>Quarterly</option>
+                        <option>Biannually</option>
+                        <option>Annually</option>
+                      </select>
+                    </label>
+                  </div>
+
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Volunteer Area / Notes</span>
+                    <textarea
+                      name="volunteerArea"
+                      value={rohFormData.volunteerArea}
+                      onChange={handleRohFormChange}
+                      rows={4}
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="Share how you want to serve or any special request"
+                    />
+                  </label>
+
+                  <label className="space-y-2 text-sm font-medium text-black">
+                    <span>Additional Notes</span>
+                    <textarea
+                      name="notes"
+                      value={rohFormData.notes}
+                      onChange={handleRohFormChange}
+                      rows={4}
+                      className="w-full rounded-2xl border border-black/10 bg-white px-4 py-3 text-black outline-none focus:border-red-800 focus:ring-2 focus:ring-red-100"
+                      placeholder="Any extra information for the ROH team"
+                    />
+                  </label>
+                </div>
+
+                <button
+                  type="submit"
+                  disabled={isRohSubmitting}
+                  className="mt-6 inline-flex w-full items-center justify-center rounded-2xl bg-red-800 px-6 py-4 text-sm font-semibold text-white shadow-lg shadow-red-200/40 transition hover:bg-red-900 disabled:opacity-50 disabled:cursor-not-allowed"
+                >
+                  {isRohSubmitting ? 'Sending...' : 'Submit Inquiry'}
+                </button>
+              </form>
+            </div>
+          </div>
+        </section>
 
         {/* MOBILE FULLSCREEN PLAYER OVERRIDE */}
         {mobilePlayerActive && (

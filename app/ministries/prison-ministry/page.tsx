@@ -5,7 +5,7 @@ import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
 import { Card } from '@/components/ui/card';
-import { ChevronLeft, ChevronRight, CalendarDays } from 'lucide-react';
+import { ChevronLeft, ChevronRight, CalendarDays, Mail, MapPin, Phone } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { apiFetch, apiUrl } from '@/lib/api';
 
@@ -15,6 +15,10 @@ type MinistryInfo = {
   about: string | null;
   heroImageUrl: string | null;
   logoImageUrl: string | null;
+  phone: string | null;
+  email: string | null;
+  location: string | null;
+  contactIntro: string | null;
 };
 
 type MinistryItem = {
@@ -67,6 +71,11 @@ const defaultInfo: MinistryInfo = {
 Our volunteers visit correctional facilities to provide spiritual guidance, counseling, and practical support. We are committed to walking with individuals during their incarceration and assisting them as they transition back into their families and communities.`,
   heroImageUrl: '/ministries/prison/header.jpg',
   logoImageUrl: '/logo.png',
+  phone: '+265 999 298 614',
+  email: 'prison@piccworldwide.org',
+  location: 'Camp of God Cathedral',
+  contactIntro:
+    'For prison outreach support, volunteer coordination, or ministry inquiries, please contact the Prison Ministry team.',
 };
 
 const pastEvents = [
@@ -288,6 +297,44 @@ export default function PrisonMinistryPage() {
                   <ChevronRight className="w-5 h-5" />
                 </button>
               </div>
+            </div>
+          </div>
+        </section>
+
+        {/* 4. CONTACTS SECTION */}
+        <section className="py-20 bg-slate-900 text-white">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="text-center mb-16">
+              <h2 className="text-3xl md:text-4xl font-bold mb-4">Get Involved</h2>
+              <p className="text-white/80 max-w-2xl mx-auto">
+                {ministryInfo.contactIntro || defaultInfo.contactIntro}
+              </p>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+              <Card className="bg-white/10 border-0 text-white p-8 text-center backdrop-blur-sm">
+                <MapPin className="w-10 h-10 mx-auto text-blue-300 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Location</h3>
+                <p className="text-white/70 whitespace-pre-line">
+                  {ministryInfo.location || defaultInfo.location}
+                </p>
+              </Card>
+
+              <Card className="bg-white/10 border-0 text-white p-8 text-center backdrop-blur-sm">
+                <Phone className="w-10 h-10 mx-auto text-blue-300 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Phone</h3>
+                <p className="text-white/70">
+                  {ministryInfo.phone || defaultInfo.phone}
+                </p>
+              </Card>
+
+              <Card className="bg-white/10 border-0 text-white p-8 text-center backdrop-blur-sm">
+                <Mail className="w-10 h-10 mx-auto text-blue-300 mb-4" />
+                <h3 className="font-bold text-xl mb-2">Email</h3>
+                <p className="text-white/70 break-all">
+                  {ministryInfo.email || defaultInfo.email}
+                </p>
+              </Card>
             </div>
           </div>
         </section>

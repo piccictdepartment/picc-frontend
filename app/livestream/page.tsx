@@ -13,7 +13,7 @@ import PrayerRequestTool from '@/components/livestream/PrayerRequestTool';
 import BibleTool from '@/components/livestream/BibleTool';
 import { Card } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
-import { BookOpenText, MessageSquareText, StickyNote } from 'lucide-react';
+import { BookOpenText, HandHeart, MessageSquareText, StickyNote } from 'lucide-react';
 
 type ToolKey = "bible" | "notepad" | "chat" | "testimony" | "prayer" | "give" | null;
 
@@ -73,11 +73,27 @@ type YouTubePlayerStateChangeEvent = {
 
 const CHANNEL_ID = "UC6auo8Q1xb5cgyY_pGJbfdw";
 const YOUTH_CHURCH_CHANNEL_ID = "UC_aXxxQF62jKWRK3xjzOZPg";
-const RELATED_CHANNEL_IDS = [
-  "UC8JUC-G4wKhrrPr7xjxYWJw",
-  YOUTH_CHURCH_CHANNEL_ID,
-  "UC5iA3dWaUBlP_PBlGSQvgNQ",
+const RELATED_CHANNELS = [
+  {
+    channelId: "UC8JUC-G4wKhrrPr7xjxYWJw",
+    title: "Watch on YouTube",
+    channelTitle: "PICC Ministry Channel",
+    url: "https://www.youtube.com/channel/UC8JUC-G4wKhrrPr7xjxYWJw",
+  },
+  {
+    channelId: YOUTH_CHURCH_CHANNEL_ID,
+    title: "Watch on YouTube",
+    channelTitle: "PICC Youth Church",
+    url: `https://www.youtube.com/channel/${YOUTH_CHURCH_CHANNEL_ID}`,
+  },
+  {
+    channelId: "UC5iA3dWaUBlP_PBlGSQvgNQ",
+    title: "Watch on YouTube",
+    channelTitle: "PICC Worldwide",
+    url: "https://www.youtube.com/channel/UC5iA3dWaUBlP_PBlGSQvgNQ",
+  },
 ];
+const RELATED_CHANNEL_IDS = RELATED_CHANNELS.map((channel) => channel.channelId);
 const FALLBACK_HERO_ID = "ydTADwZRquA";
 
 const TOOL_TABS: Array<{
@@ -101,12 +117,27 @@ export default function LivestreamPage() {
   const [loadError, setLoadError] = useState<string | null>(null);
   const [isMobileViewport, setIsMobileViewport] = useState(false);
   const [mobileResumeAt, setMobileResumeAt] = useState<number | null>(null);
+  const [bottomGiveOpen, setBottomGiveOpen] = useState(false);
+  const bottomGiveRef = useRef<HTMLDivElement | null>(null);
   const playersRef = useRef<Map<string, YouTubePlayer>>(new Map());
 
   const YOUTUBE_API_KEY = process.env.NEXT_PUBLIC_YOUTUBE_API_KEY || "";
 
   const featuredVideo = videos[0] || null;
   const gridVideos = videos.slice(1, 4);
+  const fallbackGridVideos: YouTubeVideo[] = RELATED_CHANNELS.map((channel) => ({
+    videoId: channel.channelId,
+    title: channel.title,
+    publishedAt: "",
+    updatedAt: "",
+    channelTitle: channel.channelTitle,
+    description: "",
+    thumbnail: "",
+    url: channel.url,
+    embedUrl: "",
+    canEmbed: false,
+  }));
+  const displayGridVideos = gridVideos.length > 0 ? gridVideos : fallbackGridVideos;
 
   const formatDate = (value: string) => {
     if (!value) return "";
@@ -420,6 +451,16 @@ export default function LivestreamPage() {
 
   const mobileVideoId = featuredVideo?.videoId || FALLBACK_HERO_ID;
   const mobileVideoStart = mobileResumeAt && mobileResumeAt > 0 ? `&start=${mobileResumeAt}` : '';
+
+  const openBottomGiveTool = () => {
+    setBottomGiveOpen(true);
+    window.requestAnimationFrame(() => {
+      bottomGiveRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "start",
+      });
+    });
+  };
 
   return (
     <>
@@ -769,13 +810,15 @@ export default function LivestreamPage() {
                   Loading videos from other channels...
                 </p>
               </div>
-            ) : loadError ? (
-              <div className="text-center py-12">
-                <p className="text-lg text-white/70">{loadError}</p>
-              </div>
-            ) : gridVideos.length > 0 ? (
+            ) : (
+              <>
+              {loadError && (
+                <p className="mb-6 text-center text-sm text-white/60">
+                  {loadError} Showing direct channel links instead.
+                </p>
+              )}
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-                {gridVideos.map((stream) => (
+                {displayGridVideos.map((stream) => (
                   <Card
                     key={stream.videoId}
                     className="overflow-hidden hover:shadow-lg transition-shadow flex flex-col bg-white border-black/10 text-black"
@@ -829,29 +872,56 @@ export default function LivestreamPage() {
                         )}
                       </div>
                       {stream.url && (
-                        <Button
-                          asChild
-                          className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
-                        >
-                          <Link
-                            href={stream.url}
-                            target="_blank"
-                            rel="noreferrer"
+                        <div className="grid grid-cols-2 gap-2">
+                          <Button
+                            asChild
+                            className="w-full bg-secondary text-secondary-foreground hover:bg-secondary/90"
                           >
-                            Watch on YouTube
-                          </Link>
-                        </Button>
+                            <Link
+                              href={stream.url}
+                              target="_blank"
+                              rel="noreferrer"
+                            >
+                              Watch
+                            </Link>
+                          </Button>
+                          <Button
+                            type="button"
+                            onClick={openBottomGiveTool}
+                            className="w-full bg-[#39D98A] text-black hover:bg-[#2FC77C]"
+                          >
+                            <HandHeart size={16} />
+                            {bottomGiveOpen ? "Giving" : "Give"}
+                          </Button>
+                        </div>
                       )}
                     </div>
                   </Card>
                 ))}
               </div>
-            ) : (
-              <div className="text-center py-12">
-                <p className="text-lg text-white/70">
-                  No recent videos available yet.
-                </p>
-              </div>
+              {bottomGiveOpen && (
+                <div
+                  ref={bottomGiveRef}
+                  className="mt-8 overflow-hidden rounded-2xl border border-white/15 bg-white/5"
+                >
+                  <div className="flex items-center justify-between gap-3 border-b border-white/10 px-4 py-3">
+                    <p className="text-xs font-semibold uppercase tracking-[0.2em] text-white/70">
+                      Giving Form
+                    </p>
+                    <button
+                      type="button"
+                      onClick={() => setBottomGiveOpen(false)}
+                      className="rounded-full bg-white/10 px-3 py-1 text-xs font-medium text-white hover:bg-white/20"
+                    >
+                      Close
+                    </button>
+                  </div>
+                  <div className="px-4 py-5 text-white md:px-5 md:py-6">
+                    <GiveTool isMobile={isMobileViewport} />
+                  </div>
+                </div>
+              )}
+              </>
             )}
           </div>
         </section>

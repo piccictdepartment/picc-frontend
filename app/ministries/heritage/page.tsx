@@ -1,13 +1,14 @@
 'use client';
 
-import { useState, useEffect, type SyntheticEvent } from 'react';
+import { useState, useEffect, type FormEvent, type SyntheticEvent } from 'react';
 import Image from 'next/image';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
+import NewsSection, { type NewsSectionItem } from '@/components/NewsSection';
 import { Card } from '@/components/ui/card';
 import { apiFetch, apiUrl } from '@/lib/api';
 import { 
-  MapPin, Phone, Mail, CalendarClock, Globe, 
+  MapPin, Phone, Mail, CalendarClock, Globe, Search, 
   Baby, Smile, Palette, Music, BookOpen, XIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
@@ -246,22 +247,71 @@ const defaultEventItems: MinistryItem[] = [
   },
 ];
 
+const heritageNewsItems: NewsSectionItem[] = [
+  {
+    badge: 'Update',
+    date: 'May 2026',
+    title: 'Heritage Kids Community Fair',
+    description: 'A joyful day of games, crafts, and family fellowship at the Heritage Ministry community fair.',
+    image: '/ministries/heritage/news-1.JPG',
+  },
+  {
+    badge: 'Launch',
+    date: 'May 2026',
+    title: 'New Heritage Worship Space',
+    description: 'We celebrated the opening of our refreshed children’s worship room and learning zones.',
+    image: '/ministries/heritage/news-2.JPG',
+  },
+  {
+    badge: 'Weekly',
+    date: 'May 2026',
+    title: 'Heritage Kids Midweek Club',
+    description: 'Our energetic midweek club continues to help kids grow in faith through music and story time.',
+    image: '/ministries/heritage/news-3.JPG',
+  },
+  {
+    badge: 'Highlight',
+    date: 'May 2026',
+    title: 'Creative Art & Prayer Night',
+    description: 'A special evening where children expressed faith through art, worship, and prayer circles.',
+    image: '/ministries/heritage/news-4.JPG',
+  },
+  {
+    badge: 'Community',
+    date: 'May 2026',
+    title: 'Family Outreach Sunday',
+    description: 'Heritage families joined together to serve and bless our local neighborhood.',
+    image: '/ministries/heritage/news-5.JPG',
+  },
+  {
+    badge: 'Celebration',
+    date: 'May 2026',
+    title: 'Children’s Choir Presentation',
+    description: 'The Heritage Kids Choir led worship with joyful singing and enthusiastic praise.',
+    image: '/ministries/heritage/news-6.JPG',
+  },
+];
+
 export default function HeritageMinistryPage() {
   // --- STATE ---
   const [activeGalleryId, setActiveGalleryId] = useState<string | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<MinistryItem | null>(null);
-  const [featuredEventIndex, setFeaturedEventIndex] = useState(0);
+  const [selectedOutreach, setSelectedOutreach] = useState<MinistryItem | null>(null);
+
+  // Outreaches section state (mirrors events)
+  const [outreachSearchInput, setOutreachSearchInput] = useState('');
+  const [outreachSearchQuery, setOutreachSearchQuery] = useState('');
+  const [outreachSlide, setOutreachSlide] = useState(0);
+
+  const [eventSearchInput, setEventSearchInput] = useState('');
+  const [eventSearchQuery, setEventSearchQuery] = useState('');
+  const [currentSlide, setCurrentSlide] = useState(0);
   const [ministryInfo, setMinistryInfo] = useState<MinistryInfo>(defaultMinistryInfo);
   const [ministryItems, setMinistryItems] = useState<MinistryItem[]>([]);
   const [, setIsLoading] = useState(true);
 
-  // --- CYCLING EVENTS EFFECT ---
-  useEffect(() => {
-    const timer = setInterval(() => {
-      setFeaturedEventIndex((prev) => (prev + 1) % Math.max(1, ministryItems.filter((item) => item.category === 'event').length || defaultEventItems.length));
-    }, 5000);
-    return () => clearInterval(timer);
-  }, [ministryItems]);
+  const normalizeSearchText = (value: string) =>
+    value.toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
 
   useEffect(() => {
     async function loadContent() {
@@ -302,8 +352,80 @@ export default function HeritageMinistryPage() {
   const aboutParagraphs = (ministryInfo.about || defaultMinistryInfo.about || '').split(/\n{2,}/).filter(Boolean);
   const logoImageUrl = toAssetUrl(ministryInfo.logoImageUrl);
 
-  const featuredGridEvent = eventList[featuredEventIndex % Math.max(1, eventList.length)];
-  const remainingEvents = eventList.filter((_, idx) => idx !== featuredEventIndex % Math.max(1, eventList.length));
+  const normalizedEventSearchQuery = normalizeSearchText(eventSearchQuery);
+  const displayedEventItems = normalizedEventSearchQuery
+    ? eventList.filter((item) => {
+        const searchableText = normalizeSearchText([
+          item.title,
+          item.label || item.date || '',
+          item.location || '',
+          item.description || '',
+        ].join(' '));
+        return searchableText.includes(normalizedEventSearchQuery);
+      })
+    : eventList;
+
+  const safeCurrentSlide = displayedEventItems.length
+    ? ((currentSlide % displayedEventItems.length) + displayedEventItems.length) % displayedEventItems.length
+    : 0;
+
+  const featuredGridEvent = displayedEventItems[safeCurrentSlide] || eventList[0];
+  const remainingEvents = displayedEventItems.filter((_, idx) => idx !== safeCurrentSlide);
+
+  const handleEventSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setEventSearchQuery(eventSearchInput.trim());
+    setCurrentSlide(0);
+  };
+
+  const clearEventSearch = () => {
+    setEventSearchInput('');
+    setEventSearchQuery('');
+    setCurrentSlide(0);
+  };
+
+  // --- Outreaches data derived from heritage news items ---
+  const outreachItems: MinistryItem[] = heritageNewsItems.map((n, idx) => ({
+    id: `outreach-${idx + 1}`,
+    category: 'outreach',
+    title: n.title,
+    description: n.description,
+    label: n.date,
+    imageUrl: n.image,
+    sortOrder: idx,
+  }));
+
+  const normalizedOutreachSearchQuery = normalizeSearchText(outreachSearchQuery);
+  const displayedOutreachItems = normalizedOutreachSearchQuery
+    ? outreachItems.filter((item) => {
+        const searchableText = normalizeSearchText([
+          item.title,
+          item.label || '',
+          item.location || '',
+          item.description || '',
+        ].join(' '));
+        return searchableText.includes(normalizedOutreachSearchQuery);
+      })
+    : outreachItems;
+
+  const safeOutreachSlide = displayedOutreachItems.length
+    ? ((outreachSlide % displayedOutreachItems.length) + displayedOutreachItems.length) % displayedOutreachItems.length
+    : 0;
+
+  const featuredOutreach = displayedOutreachItems[safeOutreachSlide] || outreachItems[0];
+  const remainingOutreaches = displayedOutreachItems.filter((_, idx) => idx !== safeOutreachSlide);
+
+  const handleOutreachSearch = (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    setOutreachSearchQuery(outreachSearchInput.trim());
+    setOutreachSlide(0);
+  };
+
+  const clearOutreachSearch = () => {
+    setOutreachSearchInput('');
+    setOutreachSearchQuery('');
+    setOutreachSlide(0);
+  };
 
   return (
     <>
@@ -335,7 +457,7 @@ export default function HeritageMinistryPage() {
 
               <div className="relative w-full md:w-1/2 h-64 md:h-[500px] bg-sky-100">
                 <Image 
-                  src={toAssetUrl(selectedEvent.imageUrl) || toAssetUrl(selectedEvent.image) || '/hero/hero-store.jpg'} 
+                  src={toAssetUrl(selectedEvent.imageUrl) || '/hero/hero-store.jpg'} 
                   alt={selectedEvent.title}
                   fill
                   className="object-cover"
@@ -378,6 +500,69 @@ export default function HeritageMinistryPage() {
                     </a>
                   </div>
                 </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+
+        {selectedOutreach && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 bg-black/80 backdrop-blur-sm z-50 flex items-center justify-center p-4"
+            onClick={() => setSelectedOutreach(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, y: 30 }}
+              animate={{ scale: 1, y: 0 }}
+              exit={{ scale: 0.95, y: 30 }}
+              className="bg-white text-black max-w-3xl w-full rounded-3xl overflow-hidden shadow-2xl relative flex flex-col md:flex-row"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button
+                onClick={() => setSelectedOutreach(null)}
+                className="absolute top-4 right-4 z-10 bg-black/50 text-white p-2 rounded-full hover:bg-black/70 transition-colors"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+              <div className="relative w-full md:w-1/2 h-64 md:h-auto bg-purple-100">
+                <Image
+                  src={toAssetUrl(selectedOutreach.imageUrl) || '/hero/hero-store.jpg'}
+                  alt={selectedOutreach.title}
+                  fill
+                  className="object-cover"
+                  onError={fallbackImageHandler('/hero/hero-store.jpg')}
+                />
+              </div>
+              <div className="p-6 md:p-8 w-full md:w-1/2 flex flex-col justify-center">
+                <span className="text-xs uppercase font-bold text-purple-600 tracking-wider mb-2">
+                  Outreach
+                </span>
+                <h3 className="text-2xl font-bold text-gray-900 mb-4 leading-tight">
+                  {selectedOutreach.title}
+                </h3>
+                <div className="space-y-3 mb-6 text-sm text-gray-700">
+                  <div className="flex items-center gap-2">
+                    <CalendarClock className="w-4 h-4 text-purple-600" /> {selectedOutreach.label}
+                  </div>
+                  {selectedOutreach.location && (
+                    <div className="flex items-center gap-2">
+                      <MapPin className="w-4 h-4 text-purple-600" /> {selectedOutreach.location}
+                    </div>
+                  )}
+                </div>
+                <p className="text-gray-600 text-sm leading-relaxed mb-6">
+                  {selectedOutreach.description}
+                </p>
+                <a
+                  href="https://wa.me/265995465540"
+                  target="_blank"
+                  rel="noreferrer"
+                  className="w-full text-center bg-purple-600 hover:bg-purple-700 text-white py-3 rounded-xl font-medium transition-colors text-sm"
+                >
+                  Inquire on WhatsApp
+                </a>
               </div>
             </motion.div>
           </motion.div>
@@ -564,96 +749,192 @@ export default function HeritageMinistryPage() {
           </div>
         </section>
 
-        {/* 5. ALL EVENTS SECTION (Cycling Grid) */}
+        {/* 5. ALL EVENTS SECTION (Interactive Events) */}
         <section className="py-20 bg-gray-50 text-black overflow-hidden border-y border-black/5">
           <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div className="flex flex-col md:flex-row md:items-end justify-between mb-12">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
               <div>
                 <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sky-900">Upcoming Fun & Events</h2>
                 <p className="text-black/60 max-w-xl text-lg">Mark your calendars for these exciting activities designed just for kids!</p>
               </div>
-            </div>
-
-            <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
-              <button 
-                onClick={() => setSelectedEvent(featuredGridEvent)}
-                className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-sky-100 group text-left w-full focus:outline-none focus:ring-4 focus:ring-sky-400"
-              >
-                <AnimatePresence mode="wait">
-                  <motion.div
-                    key={featuredGridEvent.id}
-                    initial={{ opacity: 0, scale: 1.05 }}
-                    animate={{ opacity: 1, scale: 1 }}
-                    exit={{ opacity: 0 }}
-                    transition={{ duration: 0.5 }}
-                    className="absolute inset-0"
+              <div className="flex flex-col items-start gap-2 md:items-end w-full md:w-auto">
+                <form onSubmit={handleEventSearch} className="flex w-full items-center gap-2 sm:w-auto">
+                  <input
+                    type="search"
+                    value={eventSearchInput}
+                    onChange={(event) => setEventSearchInput(event.target.value)}
+                    placeholder="Search by title, date, or keyword"
+                    className="h-10 min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 text-sm font-medium text-black outline-none transition placeholder:text-black/35 focus:border-[#045BB4] focus:ring-2 focus:ring-[#045BB4]/15 sm:w-64"
+                    aria-label="Search events"
+                  />
+                  <button
+                    type="submit"
+                    className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#045BB4] px-4 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-[#033D7A] focus:outline-none focus:ring-2 focus:ring-[#045BB4]/30"
                   >
-                    <Image 
-                      src={toAssetUrl(featuredGridEvent.imageUrl) || '/hero/hero-store.jpg'} 
-                      alt={featuredGridEvent.title}
-                      fill
-                      className="object-cover group-hover:scale-105 transition-transform duration-700"
-                      onError={fallbackImageHandler('/hero/hero-store.jpg')}
-                    />
-                    <div className="absolute inset-0 bg-gradient-to-t from-sky-900/90 via-sky-900/30 to-transparent flex flex-col justify-end p-8">
-                      <span className="bg-yellow-400 text-sky-900 text-xs font-black uppercase tracking-wider py-1.5 px-4 rounded-full w-fit mb-3 shadow-sm">
-                        {featuredGridEvent.type || featuredGridEvent.category}
-                      </span>
-                      <h3 className="text-white text-3xl md:text-5xl font-black mb-3 group-hover:text-yellow-200 transition-colors drop-shadow-md">{featuredGridEvent.title}</h3>
-                      <p className="text-white text-sm md:text-base font-medium flex items-center gap-2 mb-1">
-                        <CalendarClock className="w-5 h-5 text-yellow-300" /> {featuredGridEvent.label || 'TBA'}
-                      </p>
-                      {featuredGridEvent.location && (
-                        <p className="text-sky-100 text-sm flex items-center gap-2">
-                          <MapPin className="w-5 h-5 text-yellow-300" /> {featuredGridEvent.location}
-                        </p>
-                      )}
-                    </div>
-                  </motion.div>
-                </AnimatePresence>
-                <div className="absolute top-6 right-6 bg-white/30 backdrop-blur-md px-4 py-2 rounded-full text-white text-sm font-bold border border-white/50 opacity-0 group-hover:opacity-100 transition-opacity shadow-lg">
-                  Click for Info
-                </div>
-              </button>
-
-              <div className="grid grid-cols-2 lg:grid-cols-1 gap-4 lg:gap-6">
-                {remainingEvents.map((event) => (
-                  <button 
-                    key={event.id} 
-                    onClick={() => setSelectedEvent(event)}
-                    className="relative h-48 lg:h-[113px] rounded-2xl overflow-hidden shadow-md border border-sky-50 group text-left w-full focus:outline-none focus:ring-4 focus:ring-sky-300"
-                  >
-                    <Image 
-                      src={toAssetUrl(event.imageUrl) || '/hero/hero-store.jpg'} 
-                      alt={event.title}
-                      fill
-                      className="object-cover group-hover:scale-110 transition-transform duration-500"
-                      onError={fallbackImageHandler('/hero/hero-store.jpg')}
-                    />
-                    <div className="absolute inset-0 bg-sky-900/60 group-hover:bg-sky-900/40 transition-colors duration-300 flex flex-col justify-end p-4">
-                      <span className="text-yellow-300 text-[10px] font-black uppercase tracking-wider mb-1">
-                        {event.type || event.category}
-                      </span>
-                      <h4 className="text-white text-sm font-bold leading-tight mb-1 group-hover:text-yellow-200">{event.title}</h4>
-                      <p className="text-sky-100 text-[11px] truncate font-medium">{event.label || 'TBA'}</p>
-                    </div>
+                    <Search className="h-3.5 w-3.5" />
+                    Search
                   </button>
-                ))}
+                </form>
+                {eventSearchQuery && (
+                  <button
+                    type="button"
+                    onClick={clearEventSearch}
+                    className="text-xs font-semibold text-[#045BB4] hover:text-[#033D7A]"
+                  >
+                    Clear search
+                  </button>
+                )}
               </div>
             </div>
+
+            {displayedEventItems.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                <button
+                  type="button"
+                  onClick={() => setSelectedEvent(featuredGridEvent)}
+                  className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-black/5 group text-left w-full focus:outline-none focus:ring-4 focus:ring-[#045BB4]"
+                >
+                  <AnimatePresence mode="wait">
+                    <motion.div
+                      key={featuredGridEvent.id}
+                      initial={{ opacity: 0, x: 20 }}
+                      animate={{ opacity: 1, x: 0 }}
+                      exit={{ opacity: 0, x: -20 }}
+                      transition={{ duration: 0.5 }}
+                      className="absolute inset-0"
+                    >
+                      <Image
+                        src={toAssetUrl(featuredGridEvent.imageUrl) || '/hero/hero-store.jpg'}
+                        alt={featuredGridEvent.title}
+                        fill
+                        className="object-cover group-hover:scale-105 transition-transform duration-700"
+                        onError={fallbackImageHandler('/hero/hero-store.jpg')}
+                      />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
+                        <span className="bg-[#045BB4] text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3 flex items-center gap-2">
+                          <CalendarClock className="w-4 h-4" />
+                          Event
+                        </span>
+                        <h3 className="text-white text-3xl md:text-4xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">{featuredGridEvent.title}</h3>
+                        <p className="text-white/90 text-sm md:text-base font-medium flex items-center gap-2 mb-1">
+                          <CalendarClock className="w-4 h-4" /> {featuredGridEvent.label || 'TBA'}
+                        </p>
+                        <p className="text-white/70 text-sm leading-relaxed">{featuredGridEvent.description}</p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-medium border border-white/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                    Select this event
+                  </div>
+                </button>
+
+                <div className="flex gap-4 overflow-x-auto pb-4 lg:max-h-[500px] lg:flex-col lg:gap-6 lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 lg:pr-1 scrollbar-thin scrollbar-thumb-[#045BB4]/30">
+                  {remainingEvents.map((event) => (
+                    <button
+                      key={event.id}
+                      type="button"
+                      onClick={() => setSelectedEvent(event)}
+                      className="relative h-48 w-64 flex-shrink-0 rounded-xl overflow-hidden shadow-md border border-black/5 group text-left focus:outline-none focus:ring-2 focus:ring-[#045BB4] sm:w-72 lg:h-[113px] lg:w-full"
+                    >
+                      <Image
+                        src={toAssetUrl(event.imageUrl) || '/hero/hero-store.jpg'}
+                        alt={event.title}
+                        fill
+                        className="object-cover group-hover:scale-110 transition-transform duration-500"
+                        onError={fallbackImageHandler('/hero/hero-store.jpg')}
+                      />
+                      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
+                        <span className="text-blue-200 text-[10px] font-bold uppercase tracking-wider mb-1">Event</span>
+                        <h4 className="text-white text-sm font-semibold leading-tight mb-1 group-hover:underline underline-offset-2">{event.title}</h4>
+                        <p className="text-white/60 text-[10px] truncate">{event.label || 'TBA'}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-[#045BB4]/25 bg-white p-8 text-center text-sm text-black/55">
+                No events match your search.
+              </div>
+            )}
+          </div>
+        </section>
+
+        {/* 5. OUTREACHES SECTION */}
+        <section className="py-20 bg-white text-black overflow-hidden border-b border-black/5">
+          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-12 gap-6">
+              <div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 text-sky-900">Outreaches</h2>
+                <p className="text-black/60 max-w-xl text-lg">Highlights from our outreach seasons and community work.</p>
+              </div>
+              <div className="flex flex-col items-start gap-2 md:items-end w-full md:w-auto">
+                <form onSubmit={handleOutreachSearch} className="flex w-full items-center gap-2 sm:w-auto">
+                  <input
+                    type="search"
+                    value={outreachSearchInput}
+                    onChange={(e) => setOutreachSearchInput(e.target.value)}
+                    placeholder="Search outreaches"
+                    className="h-10 min-w-0 flex-1 rounded-lg border border-black/10 bg-white px-3 text-sm font-medium text-black outline-none transition placeholder:text-black/35 focus:border-[#045BB4] focus:ring-2 focus:ring-[#045BB4]/15 sm:w-64"
+                    aria-label="Search outreaches"
+                  />
+                  <button type="submit" className="inline-flex h-10 items-center gap-2 rounded-lg bg-[#045BB4] px-4 text-xs font-bold uppercase tracking-wide text-white transition hover:bg-[#033D7A] focus:outline-none focus:ring-2 focus:ring-[#045BB4]/30">
+                    <Search className="h-3.5 w-3.5" /> Search
+                  </button>
+                </form>
+                {outreachSearchQuery && (
+                  <button type="button" onClick={clearOutreachSearch} className="text-xs font-semibold text-[#045BB4] hover:text-[#033D7A]">Clear search</button>
+                )}
+              </div>
+            </div>
+
+            {displayedOutreachItems.length > 0 ? (
+              <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                <button type="button" onClick={() => setSelectedOutreach(featuredOutreach)} className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-3xl overflow-hidden shadow-xl border border-black/5 group text-left w-full focus:outline-none focus:ring-4 focus:ring-[#045BB4]">
+                  <AnimatePresence mode="wait">
+                    <motion.div key={featuredOutreach.id} initial={{ opacity: 0, x: 20 }} animate={{ opacity: 1, x: 0 }} exit={{ opacity: 0, x: -20 }} transition={{ duration: 0.5 }} className="absolute inset-0">
+                      <Image src={toAssetUrl(featuredOutreach.imageUrl) || '/hero/hero-store.jpg'} alt={featuredOutreach.title} fill className="object-cover group-hover:scale-105 transition-transform duration-700" onError={fallbackImageHandler('/hero/hero-store.jpg')} />
+                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
+                        <span className="bg-[#045BB4] text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3 flex items-center gap-2">
+                          <CalendarClock className="w-4 h-4" /> Outreach
+                        </span>
+                        <h3 className="text-white text-3xl md:text-4xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">{featuredOutreach.title}</h3>
+                        <p className="text-white/90 text-sm md:text-base font-medium flex items-center gap-2 mb-1"><CalendarClock className="w-4 h-4" /> {featuredOutreach.label || 'TBA'}</p>
+                        <p className="text-white/70 text-sm leading-relaxed">{featuredOutreach.description}</p>
+                      </div>
+                    </motion.div>
+                  </AnimatePresence>
+                  <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-medium border border-white/30 opacity-0 group-hover:opacity-100 transition-opacity">Select this outreach</div>
+                </button>
+
+                <div className="flex gap-4 overflow-x-auto pb-4 lg:max-h-[500px] lg:flex-col lg:gap-6 lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 lg:pr-1 scrollbar-thin scrollbar-thumb-[#045BB4]/30">
+                  {remainingOutreaches.map((outreach) => (
+                    <button key={outreach.id} type="button" onClick={() => setSelectedOutreach(outreach)} className="relative h-48 w-64 flex-shrink-0 rounded-xl overflow-hidden shadow-md border border-black/5 group text-left focus:outline-none focus:ring-2 focus:ring-[#045BB4] sm:w-72 lg:h-[113px] lg:w-full">
+                      <Image src={toAssetUrl(outreach.imageUrl) || '/hero/hero-store.jpg'} alt={outreach.title} fill className="object-cover group-hover:scale-110 transition-transform duration-500" onError={fallbackImageHandler('/hero/hero-store.jpg')} />
+                      <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
+                        <span className="text-blue-200 text-[10px] font-bold uppercase tracking-wider mb-1">Outreach</span>
+                        <h4 className="text-white text-sm font-semibold leading-tight mb-1 group-hover:underline underline-offset-2">{outreach.title}</h4>
+                        <p className="text-white/60 text-[10px] truncate">{outreach.label || 'TBA'}</p>
+                      </div>
+                    </button>
+                  ))}
+                </div>
+              </div>
+            ) : (
+              <div className="rounded-2xl border border-dashed border-[#045BB4]/25 bg-white p-8 text-center text-sm text-black/55">No outreaches match your search.</div>
+            )}
           </div>
         </section>
 
         {/* 6. NEWS SECTION */}
-        <section className="py-20 bg-white text-black border-b border-black/5">
-          <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-            <Globe className="w-12 h-12 mx-auto text-sky-500 mb-6" />
-            <h2 className="text-3xl md:text-4xl font-bold mb-6 text-sky-900">Parent&apos;s Noticeboard</h2>
-            <p className="text-lg text-black/70 max-w-2xl mx-auto mb-8 font-medium">
-              Parents, please remember that check-in for all classes begins 15 minutes before the main church service starts. The new curriculum workbooks for Heritage Kids are now available at the children&apos;s welcome desk!
-            </p>
-          </div>
-        </section>
+        <NewsSection
+          kicker="Heritage updates"
+          title="Latest News"
+          description="Recent highlights from Heritage ministry life, outreach, and gatherings."
+          items={heritageNewsItems}
+          backgroundClassName="bg-white text-black border-b border-black/5"
+          maxItems={6}
+        />
 
         {/* 7. CONTACTS SECTION */}
         <section className="py-20 bg-sky-600 text-white">
