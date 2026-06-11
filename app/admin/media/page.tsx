@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 import { apiFetch } from '@/lib/api';
 import { Button } from '@/components/ui/button';
 import AdminLoginCard from '@/components/admin/AdminLoginCard';
@@ -166,6 +166,8 @@ export default function AdminMediaPage() {
   const [galleryItems, setGalleryItems] = useState<GalleryItem[]>([]);
   const [bookItems, setBookItems] = useState<BookItem[]>([]);
   const [magazineItems, setMagazineItems] = useState<MagazineItem[]>([]);
+  const [newsSearch, setNewsSearch] = useState('');
+  const [magazineSearch, setMagazineSearch] = useState('');
   const [draftNews, setDraftNews] = useState(DEFAULT_NEWS_ITEM);
   const [draftGallery, setDraftGallery] = useState(DEFAULT_GALLERY_ITEM);
   const [draftBook, setDraftBook] = useState(DEFAULT_BOOK_ITEM);
@@ -355,6 +357,26 @@ export default function AdminMediaPage() {
   const editingMagazineItem = editingIds.magazines
     ? magazineItems.find((item) => item.id === editingIds.magazines)
     : null;
+
+  const filteredNewsItems = useMemo(() => {
+    const term = newsSearch.trim().toLowerCase();
+    if (!term) return newsItems;
+    return newsItems.filter((item) =>
+      [item.badge, item.date, item.title, item.description]
+        .filter(Boolean)
+        .some((value) => value.toLowerCase().includes(term)),
+    );
+  }, [newsItems, newsSearch]);
+
+  const filteredMagazineItems = useMemo(() => {
+    const term = magazineSearch.trim().toLowerCase();
+    if (!term) return magazineItems;
+    return magazineItems.filter((item) =>
+      [item.issue, item.title]
+        .filter(Boolean)
+        .some((value) => value.toLowerCase().includes(term)),
+    );
+  }, [magazineItems, magazineSearch]);
 
   const handleSaveItem = async <S extends SectionId>(
     section: S,
@@ -653,11 +675,20 @@ export default function AdminMediaPage() {
 
             <div className={sectionCardClassName}>
               <h3 className="mb-4 text-lg font-semibold text-foreground">Existing News</h3>
-              {newsItems.length === 0 ? (
+              <div className="mb-4">
+                <input
+                  type="search"
+                  value={newsSearch}
+                  onChange={(event) => setNewsSearch(event.target.value)}
+                  placeholder="Search existing news..."
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+                />
+              </div>
+              {filteredNewsItems.length === 0 ? (
                 <p className="text-sm text-foreground/60">No news items yet.</p>
               ) : (
                 <div className="max-h-[620px] space-y-3 overflow-y-auto pr-2">
-                  {newsItems.map((item) => (
+                  {filteredNewsItems.map((item) => (
                     <div
                       key={item.id}
                       className={`rounded-2xl border p-4 transition ${
@@ -1061,11 +1092,20 @@ export default function AdminMediaPage() {
 
             <div className={sectionCardClassName}>
               <h3 className="mb-4 text-lg font-semibold text-foreground">Existing Magazines</h3>
-              {magazineItems.length === 0 ? (
+              <div className="mb-4">
+                <input
+                  type="search"
+                  value={magazineSearch}
+                  onChange={(event) => setMagazineSearch(event.target.value)}
+                  placeholder="Search existing magazines..."
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+                />
+              </div>
+              {filteredMagazineItems.length === 0 ? (
                 <p className="text-sm text-foreground/60">No magazine issues yet.</p>
               ) : (
                 <div className="max-h-[620px] space-y-3 overflow-y-auto pr-2">
-                  {magazineItems.map((item) => (
+                  {filteredMagazineItems.map((item) => (
                     <div
                       key={item.id}
                       className={`rounded-2xl border p-4 transition ${

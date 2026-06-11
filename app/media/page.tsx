@@ -1,6 +1,7 @@
 'use client';
 
 import Image from 'next/image';
+import Link from 'next/link';
 import { useEffect, useMemo, useState } from 'react';
 import Navigation from '@/components/Navigation';
 import Footer from '@/components/Footer';
@@ -63,6 +64,16 @@ const normalizeAssetUrl = (value?: string | null) => {
   return value.startsWith('http') ? value : apiUrl(value);
 };
 
+const parseJson = (value: unknown): unknown => {
+  if (typeof value !== 'string') return null;
+
+  try {
+    return JSON.parse(value) as unknown;
+  } catch {
+    return null;
+  }
+};
+
 const parseListBody = (body: unknown): unknown[] => {
   if (typeof body !== 'string' || !body) return [];
   try {
@@ -75,17 +86,32 @@ const parseListBody = (body: unknown): unknown[] => {
   }
 };
 
-async function fetchSiteList<T>(key: string): Promise<T[] | null> {
+async function fetchSiteList<T>(key: string): Promise<{ items: T[]; deletedFallbackIndexes: number[] }> {
   try {
     const response = await apiFetch(`/api/site-content/${key}`);
-    if (response.status === 404) return [];
-    if (!response.ok) return null;
+    if (response.status === 404) return { items: [], deletedFallbackIndexes: [] };
+    if (!response.ok) return { items: [], deletedFallbackIndexes: [] };
+
     const record = (await response.json().catch(() => null)) as unknown;
     const body = isRecord(record) ? record.body : null;
-    const items = parseListBody(body);
-    return items.filter(isRecord) as T[];
+    const parsed = parseJson(body);
+
+    if (Array.isArray(parsed)) {
+      return { items: parsed.filter(isRecord) as T[], deletedFallbackIndexes: [] };
+    }
+
+    if (isRecord(parsed)) {
+      return {
+        items: Array.isArray(parsed.items) ? parsed.items.filter(isRecord) as T[] : [],
+        deletedFallbackIndexes: Array.isArray(parsed.deletedFallbackIndexes)
+          ? parsed.deletedFallbackIndexes.filter((value): value is number => typeof value === 'number')
+          : [],
+      };
+    }
+
+    return { items: [], deletedFallbackIndexes: [] };
   } catch {
-    return null;
+    return { items: [], deletedFallbackIndexes: [] };
   }
 }
 
@@ -166,7 +192,7 @@ export default function MediaPage() {
     let alive = true;
 
     const load = async () => {
-      const [newsItems, galleryItems, bookItems, magazineItems] = await Promise.all([
+      const [newsResult, galleryResult, bookResult, magazineResult] = await Promise.all([
         fetchSiteList<MediaNewsItem>('media-news'),
         fetchSiteList<MediaGalleryItem>('media-gallery'),
         fetchSiteList<MediaBookItem>('media-books'),
@@ -175,70 +201,78 @@ export default function MediaPage() {
 
       if (!alive) return;
 
-      if (Array.isArray(newsItems)) {
-        const adminNews = newsItems.map((item) => ({
-          badge: item.badge || 'Updates',
-          date: item.date || '',
-          title: item.title || '',
-          description: item.description || '',
-          image: normalizeAssetUrl(item.imageUrl) || '/hero/hero-4.JPG',
-        }));
-        const overriddenIndexes = new Set(
-          newsItems
-            .map((item) => item.fallbackIndex)
-            .filter((value): value is number => typeof value === 'number'),
-        );
-        const remainingFallback = CAMPUS_NEWS.filter((_, index) => !overriddenIndexes.has(index));
-        setNews(adminNews.length > 0 ? [...adminNews, ...remainingFallback] : CAMPUS_NEWS);
-      }
+      const newsItems = newsResult.items;
+      const newsDeletedIndexes = newsResult.deletedFallbackIndexes;
+      const adminNews = newsItems.map((item) => ({
+        badge: item.badge || 'Updates',
+        date: item.date || '',
+        title: item.title || '',
+        description: item.description || '',
+        image: normalizeAssetUrl(item.imageUrl) || '/hero/hero-4.JPG',
+      }));
+      const overriddenNewsIndexes = new Set(
+        newsItems
+          .map((item) => item.fallbackIndex)
+          .filter((value): value is number => typeof value === 'number'),
+      );
+      const remainingNewsFallback = CAMPUS_NEWS.filter(
+        (_, index) => !overriddenNewsIndexes.has(index) && !newsDeletedIndexes.includes(index),
+      );
+      setNews(adminNews.length > 0 || newsDeletedIndexes.length > 0 ? [...adminNews, ...remainingNewsFallback] : CAMPUS_NEWS);
 
-      if (Array.isArray(galleryItems)) {
-        const adminGallery = galleryItems.map((item) => ({
-          title: item.title || 'Gallery Item',
-          category: item.category || 'gallery',
-          image: normalizeAssetUrl(item.imageUrl) || '/hero/hero-4.JPG',
-        }));
-        const overriddenIndexes = new Set(
-          galleryItems
-            .map((item) => item.fallbackIndex)
-            .filter((value): value is number => typeof value === 'number'),
-        );
-        const remainingFallback = EVENT_GALLERY.filter((_, index) => !overriddenIndexes.has(index));
-        setGallery(adminGallery.length > 0 ? [...adminGallery, ...remainingFallback] : EVENT_GALLERY);
-      }
+      const galleryItems = galleryResult.items;
+      const galleryDeletedIndexes = galleryResult.deletedFallbackIndexes;
+      const adminGallery = galleryItems.map((item) => ({
+        title: item.title || 'Gallery Item',
+        category: item.category || 'gallery',
+        image: normalizeAssetUrl(item.imageUrl) || '/hero/hero-4.JPG',
+      }));
+      const overriddenGalleryIndexes = new Set(
+        galleryItems
+          .map((item) => item.fallbackIndex)
+          .filter((value): value is number => typeof value === 'number'),
+      );
+      const remainingGalleryFallback = EVENT_GALLERY.filter(
+        (_, index) => !overriddenGalleryIndexes.has(index) && !galleryDeletedIndexes.includes(index),
+      );
+      setGallery(adminGallery.length > 0 || galleryDeletedIndexes.length > 0 ? [...adminGallery, ...remainingGalleryFallback] : EVENT_GALLERY);
 
-      if (Array.isArray(bookItems)) {
-        const adminBooks = bookItems.map((item) => ({
-          title: item.title || '',
-          author: item.author || '',
-          description: item.description || '',
-          cover: normalizeAssetUrl(item.imageUrl) || '/fire_altar/fire-on-altar-cover.jpg',
-          file: item.fileUrl ? normalizeAssetUrl(item.fileUrl) : undefined,
-        }));
-        const overriddenIndexes = new Set(
-          bookItems
-            .map((item) => item.fallbackIndex)
-            .filter((value): value is number => typeof value === 'number'),
-        );
-        const remainingFallback = BOOKS.filter((_, index) => !overriddenIndexes.has(index));
-        setBooks(adminBooks.length > 0 ? [...adminBooks, ...remainingFallback] : BOOKS);
-      }
+      const bookItems = bookResult.items;
+      const bookDeletedIndexes = bookResult.deletedFallbackIndexes;
+      const adminBooks = bookItems.map((item) => ({
+        title: item.title || '',
+        author: item.author || '',
+        description: item.description || '',
+        cover: normalizeAssetUrl(item.imageUrl) || '/fire_altar/fire-on-altar-cover.jpg',
+        file: item.fileUrl ? normalizeAssetUrl(item.fileUrl) : undefined,
+      }));
+      const overriddenBookIndexes = new Set(
+        bookItems
+          .map((item) => item.fallbackIndex)
+          .filter((value): value is number => typeof value === 'number'),
+      );
+      const remainingBookFallback = BOOKS.filter(
+        (_, index) => !overriddenBookIndexes.has(index) && !bookDeletedIndexes.includes(index),
+      );
+      setBooks(adminBooks.length > 0 || bookDeletedIndexes.length > 0 ? [...adminBooks, ...remainingBookFallback] : BOOKS);
 
-      if (Array.isArray(magazineItems)) {
-        const adminMagazines = magazineItems.map((item) => ({
-          title: item.title || '',
-          issue: item.issue || '',
-          cover: normalizeAssetUrl(item.imageUrl) || '/magazine/magazine-1.jpeg',
-          file: item.fileUrl ? normalizeAssetUrl(item.fileUrl) : undefined,
-        }));
-        const overriddenIndexes = new Set(
-          magazineItems
-            .map((item) => item.fallbackIndex)
-            .filter((value): value is number => typeof value === 'number'),
-        );
-        const remainingFallback = MAGAZINES.filter((_, index) => !overriddenIndexes.has(index));
-        setMagazines(adminMagazines.length > 0 ? [...adminMagazines, ...remainingFallback] : MAGAZINES);
-      }
+      const magazineItems = magazineResult.items;
+      const magazineDeletedIndexes = magazineResult.deletedFallbackIndexes;
+      const adminMagazines = magazineItems.map((item) => ({
+        title: item.title || '',
+        issue: item.issue || '',
+        cover: normalizeAssetUrl(item.imageUrl) || '/magazine/magazine-1.jpeg',
+        file: item.fileUrl ? normalizeAssetUrl(item.fileUrl) : undefined,
+      }));
+      const overriddenMagazineIndexes = new Set(
+        magazineItems
+          .map((item) => item.fallbackIndex)
+          .filter((value): value is number => typeof value === 'number'),
+      );
+      const remainingMagazineFallback = MAGAZINES.filter(
+        (_, index) => !overriddenMagazineIndexes.has(index) && !magazineDeletedIndexes.includes(index),
+      );
+      setMagazines(adminMagazines.length > 0 || magazineDeletedIndexes.length > 0 ? [...adminMagazines, ...remainingMagazineFallback] : MAGAZINES);
     };
 
     void load();
@@ -302,6 +336,14 @@ export default function MediaPage() {
         </section>
 
         <ChurchNewsSection items={news} />
+        
+        <div className="bg-background pb-16 text-center">
+          <Link href="/media/archive">
+            <Button variant="outline" className="rounded-xl px-8 py-6 h-auto border-primary/20 hover:bg-primary/5 gap-2 text-sm font-bold uppercase tracking-widest text-primary transition-all">
+              View News Archive
+            </Button>
+          </Link>
+        </div>
 
         <section className="py-16 sm:py-20 md:py-24 bg-background">
           <div className="w-full px-0">
@@ -489,6 +531,13 @@ export default function MediaPage() {
                 <p className="text-foreground/70 mt-4 max-w-xl">
                   Explore recent church magazine covers. Full issues will be available soon.
                 </p>
+              </div>
+              <div className="lg:text-right">
+                <Link href="/media/archive">
+                  <Button variant="outline" className="rounded-xl px-8 py-4 h-auto border-primary/20 hover:bg-primary/5 gap-2 text-sm font-bold uppercase tracking-widest text-primary transition-all">
+                    View All Magazines
+                  </Button>
+                </Link>
               </div>
             </div>
 

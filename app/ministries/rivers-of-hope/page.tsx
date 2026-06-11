@@ -20,7 +20,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import LiveChat from '@/components/LiveChat';
 import NotepadTool from '@/components/livestream/NotepadTool';
 import TestimonyTool from '@/components/livestream/TestimonyTool';
-import GiveTool from '@/components/livestream/GiveTool';
+import ROHGiveTool from '@/components/livestream/ROHGiveTool';
 import BibleTool from '@/components/livestream/BibleTool';
 import NewsSection from '@/components/NewsSection';
 import { RIVERS_OF_HOPE_NEWS_ITEMS } from '@/components/riversOfHopeNews';
@@ -312,9 +312,13 @@ export default function RiversOfHopePage() {
   // --- STATE ---
   const [activeGalleryId, setActiveGalleryId] = useState<number | null>(null);
   const [selectedEvent, setSelectedEvent] = useState<EventCard | null>(null);
+  const [selectedOutreach, setSelectedOutreach] = useState<EventCard | null>(null);
   const [currentSlide, setCurrentSlide] = useState(0);
+  const [outreachSlide, setOutreachSlide] = useState(0);
   const [eventSearchInput, setEventSearchInput] = useState('');
   const [eventSearchQuery, setEventSearchQuery] = useState('');
+  const [outreachSearchInput, setOutreachSearchInput] = useState('');
+  const [outreachSearchQuery, setOutreachSearchQuery] = useState('');
   const [ministryInfo, setMinistryInfo] = useState<MinistryInfo>(defaultInfo);
   const [ministryItems, setMinistryItems] = useState<MinistryItem[]>([]);
   const [isRohSubmitting, setIsRohSubmitting] = useState(false);
@@ -486,6 +490,17 @@ export default function RiversOfHopePage() {
     description: item.description || '',
     image: toAssetUrl(item.imageUrl) || eventsList[index % eventsList.length]?.image || '/hero/hero-store.jpg',
   }));
+
+  const outreachItems: EventCard[] = RIVERS_OF_HOPE_NEWS_ITEMS.map((item, index) => ({
+    id: `outreach-${index + 1}`,
+    type: item.badge || 'Outreach',
+    title: item.title,
+    date: item.date || 'Past Outreach',
+    location: 'PICC Worldwide',
+    description: item.description,
+    image: item.image,
+  }));
+
   const aboutParagraphs = (ministryInfo.about || defaultInfo.about || '').split(/\n{2,}/).filter(Boolean);
   const partnershipParagraphs = (ministryInfo.partnershipBody || defaultInfo.partnershipBody || '').split(/\n{2,}/).filter(Boolean);
   const partnershipDetails = ministryInfo.partnershipDetails?.length ? ministryInfo.partnershipDetails : defaultInfo.partnershipDetails || [];
@@ -507,6 +522,16 @@ export default function RiversOfHopePage() {
       })
     : eventItems;
 
+  const normalizedOutreachSearchQuery = normalizeSearchText(outreachSearchQuery);
+  const filteredOutreachItems = normalizedOutreachSearchQuery
+    ? outreachItems.filter((item) => {
+        const searchableText = normalizeSearchText(
+          [item.title, item.date, item.location, item.description].join(' '),
+        );
+        return searchableText.includes(normalizedOutreachSearchQuery);
+      })
+    : outreachItems;
+
   // --- CYCLING EVENTS EFFECT (based on filtered results) ---
   useEffect(() => {
     if (!filteredEventItems.length) return;
@@ -516,12 +541,27 @@ export default function RiversOfHopePage() {
     return () => clearInterval(timer);
   }, [filteredEventItems.length]);
 
+  useEffect(() => {
+    if (!filteredOutreachItems.length) return;
+    const timer = setInterval(() => {
+      setOutreachSlide((prev) => (prev + 1) % filteredOutreachItems.length);
+    }, 5000);
+    return () => clearInterval(timer);
+  }, [filteredOutreachItems.length]);
+
   const safeCurrentSlide = filteredEventItems.length
     ? currentSlide % filteredEventItems.length
     : 0;
 
   const featuredGridEvent = filteredEventItems[safeCurrentSlide] || eventItems[0];
   const remainingEvents = filteredEventItems.filter((_, idx) => idx !== safeCurrentSlide);
+
+  const safeOutreachSlide = filteredOutreachItems.length
+    ? outreachSlide % filteredOutreachItems.length
+    : 0;
+
+  const featuredGridOutreach = filteredOutreachItems[safeOutreachSlide] || outreachItems[0];
+  const remainingOutreaches = filteredOutreachItems.filter((_, idx) => idx !== safeOutreachSlide);
 
   const handleEventSearch = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -533,6 +573,18 @@ export default function RiversOfHopePage() {
     setEventSearchInput('');
     setEventSearchQuery('');
     setCurrentSlide(0);
+  };
+
+  const handleOutreachSearch = (event: FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+    setOutreachSearchQuery(outreachSearchInput.trim());
+    setOutreachSlide(0);
+  };
+
+  const clearOutreachSearch = () => {
+    setOutreachSearchInput('');
+    setOutreachSearchQuery('');
+    setOutreachSlide(0);
   };
 
   // --- EFFECTS ---
@@ -816,6 +868,78 @@ export default function RiversOfHopePage() {
         )}
       </AnimatePresence>
 
+      <AnimatePresence>
+        {selectedOutreach && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+            onClick={() => setSelectedOutreach(null)}
+          >
+            <motion.div
+              initial={{ scale: 0.95, opacity: 0, y: 20 }}
+              animate={{ scale: 1, opacity: 1, y: 0 }}
+              exit={{ scale: 0.95, opacity: 0, y: 20 }}
+              className="bg-white text-black w-full max-w-4xl rounded-3xl overflow-hidden shadow-2xl flex flex-col md:flex-row relative"
+              onClick={(e) => e.stopPropagation()} 
+            >
+              <button 
+                onClick={() => setSelectedOutreach(null)}
+                className="absolute top-4 right-4 z-10 bg-black/50 hover:bg-black/70 text-white p-2 rounded-full backdrop-blur-md transition-colors"
+              >
+                <XIcon className="w-5 h-5" />
+              </button>
+
+              <div className="relative w-full md:w-1/2 h-64 md:h-[500px] bg-slate-100">
+                <Image 
+                  src={selectedOutreach.image} 
+                  alt={selectedOutreach.title}
+                  fill
+                  className="object-cover"
+                  onError={swapImage('/hero/hero-store.jpg')}
+                />
+              </div>
+
+              <div className="w-full md:w-1/2 p-8 md:p-10 flex flex-col justify-center bg-gray-50">
+                <span className="text-sm font-bold text-[#b91c1c] uppercase tracking-wider mb-2">
+                  {selectedOutreach.type}
+                </span>
+                <h3 className="text-3xl font-black text-gray-900 mb-4 leading-tight">
+                  {selectedOutreach.title}
+                </h3>
+                
+                <div className="space-y-3 mb-6">
+                  <div className="flex items-start gap-3">
+                    <CalendarClock className="w-5 h-5 text-gray-400 mt-0.5" />
+                    <p className="text-gray-700 font-medium">{selectedOutreach.date}</p>
+                  </div>
+                  <div className="flex items-start gap-3">
+                    <MapPin className="w-5 h-5 text-gray-400 mt-0.5" />
+                    <p className="text-gray-700 font-medium">{selectedOutreach.location}</p>
+                  </div>
+                </div>
+
+                <div className="w-12 h-1 bg-gray-200 rounded-full mb-6" />
+
+                <p className="text-gray-600 leading-relaxed mb-8">
+                  {selectedOutreach.description}
+                </p>
+
+                <div>
+                  <p className="text-sm font-bold text-gray-900 mb-3">SHARE & CONNECT:</p>
+                  <div className="flex flex-wrap gap-3">
+                    <a href={`mailto:${ministryInfo.email || 'roh@piccworldwide.org'}`} className="flex items-center gap-2 bg-[#b91c1c] hover:bg-red-800 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
+                      <Mail className="w-4 h-4" /> Reach Out
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
+
       <main className="min-h-screen">
         
         {/* 1. HERO SECTION */}
@@ -1033,7 +1157,7 @@ export default function RiversOfHopePage() {
                     {activeTool === "chat" && <div className="h-[400px] w-full bg-white"><LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} videoTitle={featuredVideo?.title || 'Crusade Live'} /></div>}
                     {activeTool === "notepad" && <NotepadTool />}
                     {activeTool === "testimony" && <div className="px-5 py-6"><TestimonyTool /></div>}
-                    {activeTool === "give" && <div className="px-5 py-6"><GiveTool isMobile={false} /></div>}
+                    {activeTool === "give" && <div className="px-5 py-6"><ROHGiveTool isMobile={false} /></div>}
                   </div>
                 )}
               </div>
@@ -1147,16 +1271,113 @@ export default function RiversOfHopePage() {
           </section>
         )}
 
-        {/* 7. NEWS SECTION */}
+        {/* 7. MINISTRY OUTREACHES */}
         {!mobilePlayerActive && (
-          <NewsSection 
-            title="Latest Crusade News"
-            description="Stay updated with the latest happenings, testimonies, and reports from the Rivers of Hope team."
-            items={RIVERS_OF_HOPE_NEWS_ITEMS}
-            backgroundClassName="bg-white"
-          />
+          <section className="py-20 bg-white text-black overflow-hidden border-b border-black/5">
+            <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
+              <div className="flex flex-col gap-6 mb-10 md:flex-row md:items-end md:justify-between">
+                <div>
+                  <h2 className="text-3xl md:text-4xl font-bold mb-4">Ministry Outreaches</h2>
+                  <p className="text-black/60 max-w-xl">Highlights from our community-based outreaches and mission work.</p>
+                </div>
+                <form onSubmit={handleOutreachSearch} className="flex w-full max-w-2xl items-center gap-3">
+                  <label htmlFor="rivers-of-hope-outreach-search" className="sr-only">Search outreaches</label>
+                  <input
+                    id="rivers-of-hope-outreach-search"
+                    value={outreachSearchInput}
+                    onChange={(event) => setOutreachSearchInput(event.target.value)}
+                    placeholder="Search outreaches, titles, descriptions"
+                    className="min-w-0 flex-1 rounded-full border border-black/10 bg-white px-4 py-3 text-sm text-black shadow-sm focus:border-red-800 focus:outline-none focus:ring-2 focus:ring-red-100"
+                  />
+                  <button type="submit" className="rounded-full bg-red-800 px-5 py-3 text-sm font-semibold text-white hover:bg-red-900 transition">
+                    Search
+                  </button>
+                  <button type="button" onClick={clearOutreachSearch} className="rounded-full border border-black/10 bg-white px-4 py-3 text-sm text-black hover:bg-black/5 transition">
+                    Clear
+                  </button>
+                </form>
+              </div>
+
+              {filteredOutreachItems.length === 0 ? (
+                <div className="rounded-3xl border border-black/10 bg-gray-50 p-12 text-center">
+                  <p className="text-xl font-semibold text-black">No outreaches matched your search.</p>
+                  <p className="mt-3 text-sm text-black/70">Try another keyword or clear the search to view all outreaches.</p>
+                </div>
+              ) : (
+                <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 lg:gap-8">
+                  <button 
+                    onClick={() => setSelectedOutreach(featuredGridOutreach)}
+                    className="lg:col-span-2 relative h-[400px] md:h-[500px] rounded-2xl overflow-hidden shadow-xl border border-black/5 group text-left w-full focus:outline-none focus:ring-4 focus:ring-red-800"
+                  >
+                    <AnimatePresence mode="wait">
+                      <motion.div
+                        key={featuredGridOutreach.id}
+                        initial={{ opacity: 0, x: 20 }}
+                        animate={{ opacity: 1, x: 0 }}
+                        exit={{ opacity: 0, x: -20 }}
+                        transition={{ duration: 0.5 }}
+                        className="absolute inset-0"
+                      >
+                        <Image 
+                          src={featuredGridOutreach.image} 
+                          alt={featuredGridOutreach.title}
+                          fill
+                          className="object-cover group-hover:scale-105 transition-transform duration-700"
+                          onError={swapImage('/hero/hero-store.jpg')}
+                        />
+                        <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/40 to-transparent flex flex-col justify-end p-8">
+                          <span className="bg-[#b91c1c] text-white text-xs font-bold uppercase tracking-wider py-1 px-3 rounded-full w-fit mb-3 flex items-center gap-2">
+                            <Flame className="w-4 h-4" />
+                            {featuredGridOutreach.type}
+                          </span>
+                          <h3 className="text-white text-3xl md:text-4xl font-bold mb-2 group-hover:underline decoration-2 underline-offset-4">{featuredGridOutreach.title}</h3>
+                          <p className="text-white/90 text-sm md:text-base font-medium flex items-center gap-2 mb-1">
+                            <CalendarClock className="w-4 h-4" /> {featuredGridOutreach.date}
+                          </p>
+                          <p className="text-white/70 text-sm flex items-center gap-2">
+                            <MapPin className="w-4 h-4" /> {featuredGridOutreach.location}
+                          </p>
+                        </div>
+                      </motion.div>
+                    </AnimatePresence>
+                    <div className="absolute top-4 right-4 bg-white/20 backdrop-blur-md px-3 py-1 rounded-full text-white text-xs font-medium border border-white/30 opacity-0 group-hover:opacity-100 transition-opacity">
+                      Click for Details
+                    </div>
+                  </button>
+
+                  <div className="lg:col-span-1">
+                    <div className="flex gap-4 overflow-x-auto pb-4 lg:max-h-[500px] lg:flex-col lg:overflow-x-hidden lg:overflow-y-auto lg:pb-0 lg:pr-1 scrollbar-thin scrollbar-thumb-red-200">
+                      {remainingOutreaches.map((outreach) => (
+                        <button 
+                          key={outreach.id} 
+                          onClick={() => setSelectedOutreach(outreach)}
+                          className="min-w-[280px] lg:min-w-full relative h-48 lg:h-[113px] rounded-xl overflow-hidden shadow-md border border-black/5 group text-left focus:outline-none focus:ring-2 focus:ring-red-800"
+                        >
+                          <Image 
+                            src={outreach.image} 
+                            alt={outreach.title}
+                            fill
+                            className="object-cover group-hover:scale-110 transition-transform duration-500"
+                            onError={swapImage('/hero/hero-store.jpg')}
+                          />
+                          <div className="absolute inset-0 bg-black/60 group-hover:bg-black/40 transition-colors duration-300 flex flex-col justify-end p-4">
+                            <span className="text-red-300 text-[10px] font-bold uppercase tracking-wider mb-1">
+                              {outreach.type}
+                            </span>
+                            <h4 className="text-white text-sm font-semibold leading-tight mb-1 group-hover:underline underline-offset-2">{outreach.title}</h4>
+                            <p className="text-white/60 text-[10px] truncate">{outreach.date}</p>
+                          </div>
+                        </button>
+                      ))}
+                    </div>
+                  </div>
+                </div>
+              )}
+            </div>
+          </section>
         )}
 
+        {/* 8. PARTNERSHIP FORM */}
         <section className="relative py-24 bg-slate-50 overflow-hidden">
           {/* Subtle background decoration */}
           <div className="absolute top-0 right-0 -translate-y-1/2 translate-x-1/2 w-96 h-96 bg-red-100/30 rounded-full blur-3xl pointer-events-none" />
@@ -1417,13 +1638,13 @@ export default function RiversOfHopePage() {
                 {activeTool === "bible" && <div className="mb-4 bg-white rounded-xl overflow-hidden border border-black/10"><BibleTool /></div>}
                 {activeTool === "notepad" && <div className="mb-4 bg-white rounded-xl overflow-hidden border border-black/10"><NotepadTool /></div>}
                 {activeTool === "testimony" && <div className="px-4 py-5"><TestimonyTool /></div>}
-                {activeTool === "give" && <div className="px-4 py-5"><GiveTool isMobile={true} /></div>}
+                {activeTool === "give" && <div className="px-4 py-5"><ROHGiveTool isMobile={true} /></div>}
               </div>
             </div>
           </section>
         )}
 
-        {/* 8. SUPPORT / PARTNER SECTION */}
+        {/* 9. SUPPORT / PARTNER SECTION */}
         {!mobilePlayerActive && (
           <section className="py-20 bg-gray-50 text-black">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -1460,7 +1681,17 @@ export default function RiversOfHopePage() {
           </section>
         )}
 
-        {/* 9. CONTACTS SECTION */}
+        {/* 10. NEWS SECTION */}
+        {!mobilePlayerActive && (
+          <NewsSection 
+            title="Latest Crusade News"
+            description="Stay updated with the latest happenings, testimonies, and reports from the Rivers of Hope team."
+            items={RIVERS_OF_HOPE_NEWS_ITEMS}
+            backgroundClassName="bg-white"
+          />
+        )}
+
+        {/* 11. CONTACTS SECTION */}
         {!mobilePlayerActive && (
           <section className="py-20 bg-slate-900 text-white">
             <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">

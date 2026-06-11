@@ -149,6 +149,19 @@ const toAssetUrl = (value: string | null | undefined) => {
   return trimmed;
 };
 
+const normalizePaymentAmount = (value: unknown): number | null => {
+  if (typeof value === 'number') {
+    return Number.isFinite(value) ? value : null;
+  }
+  if (typeof value === 'string') {
+    const normalized = value.replace(/[^0-9.-]+/g, '').trim();
+    if (!normalized) return null;
+    const parsed = Number(normalized);
+    return Number.isFinite(parsed) ? parsed : null;
+  }
+  return null;
+};
+
 const videoIdFromUrl = (value: string | null | undefined) => {
   const raw = (value || '').trim();
   if (!raw) return '';
@@ -165,6 +178,41 @@ const videoIdFromUrl = (value: string | null | undefined) => {
 
 const swapImage = (fallback: string) => (event: SyntheticEvent<HTMLImageElement>) => {
   event.currentTarget.src = fallback;
+};
+
+const normalizeMinistryItem = (item: unknown): MinistryItem | null => {
+  if (!item || typeof item !== 'object') return null;
+  const record = item as Record<string, unknown>;
+  const id = typeof record.id === 'string' ? record.id : typeof record.id === 'number' ? String(record.id) : '';
+  const category = typeof record.category === 'string' ? record.category : '';
+  const title = typeof record.title === 'string' ? record.title : '';
+  if (!id || !category || !title) return null;
+
+  const imageUrl = typeof record.imageUrl === 'string'
+    ? record.imageUrl
+    : typeof record.image === 'string'
+      ? record.image
+      : null;
+
+  return {
+    id,
+    category,
+    title,
+    description: typeof record.description === 'string' ? record.description : null,
+    label: typeof record.label === 'string' ? record.label : null,
+    imageUrl,
+    sortOrder:
+      typeof record.sortOrder === 'number'
+        ? record.sortOrder
+        : typeof record.sortOrder === 'string'
+          ? Number(record.sortOrder) || 0
+          : 0,
+    acceptsOnlinePayment:
+      record.acceptsOnlinePayment === true || record.acceptsOnlinePayment === 'true',
+    paymentAmount: normalizePaymentAmount(record.paymentAmount),
+    paymentCurrency: typeof record.paymentCurrency === 'string' ? record.paymentCurrency : null,
+    paymentAccount: typeof record.paymentAccount === 'string' ? record.paymentAccount : null,
+  };
 };
 
 const mergeItemsWithFallback = (loaded: MinistryItem[], fallback: MinistryItem[]) => {
@@ -429,13 +477,8 @@ export default function YouthChurchMinistryPage() {
       location: hasLocationAndBody ? maybeLocation : fallbackEvent?.location || 'PICC Youth Church',
       description: hasLocationAndBody ? bodyParts.join('\n\n') : item.description || '',
       image: toAssetUrl(item.imageUrl) || fallbackEvent?.image || '/hero/hero-store.jpg',
-      acceptsOnlinePayment: Boolean(item.acceptsOnlinePayment),
-      paymentAmount:
-        typeof item.paymentAmount === 'number'
-          ? item.paymentAmount
-          : item.paymentAmount
-            ? Number(item.paymentAmount)
-            : null,
+      acceptsOnlinePayment: Boolean(item.acceptsOnlinePayment) || (normalizePaymentAmount(item.paymentAmount) != null && normalizePaymentAmount(item.paymentAmount)! > 0),
+      paymentAmount: normalizePaymentAmount(item.paymentAmount),
       paymentCurrency: item.paymentCurrency || 'MWK',
       paymentAccount: item.paymentAccount || 'youth',
     };
@@ -554,7 +597,7 @@ export default function YouthChurchMinistryPage() {
     `${event.paymentCurrency || 'MWK'} ${Number(event.paymentAmount || 0).toLocaleString('en-US')}`;
 
   const openPayment = (event: YouthEvent) => {
-    if (!event.acceptsOnlinePayment || !event.paymentAmount) return;
+    if (!event.acceptsOnlinePayment || event.paymentAmount == null || event.paymentAmount <= 0) return;
     setPaymentEvent(event);
     setPaymentError(null);
     setPaymentSuccess(null);
@@ -689,7 +732,11 @@ export default function YouthChurchMinistryPage() {
         }
 
         if (Array.isArray(data?.items)) {
-          setMinistryItems(data.items);
+          setMinistryItems(
+            (data.items as unknown[])
+              .map((item: unknown) => normalizeMinistryItem(item))
+              .filter((item): item is MinistryItem => item !== null),
+          );
         }
       } catch {
         // Keep the built-in Youth Church content as the public fallback.
@@ -963,7 +1010,7 @@ export default function YouthChurchMinistryPage() {
                   {selectedEvent.description}
                 </p>
 
-                {selectedEvent.acceptsOnlinePayment && selectedEvent.paymentAmount ? (
+                {selectedEvent.acceptsOnlinePayment && selectedEvent.paymentAmount != null && selectedEvent.paymentAmount > 0 ? (
                   <button
                     type="button"
                     onClick={() => openPayment(selectedEvent)}

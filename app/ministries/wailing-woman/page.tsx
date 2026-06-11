@@ -300,9 +300,11 @@ export default function WailingWomenPage() {
 
       const searchData = await fetchJson(searchUrl.toString());
       return Array.isArray(searchData?.items)
-        ? searchData.items.map(toVideoFromSearch).filter((v): v is YouTubeVideo => 
-            v !== null && v.title.toLowerCase().includes("wailing woman")
-          )
+        ? (searchData.items as YouTubeSearchItem[])
+            .map(toVideoFromSearch)
+            .filter((v): v is YouTubeVideo => 
+              v !== null && v.title.toLowerCase().includes("wailing woman")
+            )
         : [];
     };
 
@@ -921,7 +923,7 @@ export default function WailingWomenPage() {
                     {activeTool === "bible" && <BibleTool />}
                     {activeTool === "chat" && <div className="h-[400px] w-full bg-white"><LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} videoTitle={featuredVideo?.title || 'Wailing Woman Live'} /></div>}
                     {activeTool === "notepad" && <NotepadTool />}
-                    {activeTool === "testimony" && <div className="px-5 py-6"><TestimonyTool /></div>}
+                    {activeTool === "testimony" && <div className="px-5 py-6"><TestimonyTool churchEmail="wailingwoman@piccworldwide.org" /></div>}
                     {activeTool === "prayer" && <div className="px-5 py-6"><PrayerRequestTool ministryKey="wailing-woman" /></div>}
                     {activeTool === "give" && <div className="px-5 py-6"><WailingWomanGiveTool isMobile={false} /></div>}
                   </div>
@@ -1017,7 +1019,7 @@ export default function WailingWomenPage() {
                 {activeTool === "chat" && <div className="h-[300px] w-full bg-white mb-4 rounded-xl overflow-hidden border border-black/10"><LiveChat videoId={featuredVideo?.videoId || FALLBACK_HERO_ID} videoTitle={featuredVideo?.title || 'Wailing Woman Live'} /></div>}
                 {activeTool === "bible" && <div className="mb-4 bg-white rounded-xl overflow-hidden border border-black/10"><BibleTool /></div>}
                 {activeTool === "notepad" && <div className="mb-4 bg-white rounded-xl overflow-hidden border border-black/10"><NotepadTool /></div>}
-                {activeTool === "testimony" && <div className="px-4 py-5"><TestimonyTool /></div>}
+                {activeTool === "testimony" && <div className="px-4 py-5"><TestimonyTool churchEmail="wailingwoman@piccworldwide.org" /></div>}
                 {activeTool === "prayer" && <div className="px-4 py-5"><PrayerRequestTool ministryKey="wailing-woman" /></div>}
                 {activeTool === "give" && <div className="px-4 py-5"><WailingWomanGiveTool isMobile={true} /></div>}
               </div>

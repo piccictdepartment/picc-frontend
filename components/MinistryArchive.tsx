@@ -9,6 +9,13 @@ import { CalendarClock, MapPin, Search, ArrowLeft } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 import Link from 'next/link';
 import { apiFetch, apiUrl } from '@/lib/api';
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogDescription,
+} from '@/components/ui/dialog';
 
 export type ArchiveNewsItem = {
   badge: string;
@@ -24,6 +31,7 @@ export type ArchiveOutreachItem = {
   description: string;
   image: string;
   location?: string;
+  badge?: string; // Added for unified popup handling
 };
 
 interface MinistryArchiveProps {
@@ -141,6 +149,7 @@ export default function MinistryArchive({
     newsItems.length > 0 ? 'news' : 'outreaches'
   );
   const [searchQuery, setSearchQuery] = useState('');
+  const [selectedItem, setSelectedItem] = useState<ArchiveNewsItem | null>(null);
 
   useEffect(() => {
     let isMounted = true;
@@ -284,17 +293,18 @@ export default function MinistryArchive({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
+                  onClick={() => setSelectedItem(item)}
                 >
-                  <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-slate-200">
-                    <div className="relative h-48 sm:h-56">
+                  <Card className="group h-full flex flex-col overflow-hidden cursor-pointer hover:shadow-lg transition-all border-slate-200 hover:border-primary/20">
+                    <div className="relative h-48 sm:h-56 overflow-hidden">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        <span className="bg-primary text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
                           {item.badge}
                         </span>
                       </div>
@@ -304,12 +314,9 @@ export default function MinistryArchive({
                         <CalendarClock className="w-3.5 h-3.5" />
                         {item.date}
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
+                      <h3 className="text-xl font-bold text-slate-900 leading-tight group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-slate-600 text-sm line-clamp-3 mb-4 flex-1">
-                        {item.description}
-                      </p>
                     </div>
                   </Card>
                 </motion.div>
@@ -324,17 +331,18 @@ export default function MinistryArchive({
                   animate={{ opacity: 1, y: 0 }}
                   exit={{ opacity: 0, scale: 0.95 }}
                   transition={{ duration: 0.3 }}
+                  onClick={() => setSelectedItem({ ...item, badge: 'Outreach' })}
                 >
-                  <Card className="h-full flex flex-col overflow-hidden hover:shadow-lg transition-shadow border-slate-200">
-                    <div className="relative h-48 sm:h-56">
+                  <Card className="group h-full flex flex-col overflow-hidden cursor-pointer hover:shadow-lg transition-all border-slate-200 hover:border-primary/20">
+                    <div className="relative h-48 sm:h-56 overflow-hidden">
                       <Image
                         src={item.image}
                         alt={item.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-105"
                       />
                       <div className="absolute top-4 left-4">
-                        <span className="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full">
+                        <span className="bg-emerald-600 text-white text-[10px] font-bold uppercase tracking-widest px-3 py-1 rounded-full shadow-sm">
                           Outreach
                         </span>
                       </div>
@@ -352,12 +360,9 @@ export default function MinistryArchive({
                           </div>
                         )}
                       </div>
-                      <h3 className="text-xl font-bold text-slate-900 mb-2 leading-tight">
+                      <h3 className="text-xl font-bold text-slate-900 leading-tight group-hover:text-primary transition-colors">
                         {item.title}
                       </h3>
-                      <p className="text-slate-600 text-sm line-clamp-3 flex-1">
-                        {item.description}
-                      </p>
                     </div>
                   </Card>
                 </motion.div>
@@ -385,6 +390,72 @@ export default function MinistryArchive({
           )}
         </div>
       </main>
+
+      <Dialog open={!!selectedItem} onOpenChange={(open) => !open && setSelectedItem(null)}>
+        <DialogContent className="max-w-[calc(100%-2rem)] md:max-w-4xl lg:max-w-6xl xl:max-w-7xl p-0 overflow-hidden border-none bg-white rounded-3xl shadow-2xl">
+          {selectedItem && (
+            <div className="flex flex-col lg:flex-row lg:h-[80vh] min-h-[500px]">
+              <DialogHeader className="sr-only">
+                <DialogTitle>{selectedItem.title}</DialogTitle>
+                <DialogDescription>
+                  {selectedItem.badge} update from {selectedItem.date}
+                </DialogDescription>
+              </DialogHeader>
+              
+              {/* Image Column */}
+              <div className="relative h-64 sm:h-80 lg:h-auto lg:w-1/2 shrink-0 bg-muted/30">
+                <Image
+                  src={selectedItem.image}
+                  alt={selectedItem.title}
+                  fill
+                  className="object-cover lg:object-contain"
+                  priority
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent lg:hidden" />
+                <div className="absolute bottom-6 left-6 right-6 text-white lg:hidden">
+                  <div className="flex flex-wrap items-center gap-3 text-xs mb-3">
+                    <span className="inline-flex items-center rounded-full bg-primary px-3 py-1 text-[10px] font-semibold uppercase tracking-[0.3em] text-white">
+                      {selectedItem.badge}
+                    </span>
+                    <span className="uppercase tracking-[0.2em] text-white/90">{selectedItem.date}</span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl font-bold leading-tight">
+                    {selectedItem.title}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Content Column */}
+              <div className="flex flex-col p-8 sm:p-10 lg:p-12 lg:w-1/2 overflow-y-auto scrollbar-thin scrollbar-thumb-primary/20 scrollbar-track-transparent">
+                <div className="lg:block mb-8">
+                  <div className="flex items-center gap-4 text-xs mb-4">
+                    <span className={`inline-flex items-center rounded-full px-4 py-1.5 text-[11px] font-bold uppercase tracking-[0.3em] ${
+                      selectedItem.badge === 'Outreach' 
+                        ? 'bg-emerald-100 text-emerald-700' 
+                        : 'bg-primary/10 text-primary'
+                    }`}>
+                      {selectedItem.badge}
+                    </span>
+                    <span className="uppercase tracking-[0.25em] text-foreground/50 font-medium">
+                      {selectedItem.date}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl sm:text-3xl xl:text-4xl font-bold text-foreground leading-tight">
+                    {selectedItem.title}
+                  </h2>
+                  <div className={`mt-6 h-1 w-20 rounded-full ${
+                    selectedItem.badge === 'Outreach' ? 'bg-emerald-600/20' : 'bg-primary/20'
+                  }`} />
+                </div>
+                
+                <div className="text-foreground/80 text-base sm:text-lg leading-relaxed whitespace-pre-wrap">
+                  {selectedItem.description}
+                </div>
+              </div>
+            </div>
+          )}
+        </DialogContent>
+      </Dialog>
 
       <Footer />
     </div>
