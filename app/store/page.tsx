@@ -1276,11 +1276,21 @@ function ClassicProductTile({
           </div>
         )}
       </div>
-      <h3 className="mt-5 min-h-12 font-serif text-lg leading-6 text-slate-950">{product.name}</h3>
-      <p className="mt-1 font-serif text-base text-slate-950">
-        {originalPrice && <span className="mr-2 text-slate-400 line-through">{formatMWK(originalPrice)}</span>}
-        <span>{formatMWK(product.price)}</span>
-      </p>
+      <div className="relative mt-5 min-h-[84px] overflow-hidden">
+        <div className="absolute inset-x-0 top-0 transition duration-200 group-hover:-translate-y-2 group-hover:opacity-0 group-focus-visible:-translate-y-2 group-focus-visible:opacity-0">
+          <h3 className="min-h-12 font-serif text-lg leading-6 text-slate-950">{product.name}</h3>
+          <p className="mt-1 font-serif text-base text-slate-950">
+            {originalPrice && <span className="mr-2 text-slate-400 line-through">{formatMWK(originalPrice)}</span>}
+            <span>{formatMWK(product.price)}</span>
+          </p>
+        </div>
+        <div className="absolute inset-x-0 top-0 flex min-h-[72px] translate-y-2 items-center justify-center opacity-0 transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+          <span className="inline-flex min-h-12 items-center justify-center gap-2 rounded-md bg-[#1688b4] px-5 font-serif text-sm font-bold uppercase tracking-wide text-white shadow-sm transition group-hover:bg-[#0f759c]">
+            <ShoppingCart className="h-4 w-4" />
+            Add to Cart
+          </span>
+        </div>
+      </div>
     </button>
   );
 }
@@ -1346,7 +1356,7 @@ function CompactProductItem({
   const originalPrice = product.price + 2500;
 
   return (
-    <button type="button" onClick={onSelect} className="grid w-full grid-cols-[120px_1fr] items-center gap-3 text-left">
+    <button type="button" onClick={onSelect} className="group grid w-full grid-cols-[120px_1fr] items-center gap-3 text-left">
       <div className="relative flex h-32 w-32 items-center justify-center border border-slate-200 bg-white p-3">
         {!imgError ? (
           <Image
@@ -1364,10 +1374,18 @@ function CompactProductItem({
           </div>
         )}
       </div>
-      <div className="min-w-0 font-serif">
-        <h3 className="truncate text-base text-slate-950">{product.name}</h3>
-        {showOriginalPrice && <p className="mt-2 text-sm text-slate-400 line-through">{formatMWK(originalPrice)}</p>}
-        <p className="mt-1 text-base text-slate-950">{formatMWK(product.price)}</p>
+      <div className="relative min-h-20 min-w-0 overflow-hidden font-serif">
+        <div className="absolute inset-x-0 top-1 transition duration-200 group-hover:-translate-y-2 group-hover:opacity-0 group-focus-visible:-translate-y-2 group-focus-visible:opacity-0">
+          <h3 className="truncate text-base text-slate-950">{product.name}</h3>
+          {showOriginalPrice && <p className="mt-2 text-sm text-slate-400 line-through">{formatMWK(originalPrice)}</p>}
+          <p className="mt-1 text-base text-slate-950">{formatMWK(product.price)}</p>
+        </div>
+        <div className="absolute inset-x-0 top-1 flex min-h-16 translate-y-2 items-center opacity-0 transition duration-200 group-hover:translate-y-0 group-hover:opacity-100 group-focus-visible:translate-y-0 group-focus-visible:opacity-100">
+          <span className="inline-flex min-h-10 items-center justify-center gap-2 rounded-md bg-[#1688b4] px-4 text-xs font-bold uppercase tracking-wide text-white shadow-sm transition group-hover:bg-[#0f759c]">
+            <ShoppingCart className="h-4 w-4" />
+            Add to Cart
+          </span>
+        </div>
       </div>
     </button>
   );
