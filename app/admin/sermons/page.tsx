@@ -59,8 +59,6 @@ export default function AdminSermonsPage() {
   const [notifySubscribers, setNotifySubscribers] = useState(false);
   const [sermonSearch, setSermonSearch] = useState('');
   const [sermonFilter, setSermonFilter] = useState<'all' | 'week' | 'month' | 'year'>('all');
-  const [podbeanFeedUrl, setPodbeanFeedUrl] = useState('https://feed.podbean.com/esaubanda/feed.xml');
-  const [isSyncingPodbean, setIsSyncingPodbean] = useState(false);
 
   const normalizeRemoteUrl = (value: string) => {
     if (!value) return '';
@@ -69,14 +67,9 @@ export default function AdminSermonsPage() {
     return apiUrl(`/${value}`);
   };
 
-  const extractIframeSrc = (value: string) => {
-    const match = value.match(/src=["']([^"']+)["']/i);
-    return match ? match[1] : value;
-  };
-
   const normalizeSermonDraft = (sermon: Omit<Sermon, 'id'>) => ({
     ...sermon,
-    audioSrc: extractIframeSrc(sermon.audioSrc).trim(),
+    audioSrc: sermon.audioSrc.trim(),
   });
 
   const updateUploadName = (key: string, name: string) => {
@@ -158,6 +151,40 @@ export default function AdminSermonsPage() {
     }
   };
 
+  const uploadAudioFile = async (file: File) => {
+    if (!token) return null;
+
+    if (!file.type.startsWith('audio/')) {
+      setStatus('Please upload an audio file.');
+      return null;
+    }
+
+    const formData = new FormData();
+    formData.append('file', file);
+
+    try {
+      const response = await apiFetch('/api/uploads/media', {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+        body: formData,
+      });
+
+      if (!response.ok) {
+        const data = await response.json().catch(() => null);
+        setStatus(typeof data?.error === 'string' ? data.error : 'Audio upload failed.');
+        return null;
+      }
+
+      const data = await response.json();
+      return apiUrl(data.url);
+    } catch {
+      setStatus('Audio upload failed.');
+      return null;
+    }
+  };
+
   const fetchSermons = async () => {
     try {
       const response = await apiFetch('/api/sermons');
@@ -186,60 +213,6 @@ export default function AdminSermonsPage() {
       setHeaderImage(DEFAULT_HEADER_IMAGE);
     } catch {
       setHeaderImage(DEFAULT_HEADER_IMAGE);
-    }
-  };
-
-  const fetchPodbeanSettings = useCallback(async () => {
-    if (!token) return;
-
-    try {
-      const response = await apiFetch('/api/admin/sermons/podbean-settings', {
-        headers: { Authorization: `Bearer ${token}` },
-      });
-      if (!response.ok) return;
-      const data = await response.json().catch(() => null);
-      if (typeof data?.feedUrl === 'string' && data.feedUrl.trim()) {
-        setPodbeanFeedUrl(data.feedUrl);
-      }
-    } catch {
-      // Keep the default feed URL.
-    }
-  }, [token]);
-
-  const syncPodbeanEpisodes = async () => {
-    if (!token) return;
-    if (!podbeanFeedUrl.trim()) {
-      setStatus('Please enter the Podbean RSS feed URL.');
-      return;
-    }
-
-    setIsSyncingPodbean(true);
-    setStatus('');
-    try {
-      const response = await apiFetch('/api/admin/sermons/podbean-sync', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({ feedUrl: podbeanFeedUrl.trim() }),
-      });
-      const data = await response.json().catch(() => null);
-
-      if (!response.ok) {
-        setStatus(typeof data?.error === 'string' ? data.error : 'Unable to sync Podbean episodes.');
-        return;
-      }
-
-      setPodbeanFeedUrl(typeof data?.feedUrl === 'string' ? data.feedUrl : podbeanFeedUrl);
-      setStatus(
-        `Podbean sync complete. Updated ${data?.updated ?? 0}, created ${data?.created ?? 0}, skipped ${data?.skippedExistingAudio ?? 0}.`,
-      );
-      void fetchSermons();
-    } catch {
-      setStatus('Unable to sync Podbean episodes.');
-    } finally {
-      setIsSyncingPodbean(false);
     }
   };
 
@@ -433,8 +406,7 @@ export default function AdminSermonsPage() {
         setHeaderImage(DEFAULT_HEADER_IMAGE);
       }
     })();
-    void fetchPodbeanSettings();
-  }, [token, extractSermons, fetchPodbeanSettings]);
+  }, [token, extractSermons]);
 
   if (!token) {
     return (
@@ -460,7 +432,7 @@ export default function AdminSermonsPage() {
             Sermon Management
           </h1>
           <p className="text-foreground/70 mt-3 max-w-2xl">
-            Upload and manage sermons, add Podbean audio links, update the header image, and notify subscribers.
+            Upload and manage sermons with real audio files, update the header image, and notify subscribers.
           </p>
         </div>
         <Button variant="outline" onClick={handleLogout}>
@@ -519,30 +491,6 @@ export default function AdminSermonsPage() {
               )}
             </div>
           </div>
-        </div>
-      </section>
-
-      <section className="rounded-2xl border border-border/60 bg-card p-6 shadow-sm space-y-4">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-          <div>
-            <h2 className="text-xl font-semibold text-foreground">Podbean Sync</h2>
-            <p className="text-sm text-foreground/60">
-              Import Podbean episodes into sermon audio by matching episode publish dates to sermon dates.
-            </p>
-          </div>
-          <Button onClick={syncPodbeanEpisodes} disabled={isSyncingPodbean || !podbeanFeedUrl.trim()}>
-            {isSyncingPodbean ? 'Syncing...' : 'Sync Podbean'}
-          </Button>
-        </div>
-        <div>
-          <Label htmlFor="podbean-feed-url">Podbean RSS Feed URL</Label>
-          <Input
-            id="podbean-feed-url"
-            value={podbeanFeedUrl}
-            onChange={(event) => setPodbeanFeedUrl(event.target.value)}
-            placeholder="https://feed.podbean.com/esaubanda/feed.xml"
-            className="rounded-xl border-border bg-background px-4 py-3"
-          />
         </div>
       </section>
 
@@ -653,15 +601,53 @@ export default function AdminSermonsPage() {
             </div>
 
             <div className="md:col-span-2">
-              <Label htmlFor="podbean-url">Podbean Audio URL <span className="text-[11px] font-normal text-muted-foreground">(Optional)</span></Label>
-              <Input
-                id="podbean-url"
-                type="text"
-                value={draftSermon.audioSrc}
-                onChange={(e) => setDraftSermon(prev => ({ ...prev, audioSrc: extractIframeSrc(e.target.value).trim() }))}
-                placeholder="Optional manual override. Podbean Sync can fill this by sermon date."
-                className="rounded-xl border-border bg-background px-4 py-3"
+              <Label htmlFor="audio-upload">Sermon Audio File <span className="text-[11px] font-normal text-muted-foreground">(MP3, M4A, WAV, OGG, FLAC)</span></Label>
+              <input
+                id="audio-upload"
+                type="file"
+                accept="audio/*,.mp3,.m4a,.aac,.wav,.ogg,.flac,.webm,.opus,.oga,.wma"
+                onChange={async (e) => {
+                  const file = e.target.files?.[0];
+                  if (!file) return;
+
+                  updateUploadName('audio', file.name);
+                  const url = await uploadAudioFile(file);
+                  if (url) {
+                    setDraftSermon((prev) => ({ ...prev, audioSrc: url }));
+                    updateUploadName('audio', '');
+                  }
+                }}
+                className="block w-full text-sm text-foreground/70 file:mr-4 file:rounded-full file:border-0 file:bg-primary/10 file:px-4 file:py-2 file:text-sm file:font-semibold file:text-primary hover:file:bg-primary/20"
               />
+              {uploadNames.audio && (
+                <p className="text-xs text-foreground/60 mt-1">Uploading: {uploadNames.audio}</p>
+              )}
+              {draftSermon.audioSrc && (
+                <div className="mt-3 rounded-xl border border-border/60 bg-background p-4">
+                  <p className="text-xs uppercase tracking-[0.25em] text-foreground/50">Current audio</p>
+                  <audio
+                    className="mt-3 w-full"
+                    controls
+                    src={normalizeRemoteUrl(draftSermon.audioSrc)}
+                  >
+                    Your browser does not support the audio element.
+                  </audio>
+                  <p className="mt-2 break-all text-xs text-foreground/50">
+                    {draftSermon.audioSrc}
+                  </p>
+                </div>
+              )}
+              <div className="mt-3 rounded-xl border border-dashed border-border/60 bg-background/60 p-4">
+                <Label htmlFor="audio-url" className="text-sm font-medium">Audio URL override <span className="text-[11px] font-normal text-muted-foreground">(optional)</span></Label>
+                <Input
+                  id="audio-url"
+                  type="text"
+                  value={draftSermon.audioSrc}
+                  onChange={(e) => setDraftSermon((prev) => ({ ...prev, audioSrc: e.target.value.trim() }))}
+                  placeholder="Paste an existing MP3 or hosted audio link if you are not uploading a file"
+                  className="mt-2 rounded-xl border-border bg-background px-4 py-3"
+                />
+              </div>
             </div>
           </div>
 

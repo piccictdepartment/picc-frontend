@@ -8,7 +8,7 @@ import { confirmDeleteToast } from '@/components/admin/confirm-delete-toast';
 import { useAdminAuth } from '@/hooks/use-admin-auth';
 import { apiFetch } from '@/lib/api';
 import { products, bookGenres, type Product } from '@/components/data/products';
-import { Eye, EyeOff, ImageIcon, RefreshCw, Trash2 } from 'lucide-react';
+import { ImageIcon, RefreshCw, Trash2 } from 'lucide-react';
 
 type StoreBook = Product & {
   productId: string;
@@ -21,6 +21,7 @@ type StoreBook = Product & {
   downloadUrl?: string | null;
   sortOrder: number;
   isActive: boolean;
+  isBuiltIn?: boolean;
 };
 
 type StoreBookDraft = {
@@ -92,7 +93,25 @@ const normalizeBook = (book: Partial<StoreBook>): StoreBook => ({
   downloadUrl: book.downloadUrl || '',
   sortOrder: Number(book.sortOrder || 0),
   isActive: book.isActive !== false,
+  isBuiltIn: book.isBuiltIn === true,
 });
+
+const builtInStoreBooks: StoreBook[] = products
+  .filter((product) => product.category === 'Books')
+  .map((product, index) => normalizeBook({
+    ...product,
+    id: `built-in-${product.id}`,
+    productId: product.id,
+    title: product.name,
+    hardCopyPrice: product.hardCopyPrice ?? product.price,
+    softCopyPrice: product.softCopyPrice ?? null,
+    hardCopyEnabled: product.hardCopyEnabled !== false,
+    softCopyEnabled: product.softCopyEnabled !== false,
+    coverImageUrl: product.image,
+    sortOrder: product.sortOrder ?? index,
+    isActive: product.isActive !== false,
+    isBuiltIn: true,
+  }));
 
 export default function AdminStorePage() {
   const {
@@ -112,7 +131,6 @@ export default function AdminStorePage() {
   const [status, setStatus] = useState('');
   const [search, setSearch] = useState('');
   const [uploadName, setUploadName] = useState('');
-  const [showInactive, setShowInactive] = useState(true);
   const [isSaving, setIsSaving] = useState(false);
   const [isImporting, setIsImporting] = useState(false);
 
@@ -226,14 +244,18 @@ export default function AdminStorePage() {
   };
 
   const startEditing = (book: StoreBook) => {
-    setEditingId(book.id);
+    setEditingId(book.isBuiltIn ? null : book.id);
     setDraft(toDraft(book));
     setUploadName('');
-    setStatus('');
+    setStatus(book.isBuiltIn ? 'Save this built-in book to customize it for the store.' : '');
   };
 
   const deleteBook = async (book: StoreBook) => {
     if (!token) return;
+    if (book.isBuiltIn) {
+      setStatus('Built-in books cannot be deleted here. Edit and save one to manage its visibility.');
+      return;
+    }
     try {
       const response = await apiFetch(`/api/admin/store/books/${book.id}`, {
         method: 'DELETE',
@@ -252,6 +274,10 @@ export default function AdminStorePage() {
   };
 
   const requestDelete = (book: StoreBook) => {
+    if (book.isBuiltIn) {
+      setStatus('Built-in books cannot be deleted here. Edit and save one to manage its visibility.');
+      return;
+    }
     confirmDeleteToast({
       title: 'Delete this store book?',
       description: book.title,
@@ -310,17 +336,25 @@ export default function AdminStorePage() {
     }
   };
 
+  const catalogBooks = useMemo(() => {
+    const savedProductIds = new Set(books.map((book) => book.productId || book.id));
+    const remainingBuiltIns = builtInStoreBooks.filter((book) => !savedProductIds.has(book.productId));
+    return [...books, ...remainingBuiltIns].sort((a, b) => {
+      if (a.isBuiltIn !== b.isBuiltIn) return a.isBuiltIn ? 1 : -1;
+      return (a.sortOrder || 0) - (b.sortOrder || 0) || a.title.localeCompare(b.title);
+    });
+  }, [books]);
+
   const filteredBooks = useMemo(() => {
     const term = search.trim().toLowerCase();
-    return books
-      .filter((book) => showInactive || book.isActive)
+    return catalogBooks
       .filter((book) => {
         if (!term) return true;
         return [book.title, book.author, book.genre, book.productId]
           .filter(Boolean)
           .some((value) => String(value).toLowerCase().includes(term));
       });
-  }, [books, search, showInactive]);
+  }, [catalogBooks, search]);
 
   if (!token) {
     return (
@@ -356,7 +390,7 @@ export default function AdminStorePage() {
 
       {status && <p className="rounded-xl bg-muted px-4 py-3 text-sm text-foreground/70">{status}</p>}
 
-      <div className="grid grid-cols-1 gap-6 xl:grid-cols-[1.2fr_1fr]">
+      <div className="grid grid-cols-1 gap-6 xl:grid-cols-2">
         <section className={`${cardClassName} space-y-5`}>
           <div className="flex flex-wrap items-center justify-between gap-3">
             <div>
@@ -367,18 +401,85 @@ export default function AdminStorePage() {
           </div>
 
           <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
-            <input value={draft.title} onChange={(event) => setDraft((prev) => ({ ...prev, title: event.target.value }))} placeholder="Book title" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
-            <input value={draft.author} onChange={(event) => setDraft((prev) => ({ ...prev, author: event.target.value }))} placeholder="Author" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
-            <input value={draft.productId} onChange={(event) => setDraft((prev) => ({ ...prev, productId: event.target.value }))} placeholder="Product ID (optional)" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
-            <select value={draft.genre} onChange={(event) => setDraft((prev) => ({ ...prev, genre: event.target.value }))} className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground">
-              <option value="">Select genre</option>
-              {bookGenres.map((genre) => <option key={genre} value={genre}>{genre}</option>)}
-            </select>
-            <input type="number" min="0" value={draft.hardCopyPrice} onChange={(event) => setDraft((prev) => ({ ...prev, hardCopyPrice: event.target.value }))} placeholder="Hard copy price" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
-            <input type="number" min="0" value={draft.softCopyPrice} onChange={(event) => setDraft((prev) => ({ ...prev, softCopyPrice: event.target.value }))} placeholder="Soft copy price" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
+            <div className="space-y-2">
+              <label htmlFor="store-book-title" className="text-sm font-medium text-foreground">Book title</label>
+              <input
+                id="store-book-title"
+                value={draft.title}
+                onChange={(event) => setDraft((prev) => ({ ...prev, title: event.target.value }))}
+                placeholder="Book title"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="store-book-author" className="text-sm font-medium text-foreground">Author</label>
+              <input
+                id="store-book-author"
+                value={draft.author}
+                onChange={(event) => setDraft((prev) => ({ ...prev, author: event.target.value }))}
+                placeholder="Author"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="store-book-product-id" className="text-sm font-medium text-foreground">Product ID</label>
+              <input
+                id="store-book-product-id"
+                value={draft.productId}
+                onChange={(event) => setDraft((prev) => ({ ...prev, productId: event.target.value }))}
+                placeholder="Product ID (optional)"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="store-book-genre" className="text-sm font-medium text-foreground">Genre</label>
+              <select
+                id="store-book-genre"
+                value={draft.genre}
+                onChange={(event) => setDraft((prev) => ({ ...prev, genre: event.target.value }))}
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              >
+                <option value="">Select genre</option>
+                {bookGenres.map((genre) => <option key={genre} value={genre}>{genre}</option>)}
+              </select>
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="store-book-hard-price" className="text-sm font-medium text-foreground">Hard copy price</label>
+              <input
+                id="store-book-hard-price"
+                type="number"
+                min="0"
+                value={draft.hardCopyPrice}
+                onChange={(event) => setDraft((prev) => ({ ...prev, hardCopyPrice: event.target.value }))}
+                placeholder="Hard copy price"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              />
+            </div>
+            <div className="space-y-2">
+              <label htmlFor="store-book-soft-price" className="text-sm font-medium text-foreground">Soft copy price</label>
+              <input
+                id="store-book-soft-price"
+                type="number"
+                min="0"
+                value={draft.softCopyPrice}
+                onChange={(event) => setDraft((prev) => ({ ...prev, softCopyPrice: event.target.value }))}
+                placeholder="Soft copy price"
+                className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+              />
+            </div>
           </div>
 
-          <textarea value={draft.description} onChange={(event) => setDraft((prev) => ({ ...prev, description: event.target.value }))} rows={4} placeholder="Book description" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
+          <div className="space-y-2">
+            <label htmlFor="store-book-description" className="text-sm font-medium text-foreground">Book description</label>
+            <textarea
+              id="store-book-description"
+              value={draft.description}
+              onChange={(event) => setDraft((prev) => ({ ...prev, description: event.target.value }))}
+              rows={4}
+              placeholder="Book description"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+            />
+          </div>
 
           <div className="grid gap-4 md:grid-cols-[160px_1fr]">
             <div className="relative flex aspect-[0.72] items-center justify-center overflow-hidden rounded-xl border border-border bg-muted">
@@ -392,10 +493,20 @@ export default function AdminStorePage() {
               )}
             </div>
             <div className="space-y-4">
-              <input value={draft.coverImageUrl} onChange={(event) => setDraft((prev) => ({ ...prev, coverImageUrl: event.target.value }))} placeholder="Cover image URL" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
-              <div>
-                <label className="mb-2 block text-sm font-medium text-foreground">Upload Cover Image</label>
+              <div className="space-y-2">
+                <label htmlFor="store-book-cover-url" className="text-sm font-medium text-foreground">Cover image URL</label>
                 <input
+                  id="store-book-cover-url"
+                  value={draft.coverImageUrl}
+                  onChange={(event) => setDraft((prev) => ({ ...prev, coverImageUrl: event.target.value }))}
+                  placeholder="Cover image URL"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+                />
+              </div>
+              <div className="space-y-2">
+                <label htmlFor="store-book-cover-upload" className="block text-sm font-medium text-foreground">Upload cover image</label>
+                <input
+                  id="store-book-cover-upload"
                   type="file"
                   accept="image/*,.heic,.heif,.avif"
                   onChange={async (event) => {
@@ -410,11 +521,22 @@ export default function AdminStorePage() {
                 />
                 {uploadName && <p className="mt-2 text-xs text-foreground/60">Selected: {uploadName}</p>}
               </div>
-              <input value={draft.downloadUrl} onChange={(event) => setDraft((prev) => ({ ...prev, downloadUrl: event.target.value }))} placeholder="Soft copy download URL (optional)" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
+              <div className="space-y-2">
+                <label htmlFor="store-book-download-url" className="text-sm font-medium text-foreground">Soft copy download URL</label>
+                <input
+                  id="store-book-download-url"
+                  value={draft.downloadUrl}
+                  onChange={(event) => setDraft((prev) => ({ ...prev, downloadUrl: event.target.value }))}
+                  placeholder="Soft copy download URL (optional)"
+                  className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+                />
+              </div>
             </div>
           </div>
 
-          <div className="grid gap-3 sm:grid-cols-3">
+          <div className="space-y-3">
+            <p className="text-sm font-medium text-foreground">Availability and visibility</p>
+            <div className="grid gap-3 sm:grid-cols-3">
             <label className="flex items-center gap-3 rounded-xl border border-border bg-background px-4 py-3 text-sm">
               <input type="checkbox" checked={draft.hardCopyEnabled} onChange={(event) => setDraft((prev) => ({ ...prev, hardCopyEnabled: event.target.checked }))} />
               Hard copy
@@ -427,9 +549,20 @@ export default function AdminStorePage() {
               <input type="checkbox" checked={draft.isActive} onChange={(event) => setDraft((prev) => ({ ...prev, isActive: event.target.checked }))} />
               Visible
             </label>
+            </div>
           </div>
 
-          <input type="number" value={draft.sortOrder} onChange={(event) => setDraft((prev) => ({ ...prev, sortOrder: event.target.value }))} placeholder="Sort order" className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
+          <div className="space-y-2">
+            <label htmlFor="store-book-sort-order" className="text-sm font-medium text-foreground">Sort order</label>
+            <input
+              id="store-book-sort-order"
+              type="number"
+              value={draft.sortOrder}
+              onChange={(event) => setDraft((prev) => ({ ...prev, sortOrder: event.target.value }))}
+              placeholder="Sort order"
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+            />
+          </div>
 
           <div className="flex flex-wrap gap-3">
             <Button onClick={saveBook} disabled={isSaving}>{isSaving ? 'Saving...' : editingId ? 'Save Book' : 'Create Book'}</Button>
@@ -450,15 +583,22 @@ export default function AdminStorePage() {
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             <div>
               <h2 className="text-lg font-semibold text-foreground">Store Books</h2>
-              <p className="text-sm text-foreground/60">{filteredBooks.length} shown of {books.length} books</p>
+              <p className="text-sm text-foreground/60">
+                {filteredBooks.length} shown of {catalogBooks.length} books
+              </p>
             </div>
-            <button type="button" onClick={() => setShowInactive((value) => !value)} className="inline-flex items-center gap-2 rounded-xl border border-border px-3 py-2 text-sm text-foreground/70 hover:text-foreground">
-              {showInactive ? <Eye className="h-4 w-4" /> : <EyeOff className="h-4 w-4" />}
-              {showInactive ? 'Showing inactive' : 'Active only'}
-            </button>
           </div>
 
-          <input value={search} onChange={(event) => setSearch(event.target.value)} placeholder="Search books..." className="mt-4 w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground" />
+          <div className="mt-4 space-y-2">
+            <label htmlFor="store-book-search" className="text-sm font-medium text-foreground">Search books</label>
+            <input
+              id="store-book-search"
+              value={search}
+              onChange={(event) => setSearch(event.target.value)}
+              placeholder="Search books..."
+              className="w-full rounded-xl border border-border bg-background px-4 py-3 text-foreground"
+            />
+          </div>
 
           <div className="mt-5 max-h-[760px] space-y-3 overflow-y-auto pr-2">
             {filteredBooks.length === 0 ? (
@@ -475,16 +615,23 @@ export default function AdminStorePage() {
                         <p className="truncate text-sm font-semibold text-foreground">{book.title}</p>
                         <p className="mt-1 text-xs text-foreground/50">{book.author || 'No author'} - {book.genre || 'No genre'}</p>
                       </div>
-                      <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase ${book.isActive ? 'bg-green-100 text-green-700' : 'bg-muted text-foreground/50'}`}>
-                        {book.isActive ? 'Visible' : 'Hidden'}
-                      </span>
+                      <div className="flex shrink-0 flex-col items-end gap-1">
+                        <span className={`rounded-full px-2 py-1 text-[10px] font-bold uppercase ${book.isActive ? 'bg-green-100 text-green-700' : 'bg-muted text-foreground/50'}`}>
+                          {book.isActive ? 'Visible' : 'Hidden'}
+                        </span>
+                        <span className="rounded-full bg-muted px-2 py-1 text-[10px] font-bold uppercase text-foreground/50">
+                          {book.isBuiltIn ? 'Built-in' : 'Managed'}
+                        </span>
+                      </div>
                     </div>
                     <p className="mt-2 text-xs text-foreground/60">
                       Hard: MWK {book.hardCopyPrice.toLocaleString()} | Soft: {book.softCopyPrice == null ? 'Not set' : `MWK ${book.softCopyPrice.toLocaleString()}`}
                     </p>
                     <div className="mt-4 flex flex-wrap gap-2">
-                      <Button variant="outline" onClick={() => startEditing(book)}>{editingId === book.id ? 'Editing' : 'Edit'}</Button>
-                      <Button variant="outline" onClick={() => requestDelete(book)}>Delete</Button>
+                      <Button variant="outline" onClick={() => startEditing(book)}>
+                        {editingId === book.id ? 'Editing' : 'Edit'}
+                      </Button>
+                      {!book.isBuiltIn && <Button variant="outline" onClick={() => requestDelete(book)}>Delete</Button>}
                     </div>
                   </div>
                 </div>

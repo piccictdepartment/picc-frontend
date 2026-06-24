@@ -216,9 +216,12 @@ export default async function PICCSecondaryPage() {
         </p>
 
         <div className="relative flex flex-wrap gap-3 justify-center">
-          <button className="bg-[#c9a84c] text-[#0d1f3c] text-xs font-bold tracking-[0.15em] uppercase px-8 py-3.5 hover:bg-[#e2c27d] transition-colors duration-200">
+          <a
+            href="https://piccschoolsmw.org/"
+            className="bg-[#c9a84c] text-[#0d1f3c] text-xs font-bold tracking-[0.15em] uppercase px-8 py-3.5 hover:bg-[#e2c27d] transition-colors duration-200"
+          >
             Visit the school&apos;s official website
-          </button>
+          </a>
         </div>
       </section>
 

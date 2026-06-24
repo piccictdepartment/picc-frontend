@@ -270,7 +270,7 @@ export default function SermonsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Listen on Podbean
+              Open audio source
             </a>
           </div>
         </div>
@@ -305,7 +305,7 @@ export default function SermonsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Listen on Podbean
+              Open audio source
             </a>
           </div>
         </div>
@@ -318,10 +318,10 @@ export default function SermonsPage() {
           {isAudioPlaying && (
             <div className="mx-auto max-w-2xl rounded-2xl bg-white/95 px-6 py-8 text-center text-primary shadow-sm">
               <p className="text-sm font-semibold">
-                This Podbean page cannot play inside the website.
+                This audio source cannot play inside the website.
               </p>
               <p className="mt-2 text-sm text-primary/70">
-                Use a Podbean embed player link for in-page playback, or open the episode on Podbean.
+                Use a compatible embed player link for in-page playback, or open the audio source in a new tab.
               </p>
             </div>
           )}
@@ -339,7 +339,7 @@ export default function SermonsPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center justify-center rounded-full border border-white/40 px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-white/10"
             >
-              Listen on Podbean
+              Open audio source
             </a>
           </div>
         </div>

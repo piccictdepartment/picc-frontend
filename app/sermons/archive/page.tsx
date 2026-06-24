@@ -22,7 +22,7 @@ import {
   DialogTitle,
   DialogDescription 
 } from '@/components/ui/dialog';
-import { CalendarClock, MapPin, Search, ArrowLeft, Filter, Play, Music, X } from 'lucide-react';
+import { CalendarClock, Search, ArrowLeft, Filter, Play, Music } from 'lucide-react';
 
 interface Sermon {
   id: string;
@@ -54,7 +54,7 @@ function getYouTubeStart(url: string): number {
   return match ? parseInt(match[1], 10) : 0;
 }
 
-// Helper functions for Podbean
+// Helper functions for external audio embeds
 const isPodbeanUrl = (url?: string): boolean => {
   if (!url) return false;
   try {
