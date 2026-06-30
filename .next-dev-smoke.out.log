@@ -1,0 +1,18 @@
+
+> picc-frontend@0.1.0 dev
+> next dev --port 3011
+
+▲ Next.js 16.2.4 (Turbopack)
+- Local:         http://localhost:3011
+- Network:       http://192.168.1.16:3011
+- Environments: .env.local
+✓ Ready in 1278ms
+Creating turbopack project {
+  dir: 'C:\\Users\\Michelle\\Documents\\PICC\\picc-frontend',
+  testMode: true
+}
+- Experiments (use with caution):
+  ✓ workerThreads
+
+○ Compiling / ...
+✓ Finished writing to filesystem cache in 105s

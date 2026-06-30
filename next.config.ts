@@ -3,8 +3,13 @@ import type { NextConfig } from "next";
 const apiBase = process.env.NEXT_PUBLIC_API_BASE_URL || "http://localhost:5000";
 const apiUrl = new URL(apiBase);
 const apiProtocol = apiUrl.protocol === "https:" ? "https" : "http";
+const projectRoot = process.cwd();
 
 const nextConfig: NextConfig = {
+  outputFileTracingRoot: projectRoot,
+  turbopack: {
+    root: projectRoot,
+  },
   typescript: {
     ignoreBuildErrors: true,
   },

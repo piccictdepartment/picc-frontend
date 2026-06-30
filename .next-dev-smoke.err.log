@@ -1,0 +1,4992 @@
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+
+
+#
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+
+<--- Last few GCs --->
+#
+<--- Last few GCs --->
+
+----- Native stack trace -----
+
+[33220:0000017711E4E000]     7202 ms: Scavenge 6.9 (8.9) -> 6.0 (8.4) MB, pooled: 0 MB, 77.43 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[34340:0000024659EBC000]     8569 ms: Scavenge 8.9 (12.2) -> 7.6 (9.7) MB, pooled: 2 MB, 4.02 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[33220:0000017711E4E000]    10882 ms: Scavenge 6.7 (8.9) -> 6.5 (9.1) MB, pooled: 0 MB, 6.06 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34340:0000024659EBC000]     9512 ms: Scavenge 9.7 (10.7) -> 9.1 (17.9) MB, pooled: 0 MB, 12.15 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[33220:0000017711E4E000]    15959 ms: Scavenge 8.1 (9.7) -> 7.6 (8.9) MB, pooled: 1 MB, 1.32 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+ 1: 00007FF75C8DE43D 
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+ 2: 00007FF75BD43956 
+----- Native stack trace -----
+----- Native stack trace -----
+ 3: 00007FF75B5DDC96 
+
+
+ 4: 00007FF75B444E7E 
+ 1: 00007FF75C993D9F 
+ 1: 00007FF75C993D9F 
+ 5: 00007FF75B4784DF 
+ 2: 00007FF75B5DDCB7 
+ 2: 00007FF75B5DDCB7 
+ 6: 00007FF75B478F92 
+ 3: 00007FF75AF55B96 
+ 3: 00007FF75B3DE4F7 
+ 7: 00007FF75B479972 
+ 4: 00007FF75ADEDE5F 
+ 4: 00007FF75B376AEB 
+ 8: 00007FF75AF748B3 
+ 5: 00007FF75AE1F827 
+ 5: 00007FF75B34E51E 
+ 9: 00007FF75B608BA6 
+ 6: 00007FF75AE1EC03 
+ 6: 00007FF75B3E0F92 
+10: 00007FF75CAA512D 
+ 7: 00007FF75ADD5772 
+ 7: 00007FF75B3DFF47 
+11: 00007FF75C7FADC5 
+ 8: 00007FF75ADDF8C0 
+ 8: 00007FF75B3F0E82 
+12: 00007FF75B632D76 
+ 9: 00007FF75ADB49BB 
+ 9: 00007FF75B3F09AB 
+13: 00007FF75CCDDC73 
+10: 00007FF75AE2CA26 
+10: 00007FF75CCC24AD 
+14: 00007FFD4384E957 
+11: 00007FF75AE2B740 
+11: 00007FF75B3DBFC0 
+15: 00007FFD43FAAD6C 
+12: 00007FF75AE2953A 
+12: 00007FF75B3F681A 
+13: 00007FF75B55196F 
+13: 00007FF75B402678 
+14: 00007FF75AE2B01B 
+14: 00007FF75B41E7EA 
+15: 00007FF75BDB6C6F 
+15: 00007FF75B109465 
+16: 00007FF75C8D944B 
+16: 00007FF75B1093ED 
+17: 00007FF75B632D76 
+17: 00007FF75B1156BA 
+18: 00007FF75CCDDC73 
+18: 00007FF75B118245 
+19: 00007FFD4384E957 
+19: 00007FF75B114AE4 
+20: 00007FFD43FAAD6C 
+20: 00007FF75B11492D 
+21: 00007FF75B119D48 
+22: 00007FF75B122943 
+23: 00007FF75B1065E1 
+24: 00007FF75B105E19 
+25: 00007FF75B182E6B 
+26: 00007FF75B18CC14 
+27: 00007FF75AFCFFB6 
+28: 00007FF75AFCE953 
+29: 000001774A5775FA 
+
+<--- Last few GCs --->
+
+[33416:0000022E9FE9B000]    14462 ms: Scavenge 8.9 (11.7) -> 7.5 (9.4) MB, pooled: 2 MB, 3.57 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[33416:0000022E9FE9B000]    15288 ms: Scavenge 9.7 (10.4) -> 9.1 (17.7) MB, pooled: 0 MB, 5.25 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+<--- Last few GCs --->
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+----- Native stack trace -----
+[33436:0000022AF4F6F000]     1084 ms: Scavenge 4.1 (6.2) -> 3.8 (6.2) MB, pooled: 0 MB, 2.75 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[33436:0000022AF4F6F000]     1576 ms: Scavenge 5.3 (7.0) -> 5.0 (7.5) MB, pooled: 0 MB, 233.43 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 1: 00007FF75C993D9F 
+
+ 2: 00007FF75B5DDCB7 
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+ 3: 00007FF75AF55B96 
+----- Native stack trace -----
+ 4: 00007FF75BD70515 
+
+ 5: 00007FF75BD70D1B 
+ 6: 00007FF75AD817A1 
+ 7: 00007FF75AE2B633 
+ 8: 00007FF75AE2953A 
+ 9: 00007FF75B55196F 
+10: 00007FF75AE2B01B 
+11: 00007FF75BDB6C6F 
+12: 00007FF75C8D944B 
+13: 00007FF75B632D76 
+14: 00007FF75CCDDC73 
+15: 00007FFD4384E957 
+16: 00007FFD43FAAD6C 
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B39F06A 
+ 6: 00007FF75B3E08D6 
+ 7: 00007FF75B3DFF26 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41A57F 
+15: 00007FF75B40C9E4 
+16: 00007FF75B0BBAD8 
+17: 00007FF75B11846D 
+18: 00007FF75B11863C 
+19: 00007FF75B114B70 
+20: 00007FF75B11492D 
+21: 00007FF75B119D48 
+22: 00007FF75B122943 
+23: 00007FF75B1065E1 
+24: 00007FF75B105E19 
+25: 00007FF75B182E6B 
+26: 00007FF75B1826EE 
+27: 00007FF75B18174D 
+28: 00007FF75B1814B4 
+29: 00007FF75B180F47 
+30: 00007FF75B180CB8 
+31: 00007FF75B592016 
+32: 0000022ABFE7753A 
+
+
+
+
+<--- Last few GCs --->
+<--- Last few GCs --->
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+
+<--- Last few GCs --->
+
+[33468:000002982C1FB000]    35138 ms: Scavenge 13.3 (16.4) -> 12.0 (13.9) MB, pooled: 2 MB, 4.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[33468:000002982C1FB000]    35856 ms: Scavenge 13.0 (14.7) -> 12.8 (20.4) MB, pooled: 0 MB, 232.92 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+<--- Last few GCs --->
+<--- Last few GCs --->
+
+
+
+
+[32660:000001E47C64C000]    36587 ms: Scavenge 11.1 (13.4) -> 10.3 (11.7) MB, pooled: 2 MB, 1.56 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35764:000001D482137000]     8555 ms: Scavenge 8.2 (11.6) -> 7.0 (9.4) MB, pooled: 2 MB, 16.32 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 1: 00007FF75C993D9F 
+[33348:00000216F0448000]      716 ms: Scavenge 4.1 (6.2) -> 3.8 (6.5) MB, pooled: 0 MB, 1.75 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34760:000002398976C000]    20399 ms: Scavenge 11.0 (11.9) -> 10.4 (13.9) MB, pooled: 0 MB, 2.73 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[32660:000001E47C64C000]    38626 ms: Scavenge 11.1 (12.1) -> 10.8 (13.4) MB, pooled: 0 MB, 1.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+ 2: 00007FF75B5DDCB7 
+[33348:00000216F0448000]     1244 ms: Scavenge 5.3 (7.0) -> 5.0 (7.7) MB, pooled: 0 MB, 345.38 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34760:000002398976C000]    21064 ms: Scavenge 10.7 (13.9) -> 10.6 (14.2) MB, pooled: 0 MB, 1.08 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[32660:000001E47C64C000]    43766 ms: Scavenge 11.8 (13.4) -> 11.4 (12.9) MB, pooled: 1 MB, 1.34 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+FATAL ERROR: Zone Allocation failed - process out of memory
+ 3: 00007FF75AF55B96 
+
+[34760:000002398976C000]    21071 ms: Scavenge 10.6 (14.2) -> 10.6 (14.2) MB, pooled: 0 MB, 0.59 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+----- Native stack trace -----
+ 4: 00007FF75AB11ED6 
+FATAL ERROR: NewSpace::EnsureCurrentCapacity Allocation failed - JavaScript heap out of memory
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+ 5: 00007FF75C1C7875 
+----- Native stack trace -----
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+ 1: 00007FF75C993D9F 
+ 6: 00007FF75C1CB1B1 
+
+----- Native stack trace -----
+
+ 2: 00007FF75B5DDCB7 
+ 7: 00007FF75C1C85E1 
+ 1: 00007FF75C993D9F 
+
+ 1: 00007FF75C993D9F 
+ 3: 00007FF75AF55B96 
+ 8: 00007FF75C1C4C78 
+ 2: 00007FF75B5DDCB7 
+ 2: 00007FF75B5DDCB7 
+ 4: 00007FF75AB49DA1 
+ 1: 00007FF75C993D9F 
+ 9: 00007FF75C1C47D9 
+ 3: 00007FF75B3DE4F7 
+ 3: 00007FF75AF55B96 
+ 5: 00007FF75B2EE235 
+ 2: 00007FF75B5DDCB7 
+10: 00007FF75C1C4294 
+ 4: 00007FF75B39ED73 
+ 4: 00007FF75B2C8DA2 
+ 6: 00007FF75B2F7211 
+ 3: 00007FF75B3DE4F7 
+11: 00007FF75C1C3821 
+ 5: 00007FF75B3E08FA 
+ 5: 00007FF75B2C800E 
+ 7: 00007FF75B2D5E96 
+ 4: 00007FF75B3BDBEE 
+12: 00007FF75C1C357F 
+ 6: 00007FF75B3DFF26 
+ 6: 00007FF75B2F4559 
+ 8: 00007FF75B2E0B49 
+ 5: 00007FF75B3B32AD 
+13: 00007FF75BFD1326 
+ 7: 00007FF75B3F0E82 
+ 7: 00007FF75B2D9868 
+ 9: 00007FF75B2D2A91 
+ 6: 00007FF75B3B2F5C 
+14: 00007FF75BFC9B96 
+ 8: 00007FF75B3F09AB 
+ 8: 00007FF75B2E5558 
+10: 00007FF75B2E7C2A 
+ 7: 00007FF75B3B2BA1 
+15: 00007FF75BFC9010 
+ 9: 00007FF75CCC24AD 
+ 9: 00007FF75B2E29D0 
+11: 00007FF75B2E869B 
+ 8: 00007FF75B3C4E88 
+16: 00007FF75B55196F 
+10: 00007FF75B3DBFC0 
+10: 00007FF75B2D1F55 
+12: 00007FF75B2D1F55 
+ 9: 00007FF75BDB641D 
+17: 00007FF75B5169BD 
+11: 00007FF75B4026C1 
+11: 00007FF75B2D01CB 
+13: 00007FF75B2CF76B 
+10: 00007FF75BDB68C2 
+18: 00007FF75B5166B5 
+12: 00007FF75B41A06C 
+12: 00007FF75B2D0550 
+14: 00007FF75B2CEBDF 
+11: 00007FF75B3B5BE4 
+19: 00007FF75BDB6C6F 
+13: 00007FF75B41A005 
+13: 00007FF75B2D20E3 
+15: 00007FF75B2CD3EF 
+12: 00007FF75B39D30D 
+20: 00007FF75C8D944B 
+14: 00007FF75B0F958E 
+14: 00007FF75B2D01CB 
+16: 00007FF75B2C4696 
+13: 00007FF75B397384 
+21: 00007FF75B632D76 
+15: 00007FF75B0F9AFD 
+15: 00007FF75B2D0550 
+17: 00007FF75B562A4F 
+14: 00007FF75B3E08FA 
+22: 00007FF75CCDDC73 
+16: 00007FF75B0FA1CB 
+16: 00007FF75B2D20E3 
+18: 00007FF75B559368 
+15: 00007FF75B3DFF26 
+17: 00007FF75AFC7E73 
+23: 00007FFD4384E957 
+17: 00007FF75B2D213A 
+19: 00007FF75B55BB04 
+16: 00007FF75B3F0E82 
+24: 00007FFD43FAAD6C 
+18: 000002169FE775FA 
+18: 00007FF75B2D213A 
+20: 00007FF75B55E501 
+17: 00007FF75B3F09AB 
+19: 00007FF75B2D213A 
+21: 00007FF75B5E7173 
+18: 00007FF75CCC24AD 
+20: 00007FF75B2D01CB 
+22: 00007FF75C9B173F 
+19: 00007FF75B3DBFC0 
+21: 00007FF75B2D0550 
+23: 00007FF75C9AFC93 
+22: 00007FF75B2D01CB 
+20: 00007FF75B42452B 
+24: 000001D4BA70F64D 
+21: 00007FF75B42425E 
+23: 00007FF75B2D0550 
+22: 00007FF75B41ECFC 
+24: 00007FF75B2D677A 
+23: 00007FF75B1E0EE1 
+25: 00007FF75B2D01CB 
+24: 00007FF75B1A8947 
+26: 00007FF75B2D0550 
+25: 00007FF75B1A8F92 
+27: 00007FF75B2CF76B 
+26: 00007FF75B560B16 
+28: 00007FF75B2CEBDF 
+27: 00007FF75B40ADDB 
+29: 00007FF75B2CD273 
+28: 00007FF75B55E6EB 
+30: 00007FF75B2C4696 
+29: 00007FF75B5E7173 
+31: 00007FF75B562A4F 
+30: 00007FF75C9C6F3D 
+32: 00007FF75B559368 
+31: 00007FF75C9C7A0E 
+33: 00007FF75B558B8D 
+32: 00007FF75C9CAC63 
+34: 00007FF75B55962C 
+33: 00000239C1D4F64D 
+35: 00007FF75AFDA98B 
+36: 000001E437E775FA 
+
+<--- Last few GCs --->
+
+
+
+
+<--- Last few GCs --->
+<--- Last few GCs --->
+<--- Last few GCs --->
+[35252:0000027DD0A7C000]    10362 ms: Scavenge 8.9 (11.4) -> 7.6 (9.2) MB, pooled: 2 MB, 911.19 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+
+
+[31132:0000021A1186C000]     7969 ms: Scavenge 8.9 (11.9) -> 7.6 (9.7) MB, pooled: 2 MB, 101.35 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[30564:000001E2CE20C000]     7399 ms: Scavenge 6.7 (8.6) -> 6.4 (9.1) MB, pooled: 0 MB, 1.36 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[5668:0000011EEB24C000]    16363 ms: Scavenge 6.9 (8.9) -> 6.1 (8.6) MB, pooled: 0 MB, 74.60 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[31132:0000021A1186C000]    15067 ms: Scavenge 9.7 (10.7) -> 9.1 (13.9) MB, pooled: 0 MB, 296.96 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+[30564:000001E2CE20C000]     9197 ms: Scavenge 8.1 (9.7) -> 7.6 (9.9) MB, pooled: 0 MB, 41.12 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[5668:0000011EEB24C000]    17338 ms: Scavenge 6.6 (8.6) -> 6.4 (10.9) MB, pooled: 0 MB, 6.60 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+----- Native stack trace -----
+[30564:000001E2CE20C000]     9345 ms: Scavenge 9.4 (11.2) -> 9.0 (13.4) MB, pooled: 0 MB, 1.36 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+#
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+----- Native stack trace -----
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+# Fatal process out of memory: Re-embedded builtins: set permissions
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+
+----- Native stack trace -----
+ 1: 00007FF75C993D9F 
+#
+ 3: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+
+ 2: 00007FF75B5DDCB7 
+----- Native stack trace -----
+ 4: 00007FF75B376AEB EC_GROUP_get0_field+76331
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 3: 00007FF75AF55B96 
+
+ 5: 00007FF75B34E51E v8::platform::tracing::TraceObject::bind_id+28894
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+
+ 4: 00007FF75C57A687 
+ 6: 00007FF75B3E0F92 uv_udp_get_send_queue_count+65330
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+
+ 5: 00007FF75C575456 
+ 7: 00007FF75B3DFF47 uv_udp_get_send_queue_count+61159
+ 4: 00007FF75AE04262 SSL_CTX_get_client_CA_list+562802
+#
+ 6: 00007FF75C574EA5 
+ 8: 00007FF75B3F0E82 v8::internal::StrongRootAllocatorBase::deallocate_impl+15858
+ 5: 00007FF75ADA58CD SSL_CTX_get_client_CA_list+175325
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+# Fatal process out of memory: Re-embedded builtins: set permissions
+ 7: 00007FF75C583EF0 
+ 9: 00007FF75B3F09AB v8::internal::StrongRootAllocatorBase::deallocate_impl+14619
+ 6: 00007FF75ADA5FCF SSL_CTX_get_client_CA_list+177119
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+#
+ 8: 00007FF75C4442CD 
+10: 00007FF75CCC24AD node::AsyncResource::CallbackScope::CallbackScope+2184429
+ 7: 00007FF75ADDED1A SSL_CTX_get_client_CA_list+409898
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+----- Native stack trace -----
+ 9: 00007FF75BFEFFC4 
+11: 00007FF75B3DBFC0 uv_udp_get_send_queue_count+44896
+ 8: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+ 4: 00007FF75B01CA1A v8::base::CPU::has_bmi2+20874
+
+10: 00007FF75BFD32D4 
+12: 00007FF75B3F681A X509_STORE_set_cleanup+5098
+ 9: 00007FF75AE2CA26 SSL_CTX_get_client_CA_list+728630
+ 5: 00007FF75B01C755 v8::base::CPU::has_bmi2+20165
+11: 00007FF75BFC9C8B 
+13: 00007FF75B402678 uv_timer_set_repeat+19096
+10: 00007FF75AE2B740 SSL_CTX_get_client_CA_list+723792
+ 6: 00007FF75B00A779 v8::base::CPU::family+71193
+12: 00007FF75BFC9063 
+14: 00007FF75B41E7EA uv_timer_set_repeat+134154
+11: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+ 7: 00007FF75B008B30 v8::base::CPU::family+63952
+13: 00007FF75B55196F 
+15: 00007FF75B109465 v8::RegExp::GetFlags+142357
+12: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+ 8: 00007FF75B00A9F2 v8::base::CPU::family+71826
+14: 00007FF75B5169BD 
+16: 00007FF75B1093ED v8::RegExp::GetFlags+142237
+15: 00007FF75B5166B5 
+ 9: 00007FF75B00A228 v8::base::CPU::family+69832
+13: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+17: 00007FF75B1156BA v8::RegExp::GetFlags+192106
+14: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+10: 00007FF75B008AAF v8::base::CPU::family+63823
+16: 00007FF75BDB6C6F 
+18: 00007FF75B118245 v8::RegExp::GetFlags+203253
+15: 00007FF75C8D944B node::GetNodeReport+93163
+11: 00007FF75B00A9F2 v8::base::CPU::family+71826
+17: 00007FF75C8D944B 
+19: 00007FF75B114AE4 v8::RegExp::GetFlags+189076
+16: 00007FF75B632D76 uv_thread_detach+150
+12: 00007FF75B00A9F2 v8::base::CPU::family+71826
+18: 00007FF75B632D76 
+20: 00007FF75B11492D v8::RegExp::GetFlags+188637
+17: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+13: 00007FF75B00A228 v8::base::CPU::family+69832
+19: 00007FF75CCDDC73 
+21: 00007FF75B119D48 v8::RegExp::GetFlags+210168
+18: 00007FFD4384E957 BaseThreadInitThunk+23
+14: 00007FF75B008AAF v8::base::CPU::family+63823
+20: 00007FFD4384E957 
+22: 00007FF75B122943 v8::RegExp::GetFlags+246003
+19: 00007FFD43FAAD6C RtlUserThreadStart+44
+15: 00007FF75B0038F4 v8::base::CPU::family+42900
+21: 00007FFD43FAAD6C 
+23: 00007FF75B1065E1 v8::RegExp::GetFlags+130449
+16: 00007FF75B00A9F2 v8::base::CPU::family+71826
+24: 00007FF75B105E19 v8::RegExp::GetFlags+128457
+17: 00007FF75B00A9F2 v8::base::CPU::family+71826
+25: 00007FF75B182E6B v8::RegExp::GetFlags+640539
+18: 00007FF75B006A36 v8::base::CPU::family+55510
+26: 00007FF75B18CC14 v8::RegExp::GetFlags+680900
+19: 00007FF75B00A228 v8::base::CPU::family+69832
+27: 00007FF75AFCFFB6 v8::CodeEvent::GetFunctionName+117286
+20: 00007FF75B008AAF v8::base::CPU::family+63823
+28: 00007FF75AFCFED1 v8::CodeEvent::GetFunctionName+117057
+21: 00007FF75B00A9F2 v8::base::CPU::family+71826
+29: 00007FF75AFCE953 v8::CodeEvent::GetFunctionName+111555
+22: 00007FF75B00A9F2 v8::base::CPU::family+71826
+30: 0000027D9FE775FA 
+23: 00007FF75B00A228 v8::base::CPU::family+69832
+24: 00007FF75B008AAF v8::base::CPU::family+63823
+25: 00007FF75B002C58 v8::base::CPU::family+39672
+26: 00007FF75AFE6150 node::StartExecutionCallbackInfoWithModule::process_object+10784
+27: 00007FF75AFE5872 node::StartExecutionCallbackInfoWithModule::process_object+8514
+28: 00007FF75AFE4169 node::StartExecutionCallbackInfoWithModule::process_object+2617
+29: 00007FF75AFE43FC node::StartExecutionCallbackInfoWithModule::process_object+3276
+30: 00007FF75AFE42DB node::StartExecutionCallbackInfoWithModule::process_object+2987
+31: 00007FF75AFBB1D2 v8::CodeEvent::GetFunctionName+31810
+32: 0000011EA7E775FA 
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+12: 00007FF75B632D76 uv_thread_detach+150
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+12: 00007FF75B632D76 uv_thread_detach+150
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+
+
+
+<--- Last few GCs --->
+<--- Last few GCs --->
+<--- Last few GCs --->
+[31100:00000201372CC000]     1393 ms: Scavenge 8.9 (11.7) -> 7.6 (11.4) MB, pooled: 0 MB, 36.98 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+
+[31100:00000201372CC000]     1563 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 3.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[12340:0000024660BAC000]     1519 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 2.13 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[4156:000002C08D98C000]     1239 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 1.90 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35224:0000021D0FC3C000]     2741 ms: Scavenge 8.9 (11.9) -> 7.6 (11.9) MB, pooled: 0 MB, 77.90 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[12340:0000024660BAC000]     1675 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 2.62 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[4156:000002C08D98C000]     1447 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 2.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+
+----- Native stack trace -----
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+----- Native stack trace -----
+----- Native stack trace -----
+----- Native stack trace -----
+
+
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 4: 00007FF75AD8200E SSL_CTX_get_client_CA_list+29726
+ 4: 00007FF75AD7FFEC SSL_CTX_get_client_CA_list+21500
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 5: 00007FF75ADB651D SSL_CTX_get_client_CA_list+244013
+ 5: 00007FF75ADA9128 SSL_CTX_get_client_CA_list+189752
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75AD8200E SSL_CTX_get_client_CA_list+29726
+ 6: 00007FF75ADB59EE SSL_CTX_get_client_CA_list+241150
+ 6: 00007FF75ADA9B53 SSL_CTX_get_client_CA_list+192355
+ 4: 00007FF75B5C4CD6 RSA_get0_q+468358
+ 5: 00007FF75AE2B633 SSL_CTX_get_client_CA_list+723523
+ 7: 00007FF75ADC8F71 SSL_CTX_get_client_CA_list+320385
+ 7: 00007FF75ADDF478 SSL_CTX_get_client_CA_list+411784
+ 5: 00007FF75B07A2F3 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+164915
+ 6: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+ 8: 00007FF75AD9DDB5 SSL_CTX_get_client_CA_list+143813
+ 8: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+ 6: 00007FF75B07798E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+154318
+ 7: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+ 9: 00007FF75ADB9502 SSL_CTX_get_client_CA_list+256274
+ 9: 00007FF75ADB4592 SSL_CTX_get_client_CA_list+235938
+ 7: 00007FF75B068E73 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+94131
+ 8: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+10: 00007FF75ADCABC6 SSL_CTX_get_client_CA_list+327638
+10: 00007FF75ADB655C SSL_CTX_get_client_CA_list+244076
+ 8: 00007FF75B06849D v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+91613
+ 9: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+11: 00007FF75ADCB9C7 SSL_CTX_get_client_CA_list+331223
+11: 00007FF75ADB59EE SSL_CTX_get_client_CA_list+241150
+ 9: 00007FF75B066BCB v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+85259
+10: 00007FF75C8D944B node::GetNodeReport+93163
+12: 00007FF75ADDFD9A SSL_CTX_get_client_CA_list+414122
+12: 00007FF75ADC8F71 SSL_CTX_get_client_CA_list+320385
+10: 00007FF75B065F06 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+81990
+11: 00007FF75B632D76 uv_thread_detach+150
+13: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+13: 00007FF75AD9DDB5 SSL_CTX_get_client_CA_list+143813
+11: 00007FF75B090A68 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+256936
+12: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+14: 00007FF75ADB4592 SSL_CTX_get_client_CA_list+235938
+14: 00007FF75ADB9502 SSL_CTX_get_client_CA_list+256274
+15: 00007FF75ADB655C SSL_CTX_get_client_CA_list+244076
+13: 00007FFD4384E957 BaseThreadInitThunk+23
+12: 00007FF75B084A80 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207808
+15: 00007FF75ADCABC6 SSL_CTX_get_client_CA_list+327638
+13: 00007FF75B0A9003 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+356675
+14: 00007FFD43FAAD6C RtlUserThreadStart+44
+16: 00007FF75ADB59EE SSL_CTX_get_client_CA_list+241150
+16: 00007FF75ADCB9C7 SSL_CTX_get_client_CA_list+331223
+14: 00007FF75B089474 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+226740
+17: 00007FF75ADC8F71 SSL_CTX_get_client_CA_list+320385
+17: 00007FF75ADDFD9A SSL_CTX_get_client_CA_list+414122
+15: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+18: 00007FF75AD9DDB5 SSL_CTX_get_client_CA_list+143813
+18: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+16: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+19: 00007FF75ADB9502 SSL_CTX_get_client_CA_list+256274
+19: 00007FF75AE2CA26 SSL_CTX_get_client_CA_list+728630
+17: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+20: 00007FF75ADCABC6 SSL_CTX_get_client_CA_list+327638
+20: 00007FF75AE2B740 SSL_CTX_get_client_CA_list+723792
+18: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+21: 00007FF75ADCB9C7 SSL_CTX_get_client_CA_list+331223
+21: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+19: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+22: 00007FF75ADDFD9A SSL_CTX_get_client_CA_list+414122
+22: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+20: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+23: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+23: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+21: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+24: 00007FF75AE2CA26 SSL_CTX_get_client_CA_list+728630
+24: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+22: 00007FF75B55B6FF RSA_get0_q+36783
+25: 00007FF75AE2B740 SSL_CTX_get_client_CA_list+723792
+25: 00007FF75C8D944B node::GetNodeReport+93163
+23: 00007FF75B55E501 RSA_get0_q+48561
+26: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+26: 00007FF75B632D76 uv_thread_detach+150
+24: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+27: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+27: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+25: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+28: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+28: 00007FFD4384E957 BaseThreadInitThunk+23
+26: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+29: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+29: 00007FFD43FAAD6C RtlUserThreadStart+44
+27: 0000021D4830F64D 
+30: 00007FF75C8D944B node::GetNodeReport+93163
+31: 00007FF75B632D76 uv_thread_detach+150
+32: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+33: 00007FFD4384E957 BaseThreadInitThunk+23
+34: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+
+
+#
+
+# Fatal process out of memory: Worklist::Segment::Create
+#
+#
+# Fatal error in , line 0
+----- Native stack trace -----
+# Out of memory: HashMap::Initialize
+
+#
+#
+#
+#FailureMessage Object: 00000073283F8D90
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43EEF 
+ 3: 00007FF75B5DBD56 
+ 4: 00007FF75B5DB442 
+ 5: 00007FF75B5DB270 
+ 6: 00007FF75B06146F 
+ 7: 00007FF75B099B50 
+ 8: 00007FF75B09F42A 
+ 9: 00007FF75B0987B9 
+10: 00007FF75B09795E 
+11: 00007FF75B09D324 
+12: 00007FF75B0A873F 
+13: 00007FF75B091F0B 
+14: 00007FF75B08794A 
+15: 00007FF75B098680 
+16: 00007FF75B0979A4 
+17: 00007FF75B09D324 
+18: 00007FF75B09B7AE 
+19: 00007FF75B09878B 
+20: 00007FF75B09795E 
+21: 00007FF75B09D324 
+22: 00007FF75B0A873F 
+23: 00007FF75B091F0B 
+24: 00007FF75B08794A 
+25: 00007FF75B098680 
+26: 00007FF75B0979A4 
+27: 00007FF75B09D324 
+28: 00007FF75B09B7AE 
+29: 00007FF75B09878B 
+30: 00007FF75B09795E 
+31: 00007FF75B09D324 
+32: 00007FF75B0A873F 
+33: 00007FF75B091F0B 
+34: 00007FF75B09140A 
+35: 00007FF75B084B07 
+36: 00007FF75B083CD4 
+37: 00007FF75B082FC2 
+38: 00007FF75B082C6A 
+39: 00007FF75B07E299 
+40: 00007FF75B55B6FF 
+41: 00007FF75B55E501 
+42: 00007FF75B5E7173 
+43: 00007FF75C9B173F 
+44: 00007FF75C9AFC93 
+45: 00000218AFDCF64D 
+
+<--- Last few GCs --->
+
+[20548:000001F87AF0E000]     3297 ms: Scavenge 8.9 (11.7) -> 7.6 (11.4) MB, pooled: 0 MB, 156.04 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[20548:000001F87AF0E000]     5801 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 894.40 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75B5CA29E RSA_get0_q+490318
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 5: 00007FF75B5C4843 RSA_get0_q+467187
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 6: 00007FF75B5C66B8 RSA_get0_q+474984
+ 3: 00007FF75B35A6F6 X509_STORE_get_cleanup+7590
+ 7: 00007FF75B092551 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+263825
+ 4: 00007FF75B357B93 v8::platform::tracing::TraceObject::bind_id+67411
+ 8: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+ 5: 00007FF75B34DA6F v8::platform::tracing::TraceObject::bind_id+26159
+ 9: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+ 6: 00007FF75B347DC8 v8::platform::tracing::TraceObject::bind_id+2440
+10: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+ 7: 00007FF75B347BA0 v8::platform::tracing::TraceObject::bind_id+1888
+11: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+ 8: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+12: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+ 9: 00007FF75C8D944B node::GetNodeReport+93163
+13: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+10: 00007FF75B632D76 uv_thread_detach+150
+14: 00007FF75B55B6FF RSA_get0_q+36783
+11: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+15: 00007FF75B55E501 RSA_get0_q+48561
+12: 00007FFD4384E957 BaseThreadInitThunk+23
+16: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+13: 00007FFD43FAAD6C RtlUserThreadStart+44
+17: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+18: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+19: 000001F837DCF64D 
+
+thread 'tokio-runtime-worker' (31192) panicked at turbopack\crates\turbo-tasks-backend\src\backend\operation\mod.rs:197:17:
+Failed to restore task data (corrupted database or bug): Meta for TaskId 1873465)
+
+Caused by:
+    0: Looking up task storage for TaskId 1873465 from database failed
+    1: Unable to open static sorted file referenced from 00022572.meta
+    2: Unable to open static sorted file 00022566.sst
+    3: Failed to mmap SST file C:\Users\Michelle\Documents\PICC\picc-frontend\.next\dev\cache/turbopack\2275bd85\00022566.sst (50745625 bytes)
+    4: The paging file is too small for this operation to complete. (os error 1455)
+note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+
+<--- Last few GCs --->
+
+
+
+<--- Last few GCs --->
+[35896:0000026B0F2FC000]    28876 ms: Scavenge 19.9 (24.4) -> 17.3 (24.4) MB, pooled: 0 MB, 1.05 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+<--- Last few GCs --->
+[33816:000001C4AB8AA000]     3602 ms: Scavenge 6.2 (7.8) -> 5.6 (10.6) MB, pooled: 0 MB, 81.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35896:0000026B0F2FC000]    29924 ms: Scavenge 20.7 (24.8) -> 18.0 (31.1) MB, pooled: 0 MB, 1031.95 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+
+[12024:000001878639C000]     7683 ms: Scavenge 8.9 (11.4) -> 7.6 (11.7) MB, pooled: 0 MB, 30.37 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Zone Allocation failed - process out of memory
+[12024:000001878639C000]    10164 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 54.58 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+----- Native stack trace -----
+----- Native stack trace -----
+
+
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+----- Native stack trace -----
+<--- Last few GCs --->
+
+
+[35896:0000026B0F2FC000]    28876 ms: Scavenge 19.9 (24.4) -> 17.3 (24.4) MB, pooled: 0 MB, 1.05 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35896:0000026B0F2FC000]    29924 ms: Scavenge 20.7 (24.8) -> 18.0 (31.1) MB, pooled: 0 MB, 1031.95 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75ADF1390 
+ 5: 00007FF75AD84511 
+ 6: 00007FF75ADECCC6 
+ 7: 00007FF75AE1C661 
+ 8: 00007FF75ADC91AE 
+ 9: 00007FF75ADC8FA3 
+10: 00007FF75AD9DDB5 
+11: 00007FF75ADB9502 
+12: 00007FF75ADCABC6 
+13: 00007FF75ADCB9C7 
+14: 00007FF75ADDFD9A 
+15: 00007FF75ADDDE63 
+16: 00007FF75ADDDC4B 
+17: 00007FF75ADB4A48 
+18: 00007FF75AE2CA26 
+19: 00007FF75AE2B740 
+20: 00007FF75AE2953A 
+21: 00007FF75B55196F 
+22: 00007FF75AE2B01B 
+23: 00007FF75BDB6C6F 
+24: 00007FF75C8D944B 
+25: 00007FF75B632D76 
+26: 00007FF75CCDDC73 
+27: 00007FFD4384E957 
+28: 00007FFD43FAAD6C 
+Compaction failed: Failed to compact database
+
+Caused by:
+    0: Failed to merge database files for family 1
+    1: Failed to write small value block
+    2: Failed to write block data
+    3: Insufficient system resources exist to complete the requested service. (os error 1450)
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75AE1C937 SSL_CTX_get_client_CA_list+662855
+ 5: 00007FF75ADC9102 SSL_CTX_get_client_CA_list+320786
+ 6: 00007FF75ADC8FA3 SSL_CTX_get_client_CA_list+320435
+ 7: 00007FF75AD9DDB5 SSL_CTX_get_client_CA_list+143813
+ 8: 00007FF75ADB9502 SSL_CTX_get_client_CA_list+256274
+ 9: 00007FF75ADCABC6 SSL_CTX_get_client_CA_list+327638
+10: 00007FF75ADCB9C7 SSL_CTX_get_client_CA_list+331223
+11: 00007FF75ADDFD9A SSL_CTX_get_client_CA_list+414122
+12: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+13: 00007FF75AE2CA26 SSL_CTX_get_client_CA_list+728630
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+14: 00007FF75AE2B740 SSL_CTX_get_client_CA_list+723792
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+15: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+ 4: 00007FF75B5DB4B4 RSA_get0_q+560484
+16: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+ 5: 00007FF75B5DB270 RSA_get0_q+559904
+17: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+ 6: 00007FF75B06146F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+62895
+18: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+ 7: 00007FF75B082096 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+197078
+19: 00007FF75C8D944B node::GetNodeReport+93163
+ 8: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+20: 00007FF75B632D76 uv_thread_detach+150
+ 9: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+21: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+10: 00007FF75B0A9832 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+358770
+22: 00007FFD4384E957 BaseThreadInitThunk+23
+11: 00007FF75B089305 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+226373
+23: 00007FFD43FAAD6C RtlUserThreadStart+44
+12: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+13: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+14: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+15: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+16: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+17: 00007FF75B09B7AE v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+301294
+18: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+19: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+20: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+21: 00007FF75B0A873F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+354431
+22: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+23: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+24: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+25: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+26: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+27: 00007FF75B09B7AE v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+301294
+28: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+29: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+30: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+31: 00007FF75B0A873F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+354431
+32: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+33: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+34: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+35: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+36: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+37: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+38: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+39: 00007FF75B55B6FF RSA_get0_q+36783
+40: 00007FF75B55E501 RSA_get0_q+48561
+41: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+42: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+43: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+44: 000001C4E3E8F64D 
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+12: 00007FF75B632D76 uv_thread_detach+150
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+12: 00007FF75B632D76 uv_thread_detach+150
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+
+[36072:000001A03175C000]     1148 ms: Scavenge 8.9 (11.4) -> 7.5 (11.2) MB, pooled: 0 MB, 69.01 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[36072:000001A03175C000]     1452 ms: Scavenge 9.7 (12.4) -> 9.1 (17.4) MB, pooled: 0 MB, 37.63 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB1231A 
+ 5: 00007FF75B2C86BA 
+ 6: 00007FF75B2C7FE0 
+ 7: 00007FF75B2F5DFD 
+ 8: 00007FF75B2E02FC 
+ 9: 00007FF75B2E0B49 
+10: 00007FF75B2D1F55 
+11: 00007FF75B2D01CB 
+12: 00007FF75B2D0550 
+13: 00007FF75B2CF76B 
+14: 00007FF75B2CEBDF 
+15: 00007FF75B2CD273 
+16: 00007FF75B2C4696 
+17: 00007FF75B562A4F 
+18: 00007FF75B559368 
+19: 00007FF75B558B8D 
+20: 00007FF75B55962C 
+21: 00007FF75AFDA98B 
+22: 000001A069EF75FA 
+
+<--- Last few GCs --->
+[12824:000002067828D000]     3080 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 44.49 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 
+15: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[36676:000001FD22C2B000]     1477 ms: Scavenge 8.9 (11.9) -> 7.5 (11.9) MB, pooled: 0 MB, 1.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[36676:000001FD22C2B000]     1675 ms: Scavenge 9.7 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 23.98 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AD84BAA 
+ 5: 00007FF75ADECCC6 
+ 6: 00007FF75AE27E17 
+ 7: 00007FF75ADE7184 
+ 8: 00007FF75ADE70BA 
+ 9: 00007FF75ADDFAB4 
+10: 00007FF75ADB49BB 
+11: 00007FF75AE2CA26 
+12: 00007FF75AE2B740 
+13: 00007FF75AE2953A 
+14: 00007FF75B55196F 
+15: 00007FF75AE2B01B 
+16: 00007FF75BDB6C6F 
+17: 00007FF75C8D944B 
+18: 00007FF75B632D76 
+19: 00007FF75CCDDC73 
+20: 00007FFD4384E957 
+21: 00007FFD43FAAD6C 
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75B084EC9 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+208905
+ 5: 00007FF75B0A1E8F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+327631
+ 6: 00007FF75B0884A5 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+222693
+ 7: 00007FF75B09F082 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+315842
+ 8: 00007FF75B08AE02 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+233282
+ 9: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+10: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+11: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+12: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+13: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+14: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+15: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+16: 00007FF75B55B6FF RSA_get0_q+36783
+17: 00007FF75B55E501 RSA_get0_q+48561
+18: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+19: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+20: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+21: 0000020637DCF64D 
+
+<--- Last few GCs --->
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+#
+----- Native stack trace -----
+
+Error: Can't resolve 'tailwindcss' in 'C:\Users\Michelle\Documents\PICC'
+    [2m[at finishWithoutResolve (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:587:18)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:679:14][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:16:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m
+    [2m[at C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\enhanced-resolve\lib\Resolver.js:740:5][0m
+    [2m[at eval (eval at create (C:\Users\Michelle\Documents\PICC\picc-frontend\node_modules\tapable\lib\HookCodeFactory.js:31:10), <anonymous>:15:1)][0m {
+  details: "resolve 'tailwindcss' in 'C:\\Users\\Michelle\\Documents\\PICC'\n" +
+    '  Parsed request is a module\n' +
+    '  No description file found in C:\\Users\\Michelle\\Documents\\PICC or above\n' +
+    '  resolve as module\n' +
+    "    C:\\Users\\Michelle\\Documents\\PICC\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\Documents\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\Michelle\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\Users\\node_modules doesn't exist or is not a directory\n" +
+    "    C:\\node_modules doesn't exist or is not a directory"
+}
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B3DE4F7 
+ 5: 00007FF75B39033A 
+ 6: 00007FF75B3903FC 
+ 7: 00007FF75B390CEB 
+ 8: 00007FF75B367F21 
+ 9: 00007FF75B3CDFE3 
+10: 00007FF75B3CDD4E 
+11: 00007FF75B3CCB38 
+12: 00007FF75B3CCABA 
+13: 00007FF75B3F6745 
+14: 00007FF75AF91CF8 
+15: 00007FF75AF8FACC 
+16: 00007FF75AF95776 
+17: 00007FF75AF907B8 
+18: 00007FF75AF8FCAE 
+19: 00007FF75AF95776 
+20: 00007FF75AF907B8 
+21: 00007FF75AF8FCAE 
+22: 00007FF75AF95776 
+23: 00007FF75AF907B8 
+24: 00007FF75AF8FCAE 
+25: 00007FF75AF95776 
+26: 00007FF75AF907B8 
+27: 00007FF75AF8FCAE 
+28: 00007FF75AF96D4E 
+29: 00007FF75AF904FD 
+30: 00007FF75B3E64B8 
+31: 00007FF75AF6E3E3 
+32: 00007FF75B47957C 
+33: 00007FF75B479972 
+34: 00007FF75AF748B3 
+35: 00007FF75B608BA6 
+36: 00007FF75CAA512D 
+37: 00007FF75C7FADC5 
+38: 00007FF75B632D76 
+39: 00007FF75CCDDC73 
+40: 00007FFD4384E957 BaseThreadInitThunk+23
+41: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[24776:0000015DFAD6B000]     5863 ms: Scavenge 8.9 (11.7) -> 7.6 (11.7) MB, pooled: 0 MB, 51.37 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[24776:0000015DFAD6B000]    10683 ms: Scavenge 9.7 (12.4) -> 9.0 (17.7) MB, pooled: 0 MB, 2618.88 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+
+<--- Last few GCs --->
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+<--- Last few GCs --->
+----- Native stack trace -----
+[27352:0000029486A1B000]      579 ms: Scavenge 8.9 (11.4) -> 7.6 (11.2) MB, pooled: 0 MB, 18.28 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+
+
+[27352:0000029486A1B000]      701 ms: Scavenge 9.7 (12.4) -> 9.0 (17.7) MB, pooled: 0 MB, 2.40 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[7876:000001B1878CC000]     5655 ms: Scavenge 8.9 (11.4) -> 7.6 (11.2) MB, pooled: 0 MB, 51.08 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+
+
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Zone Allocation failed - process out of memory
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+----- Native stack trace -----
+----- Native stack trace -----
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+
+
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+ 1: 00007FF75C993D9F 
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+ 2: 00007FF75B5DDCB7 
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+ 3: 00007FF75AF55B96 
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+ 4: 00007FF75B5C4CD6 
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+ 5: 00007FF75B06D250 
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+ 6: 00007FF75B07357A 
+12: 00007FF75B632D76 uv_thread_detach+150
+ 7: 00007FF75B066503 
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+ 8: 00007FF75B067000 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+ 9: 00007FF75B069A62 
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+10: 00007FF75B0683D7 
+11: 00007FF75B066BCB 
+12: 00007FF75B065F06 
+13: 00007FF75B090A68 
+14: 00007FF75B084A80 
+15: 00007FF75B0A9003 
+16: 00007FF75B089474 
+17: 00007FF75B091F0B 
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+18: 00007FF75B09140A 
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+19: 00007FF75B084B07 
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+20: 00007FF75B083CD4 
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75AD7D3C6 SSL_CTX_get_client_CA_list+10198
+21: 00007FF75B082FC2 
+ 4: 00007FF75BF75BF0 v8::base::DiyFp::Multiply+40368
+ 5: 00007FF75AD7D386 SSL_CTX_get_client_CA_list+10134
+22: 00007FF75B082C6A 
+ 5: 00007FF75BD8EEE9 v8::internal::compiler::CompilationDependencies::FieldTypeDependencyOffTheRecord+107193
+ 6: 00007FF75AD7D398 SSL_CTX_get_client_CA_list+10152
+23: 00007FF75B07E299 
+ 6: 00007FF75AE4B8F6 X509_ACERT_get0_notBefore+1782
+ 7: 00007FF75AD7D398 SSL_CTX_get_client_CA_list+10152
+24: 00007FF75B55B6FF 
+ 7: 00007FF75AE291EF SSL_CTX_get_client_CA_list+714239
+ 8: 00007FF75AD7D983 SSL_CTX_get_client_CA_list+11667
+25: 00007FF75B55E501 
+ 8: 00007FF75B55A003 RSA_get0_q+30899
+ 9: 00007FF75AD7D731 SSL_CTX_get_client_CA_list+11073
+26: 00007FF75B5E7173 
+ 9: 00007FF75B55C0DA RSA_get0_q+39306
+10: 00007FF75AD77C24 v8::Isolate::GetNumberOfDataSlots+108596
+27: 00007FF75C9B173F 
+10: 00007FF75AFDCE41 v8::CodeEvent::GetFunctionName+170161
+11: 00007FF75AD9AB44 SSL_CTX_get_client_CA_list+130900
+28: 00007FF75C9AFC93 
+11: 00007FF75AFDAF3F v8::CodeEvent::GetFunctionName+162223
+12: 00007FF75AD9A826 SSL_CTX_get_client_CA_list+130102
+29: 000001B1BFF0F64D 
+12: 00000294BF1375FA 
+13: 00007FF75ADA8E44 SSL_CTX_get_client_CA_list+189012
+14: 00007FF75ADA9B53 SSL_CTX_get_client_CA_list+192355
+15: 00007FF75ADDF478 SSL_CTX_get_client_CA_list+411784
+16: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+17: 00007FF75ADB4592 SSL_CTX_get_client_CA_list+235938
+18: 00007FF75ADB655C SSL_CTX_get_client_CA_list+244076
+19: 00007FF75ADB59EE SSL_CTX_get_client_CA_list+241150
+20: 00007FF75ADC8F71 SSL_CTX_get_client_CA_list+320385
+21: 00007FF75AD9DDB5 SSL_CTX_get_client_CA_list+143813
+22: 00007FF75ADB9502 SSL_CTX_get_client_CA_list+256274
+23: 00007FF75ADCABC6 SSL_CTX_get_client_CA_list+327638
+24: 00007FF75ADCB9C7 SSL_CTX_get_client_CA_list+331223
+25: 00007FF75ADDFD9A SSL_CTX_get_client_CA_list+414122
+26: 00007FF75ADB49BB SSL_CTX_get_client_CA_list+237003
+27: 00007FF75AE2CA26 SSL_CTX_get_client_CA_list+728630
+28: 00007FF75AE2B740 SSL_CTX_get_client_CA_list+723792
+29: 00007FF75AE2953A SSL_CTX_get_client_CA_list+715082
+30: 00007FF75B55196F X509_STORE_CTX_set_verify+200623
+31: 00007FF75AE2B01B SSL_CTX_get_client_CA_list+721963
+32: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+33: 00007FF75C8D944B node::GetNodeReport+93163
+34: 00007FF75B632D76 uv_thread_detach+150
+35: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+36: 00007FFD4384E957 BaseThreadInitThunk+23
+37: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+
+[31504:000001D44F6DE000]    33868 ms: Scavenge (interleaved) 36.5 (53.8) -> 28.7 (56.3) MB, pooled: 0 MB, 32.81 / 0.00 ms  (average mu = 0.964, current mu = 0.964) allocation failure; 
+[31504:000001D44F6DE000]    34683 ms: Scavenge (interleaved) 39.8 (56.3) -> 30.1 (59.8) MB, pooled: 0 MB, 379.74 / 0.00 ms  (average mu = 0.964, current mu = 0.964) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[31504:000001D44F6DE000]    33868 ms: Scavenge (interleaved) 36.5 (53.8) -> 28.7 (56.3) MB, pooled: 0 MB, 32.81 / 0.00 ms  (average mu = 0.964, current mu = 0.964) allocation failure; 
+[31504:000001D44F6DE000]    34683 ms: Scavenge (interleaved) 39.8 (56.3) -> 30.1 (59.8) MB, pooled: 0 MB, 379.74 / 0.00 ms  (average mu = 0.964, current mu = 0.964) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75BD8257B 
+ 5: 00007FF75BD838AA 
+ 6: 00007FF75BD8155B 
+ 7: 00007FF75ADA5543 
+ 8: 00007FF75ADA5FCF 
+ 9: 00007FF75ADDED1A 
+10: 00007FF75ADB49BB 
+11: 00007FF75AE2CA26 
+12: 00007FF75AE2B740 
+13: 00007FF75AE2953A 
+14: 00007FF75B55196F 
+15: 00007FF75AE2B01B 
+16: 00007FF75BDB6C6F 
+17: 00007FF75C8D944B 
+18: 00007FF75B632D76 
+19: 00007FF75CCDDC73 
+20: 00007FFD4384E957 
+21: 00007FFD43FAAD6C 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+
+ 2: 00007FF75BD43956 
+<--- Last few GCs --->
+ 3: 00007FF75B5DDC96 
+
+ 4: 00007FF75B444E7E 
+
+ 5: 00007FF75B4784DF 
+
+ 6: 00007FF75B478F92 
+#
+ 7: 00007FF75B479972 
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+ 8: 00007FF75AF748B3 
+#
+ 9: 00007FF75B608BA6 
+----- Native stack trace -----
+10: 00007FF75CAA512D 
+
+11: 00007FF75C7FADC5 
+ 1: 00007FF75C8DE43D 
+12: 00007FF75B632D76 
+ 2: 00007FF75BD43956 
+13: 00007FF75CCDDC73 
+ 3: 00007FF75B5DDC96 
+14: 00007FFD4384E957 
+ 4: 00007FF75B3DE4F7 
+15: 00007FFD43FAAD6C 
+ 5: 00007FF75B39033A 
+ 6: 00007FF75B3903FC 
+ 7: 00007FF75B390CEB 
+ 8: 00007FF75B367F21 
+ 9: 00007FF75B3CDFE3 
+10: 00007FF75B3CDD4E 
+11: 00007FF75B3CCB38 
+12: 00007FF75B3CCABA 
+13: 00007FF75B3F6745 
+14: 00007FF75AF91CF8 
+15: 00007FF75AF8FACC 
+16: 00007FF75AF96D4E 
+17: 00007FF75AF904FD 
+18: 00007FF75AF6D924 
+19: 00007FF75B3E67FE 
+20: 00007FF75B3E6551 
+21: 00007FF75AF6E3E3 
+22: 00007FF75B47957C 
+23: 00007FF75B479972 
+24: 00007FF75AF748B3 
+25: 00007FF75B608BA6 
+26: 00007FF75CAA512D 
+27: 00007FF75C7FADC5 
+28: 00007FF75B632D76 
+29: 00007FF75CCDDC73 
+30: 00007FFD4384E957 
+31: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[38832:000002B49AEFE000]     1747 ms: Scavenge 8.9 (11.7) -> 7.6 (11.7) MB, pooled: 0 MB, 1.90 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38832:000002B49AEFE000]     3044 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 24.77 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75AB1231A X509_get0_tbs_sigalg+9818
+ 5: 00007FF75B2C86BA v8::Promise::MarkAsSilent+545562
+ 6: 00007FF75B2C7FE0 v8::Promise::MarkAsSilent+543808
+ 7: 00007FF75B2FAD01 v8::Promise::MarkAsSilent+751969
+ 8: 00007FF75B2D9BF5 v8::Promise::MarkAsSilent+616533
+ 9: 00007FF75B2E5558 v8::Promise::MarkAsSilent+663992
+10: 00007FF75B2E3E44 v8::Promise::MarkAsSilent+658084
+11: 00007FF75B2E47B3 v8::Promise::MarkAsSilent+660499
+12: 00007FF75B2D1F55 v8::Promise::MarkAsSilent+584629
+13: 00007FF75B2D01CB v8::Promise::MarkAsSilent+577067
+14: 00007FF75B2D0550 v8::Promise::MarkAsSilent+577968
+15: 00007FF75B2D01CB v8::Promise::MarkAsSilent+577067
+16: 00007FF75B2D0550 v8::Promise::MarkAsSilent+577968
+17: 00007FF75B2D677A v8::Promise::MarkAsSilent+603098
+18: 00007FF75B2D01CB v8::Promise::MarkAsSilent+577067
+19: 00007FF75B2D0550 v8::Promise::MarkAsSilent+577968
+20: 00007FF75B2D01CB v8::Promise::MarkAsSilent+577067
+21: 00007FF75B2D0550 v8::Promise::MarkAsSilent+577968
+22: 00007FF75B2D213A v8::Promise::MarkAsSilent+585114
+23: 00007FF75B2CF76B v8::Promise::MarkAsSilent+574411
+24: 00007FF75B2CEBDF v8::Promise::MarkAsSilent+571455
+25: 00007FF75B2CD273 v8::Promise::MarkAsSilent+564947
+26: 00007FF75B2C4696 v8::Promise::MarkAsSilent+529142
+27: 00007FF75B562A4F RSA_get0_q+66303
+28: 00007FF75B559368 RSA_get0_q+27672
+29: 00007FF75B558B8D RSA_get0_q+25661
+30: 00007FF75B55962C RSA_get0_q+28380
+31: 00007FF75AFDA98B v8::CodeEvent::GetFunctionName+160763
+32: 000002B4D36375FA 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 
+15: 00007FFD43FAAD6C 
+
+
+#
+# Fatal error in , line 0
+# Out of memory: HashMap::Initialize
+#
+#
+#
+#FailureMessage Object: 000000ED33DFA5D0
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43EEF 
+ 3: 00007FF75B5DBD56 
+ 4: 00007FF75B5DB442 
+ 5: 00007FF75B5DB270 
+ 6: 00007FF75B06146F 
+ 7: 00007FF75B082096 
+ 8: 00007FF75B09878B 
+ 9: 00007FF75B09795E 
+10: 00007FF75B097619 
+11: 00007FF75B0969F1 
+12: 00007FF75B09878B 
+13: 00007FF75B09795E 
+14: 00007FF75B09E1C2 
+15: 00007FF75B09C490 
+16: 00007FF75B09878B 
+17: 00007FF75B09795E 
+18: 00007FF75B0A9832 
+19: 00007FF75B089305 
+20: 00007FF75B091F0B 
+21: 00007FF75B09140A 
+22: 00007FF75B084B07 
+23: 00007FF75B083CD4 
+24: 00007FF75B082FC2 
+25: 00007FF75B082C6A 
+26: 00007FF75B07E299 
+27: 00007FF75B55B6FF 
+28: 00007FF75B55E501 
+29: 00007FF75B5E7173 
+30: 00007FF75C9B173F 
+31: 00007FF75C9AFC93 
+32: 000002391FDCF64D 
+
+<--- Last few GCs --->
+
+[38180:000002051496C000]     4837 ms: Scavenge 8.9 (11.9) -> 7.6 (11.7) MB, pooled: 0 MB, 2.87 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38180:000002051496C000]     6897 ms: Scavenge 9.7 (12.9) -> 9.0 (17.9) MB, pooled: 0 MB, 15.54 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75BF75BF0 
+ 5: 00007FF75BD8EEE9 
+ 6: 00007FF75AE4B8F6 
+ 7: 00007FF75AE291EF 
+ 8: 00007FF75B55A003 
+ 9: 00007FF75B55C0DA 
+10: 00007FF75AFDCE41 
+11: 00007FF75AFDAF3F 
+12: 000002054E6775FA 
+
+<--- Last few GCs --->
+
+[38204:000002C15A87D000]     1051 ms: Scavenge 8.9 (11.9) -> 7.5 (11.7) MB, pooled: 0 MB, 227.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38204:000002C15A87D000]     1551 ms: Scavenge 9.7 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 50.16 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AD7D902 
+ 5: 00007FF75AD7D8D4 
+ 6: 00007FF75AD7D8D4 
+ 7: 00007FF75AD7D8D4 
+ 8: 00007FF75AD7D7C3 
+ 9: 00007FF75AD7D70D 
+10: 00007FF75AD77C24 
+11: 00007FF75AD7FCDE 
+12: 00007FF75AD7FA53 
+13: 00007FF75ADE2FA4 
+14: 00007FF75ADE2BD7 
+15: 00007FF75ADE187E 
+16: 00007FF75ADDF1B3 
+17: 00007FF75ADDDE63 
+18: 00007FF75ADDDC4B 
+19: 00007FF75ADB4A48 
+20: 00007FF75ADB4592 
+21: 00007FF75ADB655C 
+22: 00007FF75ADB59EE 
+23: 00007FF75ADC8F71 
+24: 00007FF75AD9DDB5 
+25: 00007FF75ADB9502 
+26: 00007FF75ADCABC6 
+27: 00007FF75ADCB9C7 
+28: 00007FF75ADDFD9A 
+29: 00007FF75ADB49BB 
+30: 00007FF75AE2CA26 
+31: 00007FF75AE2B740 
+32: 00007FF75AE2953A 
+33: 00007FF75B55196F 
+34: 00007FF75AE2B01B 
+35: 00007FF75BDB6C6F 
+36: 00007FF75C8D944B 
+37: 00007FF75B632D76 
+38: 00007FF75CCDDC73 
+39: 00007FFD4384E957 
+40: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[23884:00000261E062E000]      554 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 68.10 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[23884:00000261E062E000]      554 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 68.10 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C5098 
+ 9: 00007FF75BDB6C6F 
+10: 00007FF75C8D944B 
+11: 00007FF75B632D76 
+12: 00007FF75CCDDC73 
+13: 00007FFD4384E957 
+14: 00007FFD43FAAD6C 
+
+
+#
+# Fatal process out of memory: Worklist::Segment::Create
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75AAB057E 
+ 4: 00007FF75B383751 
+ 5: 00007FF75B3A477B 
+ 6: 00007FF75B3A3FDC 
+ 7: 00007FF75B3A395B 
+ 8: 00007FF75B398130 
+ 9: 00007FF75B397308 
+10: 00007FF75B3E08FA 
+11: 00007FF75B3DFF26 
+12: 00007FF75B3F0E82 
+13: 00007FF75B3F09AB 
+14: 00007FF75CCC24AD 
+15: 00007FF75B3DBFC0 
+16: 00007FF75B4026C1 
+17: 00007FF75B41D884 
+18: 00007FF75B41D75C 
+19: 00007FF75B404859 
+20: 00007FF75B4049C2 
+21: 00007FF75B5DDAB2 
+22: 00007FF75C905127 
+23: 00007FF75C908EDB 
+24: 000001E36458F64D 
+
+<--- Last few GCs --->
+[32272:00000200A9AEA000]      432 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.77 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[38688:000001CE34718000]      446 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 2.33 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38688:000001CE34718000]      551 ms: Scavenge 9.7 (12.4) -> 9.0 (17.7) MB, pooled: 0 MB, 2.57 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 1: 00007FF75C993D9F 
+ 4: 00007FF75B5CA29E 
+ 2: 00007FF75B5DDCB7 
+ 5: 00007FF75B5C4843 
+ 3: 00007FF75AF55B96 
+ 6: 00007FF75B5C6086 
+ 4: 00007FF75B5C4CD6 
+ 7: 00007FF75B08BF27 
+ 5: 00007FF75B096FC6 
+ 8: 00007FF75B0A906A 
+ 6: 00007FF75B09878B 
+ 9: 00007FF75B089474 
+ 7: 00007FF75B09795E 
+10: 00007FF75B091F0B 
+ 8: 00007FF75B097619 
+11: 00007FF75B09140A 
+
+ 9: 00007FF75B09FDE0 
+12: 00007FF75B084B07 
+<--- Last few GCs --->
+10: 00007FF75B097086 
+13: 00007FF75B083CD4 
+
+11: 00007FF75B09878B 
+14: 00007FF75B082FC2 
+[37544:0000020C266D8000]      481 ms: Scavenge 8.9 (11.7) -> 7.6 (11.4) MB, pooled: 0 MB, 1.83 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+12: 00007FF75B09795E 
+15: 00007FF75B082C6A 
+[37544:0000020C266D8000]      563 ms: Scavenge 9.7 (12.4) -> 9.0 (17.7) MB, pooled: 0 MB, 3.26 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+13: 00007FF75B0A9832 
+16: 00007FF75B07E299 
+
+14: 00007FF75B089305 
+17: 00007FF75B55B6FF 
+FATAL ERROR: Zone Allocation failed - process out of memory
+15: 00007FF75B091F0B 
+18: 00007FF75B55E501 
+----- Native stack trace -----
+16: 00007FF75B09140A 
+19: 00007FF75B5E7173 
+
+17: 00007FF75B084B07 
+20: 00007FF75C9B173F 
+ 1: 00007FF75C993D9F 
+18: 00007FF75B083CD4 
+21: 00007FF75C9AFC93 
+ 2: 00007FF75B5DDCB7 
+19: 00007FF75B082FC2 
+22: 000001CE6CD8F64D 
+ 3: 00007FF75AF55B96 
+20: 00007FF75B082C6A 
+ 4: 00007FF75AD77777 
+21: 00007FF75B07E299 
+ 5: 00007FF75AD7FCDE 
+22: 00007FF75B55B6FF 
+ 6: 00007FF75AD7FA53 
+23: 00007FF75B55E501 
+ 7: 00007FF75ADE2FA4 
+24: 00007FF75B5E7173 
+ 8: 00007FF75ADE2BD7 
+25: 00007FF75C9B173F 
+ 9: 00007FF75ADE187E 
+26: 00007FF75C9AFC93 
+10: 00007FF75ADDF1B3 
+27: 00000200E214F64D 
+11: 00007FF75ADDDE63 
+12: 00007FF75ADDDC4B 
+13: 00007FF75ADB4A48 
+14: 00007FF75ADB4592 
+15: 00007FF75ADB655C 
+16: 00007FF75ADB59EE 
+17: 00007FF75ADC8F71 
+18: 00007FF75AD9DDB5 
+19: 00007FF75ADB9502 
+20: 00007FF75ADCABC6 
+21: 00007FF75ADCB9C7 
+22: 00007FF75ADDFD9A 
+23: 00007FF75ADB49BB 
+24: 00007FF75AE2CA26 
+25: 00007FF75AE2B740 
+26: 00007FF75AE2953A 
+27: 00007FF75B55196F 
+28: 00007FF75AE2B01B 
+29: 00007FF75BDB6C6F 
+30: 00007FF75C8D944B 
+31: 00007FF75B632D76 
+32: 00007FF75CCDDC73 
+33: 00007FFD4384E957 
+34: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+[32900:000001D061632000]       85 ms: Scavenge 3.5 (4.5) -> 2.8 (5.5) MB, pooled: 0 MB, 12.53 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: NewSpace::EnsureCurrentCapacity Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B39ED73 
+ 5: 00007FF75B3E08FA 
+ 6: 00007FF75B3DFF26 
+ 7: 00007FF75B3F0E82 
+ 8: 00007FF75B3F09AB 
+ 9: 00007FF75CCC24AD 
+10: 00007FF75B3DBFC0 
+11: 00007FF75B45FDA9 
+12: 00007FF75AFD3232 
+13: 000001D03FE775FA 
+
+<--- Last few GCs --->
+
+
+<--- Last few GCs --->
+[37288:000001AB5138B000]      422 ms: Scavenge (interleaved) 8.8 (11.9) -> 8.0 (12.9) MB, pooled: 0 MB, 11.38 / 0.00 ms  (average mu = 0.845, current mu = 0.001) allocation failure; 
+[14908:000001F91D684000]      220 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.62 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[37288:000001AB5138B000]      436 ms: Scavenge (interleaved) 8.3 (12.9) -> 8.2 (13.4) MB, pooled: 0 MB, 1.56 / 0.00 ms  (average mu = 0.845, current mu = 0.001) allocation failure; 
+
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+----- Native stack trace -----
+
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 1: 00007FF75C993D9F 
+ 5: 00007FF75B34E51E 
+ 2: 00007FF75B5DDCB7 
+ 6: 00007FF75B3E0F92 
+ 3: 00007FF75AF55B96 
+ 7: 00007FF75B3DFF47 
+ 4: 00007FF75B5C496A 
+ 8: 00007FF75B3F0E82 
+ 5: 00007FF75B5C6086 
+ 9: 00007FF75B3F09AB 
+ 6: 00007FF75B08BA96 
+10: 00007FF75CCC24AD 
+ 7: 00007FF75B09C07D 
+11: 00007FF75B3DBFC0 
+ 8: 00007FF75B09B7DA 
+12: 00007FF75B3F68EE 
+ 9: 00007FF75B09878B 
+13: 00007FF75B402678 
+10: 00007FF75B09795E 
+14: 00007FF75B41D884 
+11: 00007FF75B097619 
+15: 00007FF75B41D75C 
+12: 00007FF75B09FDE0 
+16: 00007FF75B404859 
+13: 00007FF75B097086 
+17: 00007FF75B4049C2 
+14: 00007FF75B09878B 
+18: 00007FF75B5DDAB2 
+15: 00007FF75B09795E 
+19: 00007FF75C96FFE8 
+16: 00007FF75B0A9832 
+20: 000001AB1FDCF64D 
+17: 00007FF75B089305 
+18: 00007FF75B091F0B 
+19: 00007FF75B09140A 
+20: 00007FF75B084B07 
+21: 00007FF75B083CD4 
+22: 00007FF75B082FC2 
+23: 00007FF75B082C6A 
+24: 00007FF75B07E299 
+25: 00007FF75B55B6FF 
+26: 00007FF75B55E501 
+27: 00007FF75B5E7173 
+28: 00007FF75C9B173F 
+29: 00007FF75C9AFC93 
+30: 000001F9572CF64D 
+
+<--- Last few GCs --->
+
+[2512:00000266C591D000]      330 ms: Scavenge 8.9 (11.9) -> 7.6 (12.2) MB, pooled: 0 MB, 13.28 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[2512:00000266C591D000]      407 ms: Scavenge 9.6 (12.7) -> 9.0 (17.9) MB, pooled: 0 MB, 2.47 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AD7D3C6 
+ 5: 00007FF75AD7D386 
+ 6: 00007FF75AD7D386 
+ 7: 00007FF75AD7D386 
+ 8: 00007FF75AD7D398 
+ 9: 00007FF75AD7D983 
+10: 00007FF75AD7D731 
+11: 00007FF75AD77C24 
+12: 00007FF75AD7FCDE 
+13: 00007FF75ADE13D2 
+14: 00007FF75ADDF9E8 
+15: 00007FF75ADB49BB 
+16: 00007FF75AE2CA26 
+17: 00007FF75AE2B740 
+18: 00007FF75AE2953A 
+19: 00007FF75B55196F 
+20: 00007FF75AE2B01B 
+21: 00007FF75BDB6C6F 
+22: 00007FF75C8D944B 
+23: 00007FF75B632D76 
+24: 00007FF75CCDDC73 
+25: 00007FFD4384E957 
+26: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[13744:000001F95D7DC000]      391 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+<--- Last few GCs --->
+
+[36264:0000023EBC2BD000]      279 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 7.25 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+FATAL ERROR: NewSpace::EnsureCurrentCapacity Allocation failed - JavaScript heap out of memory
+
+----- Native stack trace -----
+FATAL ERROR: Zone Allocation failed - process out of memory
+
+----- Native stack trace -----
+ 1: 00007FF75C993D9F 
+
+ 2: 00007FF75B5DDCB7 
+ 1: 00007FF75C993D9F 
+ 3: 00007FF75B3DE4F7 
+ 2: 00007FF75B5DDCB7 
+ 4: 00007FF75B39ED73 
+ 3: 00007FF75AF55B96 
+ 5: 00007FF75B3E08FA 
+ 4: 00007FF75AB49DA1 
+ 6: 00007FF75B3DFF26 
+ 5: 00007FF75B01D0EE 
+ 7: 00007FF75B3F0E82 
+ 6: 00007FF75B01CD04 
+ 8: 00007FF75B3F09AB 
+ 7: 00007FF75B003122 
+ 9: 00007FF75CCC24AD 
+ 8: 00007FF75B00396A 
+10: 00007FF75B3DBFC0 
+ 9: 00007FF75B0043F7 
+11: 00007FF75B4026F6 
+10: 00007FF75B00A8A6 
+12: 00007FF75B41E5F2 
+11: 00007FF75B008342 
+13: 00007FF75B0E28C0 
+12: 00007FF75B00A228 
+14: 00007FF75B5C2B7A 
+13: 00007FF75B008AAF 
+15: 00007FF75B5C3281 
+14: 00007FF75B00A9F2 
+16: 00007FF75B55928E 
+15: 00007FF75B00A9F2 
+17: 00007FF75B558B8D 
+16: 00007FF75B008342 
+18: 00007FF75B55962C 
+17: 00007FF75B00A76B 
+19: 00007FF75AFDA98B 
+18: 00007FF75B008B30 
+20: 000001F91FE775FA 
+19: 00007FF75B00A9F2 
+20: 00007FF75B00A9F2 
+21: 00007FF75B008342 
+
+22: 00007FF75B00A76B 
+<--- Last few GCs --->
+
+23: 00007FF75B008B30 
+24: 00007FF75B00A9F2 
+[35692:000001693388A000]      671 ms: Scavenge 8.9 (11.7) -> 7.5 (11.4) MB, pooled: 0 MB, 47.62 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+25: 00007FF75B00A9F2 
+[35692:000001693388A000]      747 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 3.24 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+26: 00007FF75B008342 
+
+27: 00007FF75B00A228 
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+28: 00007FF75B008AAF 
+----- Native stack trace -----
+29: 00007FF75B00A9F2 
+
+30: 00007FF75B00A9F2 
+
+31: 00007FF75B008342 
+32: 00007FF75B00A228 
+<--- Last few GCs --->
+33: 00007FF75B008AAF 
+34: 00007FF75B00A9F2 
+
+35: 00007FF75B00A9F2 
+[35692:000001693388A000]      671 ms: Scavenge 8.9 (11.7) -> 7.5 (11.4) MB, pooled: 0 MB, 47.62 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+36: 00007FF75B008342 
+37: 00007FF75B00A228 
+[35692:000001693388A000]      747 ms: Scavenge 9.7 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 3.24 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+38: 00007FF75B008AAF 
+
+39: 00007FF75B0038F4 
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+40: 00007FF75B00A9F2 
+----- Native stack trace -----
+41: 00007FF75B00A9F2 
+
+42: 00007FF75B008342 
+ 1: 00007FF75C993D9F 
+43: 00007FF75B00A228 
+ 2: 00007FF75B5DDCB7 
+44: 00007FF75B008AAF 
+ 3: 00007FF75B3DE4F7 
+45: 00007FF75B00A9F2 
+ 4: 00007FF75B3BDBEE 
+46: 00007FF75B00A9F2 
+ 5: 00007FF75B3B32AD 
+47: 00007FF75B008342 
+ 6: 00007FF75B3B2F5C 
+48: 00007FF75B00A228 
+ 7: 00007FF75B3B2BA1 
+49: 00007FF75B008AAF 
+ 8: 00007FF75B3C4E88 
+50: 00007FF75B00A9F2 
+ 9: 00007FF75BDB641D 
+51: 00007FF75B00A9F2 
+10: 00007FF75BDB68C2 
+52: 00007FF75B008342 
+11: 00007FF75B3B5BE4 
+53: 00007FF75B00A228 
+12: 00007FF75B39D30D 
+54: 00007FF75B008AAF 
+13: 00007FF75B397384 
+55: 00007FF75B00A9F2 
+14: 00007FF75B3E08FA 
+56: 00007FF75B00A9F2 
+15: 00007FF75B3DFF26 
+57: 00007FF75B008342 
+16: 00007FF75B3F0E82 
+58: 00007FF75B00A228 
+17: 00007FF75B3F09AB 
+59: 00007FF75B008AAF 
+18: 00007FF75CCC24AD 
+60: 00007FF75B00A9F2 
+19: 00007FF75B3DBFC0 
+61: 00007FF75B00A228 
+20: 00007FF75B45FDA9 
+62: 00007FF75B008AAF 
+21: 00007FF75AFD3232 
+63: 00007FF75B00A9F2 
+22: 000001696BFB75FA 
+64: 00007FF75B00A9F2 
+65: 00007FF75B00A228 
+66: 00007FF75B008AAF 
+67: 00007FF75B0038F4 
+68: 00007FF75B00A9F2 
+69: 00007FF75B00A9F2 
+70: 00007FF75B006A36 
+71: 00007FF75B00A228 
+72: 00007FF75B008AAF 
+73: 00007FF75B00A9F2 
+74: 00007FF75B00A9F2 
+75: 00007FF75B00A228 
+76: 00007FF75B008AAF 
+77: 00007FF75B002C58 
+78: 00007FF75AFE6150 
+79: 00007FF75AFE5872 
+80: 00007FF75AFE4169 
+81: 00007FF75AFE43FC 
+82: 00007FF75AFE42DB 
+83: 00007FF75AFBB1D2 
+84: 0000023EF49375FA 
+
+<--- Last few GCs --->
+
+[8644:0000019164DFB000]      365 ms: Scavenge 8.9 (11.9) -> 7.6 (11.9) MB, pooled: 0 MB, 2.29 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[8644:0000019164DFB000]      427 ms: Scavenge 9.7 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 2.15 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB147D4 
+ 5: 00007FF75C333CD1 
+ 6: 00007FF75C333ADE 
+ 7: 00007FF75BFD2A96 
+ 8: 00007FF75BFC9BAB 
+ 9: 00007FF75BFC9010 
+10: 00007FF75B55196F 
+11: 00007FF75B5169BD 
+12: 00007FF75B5166B5 
+13: 00007FF75BDB6C6F 
+14: 00007FF75C8D944B 
+15: 00007FF75B632D76 
+16: 00007FF75CCDDC73 
+
+17: 00007FFD4384E957 
+<--- Last few GCs --->
+18: 00007FFD43FAAD6C 
+[31272:000001C2EEE1D000]      423 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.64 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C4CD6 
+ 5: 00007FF75B5C50D7 
+ 6: 00007FF75B09BEFD 
+ 7: 00007FF75B09B7DA 
+ 8: 00007FF75B09878B 
+ 9: 00007FF75B09795E 
+10: 00007FF75B097619 
+11: 00007FF75B09FDE0 
+12: 00007FF75B097086 
+13: 00007FF75B09878B 
+14: 00007FF75B09795E 
+15: 00007FF75B0A9832 
+16: 00007FF75B089305 
+17: 00007FF75B091F0B 
+18: 00007FF75B09140A 
+19: 00007FF75B084B07 
+20: 00007FF75B083CD4 
+21: 00007FF75B082FC2 
+22: 00007FF75B082C6A 
+23: 00007FF75B07E299 
+24: 00007FF75B55B6FF 
+25: 00007FF75B55E501 
+26: 00007FF75B5E7173 
+27: 00007FF75C9B173F 
+28: 00007FF75C9AFC93 
+29: 000001C2A7DCF64D 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41A06C 
+15: 00007FF75B41A005 
+16: 00007FF75B0EAB9B 
+17: 00007FF75B0EA41D 
+18: 00007FF75B0EB628 
+19: 00007FF75AFDD947 
+20: 000001BB9FE775FA 
+
+<--- Last few GCs --->
+[33536:0000015D0F60B000]      265 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.58 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AADF23E 
+ 5: 00007FF75B01C948 
+ 6: 00007FF75B01C755 
+ 7: 00007FF75B00A779 
+ 8: 00007FF75B008B30 
+ 9: 00007FF75B00A9F2 
+10: 00007FF75B00A9F2 
+11: 00007FF75B008342 
+12: 00007FF75B00A228 
+13: 00007FF75B008AAF 
+14: 00007FF75B0038F4 
+15: 00007FF75B00A9F2 
+16: 00007FF75B00A9F2 
+17: 00007FF75B008342 
+18: 00007FF75B00A228 
+19: 00007FF75B008AAF 
+20: 00007FF75B00A9F2 
+21: 00007FF75B00A9F2 
+22: 00007FF75B008342 
+23: 00007FF75B00A228 
+24: 00007FF75B008AAF 
+25: 00007FF75B00A9F2 
+26: 00007FF75B00A9F2 
+27: 00007FF75B008342 
+28: 00007FF75B00A228 
+29: 00007FF75B008AAF 
+30: 00007FF75B00A9F2 
+31: 00007FF75B00A9F2 
+32: 00007FF75B008342 
+33: 00007FF75B00A228 
+34: 00007FF75B008AAF 
+35: 00007FF75B00A9F2 
+36: 00007FF75B00A228 
+37: 00007FF75B008AAF 
+38: 00007FF75B00A9F2 
+39: 00007FF75B00A9F2 
+40: 00007FF75B00A228 
+41: 00007FF75B008AAF 
+42: 00007FF75B0038F4 
+43: 00007FF75B00A9F2 
+44: 00007FF75B00A9F2 
+45: 00007FF75B006A36 
+46: 00007FF75B00A228 
+47: 00007FF75B008AAF 
+48: 00007FF75B00A9F2 
+49: 00007FF75B00A9F2 
+50: 00007FF75B00A228 
+51: 00007FF75B008AAF 
+52: 00007FF75B002C58 
+53: 00007FF75AFE6150 
+54: 00007FF75AFE5872 
+55: 00007FF75AFE4169 
+56: 00007FF75AFE43FC 
+57: 00007FF75AFE42DB 
+58: 00007FF75AFBB1D2 
+59: 0000015D47CF75FA 
+
+<--- Last few GCs --->
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41A06C 
+15: 00007FF75B41A005 
+16: 00007FF75B0EAB9B 
+17: 00007FF75B0EA41D 
+18: 00007FF75B0EB628 
+19: 00007FF75AFDD947 
+20: 00000211D87F75FA 
+
+<--- Last few GCs --->
+
+[36952:000002042C08A000]      332 ms: Scavenge 8.9 (11.4) -> 7.6 (11.2) MB, pooled: 0 MB, 5.66 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: NewSpace::EnsureCurrentCapacity Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B39ED73 
+ 5: 00007FF75B3E08FA 
+ 6: 00007FF75B3DFF26 
+ 7: 00007FF75B3F0E82 
+ 8: 00007FF75B3F09AB 
+ 9: 00007FF75CCC24AD 
+10: 00007FF75B3DBFC0 
+11: 00007FF75B3F681A 
+12: 00007FF75AF91CF8 
+13: 00007FF75AF8FACC 
+14: 00007FF75AF95776 
+15: 00007FF75AF907B8 
+16: 00007FF75AF8FCAE 
+17: 00007FF75AF95776 
+18: 00007FF75AF907B8 
+19: 00007FF75AF8FCAE 
+20: 00007FF75AF95776 
+21: 00007FF75AF907B8 
+22: 00007FF75AF8FCAE 
+23: 00007FF75AF95776 
+24: 00007FF75AF907B8 
+25: 00007FF75AF8FCAE 
+26: 00007FF75AF95776 
+27: 00007FF75AF907B8 
+28: 00007FF75AF8FCAE 
+29: 00007FF75AF95776 
+30: 00007FF75AF907B8 
+31: 00007FF75AF8FCAE 
+32: 00007FF75AF95776 
+33: 00007FF75AF907B8 
+34: 00007FF75AF8FCAE 
+35: 00007FF75AF94454 
+36: 00007FF75AF901A7 
+37: 00007FF75AF9005A 
+38: 00007FF75AF8D3B7 
+39: 00007FF75AF8D334 
+40: 00007FF75AF9DF85 
+41: 00007FF75B55E1FE 
+42: 00007FF75B5E7173 
+43: 00007FF75C9C6F3D 
+44: 00007FF75C9C7A0E 
+45: 00007FF75C9CAC63 
+46: 00000204646CF64D 
+
+<--- Last few GCs --->
+
+[32524:0000024594FFC000]      365 ms: Scavenge 8.9 (11.9) -> 7.6 (11.9) MB, pooled: 0 MB, 2.16 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[32524:0000024594FFC000]      481 ms: Scavenge 9.6 (12.7) -> 8.9 (13.9) MB, pooled: 2 MB, 42.52 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[32524:0000024594FFC000]      775 ms: Scavenge 10.9 (13.9) -> 9.9 (16.7) MB, pooled: 0 MB, 1.88 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B2EE30E 
+ 6: 00007FF75B2FE6AE 
+ 7: 00007FF75B2CAF19 
+ 8: 00007FF75B2F2FAD 
+ 9: 00007FF75B2E9D3F 
+10: 00007FF75B2D25C0 
+11: 00007FF75B2D20AD 
+12: 00007FF75B2CF76B 
+13: 00007FF75B2CEBDF 
+14: 00007FF75B2CD273 
+15: 00007FF75B2C4696 
+16: 00007FF75B562A4F 
+17: 00007FF75B559368 
+18: 00007FF75B558B8D 
+19: 00007FF75B55962C 
+20: 00007FF75AFDA98B 
+21: 00000245CD6F75FA 
+
+<--- Last few GCs --->
+[7768:0000020CF27E9000]      181 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.84 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C4CD6 
+ 5: 00007FF75B096FC6 
+ 6: 00007FF75B09878B 
+ 7: 00007FF75B09795E 
+ 8: 00007FF75B09D324 
+ 9: 00007FF75B09B7AE 
+10: 00007FF75B09878B 
+11: 00007FF75B09795E 
+12: 00007FF75B097619 
+13: 00007FF75B09FDE0 
+14: 00007FF75B097086 
+15: 00007FF75B09878B 
+16: 00007FF75B09795E 
+17: 00007FF75B0A9832 
+18: 00007FF75B089305 
+19: 00007FF75B091F0B 
+20: 00007FF75B09140A 
+21: 00007FF75B084B07 
+22: 00007FF75B083CD4 
+23: 00007FF75B082FC2 
+24: 00007FF75B082C6A 
+25: 00007FF75B07E299 
+26: 00007FF75B55B6FF 
+27: 00007FF75B55E501 
+28: 00007FF75B5E7173 
+29: 00007FF75C9B173F 
+30: 00007FF75C9AFC93 
+31: 0000020CAFDCF64D 
+
+<--- Last few GCs --->
+
+[14444:000002937AA43000]      453 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 1.78 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[14444:000002937AA43000]      573 ms: Scavenge 9.7 (12.4) -> 9.0 (13.7) MB, pooled: 0 MB, 10.90 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B077FF6 
+ 5: 00007FF75B068E73 
+ 6: 00007FF75B06849D 
+ 7: 00007FF75B07467B 
+ 8: 00007FF75B068C12 
+ 9: 00007FF75B079EB9 
+10: 00007FF75B076139 
+11: 00007FF75B068EC6 
+12: 00007FF75B06849D 
+13: 00007FF75B067C5B 
+14: 00007FF75B071529 
+15: 00007FF75B06F5B0 
+16: 00007FF75B06ECCD 
+17: 00007FF75B06E6F4 
+18: 00007FF75B06ABEB 
+19: 00007FF75B06F7FA 
+20: 00007FF75B06EC53 
+21: 00007FF75B06D6AA 
+22: 00007FF75B079951 
+23: 00007FF75B068F31 
+24: 00007FF75B06849D 
+25: 00007FF75B067C5B 
+26: 00007FF75B071529 
+27: 00007FF75B06F5B0 
+28: 00007FF75B06ECCD 
+29: 00007FF75B06E6F4 
+30: 00007FF75B06ABEB 
+31: 00007FF75B06F7FA 
+32: 00007FF75B06EC53 
+33: 00007FF75B06D6AA 
+34: 00007FF75B079951 
+35: 00007FF75B068F31 
+36: 00007FF75B06849D 
+37: 00007FF75B066BCB 
+38: 00007FF75B065F06 
+39: 00007FF75B090A68 
+40: 00007FF75B084A80 
+41: 00007FF75B0A1E8F 
+42: 00007FF75B0884A5 
+43: 00007FF75B09F082 
+44: 00007FF75B09D7A3 
+45: 00007FF75B09878B 
+46: 00007FF75B09795E 
+47: 00007FF75B0981C6 
+48: 00007FF75B0979A4 
+49: 00007FF75B09D324 
+50: 00007FF75B0A873F 
+51: 00007FF75B091F0B 
+52: 00007FF75B09140A 
+53: 00007FF75B084B07 
+54: 00007FF75B083CD4 
+55: 00007FF75B082FC2 
+56: 00007FF75B082C6A 
+57: 00007FF75B07E299 
+58: 00007FF75B55B6FF 
+59: 00007FF75B55E501 
+60: 00007FF75B5E7173 
+61: 00007FF75C9B173F 
+62: 00007FF75C9AFC93 
+63: 0000029337DCF64D 
+
+<--- Last few GCs --->
+
+[7400:000001D2ACBEB000]      225 ms: Scavenge 5.6 (10.1) -> 5.6 (10.9) MB, pooled: 0 MB, 3.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AADF23E 
+ 5: 00007FF75B01C948 
+ 6: 00007FF75B01C755 
+ 7: 00007FF75B00A779 
+ 8: 00007FF75B008B30 
+ 9: 00007FF75B00A9F2 
+10: 00007FF75B00A9F2 
+11: 00007FF75B008342 
+12: 00007FF75B00A228 
+13: 00007FF75B008AAF 
+14: 00007FF75B0038F4 
+15: 00007FF75B00A9F2 
+16: 00007FF75B00A9F2 
+17: 00007FF75B008342 
+18: 00007FF75B00A228 
+19: 00007FF75B008AAF 
+20: 00007FF75B00A9F2 
+21: 00007FF75B00A9F2 
+22: 00007FF75B008342 
+23: 00007FF75B00A228 
+24: 00007FF75B008AAF 
+25: 00007FF75B00A9F2 
+26: 00007FF75B00A9F2 
+27: 00007FF75B008342 
+28: 00007FF75B00A228 
+29: 00007FF75B008AAF 
+30: 00007FF75B00A9F2 
+31: 00007FF75B00A9F2 
+32: 00007FF75B008342 
+33: 00007FF75B00A228 
+34: 00007FF75B008AAF 
+35: 00007FF75B00A9F2 
+36: 00007FF75B00A228 
+37: 00007FF75B008AAF 
+38: 00007FF75B00A9F2 
+39: 00007FF75B00A9F2 
+40: 00007FF75B00A228 
+41: 00007FF75B008AAF 
+42: 00007FF75B0038F4 
+43: 00007FF75B00A9F2 
+44: 00007FF75B00A9F2 
+45: 00007FF75B006A36 
+46: 00007FF75B00A228 
+47: 00007FF75B008AAF 
+48: 00007FF75B00A9F2 
+49: 00007FF75B00A9F2 
+50: 00007FF75B00A228 
+51: 00007FF75B008AAF 
+52: 00007FF75B002C58 
+53: 00007FF75AFE6150 
+54: 00007FF75AFE5872 
+55: 00007FF75AFE4169 
+56: 00007FF75AFE43FC 
+57: 00007FF75AFE42DB 
+58: 00007FF75AFBB1D2 
+59: 000001D2E52B75FA 
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Persisting failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+Compaction failed: Another write batch or compaction is already active (Only a single write operations is allowed at a time)
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[12728:0000026DFD2DC000]      464 ms: Scavenge 8.9 (11.9) -> 7.5 (11.9) MB, pooled: 0 MB, 1.93 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[12728:0000026DFD2DC000]      534 ms: Scavenge 9.7 (12.7) -> 9.0 (17.9) MB, pooled: 0 MB, 2.68 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[12728:0000026DFD2DC000]      464 ms: Scavenge 8.9 (11.9) -> 7.5 (11.9) MB, pooled: 0 MB, 1.93 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[12728:0000026DFD2DC000]      534 ms: Scavenge 9.7 (12.7) -> 9.0 (17.9) MB, pooled: 0 MB, 2.68 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C5098 
+ 9: 00007FF75BDB6C6F 
+10: 00007FF75C8D944B 
+11: 00007FF75B632D76 
+12: 00007FF75CCDDC73 
+13: 00007FFD4384E957 
+14: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[34256:00000257A4699000]      352 ms: Scavenge 8.9 (11.7) -> 7.6 (11.7) MB, pooled: 0 MB, 2.22 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34256:00000257A4699000]      480 ms: Scavenge 9.7 (12.4) -> 9.0 (13.4) MB, pooled: 1 MB, 63.81 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34256:00000257A4699000]      673 ms: Scavenge 10.9 (13.4) -> 9.9 (15.9) MB, pooled: 0 MB, 1.27 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B39F06A 
+ 6: 00007FF75B3E08D6 
+ 7: 00007FF75B3DFF26 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75AF91CF8 
+14: 00007FF75AF8FACC 
+15: 00007FF75AF95776 
+16: 00007FF75AF907B8 
+17: 00007FF75AF8FCAE 
+18: 00007FF75AF95776 
+19: 00007FF75AF907B8 
+20: 00007FF75AF8FCAE 
+21: 00007FF75AF95776 
+22: 00007FF75AF907B8 
+23: 00007FF75AF8FCAE 
+24: 00007FF75AF95776 
+25: 00007FF75AF907B8 
+26: 00007FF75AF8FCAE 
+27: 00007FF75AF95776 
+28: 00007FF75AF907B8 
+29: 00007FF75AF8FCAE 
+30: 00007FF75AF95776 
+31: 00007FF75AF907B8 
+32: 00007FF75AF8FCAE 
+33: 00007FF75AF94454 
+34: 00007FF75AF901A7 
+35: 00007FF75AF9005A 
+36: 00007FF75AF8D3B7 
+37: 00007FF75AF8D334 
+38: 00007FF75AF9DF85 
+39: 00007FF75B55E1FE 
+40: 00007FF75B5E7173 
+41: 00007FF75C9C6F3D 
+42: 00007FF75C9C7A0E 
+43: 00007FF75C9CAC63 
+44: 00000257DCD4F64D 
+
+<--- Last few GCs --->
+
+[11312:00000242C1C0C000]      354 ms: Scavenge 8.9 (11.9) -> 7.6 (12.2) MB, pooled: 0 MB, 2.48 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[11312:00000242C1C0C000]      440 ms: Scavenge 9.2 (12.4) -> 8.5 (13.4) MB, pooled: 0 MB, 14.15 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F68EE 
+13: 00007FF75B402678 
+14: 00007FF75B41D884 
+15: 00007FF75B41D75C 
+16: 00007FF75B404859 
+17: 00007FF75B4049C2 
+18: 00007FF75B5DDAB2 
+19: 00007FF75C96FFE8 
+20: 00000242FA24F64D 
+
+<--- Last few GCs --->
+[6024:00000225DFADD000]      172 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.81 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C496A 
+ 5: 00007FF75B5C6086 
+ 6: 00007FF75B08BF27 
+ 7: 00007FF75B0A906A 
+ 8: 00007FF75B089474 
+ 9: 00007FF75B091F0B 
+10: 00007FF75B09140A 
+11: 00007FF75B084B07 
+12: 00007FF75B083CD4 
+13: 00007FF75B082FC2 
+14: 00007FF75B082C6A 
+15: 00007FF75B07E299 
+16: 00007FF75B55B6FF 
+17: 00007FF75B55E501 
+18: 00007FF75B5E7173 
+19: 00007FF75C9B173F 
+20: 00007FF75C9AFC93 
+21: 000002259FDCF64D 
+
+<--- Last few GCs --->
+[38796:0000027BADEFD000]      218 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 22.11 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B06E2A9 
+ 5: 00007FF75B06B1B5 
+ 6: 00007FF75B06F78B 
+ 7: 00007FF75B06EC53 
+ 8: 00007FF75B06D6AA 
+ 9: 00007FF75B070298 
+10: 00007FF75B070452 
+11: 00007FF75B06F8BE 
+12: 00007FF75B06EC53 
+13: 00007FF75B06D6AA 
+14: 00007FF75B079951 
+15: 00007FF75B068F31 
+16: 00007FF75B079EB9 
+17: 00007FF75B076168 
+18: 00007FF75B068EC6 
+19: 00007FF75B079EB9 
+20: 00007FF75B076168 
+21: 00007FF75B068EC6 
+22: 00007FF75B079EB9 
+23: 00007FF75B076168 
+24: 00007FF75B068EC6 
+25: 00007FF75B079EB9 
+26: 00007FF75B076168 
+27: 00007FF75B068EC6 
+28: 00007FF75B079EB9 
+29: 00007FF75B076168 
+30: 00007FF75B068EC6 
+31: 00007FF75B079EB9 
+32: 00007FF75B076168 
+33: 00007FF75B068EC6 
+34: 00007FF75B079EB9 
+35: 00007FF75B076168 
+36: 00007FF75B068EC6 
+37: 00007FF75B079EB9 
+38: 00007FF75B076168 
+39: 00007FF75B068EC6 
+40: 00007FF75B079EB9 
+41: 00007FF75B076168 
+42: 00007FF75B068EC6 
+43: 00007FF75B07B32E 
+44: 00007FF75B07AAE4 
+45: 00007FF75B077905 
+46: 00007FF75B068E73 
+47: 00007FF75B06849D 
+48: 00007FF75B07467B 
+49: 00007FF75B068C12 
+50: 00007FF75B079EB9 
+51: 00007FF75B076139 
+52: 00007FF75B068EC6 
+53: 00007FF75B079EB9 
+54: 00007FF75B076168 
+55: 00007FF75B068EC6 
+56: 00007FF75B06849D 
+57: 00007FF75B07467B 
+58: 00007FF75B068C12 
+59: 00007FF75B079EB9 
+60: 00007FF75B076168 
+61: 00007FF75B068EC6 
+62: 00007FF75B079EB9 
+63: 00007FF75B076168 
+64: 00007FF75B068EC6 
+65: 00007FF75B079EB9 
+66: 00007FF75B076168 
+67: 00007FF75B068EC6 
+68: 00007FF75B079EB9 
+69: 00007FF75B076139 
+70: 00007FF75B068EC6 
+71: 00007FF75B06849D 
+72: 00007FF75B07467B 
+73: 00007FF75B068C12 
+74: 00007FF75B07B32E 
+75: 00007FF75B07AAE4 
+76: 00007FF75B077905 
+77: 00007FF75B068E73 
+78: 00007FF75B06849D 
+79: 00007FF75B066BCB 
+80: 00007FF75B065F06 
+81: 00007FF75B090A68 
+82: 00007FF75B084A80 
+83: 00007FF75B0A9003 
+84: 00007FF75B089474 
+85: 00007FF75B091F0B 
+86: 00007FF75B09140A 
+87: 00007FF75B084B07 
+88: 00007FF75B083CD4 
+89: 00007FF75B082FC2 
+90: 00007FF75B082C6A 
+91: 00007FF75B07E299 
+92: 00007FF75B55B6FF 
+93: 00007FF75B55E501 
+94: 00007FF75B5E7173 
+95: 00007FF75C9B173F 
+96: 00007FF75C9AFC93 
+97: 0000027BE65CF64D 
+
+<--- Last few GCs --->
+
+[14608:0000027C82BBD000]      432 ms: Mark-Compact 8.3 (11.4) -> 7.5 (12.4) MB, pooled: 1 MB, 33.82 / 0.00 ms  (average mu = 0.918, current mu = 0.918) background allocation failure; GC in old space requested
+[14608:0000027C82BBD000]      721 ms: Scavenge (interleaved) 10.6 (13.4) -> 9.5 (15.4) MB, pooled: 0 MB, 1.43 / 0.00 ms  (average mu = 0.918, current mu = 0.918) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75B5DB4CA RSA_get0_q+560506
+ 5: 00007FF75B5DB270 RSA_get0_q+559904
+ 6: 00007FF75B06146F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+62895
+ 7: 00007FF75B072B41 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+134273
+ 8: 00007FF75B071E73 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+130995
+ 9: 00007FF75B06D321 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+111713
+10: 00007FF75B07357A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+136890
+11: 00007FF75B0756E5 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+145445
+12: 00007FF75B068266 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+91046
+13: 00007FF75B066BCB v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+85259
+14: 00007FF75B065F06 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+81990
+15: 00007FF75B090A68 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+256936
+16: 00007FF75B084A80 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207808
+17: 00007FF75B0A9003 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+356675
+18: 00007FF75B089474 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+226740
+19: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+20: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+21: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+22: 00007FF75B09CC03 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+306499
+23: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+24: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+25: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+26: 00007FF75B09B7AE v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+301294
+27: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+28: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+29: 00007FF75B09E1C2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+312066
+30: 00007FF75B09ABE3 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+298275
+31: 00007FF75B0987D8 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+289048
+32: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+33: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+34: 00007FF75B0A873F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+354431
+35: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+36: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+37: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+38: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+39: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+40: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+41: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+42: 00007FF75B55B6FF RSA_get0_q+36783
+43: 00007FF75B55E501 RSA_get0_q+48561
+44: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+45: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+46: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+47: 0000027CBB24F64D 
+
+<--- Last few GCs --->
+
+[7400:0000020065BB9000]      525 ms: Scavenge 8.9 (11.4) -> 7.6 (11.2) MB, pooled: 0 MB, 18.14 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C51AC 
+ 5: 00007FF75B06BD7D 
+ 6: 00007FF75B06B633 
+ 7: 00007FF75B06F78B 
+ 8: 00007FF75B06EC53 
+ 9: 00007FF75B06E6F4 
+10: 00007FF75B06ABEB 
+11: 00007FF75B06F7FA 
+12: 00007FF75B06EC53 
+13: 00007FF75B071BC2 
+14: 00007FF75B06CFD4 
+15: 00007FF75B06B205 
+16: 00007FF75B06F78B 
+17: 00007FF75B06EC53 
+18: 00007FF75B06D6AA 
+19: 00007FF75B0787E4 
+20: 00007FF75B068EBC 
+21: 00007FF75B06849D 
+22: 00007FF75B07968B 
+23: 00007FF75B068CBF 
+24: 00007FF75B06849D 
+25: 00007FF75B07467B 
+26: 00007FF75B068C12 
+27: 00007FF75B079EB9 
+28: 00007FF75B076139 
+29: 00007FF75B068EC6 
+30: 00007FF75B06849D 
+31: 00007FF75B067C5B 
+32: 00007FF75B071529 
+33: 00007FF75B06F5B0 
+34: 00007FF75B06ECCD 
+35: 00007FF75B06E6F4 
+36: 00007FF75B06ABEB 
+37: 00007FF75B06F7FA 
+38: 00007FF75B06EC53 
+39: 00007FF75B06D6AA 
+40: 00007FF75B079951 
+41: 00007FF75B068F31 
+42: 00007FF75B06849D 
+43: 00007FF75B07467B 
+44: 00007FF75B068C12 
+45: 00007FF75B06849D 
+46: 00007FF75B066BCB 
+47: 00007FF75B065F06 
+48: 00007FF75B090A68 
+49: 00007FF75B084A80 
+50: 00007FF75B0A9003 
+51: 00007FF75B089474 
+52: 00007FF75B091F0B 
+53: 00007FF75B09140A 
+54: 00007FF75B084B07 
+55: 00007FF75B083CD4 
+56: 00007FF75B082FC2 
+57: 00007FF75B082C6A 
+58: 00007FF75B07E299 
+59: 00007FF75B55B6FF 
+60: 00007FF75B55E501 
+61: 00007FF75B5E7173 
+62: 00007FF75C9B173F 
+63: 00007FF75C9AFC93 
+64: 000002001FDCF64D 
+
+<--- Last few GCs --->
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+ 4: 00007FF75B376AEB EC_GROUP_get0_field+76331
+ 5: 00007FF75B39F06A v8::base::AddressSpaceReservation::AddressSpaceReservation+63898
+ 6: 00007FF75B3E08D6 uv_udp_get_send_queue_count+63606
+ 7: 00007FF75B3DFF26 uv_udp_get_send_queue_count+61126
+ 8: 00007FF75B3F0E82 v8::internal::StrongRootAllocatorBase::deallocate_impl+15858
+ 9: 00007FF75B3F09AB v8::internal::StrongRootAllocatorBase::deallocate_impl+14619
+10: 00007FF75CCC24AD node::AsyncResource::CallbackScope::CallbackScope+2184429
+11: 00007FF75B3DBFC0 uv_udp_get_send_queue_count+44896
+12: 00007FF75B3F681A X509_STORE_set_cleanup+5098
+13: 00007FF75B402678 uv_timer_set_repeat+19096
+14: 00007FF75B419D2A uv_timer_set_repeat+115018
+15: 00007FF75B2C726E v8::Promise::MarkAsSilent+540366
+16: 00007FF75B2EDBBC v8::Promise::MarkAsSilent+698396
+17: 00007FF75B2EFF66 v8::Promise::MarkAsSilent+707526
+18: 00007FF75B2CBA49 v8::Promise::MarkAsSilent+558761
+19: 00007FF75B2C4A2F v8::Promise::MarkAsSilent+530063
+20: 00007FF75B2C48A2 v8::Promise::MarkAsSilent+529666
+21: 00007FF75B56194C RSA_get0_q+61948
+22: 00007FF75B5593E1 RSA_get0_q+27793
+23: 00007FF75B55BB04 RSA_get0_q+37812
+24: 00007FF75B55E501 RSA_get0_q+48561
+25: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+26: 00007FF75C9C6F3D node::GetCurrentEnvironment+110413
+27: 00007FF75C9C7A0E node::GetCurrentEnvironment+113182
+28: 00007FF75CAA7906 node::MultiIsolatePlatform::Create+4326
+29: 00007FF75CAA699E node::MultiIsolatePlatform::Create+382
+30: 00007FF75C8C9101 node::GetNodeReport+26785
+31: 00007FF75CA533D7 node::SetCppgcReference+58263
+32: 00007FF75CAA574E node::CreateEnvironment+510
+33: 00007FF75C7FB235 v8::CTypeInfoBuilder<__int64>::Build+293925
+34: 00007FF75B632D76 uv_thread_detach+150
+35: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+36: 00007FFD4384E957 BaseThreadInitThunk+23
+37: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+ 1: 00007FF75C8DE43D 
+
+ 2: 00007FF75BD43956 
+[38764:000001CF59FC5000]      470 ms: Scavenge 8.9 (12.2) -> 7.6 (11.9) MB, pooled: 0 MB, 1.83 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 3: 00007FF75B5DDC96 
+[38764:000001CF59FC5000]      588 ms: Scavenge 9.7 (12.7) -> 9.0 (13.9) MB, pooled: 0 MB, 38.42 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 4: 00007FF75B444E7E 
+[38764:000001CF59FC5000]      764 ms: Scavenge 10.8 (13.9) -> 9.8 (16.2) MB, pooled: 0 MB, 1.83 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+ 5: 00007FF75B4784DF 
+
+ 6: 00007FF75B478F92 
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+ 7: 00007FF75B479972 
+----- Native stack trace -----
+ 8: 00007FF75AF748B3 
+
+ 9: 00007FF75B608BA6 
+ 1: 00007FF75C993D9F 
+10: 00007FF75CAA512D 
+ 2: 00007FF75B5DDCB7 
+11: 00007FF75C7FADC5 
+ 3: 00007FF75B3DE4F7 
+12: 00007FF75B632D76 
+ 4: 00007FF75B376AEB 
+13: 00007FF75CCDDC73 
+ 5: 00007FF75B39F06A 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+ 6: 00007FF75B3E08D6 
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+ 7: 00007FF75B3DFF26 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B4026F6 
+13: 00007FF75B41E5F2 
+14: 00007FF75B0E28C0 
+15: 00007FF75B5C2B7A 
+16: 00007FF75B5C3281 
+17: 00007FF75B55928E 
+18: 00007FF75B558B8D 
+19: 00007FF75B55962C 
+20: 00007FF75B1A9AB7 
+21: 00007FF75B1A973F 
+22: 00007FF75B1A9C93 
+23: 00007FF75B186D38 
+24: 00007FF75AFCA454 
+25: 000001CF1FE775FA 
+
+<--- Last few GCs --->
+
+[35680:0000021F3748C000]      272 ms: Scavenge 8.9 (11.9) -> 7.6 (12.2) MB, pooled: 0 MB, 2.02 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35680:0000021F3748C000]      471 ms: Scavenge 9.7 (12.7) -> 9.0 (17.9) MB, pooled: 0 MB, 77.88 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[35680:0000021F3748C000]      272 ms: Scavenge 8.9 (11.9) -> 7.6 (12.2) MB, pooled: 0 MB, 2.02 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[35680:0000021F3748C000]      471 ms: Scavenge 9.7 (12.7) -> 9.0 (17.9) MB, pooled: 0 MB, 77.88 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C5098 
+ 9: 00007FF75BDB6C6F 
+10: 00007FF75C8D944B 
+11: 00007FF75B632D76 
+12: 00007FF75CCDDC73 
+13: 00007FFD4384E957 
+14: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[38620:000001179040A000]      339 ms: Scavenge 6.1 (8.1) -> 5.5 (9.9) MB, pooled: 0 MB, 1.30 / 0.00 ms  (average mu = 0.631, current mu = 0.631) allocation failure; 
+[38620:000001179040A000]      439 ms: Scavenge 8.9 (11.9) -> 7.5 (11.7) MB, pooled: 0 MB, 1.76 / 0.00 ms  (average mu = 0.631, current mu = 0.631) allocation failure; 
+[38620:000001179040A000]      510 ms: Scavenge 9.6 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 3.06 / 0.00 ms  (average mu = 0.631, current mu = 0.631) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B2EE30E 
+ 6: 00007FF75B2FE6AE 
+ 7: 00007FF75B2CAF19 
+ 8: 00007FF75B2F2FAD 
+ 9: 00007FF75B2E9D3F 
+10: 00007FF75B2D25C0 
+11: 00007FF75B2D20AD 
+12: 00007FF75B2CF76B 
+13: 00007FF75B2CEBDF 
+14: 00007FF75B2CD273 
+15: 00007FF75B2C4696 
+16: 00007FF75B562A4F 
+17: 00007FF75B559368 
+18: 00007FF75B558B8D 
+19: 00007FF75B55962C 
+20: 00007FF75AFDA98B 
+21: 00000117C8B775FA 
+
+<--- Last few GCs --->
+[37352:000001C18C2EE000]      246 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.69 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B1E0C2B 
+ 6: 00007FF75B2DDDBB 
+ 7: 00007FF75B2E0AA9 
+ 8: 00007FF75B2D1F55 
+ 9: 00007FF75B2D01CB 
+10: 00007FF75B2D0550 
+11: 00007FF75B2CF76B 
+12: 00007FF75B2CEBDF 
+13: 00007FF75B2CD3EF 
+14: 00007FF75B2C4696 
+15: 00007FF75B562A4F 
+16: 00007FF75B559368 
+17: 00007FF75B55BB04 
+18: 00007FF75B55E501 
+19: 00007FF75B5E7173 
+20: 00007FF75C9B173F 
+21: 00007FF75C9AFC93 
+22: 000001C1C498F64D 
+
+<--- Last few GCs --->
+[13732:0000019465CCD000]      239 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.83 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B01CACD 
+ 6: 00007FF75B002FD2 
+ 7: 00007FF75B00396A 
+ 8: 00007FF75B0043F7 
+ 9: 00007FF75B00A8A6 
+10: 00007FF75B008342 
+11: 00007FF75B00A76B 
+12: 00007FF75B008B30 
+13: 00007FF75B00A9F2 
+14: 00007FF75B00A9F2 
+15: 00007FF75B008342 
+16: 00007FF75B00A76B 
+17: 00007FF75B008B30 
+18: 00007FF75B00A9F2 
+19: 00007FF75B00A9F2 
+20: 00007FF75B008342 
+21: 00007FF75B00A76B 
+
+22: 00007FF75B008B30 
+
+23: 00007FF75B00A9F2 
+#
+24: 00007FF75B00A9F2 
+# Fatal process out of memory: Re-embedded builtins: set permissions
+25: 00007FF75B008342 
+#
+26: 00007FF75B00A228 
+----- Native stack trace -----
+27: 00007FF75B008AAF 
+
+28: 00007FF75B00A9F2 
+29: 00007FF75B00A228 
+30: 00007FF75B008AAF 
+31: 00007FF75B00A9F2 
+32: 00007FF75B00A9F2 
+
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+33: 00007FF75B00A228 
+<--- Last few GCs --->
+34: 00007FF75B008AAF 
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+
+35: 00007FF75B0038F4 
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+[36756:000001F1CCE8E000]      407 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 2.01 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+36: 00007FF75B00A9F2 
+ 4: 00007FF75B444E7E v8::CppHeap::CollectGarbageInYoungGenerationForTesting+111502
+[36756:000001F1CCE8E000]      902 ms: Scavenge 9.7 (12.4) -> 9.0 (13.7) MB, pooled: 0 MB, 340.21 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+37: 00007FF75B00A9F2 
+ 5: 00007FF75B4784DF SSL_CTX_set_default_read_buffer_len+41247
+
+38: 00007FF75B006A36 
+ 6: 00007FF75B478F92 SSL_CTX_set_default_read_buffer_len+43986
+39: 00007FF75B00A228 
+FATAL ERROR: Zone Allocation failed - process out of memory
+ 7: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+40: 00007FF75B008AAF 
+----- Native stack trace -----
+ 8: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+41: 00007FF75B00A9F2 
+
+ 9: 00007FF75B608BA6 v8::Isolate::Initialize+662
+42: 00007FF75B00A9F2 
+ 1: 00007FF75C993D9F 
+10: 00007FF75CAA512D node::SetIsolateUpForNode+685
+43: 00007FF75B00A228 
+ 2: 00007FF75B5DDCB7 
+11: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+44: 00007FF75B008AAF 
+ 3: 00007FF75AF55B96 
+12: 00007FF75B632D76 uv_thread_detach+150
+45: 00007FF75B002C58 
+ 4: 00007FF75AE04262 
+13: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+46: 00007FF75AFE6150 
+ 5: 00007FF75ADA58CD 
+
+14: 00007FFD4384E957 
+47: 00007FF75AFE5872 
+ 6: 00007FF75ADA5FCF 
+<--- Last few GCs --->
+15: 00007FFD43FAAD6C RtlUserThreadStart+44
+48: 00007FF75AFE4169 
+ 7: 00007FF75ADDED1A 
+
+49: 00007FF75AFE43FC 
+ 8: 00007FF75ADB49BB 
+[2148:0000016A01787000]      306 ms: Scavenge 8.9 (11.7) -> 7.6 (11.7) MB, pooled: 0 MB, 1.63 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+50: 00007FF75AFE42DB 
+ 9: 00007FF75AE2CA26 
+
+51: 00007FF75AFBB1D2 
+10: 00007FF75AE2B740 
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+52: 000001941FE775FA 
+11: 00007FF75AE2953A 
+----- Native stack trace -----
+12: 00007FF75B55196F 
+
+13: 00007FF75AE2B01B 
+ 1: 00007FF75C993D9F 
+14: 00007FF75BDB6C6F 
+ 2: 00007FF75B5DDCB7 
+15: 00007FF75C8D944B 
+ 3: 00007FF75B3DE4F7 
+16: 00007FF75B632D76 
+ 4: 00007FF75B3BDBEE 
+17: 00007FF75CCDDC73 
+ 5: 00007FF75B3B32AD 
+18: 00007FFD4384E957 
+ 6: 00007FF75B3B2F5C 
+19: 00007FFD43FAAD6C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C4E88 
+ 9: 00007FF75BDB641D 
+10: 00007FF75BDB68C2 
+11: 00007FF75B3B5BE4 
+12: 00007FF75B39D30D 
+13: 00007FF75B397384 
+14: 00007FF75B3E08FA 
+15: 00007FF75B3DFF26 
+16: 00007FF75B3F0E82 
+17: 00007FF75B3F09AB 
+18: 00007FF75CCC24AD 
+19: 00007FF75B3DBFC0 
+
+<--- Last few GCs --->
+
+[2148:0000016A01787000]      306 ms: Scavenge 8.9 (11.7) -> 7.6 (11.7) MB, pooled: 0 MB, 1.63 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+20: 00007FF75B3F681A 
+21: 00007FF75B402678 
+22: 00007FF75B41B4E4 
+23: 00007FF75B41B459 
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+24: 00007FF75B5D067D 
+----- Native stack trace -----
+
+25: 00007FF75B2CBD56 
+26: 00007FF75B2CB846 
+27: 00007FF75B2C4A2F 
+28: 00007FF75B2C48A2 
+29: 00007FF75B56194C 
+30: 00007FF75B5593E1 
+31: 00007FF75B55BB04 
+32: 00007FF75B55E501 
+33: 00007FF75B5E7173 
+34: 00007FF75C9B173F 
+35: 00007FF75C9AFC93 
+36: 0000016A3B44F64D 
+
+<--- Last few GCs --->
+
+
+<--- Last few GCs --->
+[24972:0000015E2513B000]      511 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 69.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[24972:0000015E2513B000]      572 ms: Scavenge 9.6 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 2.20 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[11432:000001EDACA95000]      573 ms: Scavenge 8.9 (11.4) -> 7.6 (11.7) MB, pooled: 0 MB, 96.39 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+[11432:000001EDACA95000]      752 ms: Scavenge 9.7 (12.4) -> 9.0 (13.4) MB, pooled: 1 MB, 116.58 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+
+----- Native stack trace -----
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[24972:0000015E2513B000]      511 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 69.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[24972:0000015E2513B000]      572 ms: Scavenge 9.6 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 2.20 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB EC_GROUP_get0_field+76331
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B34E51E v8::platform::tracing::TraceObject::bind_id+28894
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3E0F92 uv_udp_get_send_queue_count+65330
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3DFF47 uv_udp_get_send_queue_count+61159
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3F0E82 v8::internal::StrongRootAllocatorBase::deallocate_impl+15858
+ 8: 00007FF75B3C4E88 
+ 9: 00007FF75B3F09AB v8::internal::StrongRootAllocatorBase::deallocate_impl+14619
+ 9: 00007FF75BDB641D 
+10: 00007FF75CCC24AD node::AsyncResource::CallbackScope::CallbackScope+2184429
+10: 00007FF75BDB68C2 
+11: 00007FF75B3DBFC0 uv_udp_get_send_queue_count+44896
+11: 00007FF75B3B5BE4 
+12: 00007FF75B3F681A X509_STORE_set_cleanup+5098
+12: 00007FF75B39D30D 
+13: 00007FF75B402CB6 uv_timer_set_repeat+20694
+13: 00007FF75B397384 
+14: 00007FF75AFD3907 v8::CodeEvent::GetFunctionName+131959
+14: 00007FF75B3E08FA 
+15: 000001EDE67F75FA 
+15: 00007FF75B3DFF26 
+16: 00007FF75B3F0E82 
+17: 00007FF75B3F09AB 
+18: 00007FF75CCC24AD 
+19: 00007FF75B3DBFC0 
+20: 00007FF75B4026C1 
+21: 00007FF75B41D884 
+22: 00007FF75B41D75C 
+23: 00007FF75B404859 
+24: 00007FF75B4049C2 
+25: 00007FF75B5DDAB2 
+26: 00007FF75C96FFE8 
+27: 0000015E5D78F64D 
+
+<--- Last few GCs --->
+
+[24972:0000015E2513B000]      511 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 69.55 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[24972:0000015E2513B000]      572 ms: Scavenge 9.6 (12.4) -> 9.0 (17.4) MB, pooled: 0 MB, 2.20 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[34360:00000243F840A000]      299 ms: Scavenge 8.9 (11.9) -> 7.6 (11.9) MB, pooled: 0 MB, 1.89 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34360:00000243F840A000]      526 ms: Scavenge 9.7 (12.7) -> 9.0 (17.4) MB, pooled: 0 MB, 13.10 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C5098 
+ 9: 00007FF75BDB6C6F 
+10: 00007FF75C8D944B 
+11: 00007FF75B632D76 
+12: 00007FF75CCDDC73 
+13: 00007FFD4384E957 
+14: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[7612:000002A8E27CB000]      403 ms: Scavenge (interleaved) 8.9 (12.2) -> 7.5 (11.9) MB, pooled: 0 MB, 9.34 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+[7612:000002A8E27CB000]      486 ms: Scavenge (interleaved) 9.6 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 2.74 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[7612:000002A8E27CB000]      403 ms: Scavenge (interleaved) 8.9 (12.2) -> 7.5 (11.9) MB, pooled: 0 MB, 9.34 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+[7612:000002A8E27CB000]      486 ms: Scavenge (interleaved) 9.6 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 2.74 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[7612:000002A8E27CB000]      403 ms: Scavenge (interleaved) 8.9 (12.2) -> 7.5 (11.9) MB, pooled: 0 MB, 9.34 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+[7612:000002A8E27CB000]      486 ms: Scavenge (interleaved) 9.6 (12.7) -> 9.0 (17.7) MB, pooled: 0 MB, 2.74 / 0.00 ms  (average mu = 0.448, current mu = 0.001) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 1: 00007FF75C993D9F 
+ 8: 00007FF75B3C5098 
+ 2: 00007FF75B5DDCB7 
+ 9: 00007FF75BDB6C6F 
+ 3: 00007FF75B3DE4F7 
+10: 00007FF75C8D944B 
+ 4: 00007FF75B3BDBEE 
+11: 00007FF75B632D76 
+ 5: 00007FF75B3B32AD 
+12: 00007FF75CCDDC73 
+ 6: 00007FF75B3B2F5C 
+13: 00007FFD4384E957 
+ 7: 00007FF75B3B2BA1 
+14: 00007FFD43FAAD6C 
+ 8: 00007FF75B3C5098 
+ 9: 00007FF75BDB6C6F 
+10: 00007FF75C8D944B 
+11: 00007FF75B632D76 
+12: 00007FF75CCDDC73 
+13: 00007FFD4384E957 
+14: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B39F06A 
+ 6: 00007FF75B3E08D6 
+ 7: 00007FF75B3DFF26 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B419D2A 
+15: 00007FF75B2C726E 
+16: 00007FF75B2EDBBC 
+17: 00007FF75B2EFF66 
+18: 00007FF75B2CBA49 
+19: 00007FF75B2C4A2F 
+20: 00007FF75B2C48A2 
+21: 00007FF75B56194C 
+22: 00007FF75B5593E1 
+23: 00007FF75B55BB04 
+24: 00007FF75B55E501 
+25: 00007FF75B5E7173 
+26: 00007FF75C9C6F3D 
+27: 00007FF75C9C7A0E 
+28: 00007FF75CAA7906 
+
+29: 00007FF75CAA699E 
+<--- Last few GCs --->
+30: 00007FF75C8C9101 
+
+31: 00007FF75CA533D7 
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+32: 00007FF75CAA574E 
+----- Native stack trace -----
+33: 00007FF75C7FB235 
+
+34: 00007FF75B632D76 
+35: 00007FF75CCDDC73 
+36: 00007FFD4384E957 
+37: 00007FFD43FAAD6C 
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B39F06A 
+ 6: 00007FF75B3E08D6 
+ 7: 00007FF75B3DFF26 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B45FDA9 
+13: 00007FF75AFD3232 
+14: 0000026678BB75FA 
+
+<--- Last few GCs --->
+[35388:0000016892DEA000]      197 ms: Scavenge 6.2 (7.1) -> 5.6 (9.9) MB, pooled: 0 MB, 1.68 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C4CD6 
+ 5: 00007FF75B096FC6 
+ 6: 00007FF75B09878B 
+ 7: 00007FF75B09795E 
+ 8: 00007FF75B09D324 
+ 9: 00007FF75B09B7AE 
+10: 00007FF75B09878B 
+11: 00007FF75B09795E 
+12: 00007FF75B097619 
+13: 00007FF75B09FDE0 
+14: 00007FF75B097086 
+15: 00007FF75B09878B 
+16: 00007FF75B09795E 
+17: 00007FF75B0A9832 
+18: 00007FF75B089305 
+19: 00007FF75B091F0B 
+20: 00007FF75B09140A 
+21: 00007FF75B084B07 
+22: 00007FF75B083CD4 
+23: 00007FF75B082FC2 
+24: 00007FF75B082C6A 
+25: 00007FF75B07E299 
+26: 00007FF75B55B6FF 
+27: 00007FF75B55E501 
+28: 00007FF75B5E7173 
+29: 00007FF75C9B173F 
+30: 00007FF75C9AFC93 
+31: 00000168CB44F64D 
+
+<--- Last few GCs --->
+
+[38428:000001A0E555D000]      337 ms: Scavenge 8.9 (11.4) -> 7.5 (11.4) MB, pooled: 0 MB, 2.85 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38428:000001A0E555D000]      452 ms: Scavenge 9.7 (12.4) -> 9.0 (13.4) MB, pooled: 0 MB, 52.10 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38428:000001A0E555D000]      653 ms: Scavenge 10.9 (13.4) -> 9.9 (16.4) MB, pooled: 0 MB, 55.40 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75C0A9DF2 
+ 5: 00007FF75BF83604 
+ 6: 00007FF75C475679 
+ 7: 00007FF75C474F4F 
+ 8: 00007FF75C474A81 
+ 9: 00007FF75C477110 
+10: 00007FF75C4764DC 
+11: 00007FF75C4762F6 
+12: 00007FF75C488DCD 
+13: 00007FF75BFF1AA8 
+14: 00007FF75BFCC13D 
+15: 00007FF75BFC92C9 
+16: 00007FF75BFC8F2E 
+17: 00007FF75B55196F 
+18: 00007FF75B5169BD 
+19: 00007FF75B5166B5 
+20: 00007FF75BDB6C6F 
+21: 00007FF75C8D944B 
+22: 00007FF75B632D76 
+23: 00007FF75CCDDC73 
+24: 00007FFD4384E957 
+25: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[38452:0000021D33C6E000]      415 ms: Scavenge (interleaved) 7.1 (8.6) -> 6.1 (10.9) MB, pooled: 0 MB, 2.01 / 0.00 ms  (average mu = 0.893, current mu = 0.004) allocation failure; 
+[38452:0000021D33C6E000]      516 ms: Scavenge (interleaved) 8.8 (11.9) -> 8.1 (12.9) MB, pooled: 0 MB, 2.17 / 0.00 ms  (average mu = 0.893, current mu = 0.004) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[38452:0000021D33C6E000]      415 ms: Scavenge (interleaved) 7.1 (8.6) -> 6.1 (10.9) MB, pooled: 0 MB, 2.01 / 0.00 ms  (average mu = 0.893, current mu = 0.004) allocation failure; 
+[38452:0000021D33C6E000]      516 ms: Scavenge (interleaved) 8.8 (11.9) -> 8.1 (12.9) MB, pooled: 0 MB, 2.17 / 0.00 ms  (average mu = 0.893, current mu = 0.004) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B3BDBEE 
+ 5: 00007FF75B3B32AD 
+ 6: 00007FF75B3B2F5C 
+ 7: 00007FF75B3B2BA1 
+ 8: 00007FF75B3C4E88 
+ 9: 00007FF75BDB641D 
+10: 00007FF75BDB68C2 
+11: 00007FF75B3B5BE4 
+12: 00007FF75B39D30D 
+13: 00007FF75B397384 
+14: 00007FF75B3E08FA 
+15: 00007FF75B3DFF26 
+16: 00007FF75B3F0E82 
+17: 00007FF75B3F09AB 
+18: 00007FF75CCC24AD 
+19: 00007FF75B3DBFC0 
+20: 00007FF75B3F681A 
+21: 00007FF75B402678 
+22: 00007FF75B41A06C 
+23: 00007FF75B41A005 
+24: 00007FF75B0EAB9B 
+25: 00007FF75B0EA41D 
+26: 00007FF75B0EB628 
+27: 00007FF75AFDD947 
+28: 0000021D6C3F75FA 
+
+<--- Last few GCs --->
+
+[36484:0000027F0D68F000]      377 ms: Scavenge 8.9 (11.7) -> 7.5 (11.7) MB, pooled: 0 MB, 1.84 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[36484:0000027F0D68F000]      426 ms: Scavenge 9.1 (12.2) -> 8.5 (13.2) MB, pooled: 0 MB, 7.13 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F68EE 
+13: 00007FF75B402678 
+14: 00007FF75B41D884 
+15: 00007FF75B41D75C 
+16: 00007FF75B404859 
+17: 00007FF75B4049C2 
+18: 00007FF75B5DDAB2 
+19: 00007FF75C96FFE8 
+20: 0000027F45CCF64D 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 BaseThreadInitThunk+23
+15: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[15556:00000216B5E8E000]      239 ms: Scavenge 6.9 (8.9) -> 6.1 (9.9) MB, pooled: 0 MB, 1.57 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[15556:00000216B5E8E000]      396 ms: Scavenge 8.9 (10.9) -> 8.0 (12.2) MB, pooled: 0 MB, 38.30 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[15556:00000216B5E8E000]      601 ms: Scavenge 10.3 (13.2) -> 9.5 (15.7) MB, pooled: 0 MB, 5.42 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[15556:00000216B5E8E000]      239 ms: Scavenge 6.9 (8.9) -> 6.1 (9.9) MB, pooled: 0 MB, 1.57 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[15556:00000216B5E8E000]      396 ms: Scavenge 8.9 (10.9) -> 8.0 (12.2) MB, pooled: 0 MB, 38.30 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[15556:00000216B5E8E000]      601 ms: Scavenge 10.3 (13.2) -> 9.5 (15.7) MB, pooled: 0 MB, 5.42 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B2EE30E 
+ 6: 00007FF75B2FE6AE 
+ 7: 00007FF75B2CAF19 
+ 8: 00007FF75B2F2FAD 
+ 9: 00007FF75B2E9D3F 
+10: 00007FF75B2D25C0 
+11: 00007FF75B2D20AD 
+12: 00007FF75B2CF76B 
+13: 00007FF75B2CEBDF 
+14: 00007FF75B2CD273 
+15: 00007FF75B2C4696 
+16: 00007FF75B562A4F 
+17: 00007FF75B559368 
+18: 00007FF75B558B8D 
+19: 00007FF75B55962C 
+20: 00007FF75AFDA98B 
+21: 00000216EE4F75FA 
+
+<--- Last few GCs --->
+
+[12500:000001EB503DA000]      235 ms: Mark-Compact (reduce) 5.2 (7.4) -> 5.2 (6.9) MB, pooled: 0 MB, 6.65 / 0.00 ms  (average mu = 0.929, current mu = 0.007) last resort; GC in old space requested
+[12500:000001EB503DA000]      285 ms: Scavenge (interleaved) 7.1 (8.1) -> 6.1 (8.4) MB, pooled: 0 MB, 6.08 / 0.00 ms  (average mu = 0.929, current mu = 0.007) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B01CA1A 
+ 5: 00007FF75B01C755 
+ 6: 00007FF75B00A779 
+ 7: 00007FF75B008B30 
+ 8: 00007FF75B00A9F2 
+ 9: 00007FF75B00A9F2 
+10: 00007FF75B008342 
+11: 00007FF75B00A76B 
+12: 00007FF75B008B30 
+13: 00007FF75B00A9F2 
+14: 00007FF75B00A9F2 
+15: 00007FF75B008342 
+16: 00007FF75B00A76B 
+17: 00007FF75B008B30 
+18: 00007FF75B00A9F2 
+19: 00007FF75B00A9F2 
+20: 00007FF75B008342 
+21: 00007FF75B00A228 
+22: 00007FF75B008AAF 
+23: 00007FF75B0038F4 
+24: 00007FF75B00A9F2 
+25: 00007FF75B00A9F2 
+26: 00007FF75B008342 
+27: 00007FF75B00A228 
+28: 00007FF75B008AAF 
+29: 00007FF75B00A9F2 
+30: 00007FF75B00A9F2 
+31: 00007FF75B008342 
+32: 00007FF75B00A228 
+33: 00007FF75B008AAF 
+34: 00007FF75B00A9F2 
+35: 00007FF75B00A9F2 
+36: 00007FF75B008342 
+37: 00007FF75B00A228 
+38: 00007FF75B008AAF 
+39: 00007FF75B00A9F2 
+40: 00007FF75B00A9F2 
+41: 00007FF75B008342 
+42: 00007FF75B00A228 
+43: 00007FF75B008AAF 
+44: 00007FF75B00A9F2 
+45: 00007FF75B00A228 
+46: 00007FF75B008AAF 
+47: 00007FF75B00A9F2 
+48: 00007FF75B00A9F2 
+49: 00007FF75B00A228 
+50: 00007FF75B008AAF 
+51: 00007FF75B0038F4 
+52: 00007FF75B00A9F2 
+53: 00007FF75B00A9F2 
+54: 00007FF75B006A36 
+55: 00007FF75B00A228 
+56: 00007FF75B008AAF 
+57: 00007FF75B00A9F2 
+58: 00007FF75B00A9F2 
+59: 00007FF75B00A228 
+60: 00007FF75B008AAF 
+61: 00007FF75B002C58 
+62: 00007FF75AFE6150 
+63: 00007FF75AFE5872 
+64: 00007FF75AFE4169 
+65: 00007FF75AFE43FC 
+66: 00007FF75AFE42DB 
+
+67: 00007FF75AFBB1D2 
+<--- Last few GCs --->
+68: 000001EB1FE775FA 
+
+[36556:000002240A937000]      340 ms: Scavenge 8.9 (11.7) -> 7.5 (11.7) MB, pooled: 0 MB, 1.91 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[36556:000002240A937000]      423 ms: Scavenge 9.7 (12.4) -> 9.0 (13.2) MB, pooled: 1 MB, 10.71 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[36556:000002240A937000]      599 ms: Scavenge 10.8 (13.7) -> 9.8 (15.9) MB, pooled: 0 MB, 3.61 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41D9D5 
+15: 00007FF75B41D93C 
+16: 00007FF75B4047C9 
+17: 00007FF75B4049C2 
+18: 00007FF75B5DDAB2 
+19: 00007FF75C96FFE8 
+20: 000002244300F64D 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 
+15: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[7524:0000017D13459000]      417 ms: Scavenge (interleaved) 7.1 (8.1) -> 6.1 (8.4) MB, pooled: 2 MB, 22.59 / 0.00 ms  (average mu = 0.949, current mu = 0.006) allocation failure; 
+[7524:0000017D13459000]      429 ms: Mark-Compact 6.2 (8.4) -> 6.1 (9.1) MB, pooled: 1 MB, 5.16 / 0.00 ms  (average mu = 0.942, current mu = 0.925) background allocation failure; GC in old space requested
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C496A 
+ 5: 00007FF75B5C6086 
+ 6: 00007FF75B08BF27 
+ 7: 00007FF75B0A906A 
+ 8: 00007FF75B089474 
+ 9: 00007FF75B091F0B 
+10: 00007FF75B09140A 
+11: 00007FF75B084B07 
+12: 00007FF75B083CD4 
+13: 00007FF75B082FC2 
+14: 00007FF75B082C6A 
+15: 00007FF75B07E299 
+16: 00007FF75B55B6FF 
+17: 00007FF75B55E501 
+18: 00007FF75B5E7173 
+19: 00007FF75C9B173F 
+20: 00007FF75C9AFC93 
+21: 0000017D4BA8F64D 
+
+<--- Last few GCs --->
+
+[37740:0000026BE584C000]      169 ms: Scavenge 5.6 (8.1) -> 5.6 (8.4) MB, pooled: 2 MB, 3.34 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[37740:0000026BE584C000]      210 ms: Scavenge 7.4 (9.4) -> 6.5 (10.6) MB, pooled: 0 MB, 17.71 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AB49DA1 
+ 5: 00007FF75B01CACD 
+ 6: 00007FF75B002FD2 
+ 7: 00007FF75B00396A 
+ 8: 00007FF75B0043F7 
+ 9: 00007FF75B00A8A6 
+10: 00007FF75B008342 
+11: 00007FF75B00A76B 
+12: 00007FF75B008B30 
+13: 00007FF75B00A9F2 
+14: 00007FF75B00A9F2 
+15: 00007FF75B008342 
+16: 00007FF75B00A76B 
+17: 00007FF75B008B30 
+18: 00007FF75B00A9F2 
+19: 00007FF75B00A9F2 
+20: 00007FF75B008342 
+21: 00007FF75B00A76B 
+22: 00007FF75B008B30 
+23: 00007FF75B00A9F2 
+24: 00007FF75B00A9F2 
+25: 00007FF75B008342 
+26: 00007FF75B00A228 
+27: 00007FF75B008AAF 
+28: 00007FF75B00A9F2 
+29: 00007FF75B00A228 
+30: 00007FF75B008AAF 
+31: 00007FF75B00A9F2 
+32: 00007FF75B00A9F2 
+33: 00007FF75B00A228 
+34: 00007FF75B008AAF 
+35: 00007FF75B0038F4 
+36: 00007FF75B00A9F2 
+37: 00007FF75B00A9F2 
+38: 00007FF75B006A36 
+39: 00007FF75B00A228 
+40: 00007FF75B008AAF 
+41: 00007FF75B00A9F2 
+42: 00007FF75B00A9F2 
+43: 00007FF75B00A228 
+44: 00007FF75B008AAF 
+45: 00007FF75B002C58 
+46: 00007FF75AFE6150 
+47: 00007FF75AFE5872 
+48: 00007FF75AFE4169 
+49: 00007FF75AFE43FC 
+50: 00007FF75AFE42DB 
+51: 00007FF75AFBB1D2 
+52: 0000026B9FE775FA 
+
+
+#
+# Fatal error in , line 0
+# Out of memory: HashMap::Initialize
+#
+#
+#
+#FailureMessage Object: 000000FA2FBFA4F0
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43EEF 
+ 3: 00007FF75B5DBD56 
+ 4: 00007FF75B5DB442 
+ 5: 00007FF75B5DB270 
+ 6: 00007FF75B06146F 
+ 7: 00007FF75B0A0C67 
+ 8: 00007FF75B09FA96 
+ 9: 00007FF75B097086 
+10: 00007FF75B09878B 
+11: 00007FF75B09795E 
+12: 00007FF75B097619 
+13: 00007FF75B09FDE0 
+14: 00007FF75B097086 
+15: 00007FF75B09878B 
+16: 00007FF75B09795E 
+17: 00007FF75B0A9832 
+18: 00007FF75B089305 
+19: 00007FF75B091F0B 
+20: 00007FF75B09140A 
+21: 00007FF75B084B07 
+22: 00007FF75B083CD4 
+23: 00007FF75B082FC2 
+24: 00007FF75B082C6A 
+25: 00007FF75B07E299 
+26: 00007FF75B55B6FF 
+27: 00007FF75B55E501 
+28: 00007FF75B5E7173 
+29: 00007FF75C9B173F 
+30: 00007FF75C9AFC93 
+31: 0000022D9FDCF64D 
+
+<--- Last few GCs --->
+
+[10116:000001C982F7E000]      412 ms: Scavenge 8.9 (12.2) -> 7.6 (11.9) MB, pooled: 0 MB, 23.64 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[10116:000001C982F7E000]      562 ms: Scavenge 9.7 (12.7) -> 9.0 (13.9) MB, pooled: 0 MB, 44.67 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402CB6 
+14: 00007FF75AFD3907 
+15: 000001C9BB5F75FA 
+
+<--- Last few GCs --->
+[31976:000001F964629000]      154 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 1.47 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75B5DB4CA RSA_get0_q+560506
+ 5: 00007FF75B5DB270 RSA_get0_q+559904
+ 6: 00007FF75B06146F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+62895
+ 7: 00007FF75B082096 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+197078
+ 8: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+ 9: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+10: 00007FF75B097619 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+284505
+11: 00007FF75B09FDE0 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+319264
+12: 00007FF75B097086 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+283078
+13: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+14: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+15: 00007FF75B097619 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+284505
+16: 00007FF75B09FDE0 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+319264
+17: 00007FF75B097086 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+283078
+18: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+19: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+20: 00007FF75B0A9832 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+358770
+21: 00007FF75B089305 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+226373
+22: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+23: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+24: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+25: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+26: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+27: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+28: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+29: 00007FF75B55B6FF RSA_get0_q+36783
+30: 00007FF75B55E501 RSA_get0_q+48561
+31: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+32: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+33: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+34: 000001F91FDCF64D 
+
+<--- Last few GCs --->
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+#
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[38552:0000025FDD8FD000]      368 ms: Scavenge 6.1 (8.6) -> 5.5 (10.4) MB, pooled: 0 MB, 1.67 / 0.00 ms  (average mu = 0.740, current mu = 0.740) allocation failure; 
+[38552:0000025FDD8FD000]      472 ms: Scavenge 8.9 (12.2) -> 7.5 (11.9) MB, pooled: 0 MB, 12.23 / 0.00 ms  (average mu = 0.740, current mu = 0.740) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 1: 00007FF75C8DE43D node::MultiIsolatePlatform::DisposeIsolate+8061
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+ 2: 00007FF75BD43956 v8::base::FatalOOM+54
+ 4: 00007FF75B3BDBEE v8::base::AddressSpaceReservation::AddressSpaceReservation+189726
+ 3: 00007FF75B5DDC96 v8::Function::NewInstance+390
+ 5: 00007FF75B3B32AD v8::base::AddressSpaceReservation::AddressSpaceReservation+146397
+ 4: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+ 6: 00007FF75B3B2F5C v8::base::AddressSpaceReservation::AddressSpaceReservation+145548
+ 5: 00007FF75B39033A v8::base::AddressSpaceReservation::AddressSpaceReservation+3178
+ 7: 00007FF75B3B2BA1 v8::base::AddressSpaceReservation::AddressSpaceReservation+144593
+ 6: 00007FF75B3903FC v8::base::AddressSpaceReservation::AddressSpaceReservation+3372
+ 8: 00007FF75B3C5098 v8::base::AddressSpaceReservation::AddressSpaceReservation+219592
+ 7: 00007FF75B390CEB v8::base::AddressSpaceReservation::AddressSpaceReservation+5659
+ 9: 00007FF75BDB6C6F v8::platform::DefaultJobHandle::UpdatePriority+591
+ 8: 00007FF75B367F21 EC_GROUP_get0_field+15969
+10: 00007FF75C8D944B node::GetNodeReport+93163
+ 9: 00007FF75B3CDFE3 v8::base::AddressSpaceReservation::AddressSpaceReservation+256275
+11: 00007FF75B632D76 uv_thread_detach+150
+10: 00007FF75B3CDD4E v8::base::AddressSpaceReservation::AddressSpaceReservation+255614
+12: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+11: 00007FF75B3CCB38 v8::base::AddressSpaceReservation::AddressSpaceReservation+250984
+13: 00007FFD4384E957 BaseThreadInitThunk+23
+12: 00007FF75B3CCABA v8::base::AddressSpaceReservation::AddressSpaceReservation+250858
+14: 00007FFD43FAAD6C RtlUserThreadStart+44
+13: 00007FF75B3F6745 X509_STORE_set_cleanup+4885
+14: 00007FF75AF91CF8 v8_inspector::V8InspectorClient::runMessageLoopOnInstrumentationPause+34632
+15: 00007FF75AF8FACC v8_inspector::V8InspectorClient::runMessageLoopOnInstrumentationPause+25884
+16: 00007FF75AF96D4E v8_inspector::V8InspectorClient::runMessageLoopOnInstrumentationPause+55198
+17: 00007FF75AF904FD v8_inspector::V8InspectorClient::runMessageLoopOnInstrumentationPause+28493
+18: 00007FF75B3E64B8 uv_udp_get_send_queue_count+87128
+19: 00007FF75AF6E3E3 v8::internal::Version::GetSONAME+99363
+20: 00007FF75B47957C SSL_CTX_set_default_read_buffer_len+45500
+21: 00007FF75B479972 SSL_CTX_set_default_read_buffer_len+46514
+22: 00007FF75AF748B3 v8::internal::Version::GetSONAME+125171
+23: 00007FF75B608BA6 v8::Isolate::Initialize+662
+24: 00007FF75CAA512D node::SetIsolateUpForNode+685
+25: 00007FF75C7FADC5 v8::CTypeInfoBuilder<__int64>::Build+292789
+26: 00007FF75B632D76 uv_thread_detach+150
+27: 00007FF75CCDDC73 node::AsyncResource::CallbackScope::CallbackScope+2297011
+28: 00007FFD4384E957 BaseThreadInitThunk+23
+29: 00007FFD43FAAD6C RtlUserThreadStart+44
+
+<--- Last few GCs --->
+[37700:0000018409545000]      224 ms: Scavenge 6.2 (7.3) -> 5.6 (10.1) MB, pooled: 0 MB, 2.23 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75AF55B96 v8::SnapshotCreator::GetIsolate+56918
+ 4: 00007FF75B0AC016 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+368982
+ 5: 00007FF75B0A70D4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+348692
+ 6: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+ 7: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+ 8: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+ 9: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+10: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+11: 00007FF75B0A6F4F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+348303
+12: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+13: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+14: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+15: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+16: 00007FF75B0A9832 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+358770
+17: 00007FF75B089305 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+226373
+18: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+19: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+20: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+21: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+22: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+23: 00007FF75B09B7AE v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+301294
+24: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+25: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+26: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+27: 00007FF75B0A873F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+354431
+28: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+
+29: 00007FF75B08794A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+219786
+
+<--- Last few GCs --->
+30: 00007FF75B098680 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288704
+<--- Last few GCs --->
+
+31: 00007FF75B0979A4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285412
+[32980:000002C8CC819000]      287 ms: Scavenge 8.9 (11.4) -> 7.6 (11.4) MB, pooled: 0 MB, 1.97 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+32: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+
+[11312:0000021A7F733000]      331 ms: Mark-Compact 7.6 (11.1) -> 6.2 (11.1) MB, pooled: 0 MB, 38.56 / 0.00 ms  (average mu = 0.876, current mu = 0.876) background allocation failure; GC in old space requested
+
+33: 00007FF75B09B7AE v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+301294
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+34: 00007FF75B09878B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+288971
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+35: 00007FF75B09795E v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+285342
+----- Native stack trace -----
+
+36: 00007FF75B09D324 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+308324
+
+ 1: 00007FF75C993D9F 
+37: 00007FF75B0A873F v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+354431
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+38: 00007FF75B091F0B v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+262219
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+39: 00007FF75B09140A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+259402
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B3BDBEE 
+40: 00007FF75B084B07 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+207943
+ 4: 00007FF75B2DCF58 
+ 5: 00007FF75B3B32AD 
+41: 00007FF75B083CD4 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+204308
+ 5: 00007FF75B2DBCCB 
+ 6: 00007FF75B3B2F5C 
+42: 00007FF75B082FC2 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200962
+ 6: 00007FF75B2E0AA9 
+ 7: 00007FF75B3B2BA1 
+43: 00007FF75B082C6A v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+200106
+ 7: 00007FF75B2D1F55 
+ 8: 00007FF75B3C4E88 
+44: 00007FF75B07E299 v8::ResourceConstraints::set_initial_old_generation_size_in_bytes+181209
+ 8: 00007FF75B2D01CB 
+ 9: 00007FF75BDB641D 
+45: 00007FF75B55B6FF RSA_get0_q+36783
+ 9: 00007FF75B2D0550 
+10: 00007FF75BDB68C2 
+46: 00007FF75B55E501 RSA_get0_q+48561
+10: 00007FF75B2CF76B 
+11: 00007FF75B3B5BE4 
+47: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+11: 00007FF75B2CEBDF 
+12: 00007FF75B39D30D 
+48: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+12: 00007FF75B2CD3EF 
+13: 00007FF75B397384 
+49: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+13: 00007FF75B2C4696 
+14: 00007FF75B3E08FA 
+50: 0000018441A8F64D 
+14: 00007FF75B562A4F 
+15: 00007FF75B3DFF26 
+15: 00007FF75B559368 
+16: 00007FF75B3F0E82 
+16: 00007FF75B55BB04 
+17: 00007FF75B3F09AB 
+17: 00007FF75B55E501 
+18: 00007FF75CCC24AD 
+18: 00007FF75B5E7173 
+19: 00007FF75B3DBFC0 
+19: 00007FF75C9B173F 
+20: 00007FF75B45FDA9 
+20: 00007FF75C9AFC93 
+21: 00007FF75AFD3232 
+
+21: 0000021A393CF64D 
+22: 000002C89FE775FA 
+<--- Last few GCs --->
+
+[37764:000001966B279000]      288 ms: Scavenge 8.9 (11.7) -> 7.6 (11.9) MB, pooled: 0 MB, 31.12 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[37764:000001966B279000]      438 ms: Scavenge 9.7 (12.4) -> 9.0 (13.4) MB, pooled: 2 MB, 49.46 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41D884 
+15: 00007FF75B41D75C 
+16: 00007FF75AB3A14E 
+17: 00007FF75AFB1C36 
+18: 0000019627E775FA 
+
+<--- Last few GCs --->
+
+[25220:0000021C2FDA9000]      474 ms: Scavenge 8.9 (12.2) -> 7.6 (11.9) MB, pooled: 0 MB, 2.12 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B5C4CD6 
+ 5: 00007FF75B5C50D7 
+ 6: 00007FF75B0A20CE 
+ 7: 00007FF75B09265E 
+ 8: 00007FF75B0878D5 
+ 9: 00007FF75B098680 
+10: 00007FF75B0979A4 
+11: 00007FF75B097619 
+12: 00007FF75B09FDE0 
+13: 00007FF75B097086 
+14: 00007FF75B09878B 
+15: 00007FF75B09795E 
+16: 00007FF75B0A9832 
+17: 00007FF75B089305 
+18: 00007FF75B091F0B 
+19: 00007FF75B09140A 
+20: 00007FF75B084B07 
+21: 00007FF75B083CD4 
+22: 00007FF75B082FC2 
+23: 00007FF75B082C6A 
+24: 00007FF75B07E299 
+25: 00007FF75B55B6FF 
+26: 00007FF75B55E501 
+27: 00007FF75B5E7173 
+28: 00007FF75C9B173F 
+29: 00007FF75C9AFC93 
+30: 0000021C6838F64D 
+
+<--- Last few GCs --->
+
+[27732:0000017B934CB000]      311 ms: Mark-Compact (reduce) 5.6 (8.6) -> 5.2 (7.1) MB, pooled: 0 MB, 14.46 / 0.00 ms  (average mu = 0.950, current mu = 0.950) last resort; GC in old space requested
+[27732:0000017B934CB000]      318 ms: Mark-Compact (reduce) 5.2 (7.1) -> 5.2 (6.9) MB, pooled: 0 MB, 6.90 / 0.00 ms  (average mu = 0.927, current mu = 0.007) last resort; GC in old space requested
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[35920:0000020DFB3E9000]      414 ms: Mark-Compact 7.6 (11.1) -> 6.2 (11.4) MB, pooled: 0 MB, 8.85 / 0.00 ms  (average mu = 0.978, current mu = 0.978) background allocation failure; GC in old space requested
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B096EA2 
+ 5: 00007FF75B09878B 
+ 6: 00007FF75B09795E 
+ 7: 00007FF75B097619 
+ 8: 00007FF75B0969F1 
+ 9: 00007FF75B09878B 
+10: 00007FF75B09795E 
+11: 00007FF75B0A9832 
+12: 00007FF75B089305 
+13: 00007FF75B091F0B 
+ 1: 00007FF75C993D9F 
+14: 00007FF75B08794A 
+ 2: 00007FF75B5DDCB7 
+15: 00007FF75B098680 
+ 3: 00007FF75B3DE4F7 
+16: 00007FF75B0979A4 
+ 4: 00007FF75B376AEB 
+17: 00007FF75B09D324 
+ 5: 00007FF75B34E51E 
+18: 00007FF75B09B7AE 
+ 6: 00007FF75B3E0F92 
+19: 00007FF75B09878B 
+ 7: 00007FF75B3DFF47 
+20: 00007FF75B09795E 
+ 8: 00007FF75B3F0E82 
+21: 00007FF75B09D324 
+ 9: 00007FF75B3F09AB 
+22: 00007FF75B0A873F 
+10: 00007FF75CCC24AD 
+23: 00007FF75B091F0B 
+11: 00007FF75B3DBFC0 
+24: 00007FF75B08794A 
+12: 00007FF75B3F681A 
+25: 00007FF75B098680 
+13: 00007FF75B402CB6 
+26: 00007FF75B0979A4 
+14: 00007FF75AFD3907 
+27: 00007FF75B09D324 
+15: 0000017BCBBF75FA 
+28: 00007FF75B09B7AE 
+29: 00007FF75B09878B 
+30: 00007FF75B09795E 
+31: 00007FF75B09D324 
+32: 00007FF75B0A873F 
+33: 00007FF75B091F0B 
+34: 00007FF75B09140A 
+35: 00007FF75B084B07 
+36: 00007FF75B083CD4 
+37: 00007FF75B082FC2 
+38: 00007FF75B082C6A 
+39: 00007FF75B07E299 
+40: 00007FF75B55B6FF 
+41: 00007FF75B55E501 
+42: 00007FF75B5E7173 
+43: 00007FF75C9B173F 
+44: 00007FF75C9AFC93 
+45: 0000020DB7DCF64D 
+
+<--- Last few GCs --->
+
+[7740:0000025375E49000]      394 ms: Scavenge 5.6 (10.1) -> 5.6 (10.9) MB, pooled: 0 MB, 25.21 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[7740:0000025375E49000]      514 ms: Scavenge 9.6 (12.7) -> 8.0 (11.9) MB, pooled: 0 MB, 3.21 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[7740:0000025375E49000]      572 ms: Scavenge 9.7 (12.4) -> 9.2 (17.7) MB, pooled: 0 MB, 8.44 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[7740:0000025375E49000]      394 ms: Scavenge 5.6 (10.1) -> 5.6 (10.9) MB, pooled: 0 MB, 25.21 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[7740:0000025375E49000]      514 ms: Scavenge 9.6 (12.7) -> 8.0 (11.9) MB, pooled: 0 MB, 3.21 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[7740:0000025375E49000]      572 ms: Scavenge 9.7 (12.4) -> 9.2 (17.7) MB, pooled: 0 MB, 8.44 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: MarkCompactCollector: young object promotion failed Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 1: 00007FF75C993D9F 
+ 4: 00007FF75B3BDBEE 
+ 2: 00007FF75B5DDCB7 
+ 5: 00007FF75B3B32AD 
+ 3: 00007FF75B3DE4F7 
+ 6: 00007FF75B3B2F5C 
+ 4: 00007FF75B3BDBEE 
+ 7: 00007FF75B3B2BA1 
+ 5: 00007FF75B3B32AD 
+ 8: 00007FF75B3C5098 
+ 6: 00007FF75B3B2F5C 
+ 9: 00007FF75BDB6C6F 
+ 7: 00007FF75B3B2BA1 
+10: 00007FF75C8D944B 
+ 8: 00007FF75B3C4E88 
+11: 00007FF75B632D76 
+ 9: 00007FF75BDB641D 
+12: 00007FF75CCDDC73 
+10: 00007FF75BDB68C2 
+13: 00007FFD4384E957 
+11: 00007FF75B3B5BE4 
+14: 00007FFD43FAAD6C 
+12: 00007FF75B39D30D 
+13: 00007FF75B397384 
+14: 00007FF75B3E08FA 
+15: 00007FF75B3DFF26 
+16: 00007FF75B3F0E82 
+17: 00007FF75B3F09AB 
+18: 00007FF75CCC24AD 
+19: 00007FF75B3DBFC0 
+20: 00007FF75B3F6B0F 
+21: 00007FF75B402678 
+22: 00007FF75B419D2A 
+23: 00007FF75B2C726E 
+24: 00007FF75B2EDBBC 
+25: 00007FF75B2EFF66 
+26: 00007FF75B2CBA49 
+27: 00007FF75B2C4A2F 
+
+<--- Last few GCs --->
+
+[38676:0000015FE59F7000]      512 ms: Scavenge 8.9 (12.2) -> 7.5 (11.9) MB, pooled: 0 MB, 1.77 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38676:0000015FE59F7000]      575 ms: Scavenge 9.7 (12.7) -> 9.1 (17.9) MB, pooled: 0 MB, 2.33 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+
+<--- Last few GCs --->
+
+[38000:000001DEC6173000]      459 ms: Scavenge 5.6 (10.1) -> 5.6 (10.9) MB, pooled: 0 MB, 13.03 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38000:000001DEC6173000]      577 ms: Scavenge 9.7 (12.4) -> 8.0 (11.7) MB, pooled: 0 MB, 1.93 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38000:000001DEC6173000]      871 ms: Scavenge 9.7 (12.7) -> 9.3 (13.9) MB, pooled: 1 MB, 76.52 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B08B15A 
+ 5: 00007FF75B09851D 
+ 1: 00007FF75C993D9F 
+ 6: 00007FF75B0979A4 
+ 2: 00007FF75B5DDCB7 
+ 7: 00007FF75B09D324 
+ 3: 00007FF75AF55B96 
+ 8: 00007FF75B0A873F 
+ 4: 00007FF75B0A6642 
+ 9: 00007FF75B091F0B 
+ 5: 00007FF75B0A23A8 
+10: 00007FF75B09140A 
+ 6: 00007FF75B0A4106 
+11: 00007FF75B084B07 
+ 7: 00007FF75B091F0B 
+12: 00007FF75B083CD4 
+ 8: 00007FF75B09140A 
+13: 00007FF75B082FC2 
+ 9: 00007FF75B084B07 
+14: 00007FF75B082C6A 
+10: 00007FF75B0862EE 
+15: 00007FF75B07E299 
+11: 00007FF75B08587A 
+16: 00007FF75B55B6FF 
+12: 00007FF75B07E51E 
+17: 00007FF75B55E501 
+13: 00007FF75B558B30 
+18: 00007FF75B5E7173 
+14: 00007FF75B55962C 
+19: 00007FF75C9B173F 
+15: 00007FF75AFDA98B 
+20: 00007FF75C9AFC93 
+16: 0000015F9FE775FA 
+21: 000001DEFE78F64D 
+
+<--- Last few GCs --->
+
+[34944:00000196C6CEB000]      334 ms: Scavenge 8.9 (12.2) -> 7.6 (11.9) MB, pooled: 0 MB, 2.29 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[34944:00000196C6CEB000]      452 ms: Scavenge 9.7 (12.7) -> 9.0 (13.9) MB, pooled: 1 MB, 54.75 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AD7FFEC 
+ 5: 00007FF75ADA9128 
+ 6: 00007FF75ADA9B53 
+ 7: 00007FF75ADDF478 
+ 8: 00007FF75ADB49BB 
+ 9: 00007FF75ADB4592 
+10: 00007FF75ADB655C 
+11: 00007FF75ADB59EE 
+12: 00007FF75ADC8F71 
+13: 00007FF75AD9DDB5 
+14: 00007FF75ADB9502 
+15: 00007FF75ADCABC6 
+16: 00007FF75ADCB9C7 
+17: 00007FF75ADDFD9A 
+18: 00007FF75ADB49BB 
+19: 00007FF75AE2CA26 
+20: 00007FF75AE2B740 
+21: 00007FF75AE2953A 
+22: 00007FF75B55196F 
+23: 00007FF75AE2B01B 
+24: 00007FF75BDB6C6F 
+25: 00007FF75C8D944B 
+26: 00007FF75B632D76 
+27: 00007FF75CCDDC73 
+28: 00007FFD4384E957 BaseThreadInitThunk+23
+29: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+[32728:0000020A38B90000]      274 ms: Mark-Compact 3.7 (6.5) -> 3.6 (6.2) MB, pooled: 0 MB, 12.93 / 0.00 ms  (average mu = 0.719, current mu = 0.851) background allocation failure; GC in old space requested
+[32728:0000020A38B90000]      400 ms: Scavenge 6.1 (8.8) -> 5.5 (10.6) MB, pooled: 0 MB, 8.00 / 0.00 ms  (average mu = 0.719, current mu = 0.851) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75B2ECE5F 
+ 5: 00007FF75B2ECC6F 
+ 6: 00007FF75B5D2FCD 
+ 7: 00007FF75B0972E8 
+ 8: 00007FF75B09878B 
+ 9: 00007FF75B09795E 
+10: 00007FF75B097619 
+11: 00007FF75B09FDE0 
+12: 00007FF75B097086 
+13: 00007FF75B09878B 
+14: 00007FF75B09795E 
+15: 00007FF75B0A9832 
+16: 00007FF75B089305 
+17: 00007FF75B091F0B 
+18: 00007FF75B09140A 
+19: 00007FF75B084B07 
+20: 00007FF75B083CD4 
+21: 00007FF75B082FC2 
+22: 00007FF75B082C6A 
+23: 00007FF75B07E299 
+24: 00007FF75B55B6FF 
+25: 00007FF75B55E501 
+26: 00007FF75B5E7173 
+27: 00007FF75C9B173F 
+28: 00007FF75C9AFC93 
+29: 0000020A7118F64D 
+
+<--- Last few GCs --->
+
+[38204:00000249DDFFA000]      676 ms: Scavenge 8.9 (11.4) -> 7.5 (11.4) MB, pooled: 0 MB, 1.96 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+[38204:00000249DDFFA000]      758 ms: Scavenge 9.7 (12.4) -> 9.1 (17.4) MB, pooled: 0 MB, 2.59 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: Zone Allocation failed - process out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75AF55B96 
+ 4: 00007FF75AD7D902 
+ 5: 00007FF75AD7D8C2 
+ 6: 00007FF75AD7D7C3 
+ 7: 00007FF75AD7D70D 
+ 8: 00007FF75AD77C24 
+ 9: 00007FF75AD7FCDE 
+10: 00007FF75ADE13D2 
+11: 00007FF75ADDF261 
+12: 00007FF75ADB49BB 
+13: 00007FF75AE2CA26 
+14: 00007FF75AE2B740 
+15: 00007FF75AE2953A 
+16: 00007FF75B55196F 
+17: 00007FF75AE2B01B 
+18: 00007FF75BDB6C6F 
+19: 00007FF75C8D944B 
+20: 00007FF75B632D76 
+21: 00007FF75CCDDC73 
+22: 00007FFD4384E957 
+23: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+
+#
+<--- Last few GCs --->
+----- Native stack trace -----
+
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+ 1: 00007FF75C8DE43D 
+----- Native stack trace -----
+ 2: 00007FF75BD43956 
+
+ 3: 00007FF75B5DDC96 
+ 1: 00007FF75C993D9F 
+ 4: 00007FF75B3DE4F7 
+ 2: 00007FF75B5DDCB7 
+ 5: 00007FF75B39033A 
+ 3: 00007FF75B3DE4F7 
+ 6: 00007FF75B3903FC 
+ 4: 00007FF75B376AEB 
+ 7: 00007FF75B390CEB 
+ 5: 00007FF75B39F06A 
+ 8: 00007FF75B367F21 
+ 6: 00007FF75B3E08D6 
+ 9: 00007FF75B3CDFE3 
+ 7: 00007FF75B3DFF26 
+10: 00007FF75B3CDD4E 
+ 8: 00007FF75B3F0E82 
+11: 00007FF75B3CCB38 
+ 9: 00007FF75B3F09AB 
+12: 00007FF75B3CCABA 
+10: 00007FF75CCC24AD 
+13: 00007FF75AF91C83 
+11: 00007FF75B3DBFC0 
+14: 00007FF75AF8FACC 
+12: 00007FF75B4026C1 
+15: 00007FF75AF95776 
+13: 00007FF75B41D884 
+16: 00007FF75AF907B8 
+14: 00007FF75B41D75C 
+17: 00007FF75AF8FCAE 
+15: 00007FF75B1CF677 
+18: 00007FF75AF96D4E 
+16: 00007FF75B594784 
+19: 00007FF75AF904FD 
+17: 000001EA77DF753A 
+20: 00007FF75AF6D924 
+21: 00007FF75B3E67FE 
+22: 00007FF75B3E6551 
+23: 00007FF75AF6E3E3 
+24: 00007FF75B47957C 
+25: 00007FF75B479972 
+26: 00007FF75AF748B3 
+27: 00007FF75B608BA6 
+28: 00007FF75CAA512D 
+29: 00007FF75C7FADC5 
+30: 00007FF75B632D76 
+31: 00007FF75CCDDC73 
+32: 00007FFD4384E957 
+33: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+
+<--- Last few GCs --->
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+
+----- Native stack trace -----
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+
+----- Native stack trace -----
+ 1: 00007FF75C993D9F 
+
+ 2: 00007FF75B5DDCB7 
+ 1: 00007FF75C993D9F 
+ 3: 00007FF75B3DE4F7 
+ 2: 00007FF75B5DDCB7 
+ 4: 00007FF75B376AEB 
+ 3: 00007FF75B3DE4F7 
+ 5: 00007FF75B34E51E 
+ 4: 00007FF75B376AEB 
+ 6: 00007FF75B3E0F92 
+
+ 5: 00007FF75B39F06A 
+ 7: 00007FF75B3DFF47 
+<--- Last few GCs --->
+ 6: 00007FF75B3E08D6 
+ 8: 00007FF75B3F0E82 
+
+ 7: 00007FF75B3DFF26 
+ 9: 00007FF75B3F09AB 
+[37700:000001CD77F2D000]      851 ms: Mark-Compact (reduce) 5.6 (10.9) -> 5.2 (7.4) MB, pooled: 0 MB, 11.49 / 0.00 ms  (average mu = 0.986, current mu = 0.986) last resort; GC in old space requested
+ 8: 00007FF75B3F0E82 
+10: 00007FF75CCC24AD 
+[37700:000001CD77F2D000]      861 ms: Mark-Compact (reduce) 5.2 (7.4) -> 5.2 (7.1) MB, pooled: 0 MB, 10.24 / 0.00 ms  (average mu = 0.974, current mu = 0.004) last resort; GC in old space requested
+ 9: 00007FF75B3F09AB 
+11: 00007FF75B3DBFC0 
+
+10: 00007FF75CCC24AD 
+12: 00007FF75B3F681A 
+FATAL ERROR: Zone Allocation failed - process out of memory
+11: 00007FF75B3DBFC0 
+13: 00007FF75B402678 
+----- Native stack trace -----
+12: 00007FF75B4026C1 
+14: 00007FF75B41A06C 
+
+13: 00007FF75B41A06C 
+15: 00007FF75B41A005 
+ 1: 00007FF75C993D9F 
+14: 00007FF75B41A005 
+16: 00007FF75B0EAB9B 
+ 2: 00007FF75B5DDCB7 
+15: 00007FF75B0F958E 
+17: 00007FF75B0EA41D 
+16: 00007FF75B0F9AFD 
+ 3: 00007FF75AF55B96 
+18: 00007FF75B0EB628 
+ 4: 00007FF75AB1231A 
+17: 00007FF75B0FA1CB 
+19: 00007FF75AFDD947 
+ 5: 00007FF75AB145E1 
+18: 00007FF75AFC7E73 
+20: 00000217EFDB75FA 
+ 6: 00007FF75C1C8DFC 
+19: 000001E747E775FA 
+ 7: 00007FF75C1C4C1A 
+ 8: 00007FF75C1C47D9 
+ 9: 00007FF75C1CEFC9 
+10: 00007FF75C1CDC92 
+11: 00007FF75C1C9017 
+12: 00007FF75C1C81A1 
+13: 00007FF75C1C4CEE 
+14: 00007FF75C1C47D9 
+15: 00007FF75C1C4294 
+16: 00007FF75C1C3821 
+17: 00007FF75C1C357F 
+18: 00007FF75BFD1326 
+19: 00007FF75BFC9B96 
+20: 00007FF75BFC9010 
+21: 00007FF75B55196F 
+22: 00007FF75B5169BD 
+23: 00007FF75B5166B5 
+24: 00007FF75BDB6C6F 
+25: 00007FF75C8D944B 
+26: 00007FF75B632D76 
+27: 00007FF75CCDDC73 
+28: 00007FFD4384E957 
+29: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+FATAL ERROR: Committing semi space failed. Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F 
+ 2: 00007FF75B5DDCB7 
+ 3: 00007FF75B3DE4F7 
+ 4: 00007FF75B376AEB 
+ 5: 00007FF75B34E51E 
+ 6: 00007FF75B3E0F92 
+ 7: 00007FF75B3DFF47 
+ 8: 00007FF75B3F0E82 
+ 9: 00007FF75B3F09AB 
+10: 00007FF75CCC24AD 
+11: 00007FF75B3DBFC0 
+12: 00007FF75B3F681A 
+13: 00007FF75B402678 
+14: 00007FF75B41A06C 
+15: 00007FF75B41A005 
+16: 00007FF75B0EAB9B 
+17: 00007FF75B0EA41D 
+18: 00007FF75B0EB628 
+19: 00007FF75AFDD947 
+20: 000001F6D7E775FA 
+
+<--- Last few GCs --->
+
+[25948:0000020CC734D000]      493 ms: Scavenge 8.9 (12.2) -> 7.6 (12.2) MB, pooled: 0 MB, 25.73 / 0.00 ms  (average mu = 1.000, current mu = 1.000) allocation failure; 
+
+FATAL ERROR: NewSpace::EnsureCurrentCapacity Allocation failed - JavaScript heap out of memory
+----- Native stack trace -----
+
+ 1: 00007FF75C993D9F node::OnFatalError+1343
+ 2: 00007FF75B5DDCB7 v8::Function::NewInstance+423
+ 3: 00007FF75B3DE4F7 uv_udp_get_send_queue_count+54423
+ 4: 00007FF75B39ED73 v8::base::AddressSpaceReservation::AddressSpaceReservation+63139
+ 5: 00007FF75B3E08FA uv_udp_get_send_queue_count+63642
+ 6: 00007FF75B3DFF26 uv_udp_get_send_queue_count+61126
+ 7: 00007FF75B3F0E82 v8::internal::StrongRootAllocatorBase::deallocate_impl+15858
+ 8: 00007FF75B3F09AB v8::internal::StrongRootAllocatorBase::deallocate_impl+14619
+ 9: 00007FF75CCC24AD node::AsyncResource::CallbackScope::CallbackScope+2184429
+10: 00007FF75B3DBFC0 uv_udp_get_send_queue_count+44896
+11: 00007FF75B3F681A X509_STORE_set_cleanup+5098
+12: 00007FF75B402678 uv_timer_set_repeat+19096
+13: 00007FF75B41B4E4 uv_timer_set_repeat+121092
+14: 00007FF75B41B459 uv_timer_set_repeat+120953
+15: 00007FF75B5D067D RSA_get0_q+515885
+16: 00007FF75B2CBD56 v8::Promise::MarkAsSilent+559542
+17: 00007FF75B2CB846 v8::Promise::MarkAsSilent+558246
+18: 00007FF75B2C4A2F v8::Promise::MarkAsSilent+530063
+19: 00007FF75B2C48A2 v8::Promise::MarkAsSilent+529666
+20: 00007FF75B56194C RSA_get0_q+61948
+21: 00007FF75B5593E1 RSA_get0_q+27793
+22: 00007FF75B55BB04 RSA_get0_q+37812
+23: 00007FF75B55E501 RSA_get0_q+48561
+24: 00007FF75B5E7173 v8::ScriptCompiler::CompileFunction+1011
+25: 00007FF75C9B173F node::GetCurrentEnvironment+22351
+26: 00007FF75C9AFC93 node::GetCurrentEnvironment+15523
+27: 0000020C9FDCF64D 
+
+
+#
+# Fatal process out of memory: Re-embedded builtins: set permissions
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B444E7E 
+ 5: 00007FF75B4784DF 
+ 6: 00007FF75B478F92 
+ 7: 00007FF75B479972 
+ 8: 00007FF75AF748B3 
+ 9: 00007FF75B608BA6 
+10: 00007FF75CAA512D 
+11: 00007FF75C7FADC5 
+12: 00007FF75B632D76 
+13: 00007FF75CCDDC73 
+14: 00007FFD4384E957 
+15: 00007FFD43FAAD6C 
+
+<--- Last few GCs --->
+
+
+
+#
+# Fatal JavaScript out of memory: MemoryChunk allocation failed during deserialization.
+#
+----- Native stack trace -----
+
+ 1: 00007FF75C8DE43D 
+ 2: 00007FF75BD43956 
+ 3: 00007FF75B5DDC96 
+ 4: 00007FF75B3DE4F7 
+ 5: 00007FF75B39033A 
+ 6: 00007FF75B3903FC 
+ 7: 00007FF75B390CEB 
+ 8: 00007FF75B367F21 
+ 9: 00007FF75B3CDFE3 
+10: 00007FF75B3CDD4E 
+11: 00007FF75B3CCB38 
+12: 00007FF75B3CCABA 
+13: 00007FF75B3F6745 
+14: 00007FF75AF91CF8 
+15: 00007FF75AF8FACC 
+16: 00007FF75AF95776 
+17: 00007FF75AF907B8 
+18: 00007FF75AF8FCAE 
+19: 00007FF75AF95776 
+20: 00007FF75AF907B8 
+21: 00007FF75AF8FCAE 
+22: 00007FF75AF95776 
+23: 00007FF75AF907B8 
+24: 00007FF75AF8FCAE 
+25: 00007FF75AF95776 
+26: 00007FF75AF907B8 
+27: 00007FF75AF8FCAE 
+28: 00007FF75AF96D4E 
+29: 00007FF75AF904FD 
+30: 00007FF75B3E64B8 
+31: 00007FF75AF6E3E3 
+32: 00007FF75B47957C 
+33: 00007FF75B479972 
+34: 00007FF75AF748B3 
+35: 00007FF75B608BA6 
+36: 00007FF75CAA512D 
+37: 00007FF75C7FADC5 
+38: 00007FF75B632D76 
+39: 00007FF75CCDDC73 
+40: 00007FFD4384E957 BaseThreadInitThunk+23
+41: 00007FFD43FAAD6C 
