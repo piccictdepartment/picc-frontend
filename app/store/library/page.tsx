@@ -204,7 +204,9 @@ export default function StoreLibraryPage() {
                   <div className="flex min-h-[560px] items-center justify-center p-8 text-center">
                     <div>
                       <BookOpen className="mx-auto h-12 w-12 text-slate-300" />
-                      <h2 className="mt-4 text-xl font-bold">Choose a book</h2>
+                      <Link href="/store" className="mt-4 text-xl font-bold text-[#1688b4] hover:underline">
+                        Choose a book
+                      </Link>
                       <p className="mt-2 text-sm text-slate-600">Paid soft copies will open in this reader.</p>
                     </div>
                   </div>
